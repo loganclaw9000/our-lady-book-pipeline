@@ -14,7 +14,6 @@ from __future__ import annotations
 
 import pytest
 
-
 AXIS_NAMES_FROZEN = {
     "historical",
     "metaphysics",
@@ -90,7 +89,7 @@ def test_corpus_files_paths_exist_on_disk() -> None:
         for p in paths:
             if not p.is_file():
                 missing.append(f"{axis}: {p}")
-    assert not missing, f"CORPUS_FILES references missing files:\n" + "\n".join(missing)
+    assert not missing, "CORPUS_FILES references missing files:\n" + "\n".join(missing)
 
 
 def test_brief_is_in_both_historical_and_metaphysics() -> None:
