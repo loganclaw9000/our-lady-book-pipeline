@@ -13,6 +13,7 @@ env/
 runs/*.jsonl
 runs/ablations/
 runs/state.json
+runs/critic_audit/
 indexes/*.db
 indexes/*.sqlite
 indexes/*.lance/

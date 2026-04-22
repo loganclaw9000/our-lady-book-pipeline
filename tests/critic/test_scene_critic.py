@@ -36,7 +36,6 @@ from tests.critic.fixtures import (
     make_critic_request,
 )
 
-
 FEWSHOT_PATH = Path("src/book_pipeline/critic/templates/scene_fewshot.yaml")
 TEMPLATE_PATH = Path("src/book_pipeline/critic/templates/system.j2")
 
@@ -48,18 +47,16 @@ def _rubric_version_from_yaml() -> str:
 
 
 def _patch_tenacity_wait_fast(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Monkeypatch tenacity so retry waits are ~0 — keeps the suite fast."""
+    """Monkeypatch the retry wait on SceneCritic._call_opus_inner so retry
+    waits are ~0 — keeps the suite fast. tenacity's @retry decorator captures
+    wait_exponential at decoration time, so patching the class's __init__
+    after import is ineffective; patch the retry instance attribute instead."""
     import tenacity
 
-    orig_init = tenacity.wait_exponential.__init__
+    from book_pipeline.critic.scene import SceneCritic
 
-    def fast_init(self, *args, **kwargs):  # type: ignore[no-untyped-def]
-        orig_init(self, *args, **kwargs)
-        self.multiplier = 0.001
-        self.min = 0.0
-        self.max = 0.001
-
-    monkeypatch.setattr(tenacity.wait_exponential, "__init__", fast_init)
+    fast = tenacity.wait_fixed(0)
+    monkeypatch.setattr(SceneCritic._call_opus_inner.retry, "wait", fast)
 
 
 @pytest.fixture
@@ -149,7 +146,7 @@ def test_C_missing_axis_is_filled_with_default(tmp_path, make_critic) -> None:
     assert response.pass_per_axis["metaphysics"] is True
     assert response.scores_per_axis["metaphysics"] == 75.0
 
-    ev = [e for e in logger.events if e.role == "critic"][0]
+    ev = next(e for e in logger.events if e.role == "critic")
     assert ev.extra.get("filled_axes") == ["metaphysics"]
 
 
@@ -188,7 +185,7 @@ def test_D_invariant_fix_when_overall_pass_inconsistent(tmp_path, make_critic) -
     response = critic.review(make_critic_request())
 
     assert response.overall_pass is False, "overall_pass must be corrected to False"
-    ev = [e for e in logger.events if e.role == "critic"][0]
+    ev = next(e for e in logger.events if e.role == "critic")
     assert ev.extra.get("invariant_fixed") is True
 
 
@@ -281,7 +278,7 @@ def test_G_event_rubric_version_top_level_field(tmp_path, make_critic) -> None:
     )
     critic.review(make_critic_request())
 
-    ev = [e for e in logger.events if e.role == "critic"][0]
+    ev = next(e for e in logger.events if e.role == "critic")
     assert ev.rubric_version is not None
     dumped = ev.model_dump()
     assert "rubric_version" in dumped
@@ -333,7 +330,7 @@ def test_I_request_rubric_version_mismatch_logged_and_continues(
     # Response still stamped with the critic's rubric_version (from RubricConfig)
     assert response.rubric_version == expected_rubric_version
 
-    ev = [e for e in logger.events if e.role == "critic"][0]
+    ev = next(e for e in logger.events if e.role == "critic")
     assert ev.extra.get("request_rubric_version_mismatch") is True
 
 
