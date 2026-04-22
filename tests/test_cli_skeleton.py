@@ -18,7 +18,7 @@ def test_version_flag_prints_version(capsys) -> None:
 
 
 def test_help_lists_version_subcommand(capsys) -> None:
-    rc = main(["--help"]) if False else None  # argparse --help raises SystemExit
+    # argparse --help raises SystemExit
     try:
         main(["--help"])
     except SystemExit as exc:

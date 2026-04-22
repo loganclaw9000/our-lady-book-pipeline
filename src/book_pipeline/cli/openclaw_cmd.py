@@ -49,7 +49,11 @@ def _add_parser(
     )
     r.set_defaults(_handler=_run_register_cron)
 
-    p.set_defaults(_handler=lambda _a: (p.print_help(), 0)[1])
+    def _show_help(_a: argparse.Namespace) -> int:
+        p.print_help()
+        return 0
+
+    p.set_defaults(_handler=_show_help)
 
 
 def _print_report(report: BootstrapReport) -> int:

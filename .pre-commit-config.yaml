@@ -13,3 +13,11 @@ repos:
       - id: check-yaml
       - id: check-toml
       - id: check-added-large-files
+  - repo: local
+    hooks:
+      - id: lint-imports
+        name: import-linter module boundaries
+        entry: bash scripts/lint_imports.sh
+        language: system
+        pass_filenames: false
+        stages: [pre-push]

@@ -13,6 +13,7 @@ To add a new subcommand (e.g. in plan 03/04/05):
 from __future__ import annotations
 
 import argparse
+import contextlib
 import importlib
 from collections.abc import Callable
 
@@ -44,11 +45,9 @@ def _load_subcommands() -> None:
     land their modules without plan 01 being edited after the fact.
     """
     for dotted in SUBCOMMAND_IMPORTS:
-        try:
+        # Module not yet created by its owning plan — skip silently.
+        with contextlib.suppress(ImportError):
             importlib.import_module(dotted)
-        except ImportError:
-            # Module not yet created by its owning plan — skip silently.
-            pass
 
 
 def main(argv: list[str] | None = None) -> int:

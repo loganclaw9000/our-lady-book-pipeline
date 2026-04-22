@@ -43,3 +43,42 @@ packages = ["src/book_pipeline"]
 
 [tool.hatch.build.targets.sdist]
 include = ["src/book_pipeline", "config", "README.md"]
+
+[tool.importlinter]
+root_packages = ["book_pipeline"]
+
+[[tool.importlinter.contracts]]
+# Contract extension policy (matches scripts/lint_imports.sh mypy-targets policy):
+#   When Phase 2+ adds a new kernel package, that plan's PR appends the new
+#   module to this source_modules list in the same PR. import-linter 2.x is
+#   strict about missing modules ("Module 'X' does not exist"), so we only
+#   list modules that exist TODAY. Future kernel modules pre-listed here
+#   would break lint-imports until they land.
+# Phase 2 will add: "book_pipeline.rag"
+# Phase 3 will add: "book_pipeline.drafter", "book_pipeline.regenerator"
+# Phase 4 will add: "book_pipeline.critic"
+# Phase 5 will add: "book_pipeline.orchestration"
+name = "Kernel packages MUST NOT import from book_specifics"
+type = "forbidden"
+source_modules = [
+    "book_pipeline.interfaces",
+    "book_pipeline.observability",
+    "book_pipeline.stubs",
+]
+forbidden_modules = [
+    "book_pipeline.book_specifics",
+]
+ignore_imports = []
+
+[[tool.importlinter.contracts]]
+# Same extension policy — append concrete kernel packages as they land.
+name = "Interfaces MUST NOT import from concrete kernel implementations"
+type = "forbidden"
+source_modules = [
+    "book_pipeline.interfaces",
+]
+forbidden_modules = [
+    "book_pipeline.observability",
+    "book_pipeline.stubs",
+]
+ignore_imports = []
