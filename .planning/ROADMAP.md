@@ -101,7 +101,7 @@ Plans:
 - [x] 03-03-PLAN.md — vLLM systemd unit + httpx/tenacity VllmClient + boot_handshake SHA gate [DRAFT-01]
 - [x] 03-04-PLAN.md — Mode-A drafter: Jinja2 template + sampling profiles + memorization gate + voice-fidelity Event [DRAFT-01, DRAFT-02, OBS-03]
 - [x] 03-05-PLAN.md — Scene critic: Anthropic Opus 4.7 messages.parse + ephemeral 1h cache + CRIT-04 audit log + rubric_version stamp [CRIT-01, CRIT-04]
-- [ ] 03-06-PLAN.md — SceneLocalRegenerator kernel module: Jinja2 regen template + tenacity + ±10% word-count guard + Event emission (mocked Anthropic tests only) [REGEN-01]
+- [x] 03-06-PLAN.md — SceneLocalRegenerator kernel module: Jinja2 regen template + tenacity + ±10% word-count guard + Event emission (mocked Anthropic tests only) [REGEN-01]
 - [ ] 03-07-PLAN.md — book-pipeline draft CLI composition + SceneStateMachine wiring + ch01_sc01 stub + build_retrievers_from_config factory + mocked integration tests [REGEN-01]
 - [ ] 03-08-PLAN.md — Human-verify real-world smoke on ch01_sc01 (REAL vLLM + REAL Anthropic Opus + REAL RAG) [REGEN-01]
 **UI hint**: no
@@ -185,7 +185,7 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Foundation + Observability Baseline | 6/6 | Complete    | 2026-04-22 |
 | 2. Corpus Ingestion + Typed RAG | 6/6 | Complete    | 2026-04-22 |
-| 3. Mode-A Drafter + Scene Critic + Basic Regen | 0/8 | Not started | - |
+| 3. Mode-A Drafter + Scene Critic + Basic Regen | 6/8 | In Progress | - |
 | 4. Chapter Assembly + Post-Commit DAG | 0/TBD | Not started | - |
 | 5. Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration | 0/TBD | Not started | - |
 | 6. Testbed Plane + Production Hardening + First Draft | 0/TBD | Not started | - |

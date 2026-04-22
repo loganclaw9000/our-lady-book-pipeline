@@ -154,7 +154,7 @@ Populated by roadmapper during roadmap creation. Every v1 REQ-ID maps to exactly
 | CRIT-02 | Phase 4 | Pending |
 | CRIT-03 | Phase 6 | Pending |
 | CRIT-04 | Phase 3 | Complete |
-| REGEN-01 | Phase 3 | Pending |
+| REGEN-01 | Phase 3 | In Progress (kernel landed 03-06; CLI composition + smoke pending 03-07/03-08) |
 | REGEN-02 | Phase 5 | Pending |
 | REGEN-03 | Phase 5 | Pending |
 | REGEN-04 | Phase 5 | Pending |
