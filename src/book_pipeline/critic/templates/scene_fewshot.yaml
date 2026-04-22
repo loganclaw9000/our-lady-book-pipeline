@@ -1,0 +1,100 @@
+# One bad + one good few-shot for the scene critic system prompt.
+# Curated at Plan 03-05 Task 1 time against Chapter 1-2 outline beats.
+# These are load-bearing for CRIT-01 calibration — Opus reads them inside
+# the cached system prompt on every scene-critic call. Do NOT replace with
+# placeholder / lorem-ipsum content; Tests 5a/5b/5c guard real prose +
+# real entities + Pydantic-shape correctness.
+#
+# Bad example: Cempoala scene set in "August 1520" (anachronism #1 —
+# Cortés first reached Cempoala in August 1519) AND references Tlaxcalteca
+# warriors marching alongside Cortés from Veracruz (anachronism #2 — the
+# Tlaxcalteca alliance was only sealed in September 1519 at Tlaxcala,
+# months AFTER Cempoala; a Cempoala-1519 scene could not have Tlaxcalteca
+# escorts, and a Cempoala-1520 scene is itself wrong on the calendar).
+# Expected critic response: historical axis FAILS with high-severity issue;
+# all other axes pass.
+#
+# Good example: Malintzin translating between Cortés and a Totonac cacique
+# at Cempoala in August 1519 — aligned with the historical record. No
+# anachronisms; all 5 axes pass.
+
+bad:
+  scene_text: |
+    The sun hung low over Cempoala as Cortés rode in at the head of four
+    hundred Spaniards. It was August 1520, and the long march from the
+    Veracruz coast had left his horses lathered and his Tlaxcalteca
+    auxiliaries footsore — a thousand warriors in quilted cotton, their
+    obsidian-edged clubs slung across their backs. Andrés de Tapia, riding
+    at Cortés's right, counted the banners and frowned. Cempoala's fat
+    cacique had promised tribute and welcome, but the plaza stood half
+    empty, and the white-washed temples above it wore an unfamiliar
+    hush. "They know about Cholula," Tapia said, low. Cortés did not
+    answer. He had ordered the Cholula massacre himself, the year prior,
+    and the story had run ahead of him up every coastal road. A boy in
+    a cotton tunic darted from a doorway and stopped short when he saw
+    the steel. The horses shied. Somewhere behind the tzompantli, a
+    drum began, slow and wrong — not the Totonac greeting-drum, nor
+    the warning-drum of Moctezuma's garrisons, but something older.
+    Tapia crossed himself. Cortés kept riding.
+  expected_critic_response:
+    pass_per_axis:
+      historical: false
+      metaphysics: true
+      entity: true
+      arc: true
+      donts: true
+    scores_per_axis:
+      historical: 38.0
+      metaphysics: 82.0
+      entity: 78.0
+      arc: 80.0
+      donts: 85.0
+    issues:
+      - axis: historical
+        severity: high
+        location: "paragraph 1, 'August 1520' and 'Tlaxcalteca auxiliaries'"
+        claim: "Cempoala arrival date + Tlaxcalteca escort both anachronistic."
+        evidence: "Corpus historical retriever chunk hist_brief_042 places Cortés's first entry into Cempoala in August 1519, not 1520. Chunk hist_brief_051 establishes the Tlaxcala alliance in September 1519, weeks AFTER Cempoala — so a Cempoala scene (either year) cannot include Tlaxcalteca auxiliaries as marching companions."
+        citation: "hist_brief_042"
+    overall_pass: false
+    model_id: "claude-opus-4-7"
+    rubric_version: "v1"
+    output_sha: "<runtime-computed>"
+
+good:
+  scene_text: |
+    Malintzin stood one pace behind Cortés in the shade of the temple
+    stair, her hands folded, her face still. It was the afternoon of a
+    hot August day in 1519, and the cacique of Cempoala — the Totonac
+    lord the Spaniards already called the fat cacique, though never to
+    his face — sat on a low bench of carved cedar, waiting. Cortés
+    spoke first, in Spanish. "Tell him we bring greetings from a
+    prince across the sea who honors his hospitality." Malintzin waited
+    two breaths, then rendered it into Nahuatl, her voice low and even,
+    and a young Totonac interpreter beside the cacique turned it into
+    the coastal tongue. The cacique's jaw worked. He had already said,
+    that morning, what he wanted said: that Moctezuma's tax-collectors
+    had bled Cempoala for three generations, and that if these strangers
+    had come to break the yoke, the Totonacs would feed them and fight
+    beside them. But none of that could be spoken yet, not under the
+    eyes of the Mexica envoys still in the plaza. Malintzin understood
+    the silence perfectly. She waited for the cacique to choose his
+    next word, and rendered that word, too.
+  expected_critic_response:
+    pass_per_axis:
+      historical: true
+      metaphysics: true
+      entity: true
+      arc: true
+      donts: true
+    scores_per_axis:
+      historical: 92.0
+      metaphysics: 88.0
+      entity: 90.0
+      arc: 89.0
+      donts: 94.0
+    issues: []
+    overall_pass: true
+    model_id: "claude-opus-4-7"
+    rubric_version: "v1"
+    output_sha: "<runtime-computed>"

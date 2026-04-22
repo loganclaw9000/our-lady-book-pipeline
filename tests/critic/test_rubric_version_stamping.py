@@ -21,9 +21,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-import pytest
 import yaml
-
 
 FEWSHOT_PATH = Path("src/book_pipeline/critic/templates/scene_fewshot.yaml")
 TEMPLATE_PATH = Path("src/book_pipeline/critic/templates/system.j2")
@@ -118,7 +116,7 @@ def test_fewshot_yaml_parses_and_has_correct_pass_shape() -> None:
     assert good["overall_pass"] is True
 
 
-def test_fewshot_bad_example_has_real_entities_and_length(  # noqa: D401 — test name describes intent
+def test_fewshot_bad_example_has_real_entities_and_length(
 ) -> None:
     """Test 5a (B-2): bad_example.scene_text contains >=2 real historical
     entities and is 150-250 words — not placeholder prose."""
@@ -171,7 +169,7 @@ def test_fewshot_yaml_validates_as_critic_response_schema() -> None:
 def test_audit_import_available_via_package() -> None:
     """Test 6: `from book_pipeline.critic import write_audit_record` succeeds
     regardless of whether scene.py Task 2 has landed yet."""
-    from book_pipeline.critic import write_audit_record, AuditRecord
+    from book_pipeline.critic import AuditRecord, write_audit_record
 
     assert callable(write_audit_record)
     assert AuditRecord is not None
