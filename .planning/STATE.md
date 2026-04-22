@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-06-PLAN.md (SceneLocalRegenerator kernel — Opus 4.7 + ±10% word-count guard + tenacity retry + severity grouping; REGEN-01 partially complete — kernel live, CLI in 03-07, smoke in 03-08)
-last_updated: "2026-04-22T20:20:15.100Z"
+stopped_at: Completed 03-07-PLAN.md (book-pipeline draft CLI + SceneStateMachine wiring + W-1 factory + ch01_sc01 stub + B-3 invariant enforced; 11 mocked integration tests land; Plan 03-08 real-world smoke next)
+last_updated: "2026-04-22T20:44:32.843Z"
 progress:
   total_phases: 6
   completed_phases: 2
   total_plans: 20
-  completed_plans: 18
-  percent: 90
+  completed_plans: 19
+  percent: 95
 ---
 
 # STATE: our-lady-book-pipeline
@@ -46,19 +46,19 @@ Plan 03-04 LANDED (Mode-A drafter + sampling profiles + V-2 memorization gate + 
 ## Current Position
 
 Phase: 03 (Mode-A Drafter + Scene Critic + Basic Regen) — EXECUTING
-Plan: 6 of 8 complete (03-07 book-pipeline draft CLI orchestrator next; 03-01..03-06 all landed)
+Plan: 7 of 8 complete (03-08 real-world smoke next; 03-01..03-07 all landed)
 
 - **Phase:** 3
-- **Plan:** 6 (03-07 CLI orchestrator next; 03-01..03-06 all complete)
-- **Status:** Plan 03-06 complete (SceneLocalRegenerator kernel: Regenerator Protocol impl + Jinja2 regen.j2 template + ±10% word-count guard + tenacity 5× retry + severity-bucket issue grouping + role='regenerator' Event emission + RegenWordCountDrift + RegeneratorUnavailable). REGEN-01 partially complete at kernel layer; CLI composition in 03-07, smoke in 03-08. Plan 03-07 (book-pipeline draft CLI) composes ModeADrafter + SceneCritic + SceneLocalRegenerator into the full scene-loop flow with SceneStateMachine transitions.
-- **Plans complete:** 6 / 8 (Phase 3: 03-01 + 03-02 + 03-03 + 03-04 + 03-05 + 03-06); 18 / 20 total (Phase 1: 6; Phase 2: 6; Phase 3: 6)
-- **Progress:** [█████████░] 90%
+- **Plan:** 7 (03-08 human-verify smoke on live vLLM + live Opus 4.7 next)
+- **Status:** Plan 03-07 complete (`book-pipeline draft <scene_id>` CLI composition root: bundler + 5 retrievers via W-1 factory + ModeADrafter + SceneCritic + SceneLocalRegenerator + SceneStateMachine wired through a single scene loop; B-3 invariant enforced in _commit_scene — voice_pin_sha == checkpoint_sha == draft.voice_pin_sha; ch01_sc01.yaml stub hand-authored from outline; 11 mocked integration tests + 5 factory tests land). REGEN-01 at kernel + CLI layer; real-world smoke deferred to 03-08.
+- **Plans complete:** 7 / 8 (Phase 3: 03-01 + 03-02 + 03-03 + 03-04 + 03-05 + 03-06 + 03-07); 19 / 20 total (Phase 1: 6; Phase 2: 6; Phase 3: 7)
+- **Progress:** [█████████▌] 95%
 
 ### Roadmap progress
 
 - [x] **Phase 1:** Foundation + Observability Baseline (6/6 plans)
 - [x] **Phase 2:** Corpus Ingestion + Typed RAG (6/6 plans — 02-01 RAG kernel + 02-02 corpus ingester + 02-03 3-of-5 retrievers + 02-04 entity_state/arc_position + outline_parser + 02-05 ContextPackBundler + 02-06 RAG-04 golden-query CI gate + nightly cron)
-- [~] **Phase 3:** Mode-A Drafter + Scene Critic + Basic Regen (6/8 plans — 03-01 kernel skeletons + REAL V6 voice pin; 03-02 OBS-03 voice-fidelity anchor curation; 03-03 vLLM bootstrap plane + boot_handshake SHA gate [DRAFT-01 complete]; 03-04 Mode-A ModeADrafter + Jinja2 template + sampling profiles + V-2 memorization gate + AnchorSetProvider [DRAFT-01 + DRAFT-02 + OBS-03 complete]; 03-05 SceneCritic Anthropic Opus 4.7 + CRIT-04 audit log [CRIT-01 + CRIT-04 complete]; 03-06 SceneLocalRegenerator kernel — Opus 4.7 + ±10% word-count guard + tenacity retry + severity grouping [REGEN-01 partially complete — kernel live; CLI + smoke pending 03-07/03-08])
+- [~] **Phase 3:** Mode-A Drafter + Scene Critic + Basic Regen (7/8 plans — 03-01 kernel skeletons + REAL V6 voice pin; 03-02 OBS-03 voice-fidelity anchor curation; 03-03 vLLM bootstrap plane + boot_handshake SHA gate [DRAFT-01 complete]; 03-04 Mode-A ModeADrafter + Jinja2 template + sampling profiles + V-2 memorization gate + AnchorSetProvider [DRAFT-01 + DRAFT-02 + OBS-03 complete]; 03-05 SceneCritic Anthropic Opus 4.7 + CRIT-04 audit log [CRIT-01 + CRIT-04 complete]; 03-06 SceneLocalRegenerator kernel — Opus 4.7 + ±10% word-count guard + tenacity retry + severity grouping [REGEN-01 kernel]; 03-07 book-pipeline draft CLI composition + SceneStateMachine + W-1 factory + ch01_sc01 stub + B-3 invariant + 11 mocked tests [REGEN-01 CLI layer]; 03-08 real-world smoke pending)
 - [ ] **Phase 4:** Chapter Assembly + Post-Commit DAG
 - [ ] **Phase 5:** Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration
 - [ ] **Phase 6:** Testbed Plane + Production Hardening + First Draft
@@ -85,6 +85,7 @@ No prose-generation metrics yet — pipeline has not produced artifacts. First r
 | 03-05 | 35             | 2     | 9             | 2              | 20          | 340           | 2026-04-22  |
 | Phase 03 P04 | 28m | 2 tasks | 14 files |
 | Phase 03 P06 | 40 | 2 tasks | 5 files |
+| 03-07        | 13             | 2     | 4             | 5              | 16          | 396           | 2026-04-22  |
 
 ### Target metrics (will populate once pipeline runs)
 
@@ -197,25 +198,22 @@ None. Phase 3 readiness confirmed by Plan 02-06 Gate 5 end-to-end smoke.
 ### Last session
 
 - **Date:** 2026-04-22
-- **Action:** Executed Plan 03-06 — SceneLocalRegenerator kernel (REGEN-01 kernel-only; CLI composition + real-world smoke deferred to 03-07/03-08). Single atomic commit (plan framed Tasks 1+2 as RED/GREEN but code was authored as one coherent unit; splitting commits retroactively would be theatre). Landed: `scene_local.py` (462 lines — SceneLocalRegenerator + RegenWordCountDrift + RegeneratorUnavailable + helpers), `templates/regen.j2` (52 lines — ===SYSTEM=== / ===USER=== sentinels + severity sections + low-context block), `tests/regenerator/test_scene_local.py` (562 lines — 12 tests with FakeAnthropicClient/FakeEventLogger/FakeVoicePin). Modified `regenerator/__init__.py` to export the 3 public symbols.
-- **Outcome:** 4 files created + 1 modified. 12 new tests all pass on first run (4 Task-1 template+exception + 8 Task-2 end-to-end). 386 total tests pass (+12 from 374 baseline; 1 pre-existing rag/test_golden_queries failure deselected — logged to deferred-items.md, unrelated). `bash scripts/lint_imports.sh` green: 2 import-linter contracts kept, ruff clean (1 I001 auto-fixed on __init__.py), mypy clean on 97 source files. Single commit `9620928`. VOICE_DESCRIPTION imported kernel→kernel from drafter.mode_a (sanctioned by contract 1). REGEN-01 partially complete at kernel layer (±10% word-count guard + tenacity 5× retry + severity grouping + Event emission all live); Plan 03-07 composes ModeADrafter + SceneCritic + SceneLocalRegenerator into book-pipeline draft CLI; Plan 03-08 adds real-world smoke against Opus 4.7.
-- **Stopped at:** Completed 03-06-PLAN.md (SceneLocalRegenerator kernel — Opus 4.7 + ±10% word-count guard + tenacity retry + severity grouping; REGEN-01 partially complete — kernel live, CLI in 03-07, smoke in 03-08)
+- **Action:** Executed Plan 03-07 — `book-pipeline draft <scene_id>` CLI composition root + SceneStateMachine wiring + W-1 `build_retrievers_from_config` factory + ch01_sc01.yaml stub + 11 mocked integration tests. Task 1 (W-1 factory + cli/ingest.py refactor + 5 factory tests) committed as `48b2bce`; Task 2 (cli/draft.py + main.py registration + pyproject exemptions + ch01 stub + .gitignore + test suite) committed as `54b2383`. Scene-loop state machine transitions wired per plan `<scene_loop_state_machine>`: PENDING → RAG_READY → DRAFTED_A → {CRITIC_PASS → COMMITTED} | {CRITIC_FAIL → REGENERATING → ...} up to R=3 (4 total attempts), then HARD_BLOCKED('failed_critic_after_R_attempts'). B-3 INVARIANT enforced in _commit_scene: frontmatter['voice_pin_sha'] = frontmatter['checkpoint_sha'] = draft.voice_pin_sha (single source of truth for Phase 4 ChapterAssembler; Test H asserts both fields equal draft.voice_pin_sha AND equal each other; RuntimeError if draft.voice_pin_sha is None). State persistence: atomic tmp+rename to drafts/scene_buffer/ch{NN}/{scene_id}.state.json at every transition (Test I asserts tmp-write failure leaves original untouched). T-03-07-01 mitigated by strict `ch(\d+)_sc(\d+)` regex + int cast at scene_id parse time. 4-byte deviation from plan spec: 3 cli.draft exemptions added (not 4) — cli.draft → nahuatl_entities would conflict with the existing cli._entity_list → nahuatl_entities exemption (import-linter's "no matches" detection would fail the lint gate).
+- **Outcome:** 4 files created (cli/draft.py ~450 lines, tests/cli/test_draft_loop.py ~600 lines, scenes/ch01/ch01_sc01.yaml, drafts/ch01/.gitkeep) + 5 modified (rag/__init__.py + factory, rag/retrievers/base.py + ingestion_run_id kw, cli/ingest.py factory consumer, cli/main.py subcommand list, pyproject.toml + 3 cli.draft exemptions, tests/test_import_contracts.py + cli.draft documented_exemption, .gitignore + drafts/scene_buffer). 16 new tests (5 factory + 11 draft_loop); 396 total tests pass (+16 from 380 baseline; 1 pre-existing rag/test_golden_queries failure deselected, unchanged from 03-06). `bash scripts/lint_imports.sh` green: 2 import-linter contracts kept, ruff clean, mypy clean on 98 source files. `uv run book-pipeline draft --help` prints usage with all 4 args (scene_id / --max-regen / --scene-yaml / --dry-run). Commits: `48b2bce` (Task 1) + `54b2383` (Task 2).
+- **Stopped at:** Completed 03-07-PLAN.md (book-pipeline draft CLI + SceneStateMachine wiring + W-1 factory + ch01_sc01 stub + B-3 invariant enforced; 11 mocked integration tests land; Plan 03-08 real-world smoke next)
 
 ### Next session
 
-- **Expected action:** `/gsd-execute-phase 3` — execute Plan 03-07 (book-pipeline draft CLI orchestrator: composes ModeADrafter + SceneCritic + SceneLocalRegenerator into the full scene-loop flow; SceneStateMachine transitions PENDING → RAG_READY → DRAFTED_A → CRITIC_PASS → COMMITTED with REGENERATING branch on CRITIC_FAIL up to R=3; ch01_sc01 stub + drafts/ch01/.gitkeep; CLI import-linter exemption for cli.draft → book_specifics.vllm_endpoints + book_specifics.training_corpus). Plan 03-08 is the final real-world smoke (human-verify) against live Opus 4.7 + live vLLM paul-voice for ch01_sc01.
-- **Key continuation notes:**
-  - Plan 03-07 composes SceneLocalRegenerator ONCE per `book-pipeline draft` CLI invocation alongside SceneCritic + ModeADrafter. Shared `JsonlEventLogger` + `anthropic.Anthropic()` + `VoicePinConfig().voice_pin` across all three.
-  - Plan 03-07 scene-loop orchestrator catches `RegenWordCountDrift` (transition back to CRITIC_FAIL; attempt counts toward R=3 from mode_thresholds.mode_a.regen_budget_R) + `RegeneratorUnavailable` (transition to HARD_BLOCKED with reason from exc.reason + detail from exc.context). After R attempts still CRITIC_FAIL → `HARD_BLOCKED("failed_critic_after_R_attempts")`; Phase 5 REGEN-03 will re-route to Mode-B.
-  - SceneLocalRegenerator's Event shape is FROZEN by Plan 03-06 — Plan 03-07 scene loop reads `role='regenerator'` events filtered by `caller_context.scene_id` to reconstruct attempt history. `caller_context.{attempt_number, issue_count (mid+high only), regen_token_count, word_count_drift_pct}` + `extra.issues_addressed` are stable contract fields for Phase 5 REGEN-04 oscillation detector + Phase 6 OBS-02 ingester.
-  - SceneLocalRegenerator uses `messages.create` (NOT `.parse` — regen returns free-text prose, not structured JSON). FakeAnthropicClient in `tests/regenerator/test_scene_local.py` mirrors this surface: `.messages.create(**kwargs)` returns `_FakeMessage(content=[_FakeTextBlock(text=...)], usage=_FakeUsage(input_tokens, output_tokens))`. Different shape from `tests/critic/fixtures.py::FakeAnthropicClient` (which uses `.messages.parse` + `.parsed_output`) — they are NOT interchangeable.
-  - tenacity retry config identical to Plan 03-05 critic (5× exp backoff, 2-30s, ~90s ceiling). Tests patch `SceneLocalRegenerator._call_opus_inner.retry.wait` with `tenacity.wait_fixed(0)` to keep Test 10 <1s.
-  - Pre-existing `tests/rag/test_golden_queries.py::test_golden_queries_pass_on_baseline_ingest` failure documented in `.planning/phases/03-mode-a-drafter-scene-critic-basic-regen/deferred-items.md`. NOT caused by Plan 03-06; out-of-scope per SCOPE BOUNDARY. Plan 03-07 can safely `--deselect` this test or wait for a Phase 2 Plan 06 maintenance pass.
-  - regenerator/__init__.py exports {RegenWordCountDrift, RegeneratorUnavailable, SceneLocalRegenerator}. NO importlib fallback pattern — regenerator/ has no circular concerns since only one source file (scene_local.py) exports these symbols and it's present from Plan 03-06 onward.
-  - Plan 03-07 MUST NOT touch `regenerator/__init__.py`, `regenerator/scene_local.py`, or `regenerator/templates/regen.j2` — those are kernel-stable after Plan 03-06. CLI composition happens in `src/book_pipeline/cli/draft.py` (new in Plan 03-07).
-  - Voice pin mid-regen: Plan 03-06 preserves `voice_pin_sha` from prior_draft verbatim. Plan 03-07 CLI's "one SceneLocalRegenerator per CLI invocation" discipline means the constructed regenerator holds the same VoicePinData throughout. V-3 lineage is observable via Event.checkpoint_sha across attempt_number 1→2→3.
-- **Key precedent:** Plan 03-06 established: (a) `_call_opus`/`_call_opus_inner` pattern for tenacity-wrapped Anthropic calls (reused from Plan 03-05); (b) `_emit_error_event` invoked BEFORE every raise (success XOR error, never both; T-03-06-03 mitigation); (c) `max(prior_wc, 1)` denominator guard on drift_pct (T-03-06-06); (d) `_extract_text` helper accepting both SDK `ContentBlock` objects + test fakes with `.content=[dict]`; (e) severity-bucket grouping at method-entry NOT template-time (cleaner separation); (f) voice_pin_sha preservation from prior_draft onto new DraftResponse (V-3 continuity across attempts); (g) guarded anthropic import with RuntimeError fallback at module load so tenacity's `retry_if_exception_type` captures the real class objects. Reusable patterns for Phase 5 REGEN-02 per-scene cost cap + REGEN-03 Mode-B escape + REGEN-04 oscillation detector.
-- **Phase 3 progress:** 6/8 plans complete. Kernel skeletons + voice pin (03-01) + OBS-03 anchor curation (03-02) + vLLM bootstrap (03-03) + Mode-A drafter (03-04) + SceneCritic (03-05) + SceneLocalRegenerator (03-06) = ready for CLI composition. Plans 03-07 + 03-08 complete Phase 3.
+- **Expected action:** `/gsd-execute-phase 3` — execute Plan 03-08 (real-world smoke — human-verify checkpoint on live Opus 4.7 + live vLLM paul-voice for ch01_sc01). This is the final plan in Phase 3; it exercises the full scene loop end-to-end against real infra and proves the Plan 03-07 composition root is wired correctly. `ANTHROPIC_API_KEY` + vllm-paul-voice.service running on port 8002 are prerequisites.
+- **Key continuation notes (for Plan 03-08):**
+  - Plan 03-07 CLI composition root is ALREADY built at `src/book_pipeline/cli/draft.py::_build_composition_root`. Plan 03-08 invokes `book-pipeline draft ch01_sc01` directly (not via `--dry-run`) — the real path.
+  - B-3 invariant frozen in Plan 03-07: `frontmatter['voice_pin_sha'] == frontmatter['checkpoint_sha'] == draft.voice_pin_sha` in drafts/ch01/ch01_sc01.md. Plan 03-08 MUST assert this on the committed md.
+  - SceneStateMachine persistence: drafts/scene_buffer/ch01/ch01_sc01.state.json (gitignored) holds atomic tmp+rename SceneStateRecord. Plan 03-08 reads it to assert terminal state == COMMITTED.
+  - Event trail for a full run (typical): 6 retriever/bundler events + 1 drafter + 1 critic + 0..R regenerator + 1 cli_draft wrap-up ≈ 8-18 events in runs/events.jsonl.
+  - Pre-existing `tests/rag/test_golden_queries.py::test_golden_queries_pass_on_baseline_ingest` failure documented in `.planning/phases/03-mode-a-drafter-scene-critic-basic-regen/deferred-items.md`. NOT caused by Plan 03-07; out-of-scope per SCOPE BOUNDARY.
+  - The ch01_sc01.yaml stub uses Andrés de Mora in Havana (Feb 1519) — outline-aligned via Chapter 1 Block 1 Beat 1 (triptych; Andrés fragment chosen for single-scene simplicity). Plan 04's outline-parser can re-split the triptych into three scene records at ingestion time.
+- **Key precedent from Plan 03-07:** (a) W-1 `build_retrievers_from_config` factory is the single construction point for the 5 typed retrievers — shared between cli/ingest.py (post-ingest arc reindex) + cli/draft.py (scene loop). Plan 04 ChapterAssembler CLI can consume it too. (b) `_persist(record, state_path)` atomic tmp+rename is the state-machine persistence contract — any future state-holding CLI composition reuses this helper (exported from cli/draft.py). (c) `_commit_scene` frontmatter shape is the Phase 4 input contract — ChapterAssembler MUST treat voice_pin_sha + checkpoint_sha as identical (B-3). (d) 3 cli.draft import-linter exemptions (not 4) — nahuatl_entities access goes through cli._entity_list bridge. (e) _FakeDrafter/FakeCritic/FakeRegenerator Protocol-conformant test fakes with `mode`/`level` class attrs + configurable response sequences — reusable for Phase 4 chapter-level tests.
+- **Phase 3 progress:** 7/8 plans complete. 03-01..03-07 all landed. Plan 03-08 (real-world smoke, human-verify) is the final step.
 
 ### Session continuity invariants
 
