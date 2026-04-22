@@ -16,7 +16,6 @@ from typing import Any
 
 import numpy as np
 
-
 # --- Fakes (kept per-file for in-test isolation) ------------------------------
 
 
