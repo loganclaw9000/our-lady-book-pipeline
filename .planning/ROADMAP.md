@@ -64,10 +64,16 @@
   4. ContextPackBundler enforces a hard 40KB ceiling, runs a cross-retriever reconciliation step, and emits `retrieval_conflicts.json` when retrievers contradict (never silently concatenates).
   5. A golden-query CI job with >=5 queries per retriever passes on a fresh clone; any index drift that moves expected chunks breaks the job.
 
-**Plans**: TBD
+**Plans**: 6 plans in 5 waves (Wave 1: 01 rag foundation → Wave 2: 02 CorpusIngester → Wave 3 parallel: 03 text retrievers + 04 entity_state + arc_position → Wave 4: 05 ContextPackBundler → Wave 5: 06 golden-query CI + openclaw cron)
+- [ ] 02-01-PLAN.md — rag kernel module: chunker + BGE-M3 embedder + LanceDB schema + import-linter extension [CORPUS-01]
+- [ ] 02-02-PLAN.md — CorpusIngester + router + mtime idempotency + `book-pipeline ingest` CLI + 5 LanceDB tables populated [CORPUS-01]
+- [ ] 02-03-PLAN.md — LanceDBRetrieverBase + BgeReranker + 3 retrievers (historical, metaphysics rule_type-filtered, negative_constraint always-top-K) [RAG-01]
+- [ ] 02-04-PLAN.md — outline_parser with stable beat IDs + entity_state (zero-cards-tolerant) + arc_position retriever [RAG-01, RAG-02]
+- [ ] 02-05-PLAN.md — ContextPackBundler: 40KB hard cap + per-axis soft caps + cross-retriever conflict detection + 6-event emission [RAG-03]
+- [ ] 02-06-PLAN.md — golden-query CI gate (>=12 queries, 0 forbidden leaks) + openclaw nightly-ingest cron + human-verify baseline [RAG-04, CORPUS-01]
 **UI hint**: no
 
-**Parallelization**: The 5 retrievers can be built in parallel once the shared Retriever Protocol is pinned (FOUND-04 in Phase 1). Bundler + reconciliation step depend on all 5 retrievers existing but not on their internals. Parallel retriever development is a strong fit here.
+**Parallelization**: Plans 03 and 04 run in parallel in Wave 3 (exclusive file ownership — 03 owns base.py + historical/metaphysics/negative_constraint retriever files + reranker; 04 owns entity_state + arc_position retriever files + outline_parser; both edit retrievers/__init__.py but that's additive). Plans 05 and 06 serialize in Waves 4 and 5 because Plan 05 extends rag/__init__.py (to export ContextPackBundlerImpl) and Plan 06 edits the same file. Bundler + reconciliation step depends on all 5 retrievers existing (Plans 03 + 04).
 
 ---
 
@@ -168,7 +174,7 @@
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation + Observability Baseline | 6/6 | Complete    | 2026-04-22 |
-| 2. Corpus Ingestion + Typed RAG | 0/TBD | Not started | - |
+| 2. Corpus Ingestion + Typed RAG | 0/6 | Planning complete | - |
 | 3. Mode-A Drafter + Scene Critic + Basic Regen | 0/TBD | Not started | - |
 | 4. Chapter Assembly + Post-Commit DAG | 0/TBD | Not started | - |
 | 5. Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration | 0/TBD | Not started | - |
