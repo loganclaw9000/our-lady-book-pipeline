@@ -127,57 +127,57 @@ Explicitly excluded. Documented to prevent scope creep.
 
 ## Traceability
 
-(Populated by roadmapper during roadmap creation.)
+Populated by roadmapper during roadmap creation. Every v1 REQ-ID maps to exactly one phase in `.planning/ROADMAP.md`.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | — | Pending |
-| FOUND-02 | — | Pending |
-| FOUND-03 | — | Pending |
-| FOUND-04 | — | Pending |
-| FOUND-05 | — | Pending |
-| OBS-01 | — | Pending |
-| OBS-02 | — | Pending |
-| OBS-03 | — | Pending |
-| OBS-04 | — | Pending |
-| CORPUS-01 | — | Pending |
-| CORPUS-02 | — | Pending |
-| RAG-01 | — | Pending |
-| RAG-02 | — | Pending |
-| RAG-03 | — | Pending |
-| RAG-04 | — | Pending |
-| DRAFT-01 | — | Pending |
-| DRAFT-02 | — | Pending |
-| DRAFT-03 | — | Pending |
-| DRAFT-04 | — | Pending |
-| CRIT-01 | — | Pending |
-| CRIT-02 | — | Pending |
-| CRIT-03 | — | Pending |
-| CRIT-04 | — | Pending |
-| REGEN-01 | — | Pending |
-| REGEN-02 | — | Pending |
-| REGEN-03 | — | Pending |
-| REGEN-04 | — | Pending |
-| LOOP-01 | — | Pending |
-| LOOP-02 | — | Pending |
-| LOOP-03 | — | Pending |
-| LOOP-04 | — | Pending |
-| TEST-01 | — | Pending |
-| TEST-02 | — | Pending |
-| TEST-03 | — | Pending |
-| TEST-04 | — | Pending |
-| ORCH-01 | — | Pending |
-| ORCH-02 | — | Pending |
-| ALERT-01 | — | Pending |
-| ALERT-02 | — | Pending |
-| FIRST-01 | — | Pending |
-| FIRST-02 | — | Pending |
+| FOUND-01 | Phase 1 | Pending |
+| FOUND-02 | Phase 1 | Pending |
+| FOUND-03 | Phase 1 | Pending |
+| FOUND-04 | Phase 1 | Pending |
+| FOUND-05 | Phase 1 | Pending |
+| OBS-01 | Phase 1 | Pending |
+| OBS-02 | Phase 6 | Pending |
+| OBS-03 | Phase 3 | Pending |
+| OBS-04 | Phase 6 | Pending |
+| CORPUS-01 | Phase 2 | Pending |
+| CORPUS-02 | Phase 4 | Pending |
+| RAG-01 | Phase 2 | Pending |
+| RAG-02 | Phase 2 | Pending |
+| RAG-03 | Phase 2 | Pending |
+| RAG-04 | Phase 2 | Pending |
+| DRAFT-01 | Phase 3 | Pending |
+| DRAFT-02 | Phase 3 | Pending |
+| DRAFT-03 | Phase 5 | Pending |
+| DRAFT-04 | Phase 5 | Pending |
+| CRIT-01 | Phase 3 | Pending |
+| CRIT-02 | Phase 4 | Pending |
+| CRIT-03 | Phase 6 | Pending |
+| CRIT-04 | Phase 3 | Pending |
+| REGEN-01 | Phase 3 | Pending |
+| REGEN-02 | Phase 5 | Pending |
+| REGEN-03 | Phase 5 | Pending |
+| REGEN-04 | Phase 5 | Pending |
+| LOOP-01 | Phase 5 | Pending |
+| LOOP-02 | Phase 4 | Pending |
+| LOOP-03 | Phase 4 | Pending |
+| LOOP-04 | Phase 4 | Pending |
+| TEST-01 | Phase 4 | Pending |
+| TEST-02 | Phase 6 | Pending |
+| TEST-03 | Phase 6 | Pending |
+| TEST-04 | Phase 6 | Pending |
+| ORCH-01 | Phase 5 | Pending |
+| ORCH-02 | Phase 6 | Pending |
+| ALERT-01 | Phase 5 | Pending |
+| ALERT-02 | Phase 5 | Pending |
+| FIRST-01 | Phase 6 | Pending |
+| FIRST-02 | Phase 6 | Pending |
 
 **Coverage:**
 - v1 requirements: 41 total
-- Mapped to phases: 0 (populated by roadmapper)
-- Unmapped: 41 ⚠️
+- Mapped to phases: 41
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-04-21*
-*Last updated: 2026-04-21 after initialization*
+*Last updated: 2026-04-21 after roadmap creation (traceability populated)*
