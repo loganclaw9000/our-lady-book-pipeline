@@ -13,6 +13,7 @@ preserving the "free-form JSON-shaped payload" semantics from the plan's
 <interfaces> block (the plan wrote bare `dict`; we tighten only the generic
 parameter, not the field name, type name, or structural behavior).
 """
+
 from __future__ import annotations
 
 from enum import Enum
@@ -51,7 +52,9 @@ class RetrievalHit(BaseModel):
 class RetrievalResult(BaseModel):
     """Structured output of one typed retriever for one scene request."""
 
-    retriever_name: str  # "historical"|"metaphysics"|"entity_state"|"arc_position"|"negative_constraint"
+    retriever_name: (
+        str  # "historical"|"metaphysics"|"entity_state"|"arc_position"|"negative_constraint"
+    )
     hits: list[RetrievalHit]
     bytes_used: int
     query_fingerprint: str  # xxhash of SceneRequest (cache key)
@@ -139,7 +142,10 @@ class RegenRequest(BaseModel):
 
 
 # --- Scene state ---
-class SceneState(str, Enum):
+# Note: plan 01-02 <interfaces> block specifies `class SceneState(str, Enum)`
+# verbatim as the frozen contract. StrEnum would be semantically equivalent but
+# would change the class's MRO visible to downstream code; preserve plan shape.
+class SceneState(str, Enum):  # noqa: UP042
     """States a scene can occupy in the pipeline. Persisted as JSON values.
 
     Transitions managed by the orchestrator (Phase 3); see

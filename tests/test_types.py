@@ -8,6 +8,7 @@ Covers:
 - Test 5: ContextPack.fingerprint and RetrievalResult.query_fingerprint are required str
 - Test 6: top-level imports succeed
 """
+
 from __future__ import annotations
 
 import pytest
@@ -158,9 +159,7 @@ def test_context_pack_requires_fingerprint() -> None:
     sr = SceneRequest(
         chapter=1, scene_index=1, pov="P", date_iso="1519-01-01", location="L", beat_function="b"
     )
-    cp = ContextPack(
-        scene_request=sr, retrievals={}, total_bytes=0, fingerprint="deadbeef"
-    )
+    cp = ContextPack(scene_request=sr, retrievals={}, total_bytes=0, fingerprint="deadbeef")
     assert cp.fingerprint == "deadbeef"
     assert cp.assembly_strategy == "round_robin"
 

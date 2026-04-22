@@ -9,16 +9,15 @@ ARCHITECTURE.md §4.1). Phase 3 implements the orchestrator that calls transitio
 This module is intentionally NOT a typing.Protocol — it's a Pydantic model + helper
 function. It is kept under book_pipeline.interfaces/ for cohesion per ARCHITECTURE.md §2.7.
 """
+
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from book_pipeline.interfaces.types import SceneState, SceneStateRecord
 
 
-def transition(
-    record: SceneStateRecord, to_state: SceneState, note: str
-) -> SceneStateRecord:
+def transition(record: SceneStateRecord, to_state: SceneState, note: str) -> SceneStateRecord:
     """Return a new SceneStateRecord with state advanced and a history entry appended.
 
     Pure function — caller is responsible for persisting the returned record.
@@ -27,14 +26,14 @@ def transition(
     updated = record.model_copy(
         update={
             "state": to_state,
-            "history": record.history
-            + [
+            "history": [
+                *record.history,
                 {
                     "from": record.state.value,
                     "to": to_state.value,
-                    "ts_iso": datetime.now(timezone.utc).isoformat(),
+                    "ts_iso": datetime.now(UTC).isoformat(),
                     "note": note,
-                }
+                },
             ],
         }
     )

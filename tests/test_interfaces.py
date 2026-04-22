@@ -7,6 +7,7 @@ Covers:
 - Each stub method raises NotImplementedError with descriptive message
 - Each Protocol has a non-empty docstring
 """
+
 from __future__ import annotations
 
 import pytest
@@ -58,21 +59,19 @@ PROTOCOL_STUB_PAIRS = [
 
 
 @pytest.mark.parametrize("protocol,stub_cls", PROTOCOL_STUB_PAIRS)
-def test_stub_satisfies_protocol_isinstance(
-    protocol: type, stub_cls: type
-) -> None:
+def test_stub_satisfies_protocol_isinstance(protocol: type, stub_cls: type) -> None:
     """FOUND-04 SC-4: stubs satisfy isinstance() for their Protocol."""
-    assert isinstance(
-        stub_cls(), protocol
-    ), f"{stub_cls.__name__} does not satisfy {protocol.__name__}"
+    assert isinstance(stub_cls(), protocol), (
+        f"{stub_cls.__name__} does not satisfy {protocol.__name__}"
+    )
 
 
 @pytest.mark.parametrize("protocol,stub_cls", PROTOCOL_STUB_PAIRS)
 def test_protocol_has_docstring(protocol: type, stub_cls: type) -> None:
     """FOUND-04: each Protocol has a docstring contract."""
-    assert (
-        protocol.__doc__ is not None and len(protocol.__doc__.strip()) > 0
-    ), f"{protocol.__name__} missing docstring"
+    assert protocol.__doc__ is not None and len(protocol.__doc__.strip()) > 0, (
+        f"{protocol.__name__} missing docstring"
+    )
 
 
 def test_stub_drafter_raises_not_implemented() -> None:
@@ -123,9 +122,7 @@ def test_stub_critic_raises_not_implemented() -> None:
         beat_function="b",
     )
     cp = ContextPack(scene_request=sr, retrievals={}, total_bytes=0, fingerprint="h")
-    req = CriticRequest(
-        scene_text="scene", context_pack=cp, rubric_id="r", rubric_version="v"
-    )
+    req = CriticRequest(scene_text="scene", context_pack=cp, rubric_id="r", rubric_version="v")
     with pytest.raises(NotImplementedError):
         StubCritic().review(req)
 
@@ -167,7 +164,11 @@ def test_stub_scene_state_machine_transition_is_wrapper() -> None:
 
 
 def test_all_protocols_importable_from_package() -> None:
-    """FOUND-04 SC-4: 12 Protocols importable from book_pipeline.interfaces."""
+    """FOUND-04 SC-4: 12 Protocols importable from book_pipeline.interfaces.
+
+    13th "interface" — SceneStateMachine — is types.py exports (SceneState,
+    SceneStateRecord, transition).
+    """
     from book_pipeline.interfaces import (  # noqa: F401
         ChapterAssembler,
         ContextPackBundler,
@@ -180,10 +181,11 @@ def test_all_protocols_importable_from_package() -> None:
         Regenerator,
         Retriever,
         RetrospectiveWriter,
+        SceneState,
+        SceneStateRecord,
         ThesisMatcher,
+        transition,
     )
-    # 13th "interface" — SceneStateMachine — is types.py exports
-    from book_pipeline.interfaces import SceneState, SceneStateRecord, transition  # noqa: F401
 
 
 def test_all_protocol_names_in_package_all() -> None:
@@ -208,10 +210,10 @@ def test_all_protocol_names_in_package_all() -> None:
 
 
 def test_protocols_are_runtime_checkable() -> None:
-    """Each Protocol uses @runtime_checkable — isinstance() must work without error."""
-    # If any Protocol is missing @runtime_checkable, isinstance() raises TypeError.
-    for _, stub_cls in PROTOCOL_STUB_PAIRS:
-        proto = _  # avoid linter unused-var if reordered
+    """Each Protocol uses @runtime_checkable — isinstance() must work without error.
+
+    If any Protocol is missing @runtime_checkable, isinstance() raises TypeError.
+    """
     for proto, stub_cls in PROTOCOL_STUB_PAIRS:
         try:
             result = isinstance(stub_cls(), proto)
