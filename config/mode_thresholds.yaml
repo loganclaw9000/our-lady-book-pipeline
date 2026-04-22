@@ -1,0 +1,24 @@
+# mode_thresholds.yaml — Mode A (voice-FT local) / Mode B (frontier) dial
+# per ADR-001, plus oscillation + alert tuning.
+#
+# Phase 1 ships the structure + placeholders. Phase 5 flips `oscillation.enabled`
+# to live and populates preflag_beats with the chapters known to exceed the
+# voice model's structural reach (Cholula stir, two-thirds reveal, siege climax).
+mode_a:
+  regen_budget_R: 3
+  per_scene_cost_cap_usd: 0.0
+  voice_fidelity_band:
+    min: 0.60
+    max: 0.88
+mode_b:
+  model_id: "claude-opus-4-7"
+  per_scene_cost_cap_usd: 2.00
+  regen_attempts: 1
+  prompt_cache_ttl: "1h"
+oscillation:
+  enabled: true
+  max_axis_flips: 2
+alerts:
+  telegram_cool_down_seconds: 3600
+  dedup_window_seconds: 3600
+preflag_beats: []

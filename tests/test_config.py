@@ -8,7 +8,6 @@ import pytest
 import yaml
 from pydantic import ValidationError
 
-
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CONFIG_DIR = REPO_ROOT / "config"
 
@@ -241,9 +240,7 @@ def test_missing_field_in_voice_pin_raises_with_field_name(
 # ---------------------------------------------------------------------------
 
 
-def test_malformed_yaml_raises_clear_error(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
+def test_malformed_yaml_raises_clear_error(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     from book_pipeline.config.rubric import RubricConfig
 
     (tmp_path / "config").mkdir()
@@ -290,9 +287,7 @@ def test_secrets_does_not_leak_value_in_repr(
     assert "sk-ant-leaky-xyz" not in str(s)
 
 
-def test_secrets_absent_when_env_unset(
-    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
-) -> None:
+def test_secrets_absent_when_env_unset(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     monkeypatch.chdir(tmp_path)
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     monkeypatch.delenv("OPENCLAW_GATEWAY_TOKEN", raising=False)

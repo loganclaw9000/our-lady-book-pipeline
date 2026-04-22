@@ -1,0 +1,46 @@
+# rubric.yaml — 5-axis critic rubric for scene + chapter critics.
+#
+# The 5 axes (exact names, never renamed without bumping rubric_version):
+#   historical, metaphysics, entity, arc, donts
+#
+# severity_thresholds map per-axis normalized score → severity bucket used by
+# the regenerator to decide which issues to fix first. weight is the axis's
+# contribution to the overall pass/fail gate (arc is slightly discounted
+# because beat-function alignment is harder to score precisely at scene level).
+rubric_version: "v1"
+axes:
+  historical:
+    description: "Facts, dates, places consistent with corpus historical bible."
+    severity_thresholds:
+      low: 0.4
+      mid: 0.6
+      high: 0.8
+    weight: 1.0
+  metaphysics:
+    description: "Consistency with engineering.md rule cards (engine tiers, fuel classes)."
+    severity_thresholds:
+      low: 0.4
+      mid: 0.6
+      high: 0.8
+    weight: 1.0
+  entity:
+    description: "Named-entity continuity vs entity-state cards from prior chapters."
+    severity_thresholds:
+      low: 0.4
+      mid: 0.6
+      high: 0.8
+    weight: 1.0
+  arc:
+    description: "Beat function hits the outline's expected arc-position for this chapter."
+    severity_thresholds:
+      low: 0.4
+      mid: 0.6
+      high: 0.8
+    weight: 0.9
+  donts:
+    description: "Thematic constraints from known-liberties and Things to Avoid."
+    severity_thresholds:
+      low: 0.4
+      mid: 0.6
+      high: 0.8
+    weight: 1.0

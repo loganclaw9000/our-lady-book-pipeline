@@ -1,0 +1,47 @@
+# rag_retrievers.yaml — 5 typed RAG retrievers + shared embeddings + bundler.
+#
+# The 5 retriever names (exact, never renamed):
+#   historical, metaphysics, entity_state, arc_position, negative_constraint
+#
+# Per RAG-03 the bundler caps the ContextPack at 40KB to keep drafter prompts
+# within the voice model's effective working-context. Conflicts between
+# retrievers (e.g., historical bible vs entity-state card disagree on a date)
+# are emitted to drafts/retrieval_conflicts/ for manual review.
+embeddings:
+  model: "BAAI/bge-m3"
+  model_revision: "TBD-phase2"
+  dim: 1024
+  device: "cuda:0"
+bundler:
+  max_bytes: 40960
+  assembly_strategy: "round_robin"
+  enforce_cap: true
+  emit_conflicts_to: "drafts/retrieval_conflicts/"
+retrievers:
+  historical:
+    index_path: "indexes/historical/"
+    source_files:
+      - "~/Source/our-lady-of-champion/brief.md"
+    chunk_strategy: "paragraph"
+  metaphysics:
+    index_path: "indexes/metaphysics/"
+    source_files:
+      - "~/Source/our-lady-of-champion/engineering.md"
+    chunk_strategy: "rule_card"
+  entity_state:
+    index_path: "indexes/entity_state/"
+    source_files:
+      - "~/Source/our-lady-of-champion/pantheon.md"
+      - "~/Source/our-lady-of-champion/secondary-characters.md"
+    chunk_strategy: "named_entity"
+    auto_update_from: "entity-state/"
+  arc_position:
+    index_path: "indexes/arc_position/"
+    source_files:
+      - "~/Source/our-lady-of-champion/outline.md"
+    chunk_strategy: "beat_function"
+  negative_constraint:
+    index_path: "indexes/negative_constraint/"
+    source_files:
+      - "~/Source/our-lady-of-champion/known-liberties.md"
+    chunk_strategy: "topic_tag"

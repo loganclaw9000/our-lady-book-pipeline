@@ -1,0 +1,23 @@
+# voice_pin.yaml — pins the voice-FT checkpoint consumed by Mode-A drafter.
+#
+# Phase 1 placeholder: ft_run_id + checkpoint_sha will be replaced with the
+# real values in Phase 3 (DRAFT-01) when the V9/V10-or-latest-stable checkpoint
+# from paul-thinkpiece-pipeline is selected for pinning.
+#
+# Enforcement: the vLLM-serve handshake in Phase 3 compares the served model's
+# checkpoint SHA against this file; a mismatch is a hard-block.
+voice_pin:
+  source_repo: "paul-thinkpiece-pipeline"
+  source_commit_sha: "TBD-phase3"
+  ft_run_id: "v9_or_v10_latest_stable"
+  checkpoint_path: "~/paul-thinkpiece-pipeline/output/paul-merged-latest"
+  checkpoint_sha: "TBD-phase3"
+  base_model: "Qwen/Qwen3-32B"
+  trained_on_date: "TBD-phase3"
+  pinned_on_date: "2026-04-21"
+  pinned_reason: "Phase 1 placeholder — Phase 3 pin event will replace. V9/V10 lineage per CONTEXT.md."
+  vllm_serve_config:
+    port: 8002
+    max_model_len: 8192
+    dtype: "bfloat16"
+    tensor_parallel_size: 1
