@@ -84,6 +84,9 @@ The pipeline autonomously produces first-draft novel chapters that are both **vo
 | Entity-state auto-extraction post-commit | Continuity errors across 81k words are hard to catch via unstructured RAG; structured entity cards give critic something to pattern-match | — Pending (thesis 003 tests) |
 | openclaw (local) for orchestration + bulk drafting, Anthropic API for critic + reasoning | Asymmetric deployment: free tokens for volume, frontier quality where failure is most expensive | — Pending |
 | Pre-flag structurally complex beats (Cholula stir, two-thirds reveal, siege climax) as Mode B from the start | Known to exceed voice model's structural reach; better to budget frontier cost explicitly than fight regen loops | — Pending |
+| Voice pin target = V9 or V10 (by the time Phase 3 lands) | paul-thinkpiece-pipeline is actively iterating; V6 is current but will be superseded. Phase 3 `voice_pin.yaml` pins whichever is latest-stable at that time | — Pending |
+| Remote = private GitHub (`loganclaw9000/our-lady-book-pipeline`) | Novel content + experimental code, push on every commit | ✓ Good |
+| Corpus updates propagate via cron re-ingest | If `~/Source/our-lady-of-champion/` changes mid-drafting, a cron job re-runs ingestion; no file-watch, no manual trigger | — Pending |
 
 ## Evolution
 
