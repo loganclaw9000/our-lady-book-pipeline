@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+venv_*/
+.venv/
+env/
+
+# Runtime artifacts
+runs/*.jsonl
+runs/ablations/
+runs/state.json
+indexes/*.db
+indexes/*.sqlite
+indexes/*.lance/
+indexes/*.parquet
+drafts/in_flight/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+.env.*
+!.env.example
+config/secrets.yaml
+
+# openclaw local state
+.openclaw/runs/
+.openclaw/state/
+
+# Big or ephemeral
+*.log
+*.tmp
+*.pyc
