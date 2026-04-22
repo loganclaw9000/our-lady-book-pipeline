@@ -40,10 +40,10 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 
 ### Critic
 
-- [ ] **CRIT-01**: Scene critic scores each drafted scene on 5 axes (`historical`, `metaphysics`, `entity`, `arc`, `don'ts`) producing structured JSON via `client.messages.parse()` with Pydantic schema; per-axis `{score: 0-100, severity: low|mid|high, issues: [{location, claim, evidence}]}`.
+- [x] **CRIT-01**: Scene critic scores each drafted scene on 5 axes (`historical`, `metaphysics`, `entity`, `arc`, `don'ts`) producing structured JSON via `client.messages.parse()` with Pydantic schema; per-axis `{score: 0-100, severity: low|mid|high, issues: [{location, claim, evidence}]}`.
 - [ ] **CRIT-02**: Chapter-level critic runs after scene assembly with arc-coherence and voice-consistency axes layered on top of the per-scene rubric.
 - [ ] **CRIT-03**: Cross-family critic audit runs on ≥10% of scenes using a non-Anthropic judge (Gemini 2.5 Pro or GPT-5); disagreement > threshold flags a human review candidate in digest.
-- [ ] **CRIT-04**: Critic rubric is versioned (`rubric.yaml` v1, v2, …); score histories tagged with rubric version for meaningful longitudinal comparison.
+- [x] **CRIT-04**: Critic rubric is versioned (`rubric.yaml` v1, v2, …); score histories tagged with rubric version for meaningful longitudinal comparison.
 
 ### Regeneration + Mode Dial
 
@@ -150,10 +150,10 @@ Populated by roadmapper during roadmap creation. Every v1 REQ-ID maps to exactly
 | DRAFT-02 | Phase 3 | Pending |
 | DRAFT-03 | Phase 5 | Pending |
 | DRAFT-04 | Phase 5 | Pending |
-| CRIT-01 | Phase 3 | Pending |
+| CRIT-01 | Phase 3 | Complete |
 | CRIT-02 | Phase 4 | Pending |
 | CRIT-03 | Phase 6 | Pending |
-| CRIT-04 | Phase 3 | Pending |
+| CRIT-04 | Phase 3 | Complete |
 | REGEN-01 | Phase 3 | Pending |
 | REGEN-02 | Phase 5 | Pending |
 | REGEN-03 | Phase 5 | Pending |
