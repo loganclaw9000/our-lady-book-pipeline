@@ -110,7 +110,7 @@ def _build_smoke_event() -> Event:
         mode=None,
         rubric_version=None,
         checkpoint_sha=None,
-        extra={"purpose": "phase1_exit_criterion", "prompt": SMOKE_PROMPT},
+        extra={"purpose": "phase1_exit_criterion"},
     )
 
 
@@ -162,7 +162,6 @@ def _build_drafter_smoke_event() -> tuple[Event, str]:
         checkpoint_sha=pin_sha,
         extra={
             "purpose": "phase1_voice_pin_sha_wiring",
-            "prompt": DRAFTER_SMOKE_PROMPT,
             "ft_run_id": ft_run_id,
             "base_model": base_model,
         },
