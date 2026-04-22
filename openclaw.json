@@ -1,0 +1,91 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.4.5",
+    "lastTouchedAt": "2026-04-21T00:00:00.000Z"
+  },
+  "env": {
+    "vars": {
+      "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}"
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "vllm": {
+        "baseUrl": "http://127.0.0.1:8002/v1",
+        "apiKey": "vllm",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "paul-voice-latest",
+            "name": "Paul Voice FT (pinned, placeholder for Phase 3)",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": {"input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0},
+            "contextWindow": 8192,
+            "maxTokens": 2048
+          }
+        ]
+      },
+      "anthropic": {
+        "baseUrl": "https://api.anthropic.com",
+        "api": "anthropic-messages",
+        "models": [
+          {
+            "id": "claude-opus-4-7",
+            "name": "Claude Opus 4.7 (critic + extractor + retrospective + Mode-B drafter)",
+            "reasoning": false,
+            "input": ["text", "image"],
+            "cost": {"input": 15, "output": 75, "cacheRead": 1.5, "cacheWrite": 18.75},
+            "contextWindow": 200000,
+            "maxTokens": 16000
+          },
+          {
+            "id": "claude-sonnet-4-6",
+            "name": "Claude Sonnet 4.6 (fallback for simple rubric calls)",
+            "reasoning": false,
+            "input": ["text", "image"],
+            "cost": {"input": 3, "output": 15, "cacheRead": 0.3, "cacheWrite": 3.75},
+            "contextWindow": 200000,
+            "maxTokens": 16000
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "/home/admin/Source/our-lady-book-pipeline/workspaces",
+      "compaction": {"mode": "safeguard"},
+      "maxConcurrent": 2,
+      "subagents": {"maxConcurrent": 2}
+    },
+    "list": [
+      {
+        "id": "drafter",
+        "name": "drafter",
+        "workspace": "/home/admin/Source/our-lady-book-pipeline/workspaces/drafter",
+        "model": "vllm/paul-voice-latest"
+      }
+    ]
+  },
+  "tools": {
+    "profile": "full",
+    "web": {
+      "search": {"enabled": false},
+      "fetch": {"enabled": false}
+    }
+  },
+  "gateway": {
+    "port": 18790,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "${OPENCLAW_GATEWAY_TOKEN}"
+    }
+  },
+  "plugins": {
+    "entries": {}
+  }
+}
