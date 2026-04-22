@@ -9,7 +9,7 @@
 
 ## Phases
 
-- [ ] **Phase 1: Foundation + Observability Baseline** - uv scaffolding, Pydantic config, Protocol contracts, EventLogger, voice-pin + SHA canary, openclaw workspace, module-boundary lint, Telegram plumbing.
+- [x] **Phase 1: Foundation + Observability Baseline** - uv scaffolding, Pydantic config, Protocol contracts, EventLogger, voice-pin + SHA canary, openclaw workspace, module-boundary lint, Telegram plumbing. (completed 2026-04-22)
 - [ ] **Phase 2: Corpus Ingestion + Typed RAG** - 5 LanceDB indexes, ContextPackBundler with 40KB cap + conflict reconciliation, arc-position beat parser, golden-query CI gate.
 - [ ] **Phase 3: Mode-A Drafter + Scene Critic + Basic Regen** - vLLM-served voice checkpoint, scene Critic with 5-axis rubric, scene-local Regenerator (R=1), voice-fidelity anchor set, SceneStateMachine end-to-end.
 - [ ] **Phase 4: Chapter Assembly + Post-Commit DAG** - ChapterAssembler, chapter-level Critic (fresh RAG pack), atomic canon commit, EntityExtractor with SHA-linked cards, RetrospectiveWriter with lint.
@@ -37,12 +37,12 @@
   6. Module-boundary lint (ruff rule or custom check) flags book-specific imports inside generic-kernel-candidate modules and passes CI.
 
 **Plans**: 6 plans in 4 waves (Wave 1: 01 skeleton → Wave 2 parallel: 02 Protocols + 03 configs + 04 openclaw → Wave 3: 05 EventLogger → Wave 4: 06 import-linter)
-- [ ] 01-01-PLAN.md — Package skeleton (pyproject, uv.lock, CLI subcommand dispatcher, dev tooling) [FOUND-01]
-- [ ] 01-02-PLAN.md — 13 Protocol interfaces + Pydantic type contracts + stubs [FOUND-04]
-- [ ] 01-03-PLAN.md — 4 YAML configs + Pydantic-Settings models + validate-config CLI [FOUND-02]
-- [ ] 01-04-PLAN.md — openclaw.json + drafter workspace + bootstrap/register-cron CLI [FOUND-03]
-- [ ] 01-05-PLAN.md — JsonlEventLogger concrete + xxhash helpers + smoke-event CLI [OBS-01]
-- [ ] 01-06-PLAN.md — import-linter module boundary contracts + violation-proof test [FOUND-05]
+- [x] 01-01-PLAN.md — Package skeleton (pyproject, uv.lock, CLI subcommand dispatcher, dev tooling) [FOUND-01]
+- [x] 01-02-PLAN.md — 13 Protocol interfaces + Pydantic type contracts + stubs [FOUND-04]
+- [x] 01-03-PLAN.md — 4 YAML configs + Pydantic-Settings models + validate-config CLI [FOUND-02]
+- [x] 01-04-PLAN.md — openclaw.json + drafter workspace + bootstrap/register-cron CLI [FOUND-03]
+- [x] 01-05-PLAN.md — JsonlEventLogger concrete + xxhash helpers + smoke-event CLI [OBS-01]
+- [x] 01-06-PLAN.md — import-linter module boundary contracts + violation-proof test [FOUND-05]
 **UI hint**: no
 
 **Parallelization**: Plans 02 + 03 + 04 run in parallel in Wave 2 after Plan 01's skeleton lands (zero file-overlap — plans 03/04 append to main.py's SUBCOMMAND_IMPORTS via strictly-additive one-line edits). Plan 05 (Wave 3) depends on Plan 02's Event model + EventLogger Protocol. Plan 06 (Wave 4) must be last so it lints real committed modules.
@@ -167,7 +167,7 @@
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation + Observability Baseline | 0/6 | Not started | - |
+| 1. Foundation + Observability Baseline | 6/6 | Complete    | 2026-04-22 |
 | 2. Corpus Ingestion + Typed RAG | 0/TBD | Not started | - |
 | 3. Mode-A Drafter + Scene Critic + Basic Regen | 0/TBD | Not started | - |
 | 4. Chapter Assembly + Post-Commit DAG | 0/TBD | Not started | - |
