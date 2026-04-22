@@ -161,15 +161,16 @@ def test_register_nightly_ingest_invokes_subprocess_with_correct_args(
     # --session isolated
     assert "--session" in cmd
     assert "isolated" in cmd
-    # --session-agent drafter
-    assert "--session-agent" in cmd
+    # --agent drafter (the 2026.4.5 openclaw CLI flag name)
+    assert "--agent" in cmd
     assert "drafter" in cmd
-    # --system-event must mention "book-pipeline ingest"
-    assert "--system-event" in cmd
-    event_idx = cmd.index("--system-event")
-    system_event = cmd[event_idx + 1]
-    assert isinstance(system_event, str)
-    assert "book-pipeline ingest" in system_event
+    # --message must mention "book-pipeline ingest" (openclaw 2026.4.5: isolated
+    # sessions with --agent require --message, not --system-event).
+    assert "--message" in cmd
+    msg_idx = cmd.index("--message")
+    message_payload = cmd[msg_idx + 1]
+    assert isinstance(message_payload, str)
+    assert "book-pipeline ingest" in message_payload
 
 
 def test_register_cron_cli_registers_both_placeholder_and_nightly(

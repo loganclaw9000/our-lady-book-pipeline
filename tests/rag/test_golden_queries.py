@@ -66,12 +66,16 @@ def _load_queries() -> list[dict]:
 
 
 def _indexes_populated() -> bool:
-    """True iff indexes/ contains at least one LanceDB table directory."""
+    """True iff indexes/ contains at least one LanceDB table directory.
+
+    LanceDB stores tables as `<axis>.lance/` subdirectories — strip the
+    suffix before matching.
+    """
     if not INDEXES_DIR.exists():
         return False
-    # LanceDB creates per-axis subdirectories; any non-empty entry means data.
     return any(
-        entry.is_dir() and entry.name in REQUIRED_AXES
+        entry.is_dir()
+        and entry.name.removesuffix(".lance") in REQUIRED_AXES
         for entry in INDEXES_DIR.iterdir()
     )
 
@@ -164,9 +168,8 @@ def test_golden_queries_pass_on_baseline_ingest() -> None:
     runs each golden query through `bundler.bundle()`, and asserts the pass
     criteria from 02-CONTEXT.md "Golden-Query CI Gate".
     """
-    from book_pipeline.cli._entity_list import build_nahuatl_entity_set
-
     from book_pipeline.book_specifics.corpus_paths import OUTLINE
+    from book_pipeline.cli._entity_list import build_nahuatl_entity_set
     from book_pipeline.config.rag_retrievers import RagRetrieversConfig
     from book_pipeline.interfaces.types import SceneRequest
     from book_pipeline.observability import JsonlEventLogger

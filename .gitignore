@@ -20,6 +20,7 @@ indexes/*.parquet
 indexes/mtime_index.json
 indexes/resolved_model_revision.json
 drafts/in_flight/
+drafts/retrieval_conflicts/
 
 # IDE
 .vscode/

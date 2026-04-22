@@ -1,0 +1,27 @@
+{
+  "_comment": "Canonical cron job definitions for the book-pipeline repo. Applied via `book-pipeline openclaw register-cron` when the gateway is authenticated. Source of truth for Phase 2 Plan 06 nightly-ingest registration.",
+  "_registered_via": "openclaw cron add ... (see src/book_pipeline/openclaw/bootstrap.py)",
+  "_authenticated_path_requires": "OPENCLAW_GATEWAY_TOKEN env var OR --token flag",
+  "jobs": [
+    {
+      "name": "book-pipeline:nightly-ingest",
+      "description": "Nightly corpus re-ingest (Phase 2 Plan 06 / RAG-04 + CORPUS-01). Rebuild the 5 LanceDB tables if any Our Lady of Champion bible's mtime changed.",
+      "agentId": "drafter",
+      "schedule": {
+        "kind": "cron",
+        "expression": "0 2 * * *",
+        "tz": "America/New_York"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Run nightly ingest: book-pipeline ingest; if any corpus file mtime changed, rebuild the 5 LanceDB tables. Details: Phase 2 Plan 06 (RAG-04 baseline maintenance + CORPUS-01 freshness)."
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "_manual_register_cmd": "openclaw cron add --name 'book-pipeline:nightly-ingest' --cron '0 2 * * *' --tz 'America/New_York' --session isolated --agent drafter --message 'Run nightly ingest: book-pipeline ingest; if any corpus file mtime changed, rebuild the 5 LanceDB tables. Details: Phase 2 Plan 06 (RAG-04 baseline maintenance + CORPUS-01 freshness).' --wake now --token \"$OPENCLAW_GATEWAY_TOKEN\""
+    }
+  ]
+}

@@ -130,8 +130,8 @@ def register_placeholder_cron() -> tuple[bool, str, str]:
             "Run manually:\n"
             '  openclaw cron add --name "book-pipeline:phase1-placeholder" '
             '--cron "0 2 * * *" --tz "America/New_York" --session isolated '
-            '--session-agent drafter '
-            '--system-event "Phase 1 placeholder. No-op tick. Phase 5 ORCH-01 replaces." '
+            '--agent drafter '
+            '--message "Phase 1 placeholder. No-op tick. Phase 5 ORCH-01 replaces." '
             "--wake now",
         )
     cmd = [
@@ -146,9 +146,14 @@ def register_placeholder_cron() -> tuple[bool, str, str]:
         "America/New_York",
         "--session",
         "isolated",
-        "--session-agent",
+        "--agent",
         "drafter",
-        "--system-event",
+        # Plan 02-06 fix: openclaw 2026.4.5 rejects --system-event with
+        # --session isolated + --agent <id>; agentTurn payloads must use
+        # --message. Documented as Deviation in 02-06 SUMMARY (Rule 1 bug
+        # in Phase 1 wiring; caught when the real CLI was exercised for
+        # the first time in this plan).
+        "--message",
         "Phase 1 placeholder. No-op tick. Phase 5 ORCH-01 replaces this with "
         "the real nightly drafter loop per workspaces/drafter/AGENTS.md.",
         "--wake",
@@ -164,7 +169,9 @@ def register_placeholder_cron() -> tuple[bool, str, str]:
 NIGHTLY_INGEST_JOB_NAME = "book-pipeline:nightly-ingest"
 NIGHTLY_INGEST_CRON = "0 2 * * *"
 NIGHTLY_INGEST_TZ = "America/New_York"
-NIGHTLY_INGEST_SYSTEM_EVENT = (
+# openclaw 2026.4.5: --session isolated + --agent <id> requires --message
+# (agentTurn payload). --system-event is rejected in this session mode.
+NIGHTLY_INGEST_MESSAGE = (
     "Run nightly ingest: book-pipeline ingest; if any corpus file mtime "
     "changed, rebuild the 5 LanceDB tables. Details: Phase 2 Plan 06 "
     "(RAG-04 baseline maintenance + CORPUS-01 freshness)."
@@ -190,8 +197,8 @@ def register_nightly_ingest() -> tuple[bool, str, str]:
         f'    --cron "{NIGHTLY_INGEST_CRON}" \\\n'
         f'    --tz "{NIGHTLY_INGEST_TZ}" \\\n'
         "    --session isolated \\\n"
-        "    --session-agent drafter \\\n"
-        f'    --system-event "{NIGHTLY_INGEST_SYSTEM_EVENT}" \\\n'
+        "    --agent drafter \\\n"
+        f'    --message "{NIGHTLY_INGEST_MESSAGE}" \\\n'
         "    --wake now"
     )
     if shutil.which("openclaw") is None:
@@ -216,10 +223,10 @@ def register_nightly_ingest() -> tuple[bool, str, str]:
         NIGHTLY_INGEST_TZ,
         "--session",
         "isolated",
-        "--session-agent",
+        "--agent",
         "drafter",
-        "--system-event",
-        NIGHTLY_INGEST_SYSTEM_EVENT,
+        "--message",
+        NIGHTLY_INGEST_MESSAGE,
         "--wake",
         "now",
     ]
