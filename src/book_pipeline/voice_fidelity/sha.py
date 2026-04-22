@@ -15,9 +15,9 @@ File order is fixed (safetensors first, then config). Do not sort, do not glob,
 do not include tokenizer files. The fixed order is the reason two independent
 callers (pin-voice CLI + Phase 3 vLLM boot handshake) reproduce the same digest.
 
-This module lives in the kernel: it MUST NOT import from book_specifics and
-MUST NOT carry Our Lady of Champion-specific logic. The import-linter contract
-1 (pyproject.toml) guards this on every commit.
+This module lives in the kernel and MUST NOT carry Our Lady of
+Champion-specific logic. Import-linter contract 1 (pyproject.toml) guards
+the kernel/book-domain boundary on every commit.
 """
 from __future__ import annotations
 
