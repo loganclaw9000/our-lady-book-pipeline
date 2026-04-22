@@ -161,3 +161,99 @@ def test_arc_position_reindex_is_idempotent(tmp_path: Path) -> None:
 
     assert first_ids == second_ids
     assert tbl.count_rows() == 12  # overwrite semantics: still exactly 12 rows.
+
+
+class _RaisingEmbedder:
+    """Embedder that returns a valid array on the FIRST call and raises on
+    the SECOND. Used to simulate an embedding failure during a re-reindex
+    after an initial successful reindex."""
+
+    revision_sha = "fake-raising-sha"
+
+    def __init__(self) -> None:
+        self.calls = 0
+
+    def embed_texts(self, texts: list[str]) -> np.ndarray:
+        self.calls += 1
+        if self.calls >= 2:
+            raise RuntimeError(
+                "simulated GPU OOM / HF cache miss on second reindex"
+            )
+        if not texts:
+            return np.empty((0, 1024), dtype=np.float32)
+        rng = np.random.default_rng(seed=abs(hash(tuple(texts))) % (2**32))
+        arr = rng.standard_normal((len(texts), 1024)).astype(np.float32)
+        norms = np.linalg.norm(arr, axis=1, keepdims=True)
+        return arr / norms
+
+
+def test_arc_position_reindex_preserves_state_if_embedding_fails(
+    tmp_path: Path,
+) -> None:
+    """WR-02: if embedder.embed_texts raises during reindex, the existing
+    arc_position table must remain intact. Pre-fix behavior deleted rows
+    FIRST, leaving the table empty on embedder failure + the mtime index
+    already written → stuck empty until --force."""
+    import pytest
+
+    from book_pipeline.rag.lance_schema import open_or_create_table
+    from book_pipeline.rag.retrievers import ArcPositionRetriever
+
+    embedder = _RaisingEmbedder()
+    r = ArcPositionRetriever(
+        db_path=tmp_path,
+        outline_path=_FIXTURE,
+        embedder=embedder,
+        reranker=_FakeReranker(),
+        ingestion_run_id="ing-ap-wr02",
+    )
+
+    # First reindex succeeds and populates 12 rows.
+    r.reindex()
+    tbl = open_or_create_table(tmp_path, "arc_position")
+    assert tbl.count_rows() == 12
+    first_ids = {row["chunk_id"] for row in tbl.to_arrow().to_pylist()}
+
+    # Second reindex: embedder will raise on its first call. The table must
+    # remain at 12 rows with the same beat_ids.
+    with pytest.raises(RuntimeError, match="simulated GPU OOM"):
+        r.reindex()
+
+    tbl_after = open_or_create_table(tmp_path, "arc_position")
+    assert tbl_after.count_rows() == 12, (
+        f"WR-02: table corrupted after embedding failure; row count "
+        f"{tbl_after.count_rows()} != 12"
+    )
+    after_ids = {row["chunk_id"] for row in tbl_after.to_arrow().to_pylist()}
+    assert after_ids == first_ids, (
+        "WR-02: beat_id set changed after failed reindex"
+    )
+
+
+def test_arc_position_reindex_empty_beats_preserves_existing_rows(
+    tmp_path: Path,
+) -> None:
+    """WR-02 defense-in-depth: empty outline (no beats) must not wipe an
+    existing populated table. Pre-fix: delete("true") ran BEFORE the
+    `if not beats: return` check, silently emptying the table."""
+    from book_pipeline.rag.lance_schema import open_or_create_table
+
+    r = _make_retriever(tmp_path)
+    r.reindex()
+    tbl = open_or_create_table(tmp_path, "arc_position")
+    assert tbl.count_rows() == 12
+
+    # Point the retriever at an outline file that parses to zero beats
+    # (prose with no chapter/block/beat heading structure). The existing
+    # table must be untouched.
+    empty_outline = tmp_path / "empty_outline.md"
+    empty_outline.write_text(
+        "# Scratch notes\n\nNo chapter/block/beat structure here.\n"
+    )
+    r.outline_path = empty_outline
+    r.reindex()
+
+    tbl_after = open_or_create_table(tmp_path, "arc_position")
+    assert tbl_after.count_rows() == 12, (
+        "WR-02: empty-beats reindex silently emptied the table"
+    )

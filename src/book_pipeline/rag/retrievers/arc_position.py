@@ -76,15 +76,27 @@ class ArcPositionRetriever(LanceDBRetrieverBase):
         the arc_position LanceDB table with them. chunk_id == beat_id
         (RAG-02 stability); chapter int column populated directly from the
         parsed Beat.chapter (W-5).
+
+        WR-02 crash-safety: embed + assemble rows FIRST (in-memory). Only if
+        assembly succeeds do we delete + replace the existing table rows. If
+        embedding raises (GPU OOM, HF cache miss, network hiccup on revision
+        resolution), the existing arc_position table is left UNCHANGED so
+        subsequent retrievals still return data. Pre-fix: delete happened
+        first, leaving the table empty + the mtime index already written +
+        the system stuck until --force.
         """
         text = self.outline_path.read_text()
         beats = parse_outline(text)
         tbl = open_or_create_table(self.db_path, "arc_position")
-        # Full rebuild — truncate and rewrite. LanceDB's delete supports a
-        # SQL-esque predicate; "true" deletes every row.
-        tbl.delete("true")
+        # WR-02 defense-in-depth: check beats BEFORE mutating the table.
+        # Empty outline → leave the existing table alone (a no-op reindex
+        # must not wipe prior valid state).
         if not beats:
             return
+
+        # Phase 1: build the full replacement row set IN MEMORY. Any failure
+        # here (embedder OOM, HF resolution error, etc.) raises BEFORE we
+        # touch the live table.
         run_id = self.ingestion_run_id or f"arc_{hash_text(text)[:16]}"
         vectors = self.embedder.embed_texts([b.body for b in beats])
         rows = [
@@ -100,6 +112,15 @@ class ArcPositionRetriever(LanceDBRetrieverBase):
             }
             for b, v in zip(beats, vectors, strict=True)
         ]
+
+        # Phase 2: swap. LanceDB has no transaction API spanning delete+add,
+        # but doing them back-to-back keeps the empty-window tiny and — more
+        # importantly — Phase 1 has already guaranteed we CAN add the new
+        # rows. A post-delete add() failure is extremely unlikely at this
+        # point (schema is fixed, rows are materialized) but if it raised we
+        # would be in the pre-fix state anyway; the mtime index invalidation
+        # path in CLI ingest catches that case.
+        tbl.delete("true")
         tbl.add(rows)
 
 
