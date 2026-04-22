@@ -3,20 +3,20 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-06-PLAN.md (RAG-04 golden-query CI gate + nightly-ingest cron; Phase 2 CLOSED)
-last_updated: "2026-04-22T11:19:49.501Z"
+stopped_at: Completed 03-01-PLAN.md (Phase 3 kernel skeletons + REAL V6 voice pin)
+last_updated: "2026-04-22T17:20:24Z"
 progress:
   total_phases: 6
   completed_phases: 2
   total_plans: 20
-  completed_plans: 12
-  percent: 60
+  completed_plans: 13
+  percent: 65
 ---
 
 # STATE: our-lady-book-pipeline
 
-**Last updated:** 2026-04-22 after Plan 02-06 (RAG-04 golden-query CI gate + nightly-ingest cron; Phase 2 CLOSED)
-**Status:** Ready to execute
+**Last updated:** 2026-04-22 after Plan 03-01 (Phase 3 kernel skeletons + REAL V6 voice pin landed)
+**Status:** Executing Phase 03
 
 ---
 
@@ -35,26 +35,26 @@ Autonomously produce first-draft novel chapters that are both voice-faithful (Pa
 
 ### Current focus
 
-Phase 2 CLOSED. All 5 Phase 2 REQs complete (CORPUS-01, RAG-01, RAG-02, RAG-03, RAG-04). The 5-axis LanceDB retrieval plane is populated with a real ingest (237 chunks across 5 axes; baseline `ingestion_run_id=ing_20260422T082448725590Z_2264c687`); the golden-query CI gate is wired as a pre-push hook; the nightly-ingest openclaw cron is wired (operator applies via `openclaw/cron_jobs.json` when `OPENCLAW_GATEWAY_TOKEN` is set); the end-to-end bundler smoke on a real `SceneRequest(POV=Cortés, ch=8)` produces a valid `ContextPack` with the Plan 02-05 invariants holding (≤40KB; 6 events; conflicts surfaced). Phase 3 (Mode-A Drafter + Scene Critic + Basic Regen) ready to start.
+Phase 3 executing. Plan 03-01 LANDED (kernel skeletons + REAL V6 voice pin): 4 empty kernel packages (drafter/, critic/, regenerator/, voice_fidelity/) wired into import-linter contracts + scripts/lint_imports.sh mypy scope; `book_pipeline.voice_fidelity.sha` ships `compute_adapter_sha` + `verify_pin` + `VoicePinMismatch` (V-3 PITFALLS mitigation); `book-pipeline pin-voice <adapter_dir>` CLI computes + atomically writes voice_pin.yaml + emits role='voice_pin' Event; and the REAL V6 qwen3-32b LoRA pin `3f0ac5e2290dab63…d094` is committed to `config/voice_pin.yaml` (source_commit_sha `c571bb7b...` from paul-thinkpiece-pipeline HEAD). Phase 1 placeholders obliterated. Plan 03-02 (voice-fidelity scorer + drafter/vllm_client) ready to start.
 
 ---
 
 ## Current Position
 
-Phase: 02 (Corpus Ingestion + Typed RAG) — COMPLETE
-Plan: 6 of 6 complete
+Phase: 03 (Mode-A Drafter + Scene Critic + Basic Regen) — EXECUTING
+Plan: 2 of 8
 
 - **Phase:** 3
-- **Plan:** Not started
-- **Status:** Phase 2 complete; ready for `/gsd-plan-phase 3`
-- **Plans complete:** 6 / 6 (Phase 2); 12 / 12 total (Phase 1: 6; Phase 2: 6)
-- **Progress:** [██████████] 100%
+- **Plan:** 2 (03-02 next)
+- **Status:** Plan 03-01 complete; ready for `/gsd-execute-phase 3` wave 2 (Plan 03-02)
+- **Plans complete:** 1 / 8 (Phase 3); 13 / 20 total (Phase 1: 6; Phase 2: 6; Phase 3: 1)
+- **Progress:** [█████████▌] 65%
 
 ### Roadmap progress
 
 - [x] **Phase 1:** Foundation + Observability Baseline (6/6 plans)
 - [x] **Phase 2:** Corpus Ingestion + Typed RAG (6/6 plans — 02-01 RAG kernel + 02-02 corpus ingester + 02-03 3-of-5 retrievers + 02-04 entity_state/arc_position + outline_parser + 02-05 ContextPackBundler + 02-06 RAG-04 golden-query CI gate + nightly cron)
-- [ ] **Phase 3:** Mode-A Drafter + Scene Critic + Basic Regen
+- [~] **Phase 3:** Mode-A Drafter + Scene Critic + Basic Regen (1/8 plans — 03-01 kernel skeletons + REAL V6 voice pin)
 - [ ] **Phase 4:** Chapter Assembly + Post-Commit DAG
 - [ ] **Phase 5:** Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration
 - [ ] **Phase 6:** Testbed Plane + Production Hardening + First Draft
@@ -75,6 +75,7 @@ No prose-generation metrics yet — pipeline has not produced artifacts. First r
 | 02-04 | 12             | 2     | 7             | 0              | 17          | 209           | 2026-04-22  |
 | 02-05 | 12             | 2     | 7             | 3              | 26          | 235           | 2026-04-22  |
 | 02-06 | 45             | 3     | 10            | 11             | 19          | 254           | 2026-04-22  |
+| 03-01 | 12             | 3     | 12            | 6              | 14          | 280           | 2026-04-22  |
 
 ### Target metrics (will populate once pipeline runs)
 
@@ -128,6 +129,12 @@ No prose-generation metrics yet — pipeline has not produced artifacts. First r
 - **(02-06) Golden-query `forbidden_chunks` uses a single universally-forbidden cross-axis negative (`engineering.md > Byzantine Orthodox`).** Initial seed queries used axis-local forbidden chunks that conflicted with each retriever's own source files (e.g., negative_constraint reads known-liberties.md, so forbidding known-liberties on ANY retriever is logically inconsistent). Refined to an always-forbidden background section no retriever should surface on Spanish/Mexica scenes. Phase 6 thesis 005 can refine per-query anti-leak cases.
 - **(02-06) 6-event-per-bundle invariant held on real corpus (Gate 5).** SceneRequest(Cortés@Tenochtitlan, ch=8, arrival) produced ContextPack total_bytes=31573, 5 axes populated (8+4+4+1+6=23 hits), exactly 6 new events (5 retriever + 1 context_pack_bundler), 38 W-1 conflicts detected. Plan 02-05's invariants survive the jump to real BGE-M3 + real BGE reranker-v2-m3 + 237-chunk corpus.
 - **(02-06) Cron registration blocked by missing OPENCLAW_GATEWAY_TOKEN; fallback committed to openclaw/cron_jobs.json.** openclaw CLI is on PATH and the book-pipeline wires the correct flags; gateway auth is a deferred user action. Phase 5 stale-cron detector will alert if `book-pipeline:nightly-ingest` hasn't fired in >36h.
+- **(03-01) compute_adapter_sha algorithm pinned: SHA256(adapter_model.safetensors bytes || adapter_config.json bytes), 1 MiB chunks, fixed file order.** Two machines reproduce the same digest. Tokenizer files + checkpoint-*/ subdirs intentionally excluded (change every training iteration, don't affect inference weights). Plan 03-03 boot handshake calls `verify_pin(pin, strict=True)` at vLLM startup; mismatch → `HARD_BLOCKED("checkpoint_sha_mismatch")`.
+- **(03-01) REAL V6 pin committed: SHA `3f0ac5e2290dab633a19b6fb7a37d75f59d4961497e7957947b6428e4dc9d094`** (first 16: `3f0ac5e2290dab63`, last 4: `d094`). ft_run_id=v6_qwen3_32b, checkpoint_path=/home/admin/finetuning/output/paul-v6-qwen3-32b-lora, base_model=Qwen/Qwen3-32B, source_commit_sha=c571bb7b... (real paul-thinkpiece-pipeline HEAD). Compute wall time 10.7s over the 537MB safetensors.
+- **(03-01) All 4 Phase 3 kernel packages (drafter/, critic/, regenerator/, voice_fidelity/) land in the SAME plan as their import-linter contract extension and scripts/lint_imports.sh mypy-scope extension.** Append-only: +4 entries in contract 1 source_modules, +4 in contract 2 forbidden_modules, +4 mypy target dirs. Plan 01-06 extension policy precedent; Plans 03-02..05 add concrete impls INSIDE these packages without touching pyproject.toml.
+- **(03-01) voice_fidelity/__init__.py uses importlib+contextlib.suppress for BOTH sha AND scorer.** Plan spec only covered scorer; extending to sha keeps the 3-task commit chain atomic (Task 1's GREEN state doesn't depend on Task 2 having landed sha.py). Downstream pattern: Plan 03-02 replaces scorer stub body WITHOUT touching __init__.py — `score_voice_fidelity` attribute re-resolves through the fallback.
+- **(03-01) VoicePinConfig round-trip skip for non-canonical --yaml-path in pin-voice CLI.** pydantic-settings hardcodes `yaml_file='config/voice_pin.yaml'` via SettingsConfigDict; tests using tmp_path for yaml_path fall back to direct `VoicePinData(**payload)` construction (same schema gate). Happy path (real `book-pipeline pin-voice` against canonical path) takes the full VoicePinConfig branch and exercises the pydantic-settings loader end-to-end.
+- **(03-01) Pre-existing SIM105 ruff violation in rag/bundler.py auto-fixed under Rule 3 (blocker).** `bash scripts/lint_imports.sh` was failing before Plan 03-01 started (Phase 2 Plan 05's try/except/pass block from commit d4f35ac). Fixed to `contextlib.suppress(Exception)` — same semantics, unblocks the aggregate gate. Regression likely introduced by a ruff version bump between Plan 02-06 close and Plan 03-01 start (both on 2026-04-22).
 
 ### Open todos
 
@@ -154,16 +161,20 @@ None. Phase 3 readiness confirmed by Plan 02-06 Gate 5 end-to-end smoke.
 ### Last session
 
 - **Date:** 2026-04-22
-- **Action:** Executed Plan 02-06 — RAG-04 golden-query CI gate + nightly-ingest openclaw cron + reranker config + W-1 entity_list CLI helper + post-ingest ArcPositionRetriever.reindex() hook. Task 3 auto-executed per `<autonomous_mode>` directive: 6 sanity gates (GPU/vllm, real ingest, fixture capture, slow pytest, cron register, bundler smoke, cron-on-disk). 4/6 PASS + 2/6 PARTIAL (slow test's forbidden-leak failure revealed seed-set design bug → refined; cron registration blocked by missing OPENCLAW_GATEWAY_TOKEN → fallback committed to openclaw/cron_jobs.json).
-- **Outcome:** 10 files created (golden_queries.jsonl, test_golden_queries.py, _capture_expected_chunks.py, expected_chunks.jsonl, tests/cli/* entity_list + arc_reindex tests, src/book_pipeline/cli/_entity_list.py, openclaw/cron_jobs.json, this plan's SUMMARY); 11 files modified (pyproject.toml, .pre-commit-config.yaml, .gitignore, openclaw/bootstrap.py, cli/openclaw_cmd.py, cli/ingest.py, config/rag_retrievers.py, config/rag_retrievers.yaml, test_openclaw.py, test_config.py, test_import_contracts.py). 19 tests added; 254 total passing (was 240). Real ingest landed ingestion_run_id=ing_20260422T082448725590Z_2264c687 with BGE-M3 rev 5617a9f61b028005a4858fdac845db406aefb181 (237 chunks; 110.6s wall time). End-to-end bundler smoke confirmed 40KB cap + 6-event invariant + W-1 entity_list detection hold on real corpus. Aggregate gate `bash scripts/lint_imports.sh` green (2 contracts kept, ruff clean, mypy clean on 75 files). 4 per-task commits: 283a4ac (Task 1) + a32a941 (Task 2 RED) + 29735b5 (Task 2 GREEN) + 585afba (Task 3 fixes). **RAG-04 + CORPUS-01 + Phase 2 CLOSE.**
-- **Stopped at:** Completed 02-06-PLAN.md (RAG-04 golden-query CI gate + nightly-ingest cron; Phase 2 CLOSED)
+- **Action:** Executed Plan 03-01 — Phase 3 kernel skeletons (drafter/, critic/, regenerator/, voice_fidelity/) + import-linter extension + scripts/lint_imports.sh mypy-scope extension + `book_pipeline.voice_fidelity.sha` (compute_adapter_sha + verify_pin + VoicePinMismatch) + `book_pipeline.voice_fidelity.scorer` signature stub + `book-pipeline pin-voice <adapter_dir>` CLI + REAL V6 qwen3-32b LoRA SHA pinned in config/voice_pin.yaml. TDD: 3 RED/GREEN commit pairs (6 commits total).
+- **Outcome:** 12 files created (4 kernel __init__.py + sha.py + scorer.py + pin_voice.py CLI + 4 test files); 6 files modified (pyproject.toml, scripts/lint_imports.sh, cli/main.py, voice_fidelity/__init__.py's eager-vs-fallback choice, config/voice_pin.yaml obliterated Phase 1 placeholder, rag/bundler.py Rule-3 auto-fix for pre-existing SIM105). 14 tests added (3 import-contract structural + 7 sha non-slow + 1 scorer + 4 pin_voice); 280 total passing (was 266 baseline). REAL V6 SHA `3f0ac5e2290dab63…d094` computed in 10.7s over the 537MB safetensors at /home/admin/finetuning/output/paul-v6-qwen3-32b-lora/. Source commit SHA `c571bb7b...` from paul-thinkpiece-pipeline HEAD. Aggregate gate `bash scripts/lint_imports.sh` green (2 contracts kept, ruff clean, mypy clean on 82 source files). 6 per-task commits: d547ae8 (T1 RED) + e785525 (T1 GREEN + Rule-3 bundler fix) + 26df024 (T2 RED) + c987a3e (T2 GREEN) + 42bcdf9 (T3 RED) + 9c1b9c1 (T3 GREEN + REAL V6 pin).
+- **Stopped at:** Completed 03-01-PLAN.md (Phase 3 kernel skeletons + REAL V6 voice pin)
 
 ### Next session
 
-- **Expected action:** `/gsd-plan-phase 3` — begin Phase 3 (Mode-A Drafter + Scene Critic + Basic Regen). Dependencies: voice-FT anchor set curation (open todo above, NOT in a plan yet), voice_pin.yaml checkpoint path confirmation, vLLM OpenAI-compatible endpoint probe for the pinned voice-FT model.
-- **Key continuation note:** Plan 02-06's end-to-end smoke (Gate 5) is the golden template for Phase 3 drafter CLI wiring — `ContextPackBundlerImpl(event_logger=JsonlEventLogger(), entity_list=build_nahuatl_entity_set())` + `bundler.bundle(request, retrievers)` is the same construction shape drafter plans will use.
-- **Key precedent:** Plan 02-06 established: (a) golden-query CI gate pattern for retrieval regressions; (b) fallback-path openclaw cron registration when gateway auth is missing; (c) openclaw 2026.4.5 CLI flag semantics (--agent + --message, not --session-agent + --system-event); (d) baseline fixture regeneration workflow via `_capture_expected_chunks.py`. Phase 3 drafter plans can reference these conventions directly.
-- **Phase 2 complete:** all 5 Phase 2 REQs done. Phase 3 can begin when anchor set is ready.
+- **Expected action:** `/gsd-execute-phase 3` wave 2 — execute Plan 03-02 (voice-fidelity real scorer + drafter/vllm_client). Plan 03-02 replaces the `score_voice_fidelity` stub body with the BGE-M3 cosine impl (reuse `book_pipeline.rag.embedder.BgeM3Embedder`), lands the anchor-set curation helpers, and begins drafter/vllm_client.py.
+- **Key continuation notes:**
+  - Plan 03-01 pinned the exact `compute_adapter_sha` algorithm (safetensors || config.json, 1 MiB chunks, fixed order). Plan 03-03 boot handshake uses this same algorithm on both sides of the comparison.
+  - Plan 03-02 MUST NOT touch `voice_fidelity/__init__.py` — the importlib+contextlib.suppress fallback pattern auto-resolves the real `score_voice_fidelity` implementation once it replaces the stub body. Signature is frozen: `score_voice_fidelity(scene_text: str, anchor_centroid: Any | None = None, embedder: Any | None = None) -> float`.
+  - Plan 03-02 MUST NOT touch `pyproject.toml` import-linter contracts — voice_fidelity is already in both contracts. Same for drafter/critic/regenerator (plans 03-03..05 add files inside without contract churn).
+  - REAL V6 SHA available at `cfg.voice_pin.checkpoint_sha`: `3f0ac5e2290dab633a19b6fb7a37d75f59d4961497e7957947b6428e4dc9d094`. Drafter plans stamp this onto `DraftResponse.voice_pin_sha` and `Event.checkpoint_sha`.
+- **Key precedent:** Plan 03-01 established: (a) kernel skeleton + contract + mypy-scope extension land in the SAME plan (Phase 1 Plan 06 policy); (b) compute_adapter_sha deterministic algorithm with file-order locking; (c) atomic YAML write pattern (tempfile + os.replace); (d) role='voice_pin' Event emission pattern for one-time pin events; (e) VoicePinMismatch attribute surface (expected_sha, actual_sha, adapter_dir) for Plan 03-03 error handling.
+- **Phase 3 progress:** 1/8 plans complete. Kernel skeleton + real voice pin = Plan 03-02..08 foundation laid.
 
 ### Session continuity invariants
 

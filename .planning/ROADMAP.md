@@ -96,7 +96,7 @@
 **Plans**: 8 plans in 7 waves (Wave 1: 01 kernel-skeleton+voice-pin-V6 → Wave 2: 02 anchor-curation+voice_fidelity → Wave 3 parallel: 03 vLLM systemd+client + 05 Scene critic → Wave 4: 04 Mode-A drafter → Wave 5: 06 Regenerator kernel-only → Wave 6: 07 CLI composition+SceneStateMachine+stub+mocked integration → Wave 7: 08 human-verify real-world smoke)
 
 Plans:
-- [ ] 03-01-PLAN.md — Kernel package skeletons (drafter/critic/regenerator/voice_fidelity) + V6 SHA pin + pin-voice CLI [DRAFT-01]
+- [x] 03-01-PLAN.md — Kernel package skeletons (drafter/critic/regenerator/voice_fidelity) + V6 SHA pin + pin-voice CLI [DRAFT-01]
 - [ ] 03-02-PLAN.md — OBS-03 anchor curation (20-30 passages) + voice_fidelity module (centroid + scorer) + mode_thresholds voice_fidelity block [OBS-03]
 - [ ] 03-03-PLAN.md — vLLM systemd unit + httpx/tenacity VllmClient + boot_handshake SHA gate [DRAFT-01]
 - [ ] 03-04-PLAN.md — Mode-A drafter: Jinja2 template + sampling profiles + memorization gate + voice-fidelity Event [DRAFT-01, DRAFT-02, OBS-03]
