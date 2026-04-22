@@ -12,6 +12,10 @@ Generic payload dicts use `dict[str, object]` to satisfy mypy --strict while
 preserving the "free-form JSON-shaped payload" semantics from the plan's
 <interfaces> block (the plan wrote bare `dict`; we tighten only the generic
 parameter, not the field name, type name, or structural behavior).
+
+Phase 2 Plan 05 adds OPTIONAL top-level fields to ContextPack (conflicts,
+ingestion_run_id) and adds the ConflictReport model. Per Phase 1 freeze, no
+existing field is renamed/removed; these are additive only.
 """
 
 from __future__ import annotations
@@ -60,14 +64,45 @@ class RetrievalResult(BaseModel):
     query_fingerprint: str  # xxhash of SceneRequest (cache key)
 
 
+class ConflictReport(BaseModel):
+    """Cross-retriever conflict — two+ retrievers disagree on an (entity, dimension).
+
+    Emitted by `book_pipeline.rag.conflict_detector.detect_conflicts` (Plan 02-05)
+    as a PITFALLS R-1 mitigation: no silent concatenation of contradictory context.
+
+    Fields:
+        entity: the entity name both retrievers reference (e.g. "Motecuhzoma").
+        dimension: which claim dimension disagrees — "location" | "date" | "possession".
+        values_by_retriever: retriever_name → claimed value string (pipe-joined
+            if the retriever returned multiple values on that dimension).
+        source_chunk_ids_by_retriever: retriever_name → evidence chunk_ids that
+            carried the disagreeing claim (traceability trail for the critic).
+        severity: "low" | "mid" | "high". Defaults to "mid"; Phase 6 thesis 005
+            may refine severity logic beyond the Plan 2 forcing-function heuristic.
+    """
+
+    entity: str
+    dimension: str
+    values_by_retriever: dict[str, str]
+    source_chunk_ids_by_retriever: dict[str, list[str]]
+    severity: str = "mid"
+
+
 class ContextPack(BaseModel):
-    """Bundler output — the structured context packet handed to a Drafter."""
+    """Bundler output — the structured context packet handed to a Drafter.
+
+    Phase 2 Plan 05 added OPTIONAL fields (conflicts, ingestion_run_id) under
+    the Phase 1 freeze policy (additions allowed; renames/removals forbidden).
+    """
 
     scene_request: SceneRequest
     retrievals: dict[str, RetrievalResult]  # keyed by retriever name
     total_bytes: int
     assembly_strategy: str = "round_robin"
     fingerprint: str  # xxhash of the whole pack
+    # --- OPTIONAL additions (Plan 02-05, additive under Phase 1 freeze) ------
+    conflicts: list[ConflictReport] | None = None
+    ingestion_run_id: str | None = None
 
 
 # --- Drafter types ---
@@ -240,6 +275,7 @@ class Event(BaseModel):
 
 
 __all__ = [
+    "ConflictReport",
     "ContextPack",
     "CriticIssue",
     "CriticRequest",

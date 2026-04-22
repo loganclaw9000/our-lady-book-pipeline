@@ -35,6 +35,7 @@ from book_pipeline.interfaces.scene_state_machine import (
 )
 from book_pipeline.interfaces.thesis_matcher import ThesisMatcher
 from book_pipeline.interfaces.types import (
+    ConflictReport,
     ContextPack,
     CriticIssue,
     CriticRequest,
@@ -53,6 +54,7 @@ from book_pipeline.interfaces.types import (
 
 __all__ = [
     "ChapterAssembler",
+    "ConflictReport",
     "ContextPack",
     "ContextPackBundler",
     "Critic",
