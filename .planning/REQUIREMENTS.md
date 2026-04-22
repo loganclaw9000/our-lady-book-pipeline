@@ -29,7 +29,7 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 - [x] **RAG-01**: The 5 typed retrievers each return structured findings with provenance (source file + chunk id) given a scene request keyed on `{POV, date, location, beat_function, chapter_num}`.
 - [x] **RAG-02**: Chapter outline (`our-lady-of-champion-outline.md`, 27 chapters × 3 blocks × 3 beats nominal) parsed into the arc-position retriever at beat-function-level granularity; stable beat IDs.
 - [x] **RAG-03**: Context Pack Bundler enforces a hard cap of ≤40KB total retrieved context per drafter call, with a cross-retriever reconciliation step that surfaces contradictions instead of silently concatenating.
-- [ ] **RAG-04**: Golden-query CI gate: a fixed set of RAG queries produces a fixed set of expected chunks; breaks on index drift.
+- [x] **RAG-04**: Golden-query CI gate: a fixed set of RAG queries produces a fixed set of expected chunks; breaks on index drift.
 
 ### Drafter
 
@@ -145,7 +145,7 @@ Populated by roadmapper during roadmap creation. Every v1 REQ-ID maps to exactly
 | RAG-01 | Phase 2 | Complete |
 | RAG-02 | Phase 2 | Complete |
 | RAG-03 | Phase 2 | Complete |
-| RAG-04 | Phase 2 | Pending |
+| RAG-04 | Phase 2 | Complete |
 | DRAFT-01 | Phase 3 | Pending |
 | DRAFT-02 | Phase 3 | Pending |
 | DRAFT-03 | Phase 5 | Pending |

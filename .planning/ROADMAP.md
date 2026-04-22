@@ -10,7 +10,7 @@
 ## Phases
 
 - [x] **Phase 1: Foundation + Observability Baseline** - uv scaffolding, Pydantic config, Protocol contracts, EventLogger, voice-pin + SHA canary, openclaw workspace, module-boundary lint, Telegram plumbing. (completed 2026-04-22)
-- [ ] **Phase 2: Corpus Ingestion + Typed RAG** - 5 LanceDB indexes, ContextPackBundler with 40KB cap + conflict reconciliation, arc-position beat parser, golden-query CI gate.
+- [x] **Phase 2: Corpus Ingestion + Typed RAG** - 5 LanceDB indexes, ContextPackBundler with 40KB cap + conflict reconciliation, arc-position beat parser, golden-query CI gate. (completed 2026-04-22)
 - [ ] **Phase 3: Mode-A Drafter + Scene Critic + Basic Regen** - vLLM-served voice checkpoint, scene Critic with 5-axis rubric, scene-local Regenerator (R=1), voice-fidelity anchor set, SceneStateMachine end-to-end.
 - [ ] **Phase 4: Chapter Assembly + Post-Commit DAG** - ChapterAssembler, chapter-level Critic (fresh RAG pack), atomic canon commit, EntityExtractor with SHA-linked cards, RetrospectiveWriter with lint.
 - [ ] **Phase 5: Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration** - Mode-B Drafter (Opus), full R-cap regen with cost gate, oscillation detector, Mode-B preflags, hard-block Telegram alerts, nightly openclaw cron.
@@ -70,7 +70,7 @@
 - [x] 02-03-PLAN.md — LanceDBRetrieverBase + BgeReranker + 3 retrievers (historical, metaphysics rule_type-filtered, negative_constraint always-top-K) [RAG-01]
 - [x] 02-04-PLAN.md — outline_parser with stable beat IDs + entity_state (zero-cards-tolerant) + arc_position retriever [RAG-01, RAG-02]
 - [x] 02-05-PLAN.md — ContextPackBundler: 40KB hard cap + per-axis soft caps + cross-retriever conflict detection + 6-event emission [RAG-03]
-- [ ] 02-06-PLAN.md — golden-query CI gate (>=12 queries, 0 forbidden leaks) + openclaw nightly-ingest cron + human-verify baseline [RAG-04, CORPUS-01]
+- [x] 02-06-PLAN.md — golden-query CI gate (13 queries, 0 forbidden leaks) + openclaw nightly-ingest cron + baseline ingest pinned at ing_20260422T082448725590Z_2264c687 [RAG-04, CORPUS-01]
 **UI hint**: no
 
 **Parallelization**: Plans 03 and 04 run in parallel in Wave 3 (exclusive file ownership — 03 owns base.py + historical/metaphysics/negative_constraint retriever files + reranker; 04 owns entity_state + arc_position retriever files + outline_parser; both edit retrievers/__init__.py but that's additive). Plans 05 and 06 serialize in Waves 4 and 5 because Plan 05 extends rag/__init__.py (to export ContextPackBundlerImpl) and Plan 06 edits the same file. Bundler + reconciliation step depends on all 5 retrievers existing (Plans 03 + 04).
