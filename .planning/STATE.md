@@ -3,19 +3,19 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-05-PLAN.md (SceneCritic CRIT-01 + CRIT-04 audit log + ephemeral 1h cache live)
-last_updated: "2026-04-22T19:30:00.000Z"
+stopped_at: Completed 03-04-PLAN.md (Mode-A drafter + Jinja2 template + sampling profiles + V-2 memorization gate + AnchorSetProvider; DRAFT-01 + DRAFT-02 + OBS-03 complete)
+last_updated: "2026-04-22T19:36:00.000Z"
 progress:
   total_phases: 6
   completed_phases: 2
   total_plans: 20
-  completed_plans: 16
-  percent: 80
+  completed_plans: 17
+  percent: 85
 ---
 
 # STATE: our-lady-book-pipeline
 
-**Last updated:** 2026-04-22 after Plan 03-05 (SceneCritic Anthropic Opus 4.7 + CRIT-04 audit log + 1h ephemeral cache live; CRIT-01 + CRIT-04 complete)
+**Last updated:** 2026-04-22 after Plan 03-04 (Mode-A drafter + Jinja2 template + sampling profiles + V-2 memorization gate + AnchorSetProvider; DRAFT-01 + DRAFT-02 + OBS-03 complete)
 **Status:** Executing Phase 03
 
 ---
@@ -35,26 +35,26 @@ Autonomously produce first-draft novel chapters that are both voice-faithful (Pa
 
 ### Current focus
 
-Phase 3 executing. Plan 03-05 LANDED (SceneCritic CRIT-01 + CRIT-04 audit log live): `book_pipeline.critic.scene.SceneCritic` satisfies the FROZEN Critic Protocol (`level='scene'`, `isinstance(c, Critic) True`) wrapping Anthropic Opus 4.7's `client.messages.parse(output_format=CriticResponse, model='claude-opus-4-7', max_tokens=4096, temperature=0.1, system=[{type:'text', text:<rendered>, cache_control:{type:'ephemeral', ttl:'1h'}}], messages=[...])` via tenacity 5× exp backoff (2→4→8→16→30s, capped ~90s total; T-03-05-05 DoS mitigation); system prompt pre-rendered ONCE at __init__ by `SystemPromptBuilder(RubricConfig(), templates/scene_fewshot.yaml, templates/system.j2)` and reused object-identically across every review() so the 1h ephemeral cache hits on scene #2+ (Test H); `scene_fewshot.yaml` ships CURATED B-2 content (173-word bad scene with TWO historical anachronisms — Cempoala-1520 + Tlaxcalteca-at-Cempoala — and 192-word good scene of Malintzin translating at Cempoala Aug 1519, all real Nahua/Spanish entities, NOT lorem-ipsum); `critic/audit.py::write_audit_record` persists CRIT-04 audit to `runs/critic_audit/{scene_id}_{attempt:02d}_{timestamp}.json` on EVERY invocation (W-7 semantics: success AND tenacity-exhaustion failure — failure payload = `{error, error_type: 'APIConnectionError', attempts_made: 5}` with `parsed_critic_response=null`, all other fields still populated; atomic tmp+os.replace); post-process fills missing REQUIRED_AXES with pass=True/score=75.0 (`Event.extra['filled_axes']`) and enforces `overall_pass == all(pass_per_axis.values())` invariant (`Event.extra['invariant_fixed']`); rubric_version stamped 3-ways (CriticResponse.rubric_version overridden to `self.rubric.rubric_version` + top-level Event.rubric_version Phase-1 field + audit record — W-6: Test B + I dynamically read from `config/rubric.yaml`, NOT hardcoded 'v1'); emits exactly ONE `role='critic'` Event per call (success OR failure with `extra.status='error'`); `SceneCriticError('anthropic_unavailable', scene_id=..., attempt=..., underlying_cause=...)` raised on retry exhaustion so Plan 03-06 regenerator can persist HARD_BLOCKED. `runs/critic_audit/` added to `.gitignore` (T-03-05-07: unpublished prose stays local-disk). 20 new tests via FakeAnthropicClient (messages.parse + .parsed_output + .usage.cache_read_input_tokens mimicked in-memory) + tenacity `retry.wait` monkeypatch (Test E 30s→<1s); 340 total pass (from 320 baseline). REQUIREMENTS.md CRIT-01 + CRIT-04 marked COMPLETE. Plan 03-04 (Mode-A drafter: Jinja2 prompt template + sampling profiles + memorization gate) remains pending; Plan 03-06 (scene-local regenerator) can start after 03-04 lands.
+Phase 3 executing. Plan 03-04 LANDED (Mode-A drafter + sampling profiles + V-2 memorization gate + AnchorSetProvider; DRAFT-01 + DRAFT-02 + OBS-03 complete): `book_pipeline.drafter.mode_a.ModeADrafter` satisfies the FROZEN Drafter Protocol (`mode='A'`, `isinstance(d, Drafter) True`) composing 6 primitives into one `draft()` call: (1) scene_type resolution (`generation_config['scene_type']` override → paired-quotes heuristic `re.findall(r'"[^"]+"') >= 3` in prior_scenes → default 'prose'), (2) DRAFT-02 per-scene-type sampling profile lookup via `SamplingProfiles` (prose 0.85/0.92, dialogue_heavy 0.7/0.90, structural_complex 0.6/0.88; all repetition_penalty 1.05, max_tokens 2048) with plan-pinned defaults committed to `config/mode_thresholds.yaml` `sampling_profiles:` block, (3) Jinja2 render of `drafter/templates/mode_a.j2` with sentinel-split on `===SYSTEM===` / `===USER===` + `VOICE_DESCRIPTION` / `RUBRIC_AWARENESS` module constants (Plan 03-05 critic can share `RUBRIC_AWARENESS`), (4) Plan 03-03 `VllmClient.chat_completion(model='paul-voice')` with `VllmUnavailable` → `ModeADrafterBlocked('mode_a_unavailable')` and empty/whitespace completion → `ModeADrafterBlocked('empty_completion')`, (5) V-2 `TrainingBleedGate(training_corpus_path, ngram=12)` preloading xxh64 12-gram hash set from paul-thinkpiece `conversations[-1].from=='gpt'` rows — any hit → `ModeADrafterBlocked('training_bleed')` HARD BLOCK, (6) OBS-03 `score_voice_fidelity(scene_text, centroid, embedder)` with 4-way classification (fail <0.75, flag_low 0.75-0.78, pass 0.78-0.95, flag_memorization ≥0.95). `AnchorSetProvider(yaml_path, thresholds_path, embedder, parquet_path=...)` verifies anchor SHA against `mode_thresholds.voice_fidelity.anchor_set_sha` at `__init__` time (mismatch → `AnchorSetDrift` — V-3 extension for anchor drift); W-2 parquet fast-path: if `indexes/voice_anchors/embeddings.parquet` matches `(N_anchors, 1024)`, centroid is assembled directly from parquet without embedder call; on wrong shape or absence, WARNING logged + fallback to `compute_centroid`. Exactly ONE `role='drafter'` OBS-01 Event per draft() call (success XOR error) with `mode='A'` + `checkpoint_sha=voice_pin.checkpoint_sha` + `caller_context={scene_id, chapter, pov, beat_function, scene_type, voice_pin_sha, anchor_set_sha, voice_fidelity_score, voice_fidelity_status, attempt_number, repetition_penalty}` + `extra={word_count, context_pack_fingerprint}`; error path carries `extra={status: 'error', error: <reason>}` with reason ∈ {training_bleed, mode_a_unavailable, empty_completion, invalid_scene_type}. Kernel clean (grep -c book_specifics drafter/mode_a.py == 0); `book_specifics/training_corpus.py` ships `TRAINING_CORPUS_DEFAULT` pointer for Plan 03-06 CLI composition. 32 new tests (8 sampling_profiles + 5 memorization_gate + 6 pin + 13 mode_a A-J) all pass; 372 total non-slow tests pass (from 343 baseline). REQUIREMENTS.md DRAFT-01 + DRAFT-02 + OBS-03 marked COMPLETE. Plan 03-06 (scene-local regenerator) can now compose `ModeADrafter` + `SceneCritic` + `SceneLocalRegenerator` into the full `book-pipeline draft <scene_id>` CLI flow.
 
 ---
 
 ## Current Position
 
 Phase: 03 (Mode-A Drafter + Scene Critic + Basic Regen) — EXECUTING
-Plan: 4 of 8 (03-05 complete out of order; 03-04 Mode-A drafter still pending)
+Plan: 5 of 8 (03-06 scene-local regenerator next; 03-04 + 03-05 both landed)
 
 - **Phase:** 3
-- **Plan:** 4 (03-04 Mode-A drafter next; 03-05 scene critic already complete)
-- **Status:** Plan 03-05 complete (SceneCritic CRIT-01 + CRIT-04 live: Anthropic Opus 4.7 + messages.parse + 1h ephemeral cache_control + per-invocation audit log with W-7 failure-path semantics + rubric_version 3-way stamp + tenacity 5× exp backoff). CRIT-01 + CRIT-04 marked complete. Plan 03-04 (Mode-A drafter) still pending.
-- **Plans complete:** 4 / 8 (Phase 3: 03-01 + 03-02 + 03-03 + 03-05); 16 / 20 total (Phase 1: 6; Phase 2: 6; Phase 3: 4)
-- **Progress:** [████████░░] 80%
+- **Plan:** 5 (03-06 scene-local regenerator next; 03-04 + 03-05 both complete)
+- **Status:** Plan 03-04 complete (Mode-A drafter: ModeADrafter Protocol impl + Jinja2 mode_a.j2 template + SamplingProfiles per-scene-type dispatch + TrainingBleedGate V-2 HARD BLOCK + AnchorSetProvider with W-2 parquet fast-path + OBS-03 voice_fidelity_score classification 4-way). DRAFT-01 + DRAFT-02 + OBS-03 marked complete. Plan 03-06 (scene-local regenerator) can now compose the drafter + critic + regenerator chain.
+- **Plans complete:** 5 / 8 (Phase 3: 03-01 + 03-02 + 03-03 + 03-04 + 03-05); 17 / 20 total (Phase 1: 6; Phase 2: 6; Phase 3: 5)
+- **Progress:** [█████████░] 85%
 
 ### Roadmap progress
 
 - [x] **Phase 1:** Foundation + Observability Baseline (6/6 plans)
 - [x] **Phase 2:** Corpus Ingestion + Typed RAG (6/6 plans — 02-01 RAG kernel + 02-02 corpus ingester + 02-03 3-of-5 retrievers + 02-04 entity_state/arc_position + outline_parser + 02-05 ContextPackBundler + 02-06 RAG-04 golden-query CI gate + nightly cron)
-- [~] **Phase 3:** Mode-A Drafter + Scene Critic + Basic Regen (4/8 plans — 03-01 kernel skeletons + REAL V6 voice pin; 03-02 OBS-03 voice-fidelity anchor curation; 03-03 vLLM bootstrap plane + boot_handshake SHA gate [DRAFT-01 complete]; 03-05 SceneCritic Anthropic Opus 4.7 + CRIT-04 audit log [CRIT-01 + CRIT-04 complete])
+- [~] **Phase 3:** Mode-A Drafter + Scene Critic + Basic Regen (5/8 plans — 03-01 kernel skeletons + REAL V6 voice pin; 03-02 OBS-03 voice-fidelity anchor curation; 03-03 vLLM bootstrap plane + boot_handshake SHA gate [DRAFT-01 complete]; 03-04 Mode-A ModeADrafter + Jinja2 template + sampling profiles + V-2 memorization gate + AnchorSetProvider [DRAFT-01 + DRAFT-02 + OBS-03 complete]; 03-05 SceneCritic Anthropic Opus 4.7 + CRIT-04 audit log [CRIT-01 + CRIT-04 complete])
 - [ ] **Phase 4:** Chapter Assembly + Post-Commit DAG
 - [ ] **Phase 5:** Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration
 - [ ] **Phase 6:** Testbed Plane + Production Hardening + First Draft
@@ -79,6 +79,7 @@ No prose-generation metrics yet — pipeline has not produced artifacts. First r
 | Phase 03 P02 | 32 | 2 tasks | 9 files |
 | Phase 03 P03 | 10 | 2 tasks | 10 files |
 | 03-05 | 35             | 2     | 9             | 2              | 20          | 340           | 2026-04-22  |
+| Phase 03 P04 | 28m | 2 tasks | 14 files |
 
 ### Target metrics (will populate once pipeline runs)
 

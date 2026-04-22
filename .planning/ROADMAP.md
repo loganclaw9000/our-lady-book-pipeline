@@ -99,7 +99,7 @@ Plans:
 - [x] 03-01-PLAN.md — Kernel package skeletons (drafter/critic/regenerator/voice_fidelity) + V6 SHA pin + pin-voice CLI [DRAFT-01]
 - [x] 03-02-PLAN.md — OBS-03 anchor curation (20-30 passages) + voice_fidelity module (centroid + scorer) + mode_thresholds voice_fidelity block [OBS-03]
 - [x] 03-03-PLAN.md — vLLM systemd unit + httpx/tenacity VllmClient + boot_handshake SHA gate [DRAFT-01]
-- [ ] 03-04-PLAN.md — Mode-A drafter: Jinja2 template + sampling profiles + memorization gate + voice-fidelity Event [DRAFT-01, DRAFT-02, OBS-03]
+- [x] 03-04-PLAN.md — Mode-A drafter: Jinja2 template + sampling profiles + memorization gate + voice-fidelity Event [DRAFT-01, DRAFT-02, OBS-03]
 - [x] 03-05-PLAN.md — Scene critic: Anthropic Opus 4.7 messages.parse + ephemeral 1h cache + CRIT-04 audit log + rubric_version stamp [CRIT-01, CRIT-04]
 - [ ] 03-06-PLAN.md — SceneLocalRegenerator kernel module: Jinja2 regen template + tenacity + ±10% word-count guard + Event emission (mocked Anthropic tests only) [REGEN-01]
 - [ ] 03-07-PLAN.md — book-pipeline draft CLI composition + SceneStateMachine wiring + ch01_sc01 stub + build_retrievers_from_config factory + mocked integration tests [REGEN-01]

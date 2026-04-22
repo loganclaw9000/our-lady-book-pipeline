@@ -19,7 +19,7 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 
 - [ ] **OBS-01**: Every LLM call (drafter, critic, regen, entity extractor, retrospective writer, digest, thesis matcher) emits a structured JSONL event with timestamp, role, model, prompt hash, token counts (input/cached/output), latency, temperature, top_p, caller context, output hash, mode tag (A/B).
 - [ ] **OBS-02**: Per-axis critic scores persist per committed scene + chapter into a SQLite metric ledger suitable for weekly aggregation; schema versioned; idempotent re-scan from events.jsonl supported.
-- [ ] **OBS-03**: Voice-fidelity score (embedding cosine vs 20-30 anchor passages from paul-thinkpiece-pipeline training corpus) computed and stored per Mode-A scene; anchor set curated before first production Mode-A scene commits (cannot be retroactive).
+- [x] **OBS-03**: Voice-fidelity score (embedding cosine vs 20-30 anchor passages from paul-thinkpiece-pipeline training corpus) computed and stored per Mode-A scene; anchor set curated before first production Mode-A scene commits (cannot be retroactive).
 - [ ] **OBS-04**: Mode-B escape rate, regen count distribution, and critic false-positive-rate proxies are first-class metrics in the ledger and the weekly digest.
 
 ### Corpus + Typed RAG
@@ -34,7 +34,7 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 ### Drafter
 
 - [x] **DRAFT-01**: Mode-A drafter speaks to a vLLM OpenAI-compatible endpoint serving a pinned voice-FT checkpoint from `paul-thinkpiece-pipeline`; checkpoint pinned by SHA in `voice_pin.yaml`; startup asserts SHA match. *(complete: Plan 03-01 landed the SHA pin + verify_pin helper; Plan 03-03 landed the vLLM boot handshake + SHA-match assertion via `VllmClient.boot_handshake` which calls `compute_adapter_sha` + raises `VoicePinMismatch` on drift — V-3 PITFALLS mitigation live)*
-- [ ] **DRAFT-02**: Mode-A drafter accepts per-scene `{temperature, top_p, repetition_penalty}` from config and overrides via scene-type tag (e.g., dialogue-heavy, action, reflection).
+- [x] **DRAFT-02**: Mode-A drafter accepts per-scene `{temperature, top_p, repetition_penalty}` from config and overrides via scene-type tag (e.g., dialogue-heavy, action, reflection).
 - [ ] **DRAFT-03**: Mode-B drafter uses Anthropic SDK (Opus 4.7) with voice samples in-context and prompt caching enabled (ephemeral `ttl="1h"`); per-scene opt-in via controller decision; scene carries `mode="B"` in event log and commit metadata.
 - [ ] **DRAFT-04**: Structurally complex beats (Cholula stir, two-thirds revelation, siege climax — list derived from outline tags) are pre-flagged for Mode-B by default and can be demoted to Mode-A via config.
 
@@ -138,7 +138,7 @@ Populated by roadmapper during roadmap creation. Every v1 REQ-ID maps to exactly
 | FOUND-05 | Phase 1 | Pending |
 | OBS-01 | Phase 1 | Pending |
 | OBS-02 | Phase 6 | Pending |
-| OBS-03 | Phase 3 | Pending |
+| OBS-03 | Phase 3 | Complete |
 | OBS-04 | Phase 6 | Pending |
 | CORPUS-01 | Phase 2 | Complete |
 | CORPUS-02 | Phase 4 | Pending |
@@ -147,7 +147,7 @@ Populated by roadmapper during roadmap creation. Every v1 REQ-ID maps to exactly
 | RAG-03 | Phase 2 | Complete |
 | RAG-04 | Phase 2 | Complete |
 | DRAFT-01 | Phase 3 | Complete (03-01: pin + helper; 03-03: boot handshake live) |
-| DRAFT-02 | Phase 3 | Pending |
+| DRAFT-02 | Phase 3 | Complete |
 | DRAFT-03 | Phase 5 | Pending |
 | DRAFT-04 | Phase 5 | Pending |
 | CRIT-01 | Phase 3 | Complete |
