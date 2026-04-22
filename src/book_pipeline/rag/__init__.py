@@ -14,7 +14,10 @@ Public surface:
   - open_or_create_table (LanceDB schema-enforced table opener)
 """
 
+from book_pipeline.rag.budget import HARD_CAP, PER_AXIS_SOFT_CAPS, enforce_budget
+from book_pipeline.rag.bundler import ContextPackBundlerImpl
 from book_pipeline.rag.chunker import chunk_markdown
+from book_pipeline.rag.conflict_detector import detect_conflicts
 from book_pipeline.rag.embedding import EMBEDDING_DIM, BgeM3Embedder
 from book_pipeline.rag.lance_schema import CHUNK_SCHEMA, open_or_create_table
 from book_pipeline.rag.types import Chunk
@@ -22,8 +25,13 @@ from book_pipeline.rag.types import Chunk
 __all__ = [
     "CHUNK_SCHEMA",
     "EMBEDDING_DIM",
+    "HARD_CAP",
+    "PER_AXIS_SOFT_CAPS",
     "BgeM3Embedder",
     "Chunk",
+    "ContextPackBundlerImpl",
     "chunk_markdown",
+    "detect_conflicts",
+    "enforce_budget",
     "open_or_create_table",
 ]

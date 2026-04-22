@@ -28,7 +28,6 @@ from book_pipeline.interfaces.types import (
     SceneRequest,
 )
 
-
 # --- Fakes ------------------------------------------------------------------
 
 
@@ -308,10 +307,9 @@ def test_f_event_schema_v1_fields_preserved(tmp_path: Path) -> None:
 
 def test_g_w1_entity_list_catches_motecuhzoma_conflict(tmp_path: Path) -> None:
     """W-1: with entity_list supplied, Nahuatl-named conflicts surface."""
-    from book_pipeline.rag.bundler import ContextPackBundlerImpl
-
     # Tests may import book_specifics; only the kernel is forbidden.
     from book_pipeline.book_specifics.nahuatl_entities import NAHUATL_CANONICAL_NAMES
+    from book_pipeline.rag.bundler import ContextPackBundlerImpl
 
     entity_list: set[str] = set(NAHUATL_CANONICAL_NAMES.keys())
     for variants in NAHUATL_CANONICAL_NAMES.values():
