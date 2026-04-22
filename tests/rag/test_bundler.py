@@ -387,3 +387,172 @@ def test_bundler_retriever_event_caller_context_shape(tmp_path: Path) -> None:
         assert cc.get("beat_function") == req.beat_function
         assert "retriever_name" in cc
         assert "index_fingerprint" in cc
+
+
+# --- BL-01 regression: 6-event invariant under adverse conditions -----------
+
+
+class _RaisingRetriever:
+    """Retriever whose retrieve() raises. Simulates GPU OOM / network hiccup."""
+
+    def __init__(self, name: str, exc: Exception) -> None:
+        self.name = name
+        self._exc = exc
+
+    def retrieve(self, request: SceneRequest) -> RetrievalResult:
+        raise self._exc
+
+    def reindex(self) -> None:  # pragma: no cover
+        pass
+
+    def index_fingerprint(self) -> str:
+        return "raising-idx"
+
+
+class _BadResultRetriever:
+    """Retriever whose retrieve() returns an object whose model_dump_json raises.
+
+    Simulates BL-01 failure paths downstream of retrieve() (serialization
+    mid-emission). We subclass RetrievalResult at runtime to poison the
+    dump method without breaking Pydantic validation at construction.
+    """
+
+    def __init__(self, name: str) -> None:
+        self.name = name
+
+    def retrieve(self, request: SceneRequest) -> RetrievalResult:
+        rr = RetrievalResult(
+            retriever_name=self.name,
+            hits=[],
+            bytes_used=0,
+            query_fingerprint="q-bad",
+        )
+
+        def _boom(*_a: Any, **_kw: Any) -> str:
+            raise RuntimeError("model_dump_json boom")
+
+        # Monkey-patch the instance; Pydantic allows attribute access via
+        # __dict__ on BaseModel (object.__setattr__ bypass).
+        object.__setattr__(rr, "model_dump_json", _boom)
+        return rr
+
+    def reindex(self) -> None:  # pragma: no cover
+        pass
+
+    def index_fingerprint(self) -> str:
+        return "bad-idx"
+
+
+def _four_ok_plus_one(
+    bad_name: str, bad_retriever: Any
+) -> list[Any]:
+    """Build exactly 5 retrievers with the 5 expected axis names, where the
+    retriever matching `bad_name` is replaced with `bad_retriever`."""
+    ok = {r.name: r for r in _five_disjoint_retrievers()}
+    ok[bad_name] = bad_retriever
+    return list(ok.values())
+
+
+def test_bundler_emits_exactly_6_events_even_when_retriever_raises(
+    tmp_path: Path,
+) -> None:
+    """BL-01: retriever.retrieve() raising must NOT shrink the event count."""
+    from book_pipeline.rag.bundler import ContextPackBundlerImpl
+
+    logger = _FakeEventLogger()
+    bundler = ContextPackBundlerImpl(
+        event_logger=logger, conflicts_dir=tmp_path / "conflicts"
+    )
+    retrievers = _four_ok_plus_one(
+        "arc_position",
+        _RaisingRetriever("arc_position", RuntimeError("GPU OOM")),
+    )
+    bundler.bundle(_scene_request(), retrievers)
+
+    assert len(logger.events) == 6, (
+        f"BL-01: expected 6 events under retrieve() exception; got "
+        f"{len(logger.events)}"
+    )
+    retriever_events = [e for e in logger.events if e.role == "retriever"]
+    bundler_events = [e for e in logger.events if e.role == "context_pack_bundler"]
+    assert len(retriever_events) == 5
+    assert len(bundler_events) == 1
+
+    # Degraded event for the failing axis carries the error metadata.
+    arc = next(
+        e
+        for e in retriever_events
+        if e.caller_context.get("retriever_name") == "arc_position"
+    )
+    assert arc.extra.get("status") == "error"
+    assert arc.extra.get("error_class") == "RuntimeError"
+    assert "GPU OOM" in (arc.extra.get("error_message") or "")
+
+
+def test_bundler_emits_exactly_6_events_when_serialization_raises(
+    tmp_path: Path,
+) -> None:
+    """BL-01: RetrievalResult.model_dump_json() raising mid-emission must NOT
+    shrink the event count — a degraded retriever event still lands."""
+    from book_pipeline.rag.bundler import ContextPackBundlerImpl
+
+    logger = _FakeEventLogger()
+    bundler = ContextPackBundlerImpl(
+        event_logger=logger, conflicts_dir=tmp_path / "conflicts"
+    )
+    retrievers = _four_ok_plus_one(
+        "metaphysics", _BadResultRetriever("metaphysics")
+    )
+    bundler.bundle(_scene_request(), retrievers)
+
+    assert len(logger.events) == 6, (
+        f"BL-01: expected 6 events under serialization exception; got "
+        f"{len(logger.events)}"
+    )
+    retriever_events = [e for e in logger.events if e.role == "retriever"]
+    assert len(retriever_events) == 5
+    meta = next(
+        e
+        for e in retriever_events
+        if e.caller_context.get("retriever_name") == "metaphysics"
+    )
+    assert meta.extra.get("status") == "error"
+    # Error class reflects the serialization failure.
+    assert "RuntimeError" in (meta.extra.get("error_class") or "")
+
+
+def test_bundler_emits_exactly_6_events_when_event_construction_raises(
+    tmp_path: Path,
+) -> None:
+    """BL-01: if constructing the first Event raises (e.g., via corrupted
+    retriever.name producing a validation error), the fallback path still
+    emits one retriever event, preserving the 6-event invariant."""
+    from unittest.mock import patch
+
+    from book_pipeline.rag.bundler import ContextPackBundlerImpl
+
+    logger = _FakeEventLogger()
+    bundler = ContextPackBundlerImpl(
+        event_logger=logger, conflicts_dir=tmp_path / "conflicts"
+    )
+    retrievers = _five_disjoint_retrievers()
+
+    real_event = Event
+    call_counter = {"n": 0}
+
+    def _flaky_event(*args: Any, **kwargs: Any) -> Event:
+        call_counter["n"] += 1
+        # Fail ONCE on the first retriever's primary Event construction; the
+        # fallback path will call Event() again with minimal payload and we
+        # allow that second call to succeed.
+        if call_counter["n"] == 1:
+            raise ValueError("simulated schema validation error")
+        return real_event(*args, **kwargs)
+
+    with patch("book_pipeline.rag.bundler.Event", side_effect=_flaky_event):
+        bundler.bundle(_scene_request(), retrievers)
+
+    assert len(logger.events) == 6, (
+        f"BL-01: expected 6 events under Event construction exception; got "
+        f"{len(logger.events)}"
+    )

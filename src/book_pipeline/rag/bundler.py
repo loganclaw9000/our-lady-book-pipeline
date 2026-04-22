@@ -182,63 +182,161 @@ class ContextPackBundlerImpl:
         On exception: emit event with output_tokens=0 + extra['error'] set, and
         return an empty RetrievalResult so the bundle still completes
         (T-02-05-04 repudiation mitigation).
+
+        BL-01: the ENTIRE emission path (retrieval + metadata + Event
+        construction + emit) is wrapped so that exactly ONE retriever event
+        is always emitted per call — even if model_dump_json(), Event(...)
+        validation, or the injected event_logger raise. A degraded fallback
+        event is assembled + emitted from a last-resort block so the
+        bundler's 6-event invariant holds under adverse conditions.
         """
         start_ns = time.monotonic_ns()
-        error_msg: str | None = None
-        rr: RetrievalResult
-        try:
-            rr = retriever.retrieve(request)
-        except Exception as exc:
-            error_msg = f"{type(exc).__name__}: {exc}"
-            rr = RetrievalResult(
-                retriever_name=retriever.name,
-                hits=[],
-                bytes_used=0,
-                query_fingerprint=request_fp,
-            )
-        latency_ms = max(1, (time.monotonic_ns() - start_ns) // 1_000_000)
-
-        # index_fingerprint may raise on some backends; tolerate.
-        try:
-            idx_fp = retriever.index_fingerprint()
-        except Exception as exc:
-            idx_fp = f"error:{type(exc).__name__}"
-
-        output_hash_input = rr.model_dump_json()
-        output_hash = hash_text(output_hash_input)
-        ts_iso = _now_iso()
-        caller = f"rag.bundler.bundle:{retriever.name}"
-        extra: dict[str, Any] = {
-            "bytes_used": rr.bytes_used,
-            "num_hits": len(rr.hits),
-        }
-        if error_msg is not None:
-            extra["error"] = error_msg
-
-        event = Event(
-            event_id=event_id(ts_iso, "retriever", caller, rr.query_fingerprint),
-            ts_iso=ts_iso,
-            role="retriever",
-            model=retriever.name,
-            prompt_hash=rr.query_fingerprint,
-            input_tokens=0,
-            output_tokens=len(rr.hits),
-            latency_ms=int(latency_ms),
-            caller_context={
-                "module": "rag.bundler",
-                "function": "bundle",
-                "scene_id": scene_id,
-                "chapter_num": request.chapter,
-                "pov": request.pov,
-                "beat_function": request.beat_function,
-                "retriever_name": retriever.name,
-                "index_fingerprint": idx_fp,
-            },
-            output_hash=output_hash,
-            extra=extra,
+        # Safe defaults so the fallback path can always produce an Event.
+        retriever_name = getattr(retriever, "name", "unknown") or "unknown"
+        error_class: str | None = None
+        error_message: str | None = None
+        rr: RetrievalResult = RetrievalResult(
+            retriever_name=retriever_name,
+            hits=[],
+            bytes_used=0,
+            query_fingerprint=request_fp,
         )
-        self._emit(event)
-        return rr
+        idx_fp = "unresolved"
+        output_hash = "error"
+        try:
+            try:
+                rr = retriever.retrieve(request)
+            except Exception as exc:
+                error_class = type(exc).__name__
+                error_message = str(exc)
+                # rr retains the safe empty default.
+
+            # index_fingerprint may raise on some backends; tolerate.
+            try:
+                idx_fp = retriever.index_fingerprint()
+            except Exception as exc:
+                idx_fp = f"error:{type(exc).__name__}"
+
+            try:
+                output_hash = hash_text(rr.model_dump_json())
+            except Exception as exc:
+                output_hash = "error"
+                if error_class is None:
+                    error_class = type(exc).__name__
+                    error_message = f"serialize failure: {exc}"
+                else:
+                    error_message = (
+                        f"{error_message}; serialize failure: "
+                        f"{type(exc).__name__}: {exc}"
+                    )
+
+            latency_ms = max(1, (time.monotonic_ns() - start_ns) // 1_000_000)
+            ts_iso = _now_iso()
+            caller = f"rag.bundler.bundle:{retriever_name}"
+            extra: dict[str, Any] = {
+                "bytes_used": rr.bytes_used,
+                "num_hits": len(rr.hits),
+            }
+            if error_class is not None:
+                extra["status"] = "error"
+                extra["error_class"] = error_class
+                extra["error_message"] = error_message or ""
+                # Back-compat with pre-BL-01 consumers that read extra['error'].
+                extra["error"] = f"{error_class}: {error_message}"
+
+            event = Event(
+                event_id=event_id(
+                    ts_iso, "retriever", caller, rr.query_fingerprint
+                ),
+                ts_iso=ts_iso,
+                role="retriever",
+                model=retriever_name,
+                prompt_hash=rr.query_fingerprint,
+                input_tokens=0,
+                output_tokens=len(rr.hits),
+                latency_ms=int(latency_ms),
+                caller_context={
+                    "module": "rag.bundler",
+                    "function": "bundle",
+                    "scene_id": scene_id,
+                    "chapter_num": request.chapter,
+                    "pov": request.pov,
+                    "beat_function": request.beat_function,
+                    "retriever_name": retriever_name,
+                    "index_fingerprint": idx_fp,
+                },
+                output_hash=output_hash,
+                extra=extra,
+            )
+            self._emit(event)
+            return rr
+        except Exception as outer_exc:
+            # BL-01 last-resort: something raised while building or emitting
+            # the per-retriever event (Event validation, logger disk-full,
+            # etc). Synthesize a minimal Event and try again. If even THIS
+            # fails we must still return rr so the bundle can complete with
+            # the other retrievers — never let one retriever's failure
+            # erase the 6-event invariant for the scene.
+            outer_class = type(outer_exc).__name__
+            outer_msg = str(outer_exc)
+            combined_error = (
+                f"{error_class}: {error_message}"
+                if error_class is not None
+                else f"{outer_class}: {outer_msg}"
+            )
+            fallback_extra: dict[str, Any] = {
+                "bytes_used": 0,
+                "num_hits": 0,
+                "status": "error",
+                "error_class": error_class or outer_class,
+                "error_message": error_message or outer_msg,
+                "error": combined_error,
+                "emission_error_class": outer_class,
+                "emission_error_message": outer_msg,
+            }
+            latency_ms = max(1, (time.monotonic_ns() - start_ns) // 1_000_000)
+            ts_iso = _now_iso()
+            try:
+                fallback_event = Event(
+                    event_id=event_id(
+                        ts_iso,
+                        "retriever",
+                        f"rag.bundler.bundle:{retriever_name}",
+                        request_fp,
+                    ),
+                    ts_iso=ts_iso,
+                    role="retriever",
+                    model=retriever_name,
+                    prompt_hash=request_fp,
+                    input_tokens=0,
+                    output_tokens=0,
+                    latency_ms=int(latency_ms),
+                    caller_context={
+                        "module": "rag.bundler",
+                        "function": "bundle",
+                        "scene_id": scene_id,
+                        "chapter_num": request.chapter,
+                        "pov": request.pov,
+                        "beat_function": request.beat_function,
+                        "retriever_name": retriever_name,
+                        "index_fingerprint": "unresolved",
+                    },
+                    output_hash="error",
+                    extra=fallback_extra,
+                )
+                try:
+                    self._emit(fallback_event)
+                except Exception:
+                    # Last-resort swallow: we CANNOT let an emit failure
+                    # abort the bundle loop. Downstream will miss this one
+                    # event but the bundler event still emits.
+                    pass
+            except Exception:
+                # Even Event() construction failed. Nothing left to do — do
+                # NOT propagate; the bundle must continue so remaining
+                # retrievers + the bundler event still emit.
+                pass
+            return rr
 
     def _emit_bundler_event(
         self,
