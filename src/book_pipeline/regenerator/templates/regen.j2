@@ -1,0 +1,52 @@
+{#- regen.j2 — Scene-local regenerator prompt (Plan 03-06, REGEN-01).
+    Variables:
+      prior_scene_text: str
+      severity_grouped_issues: dict[str, list[CriticIssue]]  # high, mid, low
+      word_count_target: int  # ±10% of original
+      scene_request: SceneRequest
+      voice_description: str
+      retrievals: dict[str, RetrievalResult]
+-#}
+===SYSTEM===
+You are rewriting specific passages of a scene to fix critic issues. Voice: {{ voice_description }}
+
+Rules:
+1. Target total word count: {{ word_count_target }} (±10%). Drifting outside this band fails the rewrite.
+2. Address every HIGH and MID severity issue listed. LOW-severity issues are context; do not chase them if it costs word budget.
+3. Preserve all named entities, dates, and facts from the corpus context below.
+4. Preserve passages NOT implicated by an issue — minimize change outside affected ranges.
+
+Corpus context (same context the drafter saw):
+{% for retriever_name, result in retrievals.items() -%}
+--- {{ retriever_name }} ---
+{% for hit in result.hits -%}
+[{{ hit.chunk_id }}] {{ hit.text }}
+{% endfor %}
+{% endfor %}
+
+===USER===
+Scene: ch{{ "%02d" | format(scene_request.chapter) }}_sc{{ "%02d" | format(scene_request.scene_index) }}
+POV: {{ scene_request.pov }} | Date: {{ scene_request.date_iso }} | Location: {{ scene_request.location }}
+
+Prior scene (BEFORE rewrite):
+'''
+{{ prior_scene_text }}
+'''
+
+Issues to fix (HIGH first):
+{% for severity in ["high", "mid"] -%}
+{% for issue in severity_grouped_issues.get(severity, []) -%}
+- [{{ severity }}/{{ issue.axis }}] {{ issue.location }}: {{ issue.claim }}
+  Evidence: {{ issue.evidence }}
+  {% if issue.citation %}Citation: {{ issue.citation }}{% endif %}
+{% endfor %}
+{% endfor %}
+
+{% if severity_grouped_issues.get("low") -%}
+Low-severity context (don't chase):
+{% for issue in severity_grouped_issues["low"] -%}
+- [{{ issue.axis }}] {{ issue.claim }}
+{% endfor %}
+{% endif %}
+
+Rewrite the scene. Return ONLY the full revised scene text. No meta commentary. No outline prefix.
