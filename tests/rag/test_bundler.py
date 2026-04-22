@@ -325,7 +325,7 @@ def test_g_w1_entity_list_catches_motecuhzoma_conflict(tmp_path: Path) -> None:
     retrievers = [
         _FakeRetriever(
             "historical",
-            [("h1", "Motecuhzoma in Tenochtitlan received the envoys.", 0.9)],
+            [("h1", "Motecuhzoma stays at Tenochtitlan and received the envoys.", 0.9)],
         ),
         _FakeRetriever(
             "metaphysics",
