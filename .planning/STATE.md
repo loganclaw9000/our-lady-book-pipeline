@@ -3,19 +3,19 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-02-PLAN.md (corpus ingester + mtime idempotency + CLI)
-last_updated: "2026-04-22T06:56:01.437Z"
+stopped_at: Completed 02-03-PLAN.md (3 of 5 typed retrievers + shared base + BGE reranker)
+last_updated: "2026-04-22T07:16:43Z"
 progress:
   total_phases: 6
   completed_phases: 1
   total_plans: 12
-  completed_plans: 8
-  percent: 67
+  completed_plans: 9
+  percent: 75
 ---
 
 # STATE: our-lady-book-pipeline
 
-**Last updated:** 2026-04-22 after Plan 02-02 (corpus ingester + mtime idempotency + CLI)
+**Last updated:** 2026-04-22 after Plan 02-03 (3 of 5 typed retrievers + shared LanceDBRetrieverBase + BGE reranker)
 **Status:** Executing Phase 02
 
 ---
@@ -42,18 +42,18 @@ Phase 2: Corpus Ingestion + Typed RAG. Build the 5-axis LanceDB retrieval plane 
 ## Current Position
 
 Phase: 02 (Corpus Ingestion + Typed RAG) — EXECUTING
-Plan: 3 of 6 (next: 02-03 historical + metaphysics retrievers)
+Plan: 4 of 6 (next: 02-04 entity_state + arc_position retrievers)
 
 - **Phase:** 2
-- **Plan:** 02-02 COMPLETE; 02-03 next
+- **Plan:** 02-03 COMPLETE; 02-04 next
 - **Status:** In progress
-- **Plans complete:** 2 / 6 (Phase 2); 8 / 12 total (Phase 1: 6; Phase 2: 2)
-- **Progress:** [███████░░░] 67%
+- **Plans complete:** 3 / 6 (Phase 2); 9 / 12 total (Phase 1: 6; Phase 2: 3)
+- **Progress:** [████████░░] 75%
 
 ### Roadmap progress
 
 - [x] **Phase 1:** Foundation + Observability Baseline (6/6 plans)
-- [ ] **Phase 2:** Corpus Ingestion + Typed RAG (2/6 plans — 02-01 RAG kernel + 02-02 corpus ingester)
+- [ ] **Phase 2:** Corpus Ingestion + Typed RAG (3/6 plans — 02-01 RAG kernel + 02-02 corpus ingester + 02-03 historical/metaphysics/negative_constraint retrievers)
 - [ ] **Phase 3:** Mode-A Drafter + Scene Critic + Basic Regen
 - [ ] **Phase 4:** Chapter Assembly + Post-Commit DAG
 - [ ] **Phase 5:** Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration
@@ -71,6 +71,7 @@ No prose-generation metrics yet — pipeline has not produced artifacts. First r
 | ----- | -------------- | ----- | ------------- | -------------- | ----------- | ------------- | ----------- |
 | 02-01 | 45             | 1     | 11            | 3              | 20          | 131           | 2026-04-22  |
 | 02-02 | 16             | 2     | 14            | 6              | 36          | 167           | 2026-04-22  |
+| 02-03 | 14             | 2     | 11            | 0              | 25          | 192           | 2026-04-22  |
 
 ### Target metrics (will populate once pipeline runs)
 
@@ -100,13 +101,20 @@ No prose-generation metrics yet — pipeline has not produced artifacts. First r
 - **(02-02) `indexes/resolved_model_revision.json` (gitignored) replaces the planned YAML write-back (W-4).** `{sha, model, resolved_at_iso}` shape; written only after successful ingest; `config/rag_retrievers.yaml` is READ-ONLY to the ingester. Regression-guarded by `test_w4_yaml_config_is_not_modified` (asserts byte-identical yaml pre/post ingest).
 - **(02-02) `BRIEF_HEADING_AXIS_MAP` is an explicit 12-entry allowlist (W-3).** Hand-authored from the real `brief.md` H2 headings (4 metaphysics + 8 historical). Regex-absence is asserted by `test_heading_classifier_module_has_no_regex`. Unmapped headings default to the file's primary axis (`historical`). `classify_brief_heading` accepts either the full breadcrumb OR the trailing segment.
 - **(02-02) `ingestion_run_id` mixes microsecond timestamp + mtime-snapshot hash to stay unique across rapid rebuilds.** Plan's literal digest input (sorted paths + revision_sha) would have collided on back-to-back `--force` runs; the extra entropy closes the hole. Plan 05 bundler stamps `ContextPack.ingestion_run_id` with this format.
+- **(02-03) B-1 sole ownership of `retrievers/__init__.py` — Plan 03 owns, Plan 04 never modifies.** All 5 retriever symbols pre-declared; Plan 02-04's `entity_state` + `arc_position` loaded via `importlib.import_module` inside `contextlib.suppress(ImportError)` (dynamic import needed to bypass mypy's import-untyped static complaint on modules-not-yet-on-disk). Pre-Plan-04: attributes are `None`. Post-Plan-04: attributes are the real classes.
+- **(02-03) B-2 frozen Protocol `reindex(self) -> None` on every concrete retriever.** Axis-specific reindex state (Plan 02-04's ArcPositionRetriever outline_path, embedder, ingestion_run_id) is stored on `self` at `__init__` and read during `reindex()`. Runtime-checkable `isinstance(r, Retriever)` passes — verified by dedicated test in each retriever test file + `inspect.signature(r.reindex).parameters` emptiness check.
+- **(02-03) W-2 explicit-kwargs retriever __init__ template.** `def __init__(self, *, db_path, embedder, reranker, **kw) -> None: super().__init__(name="axis", db_path=db_path, embedder=embedder, reranker=reranker, **kw)`. No positional-splat forwarding. Plan 02-04's two retrievers MUST follow this template.
+- **(02-03) candidate_k=50 -> final_k=8 pipeline cemented on LanceDBRetrieverBase.** Plan 02-05 bundler's 40KB ContextPack cap math assumes 8 hits per axis × 5 axes = up to 40 hits. `final_k` is an `__init__` kwarg for future tuning without API break.
+- **(02-03) MetaphysicsRetriever `[a-z_]+` regex injection guard on `include_rule_types`.** Defense in depth; today's callers are all trusted (Plan 02-05 bundler reads from `config/rag_retrievers.yaml`) but the guard prevents a future regression from leaking unsanitized input into the where clause. Raises `ValueError` on any non-conformant value.
+- **(02-03) NegativeConstraintRetriever `_where_clause` is UNCONDITIONALLY `None` (PITFALLS R-5).** Tag-based filtering lives in Plan 02-05 bundler, NEVER in this retriever. Prevents the silent-miss failure where a scene's tag set doesn't match and the constraint never surfaces.
+- **(02-03) RetrievalHit.metadata carries 5 keys (added `vector_distance` beyond the plan's literal 4).** `{rule_type, heading_path, ingestion_run_id, chapter, vector_distance}` — zero-cost additive signal for Plan 02-05 bundler + Plan 02-06 CI baseline introspection.
 
 ### Open todos
 
-- Plan 02-03: historical + metaphysics retrievers — LanceDB query wrappers against the 5 tables populated by 02-02; metaphysics retriever filters on `rule_type='rule'` by default (PITFALLS R-4).
+- Plan 02-04: entity_state + arc_position retrievers. Creates `src/book_pipeline/rag/retrievers/{entity_state,arc_position}.py` and does NOT modify `__init__.py` (B-1 contract). Follows W-2 explicit-kwargs template; keeps B-2 `reindex(self) -> None` signature. ArcPositionRetriever overrides reindex body to re-parse `outline.md` from `self.outline_path` + `self.embedder` + `self.ingestion_run_id`. EntityStateRetriever tolerates zero entity-state/*.md cards (empty-table path is in the base class already).
 - Before Phase 3 starts: curate the 20-30 voice-fidelity anchor passages from paul-thinkpiece-pipeline training corpus (blocker for the anchor-set pin, not a line item in a plan).
-- Plan 02-06: run the first REAL `book-pipeline ingest --force` on a machine with GPU + HF access; capture `chunk_counts_per_axis` + `indexes/resolved_model_revision.json` as the golden-query CI baseline.
-- Watch: `lancedb.table_names()` deprecation — migrate to `list_tables().tables` when old API is actually removed (3 call sites now: `rag/lance_schema.py`, `corpus_ingest/ingester.py`, and test_lance_schema.py).
+- Plan 02-06: run the first REAL `book-pipeline ingest --force` on a machine with GPU + HF access; capture `chunk_counts_per_axis` + `indexes/resolved_model_revision.json` as the golden-query CI baseline. Also the first real BGE reranker-v2-m3 load.
+- Watch: `lancedb.table_names()` deprecation — migrate to `list_tables().tables` when old API is actually removed (3 call sites now: `rag/lance_schema.py`, `corpus_ingest/ingester.py`, and test_lance_schema.py). `rag/retrievers/base.py` goes through `open_or_create_table` so it benefits from a single-site migration.
 - Optional: T-02-02-04 harden — wrap 5-table rebuild in try/except that restores prior mtime_index.json on failure. Current ordering (write mtime last) is equivalent in practice but the explicit safety net is deferred.
 
 ### Blockers
@@ -126,15 +134,15 @@ None.
 ### Last session
 
 - **Date:** 2026-04-22
-- **Action:** Executed Plan 02-02 — CorpusIngester + mtime idempotency + `book-pipeline ingest` CLI, with W-3 (explicit heading classifier allowlist) / W-4 (resolved_model_revision.json replaces YAML write-back) / W-5 (chapter column round-trip) revisions implemented.
-- **Outcome:** New kernel package `book_pipeline.corpus_ingest` (router + mtime_index + ingester). New CLI composition seam `book_pipeline.cli.ingest`. Reconciled `book_specifics/corpus_paths.py` filenames to `our-lady-of-champion-*.md` and added CORPUS_FILES 5-axis mapping. New `book_specifics/heading_classifier.py` with 12-entry BRIEF_HEADING_AXIS_MAP. 36 new tests green (6 corpus_paths + 5 heading_classifier + 7 router + 7 mtime_index + 11 ingester); full suite 167 passed (was 131). Aggregate gate `bash scripts/lint_imports.sh` green (2 contracts kept, ruff clean, mypy 62 files clean). 4 per-task commits: fa1adfc + 9d31263 (Task 1 RED/GREEN) + e2af2a8 + 6d7d981 (Task 2 RED/GREEN). `book-pipeline ingest --help` and `--dry-run` both verified end-to-end. CORPUS-01 complete.
-- **Stopped at:** Completed 02-02-PLAN.md (corpus ingester + mtime idempotency + CLI)
+- **Action:** Executed Plan 02-03 — 3 of 5 typed retrievers (historical, metaphysics with PITFALLS R-4 filter + injection guard, negative_constraint with PITFALLS R-5 deliberate-no-filter) on top of a shared `LanceDBRetrieverBase` (candidate_k=50 -> final_k=8 pipeline with empty-table tolerance + B-2 frozen `reindex(self) -> None` + `empty` sentinel on index_fingerprint for empty tables) and a lazy `BgeReranker` cross-encoder wrapper. B-1: Plan 03 sole-owns `retrievers/__init__.py` with all 5 imports pre-declared (Plan 04's entity_state + arc_position loaded via `importlib.import_module` inside `contextlib.suppress(ImportError)`).
+- **Outcome:** New module tree `src/book_pipeline/rag/retrievers/` (5 source files — base + 3 concrete retrievers + __init__.py) and `src/book_pipeline/rag/reranker.py`. 25 new tests green (4 reranker + 8 retriever_base + 4 historical + 5 metaphysics + 4 negative_constraint); full suite 192 passed (was 167). Aggregate gate `bash scripts/lint_imports.sh` green (2 contracts kept, ruff clean, mypy 68 files clean — added retrievers subpackage under existing `src/book_pipeline/rag` mypy scope). 4 per-task commits: 2b2dab1 + e7acc52 (Task 1 RED/GREEN) + 0de228b + 4ea3dac (Task 2 RED/GREEN). RAG-01 progresses from 0% to 60% complete (3 of 5 retrievers).
+- **Stopped at:** Completed 02-03-PLAN.md (3 of 5 typed retrievers + shared base + BGE reranker)
 
 ### Next session
 
-- **Expected action:** `/gsd-execute-phase 2` continuation (or explicit `gsd-execute-plan 02-03`) — decompose and execute Plan 02-03 (historical + metaphysics typed retrievers). Consumes Plan 02-02's populated LanceDB tables.
-- **Key continuation note:** Plan 02-03 should NOT run a real BGE-M3 ingest to test retrievers — use the same `_FakeEmbedder` pattern from `tests/corpus_ingest/test_ingester.py` (deterministic `(n, 1024)` float32 via hash-seeded rng). The real first ingest is deferred to Plan 02-06 where it serves as the golden-query CI baseline.
-- **Key precedent:** The CLI-composition exemption pattern (pyproject ignore_imports + grep-fallback documented_exemptions + module docstring) is now the sanctioned way to bridge book_specifics into kernel-level CLI commands. Plan 03/04/05 should follow the same 3-site pattern when they add their own CLI subcommands.
+- **Expected action:** `/gsd-execute-phase 2` continuation (or explicit `gsd-execute-plan 02-04`) — Plan 02-04: entity_state + arc_position retrievers. Creates 2 new retriever source files; does NOT modify `__init__.py` (B-1 contract). ArcPositionRetriever parses `~/Source/our-lady-of-champion/our-lady-of-champion-outline.md` into beat-function granularity chunks (27 chapters × blocks × beats) with stable `ch{NN}_b{block}_beat{NN}` IDs, overriding `reindex()` body (NOT signature — B-2). EntityStateRetriever reads `entity-state/` cards, tolerating the zero-cards case (empty-table path already in the base).
+- **Key continuation note:** Plan 02-04 MUST follow the W-2 explicit-kwargs `__init__` template (no `*args` forwarding) and MUST preserve the B-2 zero-arg `reindex(self) -> None` signature. Dedicated test in each new retriever test file: `assert isinstance(r, Retriever)` (runtime_checkable Protocol) AND `assert len(inspect.signature(r.reindex).parameters) == 0`.
+- **Key precedent:** Plan 02-03 established the retriever-subclass template: override `_build_query_text(request) -> str` (required) and optionally `_where_clause(request) -> str | None` (default `None`). Any axis-specific state for a non-trivial `reindex()` override is stored on `self` at `__init__` time. Never emit observability events from retrievers (grep-guarded to 0 matches — the bundler in Plan 02-05 is the sole emission site).
 
 ### Session continuity invariants
 
