@@ -1,0 +1,11 @@
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+ignore = ["E501"]  # line-too-long handled by formatter
+
+[format]
+quote-style = "double"
+indent-style = "space"
