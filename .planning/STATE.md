@@ -3,19 +3,19 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-02-PLAN.md (OBS-03 voice-fidelity anchor curation)
-last_updated: "2026-04-22T18:06:32.840Z"
+stopped_at: Completed 03-03-PLAN.md (vLLM bootstrap plane + V-3 handshake SHA gate live)
+last_updated: "2026-04-22T18:27:58.724Z"
 progress:
   total_phases: 6
   completed_phases: 2
   total_plans: 20
-  completed_plans: 14
-  percent: 70
+  completed_plans: 15
+  percent: 75
 ---
 
 # STATE: our-lady-book-pipeline
 
-**Last updated:** 2026-04-22 after Plan 03-02 (OBS-03 voice-fidelity anchor curation — 22 anchors pinned, SHA 28fd890bc4c8afc1…df31, real BGE-M3 cosine scorer live)
+**Last updated:** 2026-04-22 after Plan 03-03 (vLLM bootstrap plane + V-3 boot_handshake SHA gate live; DRAFT-01 complete)
 **Status:** Executing Phase 03
 
 ---
@@ -35,7 +35,7 @@ Autonomously produce first-draft novel chapters that are both voice-faithful (Pa
 
 ### Current focus
 
-Phase 3 executing. Plan 03-02 LANDED (OBS-03 voice-fidelity anchor curation): `book_pipeline.voice_fidelity.anchors` ships AnchorSet + Anchor Pydantic models, compute_centroid (L2-normalized BGE-M3 mean), compute_per_sub_genre_centroids, deterministic compute_anchor_set_sha, and check_anchor_dominance; `voice_fidelity.scorer.score_voice_fidelity` replaces the Plan 03-01 stub with real BGE-M3 cosine-vs-centroid (Plan 03-01's importlib-suppress fallback auto-resolves); `book-pipeline curate-anchors` CLI builds the curated anchor set with W-3/W-5 pre-flight quota check + --override-quotas escape hatch + --skip-embed + role='anchor_curator' Event emission; `config/voice_anchors/anchor_set_v1.yaml` ships 22 real curated anchors (essay=8 analytic=8 narrative=6) from paul-thinkpiece-pipeline v3_data/train_filtered.jsonl (ANALYTIC keyword set EXTENDED beyond the plan's narrow ML-jargon list per Rule 2 — the plan-original set yielded only 5 analytic-passing rows vs. the V-1 minimum of 6); `config/mode_thresholds.yaml` gains a voice_fidelity: block with `anchor_set_sha=28fd890bc4c8afc1…df31` + pass=0.78/flag-band=0.75-0.78/fail=0.75/memorization=0.95 thresholds validated by a VoiceFidelityConfig Pydantic interval validator. BGE-M3 revision resolved to `5617a9f61b028005…`. All 22 anchors flag as 'dominant' — threshold-calibration artifact (contribution range 0.63-0.76, spread only 19%), documented as Phase 6 refinement. Plan 03-03 (vLLM bootstrap + scene critic + SceneState orchestration) ready to start.
+Phase 3 executing. Plan 03-03 LANDED (vLLM bootstrap plane + V-3 boot_handshake SHA gate live): `book_pipeline.drafter.vllm_client.VllmClient` is an httpx+tenacity client (3x exponential backoff 1→4s on transient transport errors) with `get_models`, `chat_completion` (OpenAI-compatible payload with vLLM `repetition_penalty` under `extra_body`), `health_ok`, and `boot_handshake(pin)` — the V-3 PITFALLS mitigation LIVE end-to-end (recomputes `compute_adapter_sha(pin.checkpoint_path)`, asserts `paul-voice` is in `/v1/models` data, emits `role="vllm_boot_handshake"` OBS-01 Event with `checkpoint_sha` + served `vllm_version`, raises `VoicePinMismatch` on drift with an error-status Event emitted BEFORE the raise for observability trail); `book_pipeline.drafter.systemd_unit` ships `render_unit` (Jinja2 StrictUndefined→KeyError), atomic `write_unit` via tmp+os.replace, `systemctl_user` + `daemon_reload` returning `(ok, stdout, stderr)` tuples with 60s subprocess timeouts (failures don't crash the CLI), and pure-httpx `poll_health` with bounded timeout (separate from VllmClient's retry profile); `book-pipeline vllm-bootstrap` CLI composes unit-render + write + (optional) enable + (optional) start + boot_handshake with structured exit codes (0=ok, 2=config/render, 3=SHA mismatch, 4=handshake error, 5=systemctl/poll failure) + `role="vllm_bootstrap"` summary Event even on `--dry-run`; `config/systemd/vllm-paul-voice.service.j2` Jinja2 template renders against Plan 03-01's real V6 pin to `--model Qwen/Qwen3-32B --enable-lora --lora-modules paul-voice=/home/admin/finetuning/output/paul-v6-qwen3-32b-lora --port 8002 --dtype bfloat16 --max-model-len 8192 --tensor-parallel-size 1 --gpu-memory-utilization 0.85`; `book_specifics/vllm_endpoints.py` holds `DEFAULT_BASE_URL` + `LORA_MODULE_NAME` + poll timeouts (CLI-composition seam — kernel `drafter/vllm_client.py` + `drafter/systemd_unit.py` both grep-clean on book_specifics); jinja2 declared explicitly in pyproject (was transitive); 18 new tests via `httpx.MockTransport` + subprocess monkeypatches (320 total, from 302 baseline). REQUIREMENTS.md DRAFT-01 marked COMPLETE (Plan 03-01 pin + verify_pin helper + Plan 03-03 boot-handshake live). Plan 03-04 (Mode-A drafter: Jinja2 prompt template + sampling profiles + memorization gate) ready to start.
 
 ---
 
@@ -45,16 +45,16 @@ Phase: 03 (Mode-A Drafter + Scene Critic + Basic Regen) — EXECUTING
 Plan: 3 of 8
 
 - **Phase:** 3
-- **Plan:** 3 (03-03 next)
-- **Status:** Plan 03-02 complete (OBS-03 anchor curation live, 22 anchors pinned, SHA 28fd890bc4c8afc1…df31); ready for `/gsd-execute-phase 3` wave 3 (Plan 03-03)
-- **Plans complete:** 2 / 8 (Phase 3); 14 / 20 total (Phase 1: 6; Phase 2: 6; Phase 3: 2)
-- **Progress:** [███████░░░] 70%
+- **Plan:** 4 (03-04 next)
+- **Status:** Plan 03-03 complete (vLLM bootstrap plane live: VllmClient httpx+tenacity+boot_handshake + systemd unit template + book-pipeline vllm-bootstrap CLI; V-3 PITFALLS enforcement LIVE end-to-end; DRAFT-01 marked complete). Ready for Plan 03-04 Mode-A drafter.
+- **Plans complete:** 3 / 8 (Phase 3); 15 / 20 total (Phase 1: 6; Phase 2: 6; Phase 3: 3)
+- **Progress:** [████████░░] 75%
 
 ### Roadmap progress
 
 - [x] **Phase 1:** Foundation + Observability Baseline (6/6 plans)
 - [x] **Phase 2:** Corpus Ingestion + Typed RAG (6/6 plans — 02-01 RAG kernel + 02-02 corpus ingester + 02-03 3-of-5 retrievers + 02-04 entity_state/arc_position + outline_parser + 02-05 ContextPackBundler + 02-06 RAG-04 golden-query CI gate + nightly cron)
-- [~] **Phase 3:** Mode-A Drafter + Scene Critic + Basic Regen (2/8 plans — 03-01 kernel skeletons + REAL V6 voice pin; 03-02 OBS-03 voice-fidelity anchor curation)
+- [~] **Phase 3:** Mode-A Drafter + Scene Critic + Basic Regen (3/8 plans — 03-01 kernel skeletons + REAL V6 voice pin; 03-02 OBS-03 voice-fidelity anchor curation; 03-03 vLLM bootstrap plane + boot_handshake SHA gate [DRAFT-01 complete])
 - [ ] **Phase 4:** Chapter Assembly + Post-Commit DAG
 - [ ] **Phase 5:** Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration
 - [ ] **Phase 6:** Testbed Plane + Production Hardening + First Draft
@@ -77,6 +77,7 @@ No prose-generation metrics yet — pipeline has not produced artifacts. First r
 | 02-06 | 45             | 3     | 10            | 11             | 19          | 254           | 2026-04-22  |
 | 03-01 | 12             | 3     | 12            | 6              | 14          | 280           | 2026-04-22  |
 | Phase 03 P02 | 32 | 2 tasks | 9 files |
+| Phase 03 P03 | 10 | 2 tasks | 10 files |
 
 ### Target metrics (will populate once pipeline runs)
 
@@ -143,8 +144,16 @@ No prose-generation metrics yet — pipeline has not produced artifacts. First r
 - **(03-02) curate-anchors atomic YAML rewrite strips comments — known limitation of yaml.safe_dump.** Documented inline in mode_thresholds.yaml header; operators re-adding comments is manual. NOT fixing via ruumel.yaml dep per STACK.md ("PyYAML unless we round-trip-edit YAML programmatically — we don't"). File's load-bearing bytes are the data, not comments.
 - **(03-02) Plan 03-01 stub test `tests/voice_fidelity/test_scorer.py` DELETED.** The stub test asserted `NotImplementedError`; replacing the stub body with the real BGE-M3 cosine impl (Plan 03-02 Task 1) makes it false-fail. Plan 03-01 summary explicitly anticipated this sunset. 5 new centroid-behavior tests in `tests/voice_fidelity/test_scorer_centroid.py` supersede.
 - **(03-02) env-var override pattern for CLI-tested paths: OBS_CURATE_ANCHORS_{THINKPIECE,BLOG}_PATH.** Lets tests swap corpus locations without monkeypatching module constants. Production uses default paths inside anchor_sources.py. Same idiom as Phase 2 path overrides — keep in mind for future book-specifics CLI pointer tables.
+- **(03-03) VllmClient boot_handshake is the V-3 enforcement live site.** Recomputes `compute_adapter_sha(pin.checkpoint_path)` on first vLLM contact, asserts `paul-voice` is served, emits `role="vllm_boot_handshake"` Event with `checkpoint_sha` + served `vllm_version`, raises `VoicePinMismatch` on drift. Error-status Event is emitted BEFORE the raise so ops investigation has an auditable trail — the attempted pin-check is observable even when it fails. Plan 03-04 drafter will call this at startup before every Mode-A scene draft; SHA mismatch routes to `HARD_BLOCKED("checkpoint_sha_mismatch")`.
+- **(03-03) tenacity.Retrying as a context manager (not @tenacity.retry decorator) on VllmClient._http_get / _http_post.** Same semantics (3 attempts, exponential 1→4s, httpx.TimeoutException/ConnectError/RequestError). Cleaner typing — yields httpx.Response uniformly inside a for-loop rather than wrestling a decorator's captured-method annotations. Production behavior identical.
+- **(03-03) Test seam via optional `_http_client` kwarg on VllmClient.__init__ instead of adding respx as a dep.** Plan allowed either; MockTransport is stdlib-shaped + already transitive via httpx + zero new deps. Tests pass `httpx.Client(transport=MockTransport(...))`; production leaves it None and builds its own httpx.Client(base_url, timeout). Retry semantics exercise against real-shaped httpx.Response objects in the mock.
+- **(03-03) Pure-httpx poll_health in systemd_unit.py — does NOT compose VllmClient.health_ok().** VllmClient retry tuning is for post-up responsiveness (3×, 1→4s); boot-poll wants "keep-trying-quietly" semantics for a cold-starting server. poll_health loops on `httpx.get({url}/models, timeout=2s)` every interval_s until 200 or deadline. Cleaner CLI lifecycle + simpler timeout reporting than re-using the handshake client.
+- **(03-03) LoRA-adapter mode, NOT merged-weights, for vLLM serving (W-4 closure).** Template renders `--enable-lora --lora-modules paul-voice=<adapter_path>` against base `Qwen/Qwen3-32B`. Rationale: no re-merge on every pin bump (saves ~30min + 65GB per bump), hot-swap potential for future Phase 5 Mode-B experiments, and faster boot_handshake (~10.7s for 537MB adapter vs ~2-3min for 65GB merged base). Trade-off: ~5-10% per-token latency penalty vs merged. Acceptable for Phase 3 nightly cadence. Documented upgrade path: `peft merge_and_unload` + `book-pipeline pin-voice <merged_dir>` + re-bootstrap.
+- **(03-03) CLI exit-code taxonomy for book-pipeline vllm-bootstrap:** 0=ok, 2=config/render failure, 3=SHA mismatch (V-3 fired), 4=handshake error (LoRA not loaded), 5=systemctl/poll failure. Plan 03-08 smoke + future cron will distinguish infrastructure failures from SHA drift. Documented in the CLI module docstring; threat T-03-03-07 (DoS via hanging subprocess) mitigated by bounded timeouts at every stage.
+- **(03-03) --dry-run still emits role='vllm_bootstrap' Event** (with caller_context.dry_run=True + all enable/start/handshake statuses = 'skipped'). Observability is load-bearing even for dry-runs — Plan 03-08 smoke asserts ANY role='vllm_bootstrap' event, not just live-side-effect runs.
 
 ### Open todos
+
 - **Operator action (low-priority):** set OPENCLAW_GATEWAY_TOKEN in env and run `book-pipeline openclaw register-cron --ingest-only` (or apply `openclaw/cron_jobs.json` manually) to activate the nightly-ingest cron.
 - **Plan 02-06 deferred:** re-run `pytest tests/rag/test_golden_queries.py -m slow` with the refined `forbidden_chunks` seed to confirm the >=90% pass + 0 forbidden-leaks criterion on the pinned baseline. Plumbing proven to work (Gate 3 initial run ran 11m31s end-to-end; deterministic test passed).
 - Watch: `lancedb.table_names()` deprecation — migrate to `list_tables().tables` when old API is actually removed (4 call sites now including `_capture_expected_chunks.py`). `rag/retrievers/base.py` goes through `open_or_create_table` so it benefits from a single-site migration.
@@ -169,7 +178,7 @@ None. Phase 3 readiness confirmed by Plan 02-06 Gate 5 end-to-end smoke.
 - **Date:** 2026-04-22
 - **Action:** Executed Plan 03-01 — Phase 3 kernel skeletons (drafter/, critic/, regenerator/, voice_fidelity/) + import-linter extension + scripts/lint_imports.sh mypy-scope extension + `book_pipeline.voice_fidelity.sha` (compute_adapter_sha + verify_pin + VoicePinMismatch) + `book_pipeline.voice_fidelity.scorer` signature stub + `book-pipeline pin-voice <adapter_dir>` CLI + REAL V6 qwen3-32b LoRA SHA pinned in config/voice_pin.yaml. TDD: 3 RED/GREEN commit pairs (6 commits total).
 - **Outcome:** 12 files created (4 kernel __init__.py + sha.py + scorer.py + pin_voice.py CLI + 4 test files); 6 files modified (pyproject.toml, scripts/lint_imports.sh, cli/main.py, voice_fidelity/__init__.py's eager-vs-fallback choice, config/voice_pin.yaml obliterated Phase 1 placeholder, rag/bundler.py Rule-3 auto-fix for pre-existing SIM105). 14 tests added (3 import-contract structural + 7 sha non-slow + 1 scorer + 4 pin_voice); 280 total passing (was 266 baseline). REAL V6 SHA `3f0ac5e2290dab63…d094` computed in 10.7s over the 537MB safetensors at /home/admin/finetuning/output/paul-v6-qwen3-32b-lora/. Source commit SHA `c571bb7b...` from paul-thinkpiece-pipeline HEAD. Aggregate gate `bash scripts/lint_imports.sh` green (2 contracts kept, ruff clean, mypy clean on 82 source files). 6 per-task commits: d547ae8 (T1 RED) + e785525 (T1 GREEN + Rule-3 bundler fix) + 26df024 (T2 RED) + c987a3e (T2 GREEN) + 42bcdf9 (T3 RED) + 9c1b9c1 (T3 GREEN + REAL V6 pin).
-- **Stopped at:** Completed 03-02-PLAN.md (OBS-03 voice-fidelity anchor curation)
+- **Stopped at:** Completed 03-03-PLAN.md (vLLM bootstrap plane + V-3 handshake SHA gate live)
 
 ### Next session
 

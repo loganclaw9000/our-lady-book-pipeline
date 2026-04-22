@@ -33,7 +33,7 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 
 ### Drafter
 
-- [~] **DRAFT-01**: Mode-A drafter speaks to a vLLM OpenAI-compatible endpoint serving a pinned voice-FT checkpoint from `paul-thinkpiece-pipeline`; checkpoint pinned by SHA in `voice_pin.yaml`; startup asserts SHA match. *(partial: Plan 03-01 landed the SHA pin + verify_pin helper; Plan 03-03 lands the vLLM boot handshake + SHA-match assertion)*
+- [x] **DRAFT-01**: Mode-A drafter speaks to a vLLM OpenAI-compatible endpoint serving a pinned voice-FT checkpoint from `paul-thinkpiece-pipeline`; checkpoint pinned by SHA in `voice_pin.yaml`; startup asserts SHA match. *(complete: Plan 03-01 landed the SHA pin + verify_pin helper; Plan 03-03 landed the vLLM boot handshake + SHA-match assertion via `VllmClient.boot_handshake` which calls `compute_adapter_sha` + raises `VoicePinMismatch` on drift — V-3 PITFALLS mitigation live)*
 - [ ] **DRAFT-02**: Mode-A drafter accepts per-scene `{temperature, top_p, repetition_penalty}` from config and overrides via scene-type tag (e.g., dialogue-heavy, action, reflection).
 - [ ] **DRAFT-03**: Mode-B drafter uses Anthropic SDK (Opus 4.7) with voice samples in-context and prompt caching enabled (ephemeral `ttl="1h"`); per-scene opt-in via controller decision; scene carries `mode="B"` in event log and commit metadata.
 - [ ] **DRAFT-04**: Structurally complex beats (Cholula stir, two-thirds revelation, siege climax — list derived from outline tags) are pre-flagged for Mode-B by default and can be demoted to Mode-A via config.
@@ -146,7 +146,7 @@ Populated by roadmapper during roadmap creation. Every v1 REQ-ID maps to exactly
 | RAG-02 | Phase 2 | Complete |
 | RAG-03 | Phase 2 | Complete |
 | RAG-04 | Phase 2 | Complete |
-| DRAFT-01 | Phase 3 | Partial (03-01: pin + helper; 03-03: boot handshake pending) |
+| DRAFT-01 | Phase 3 | Complete (03-01: pin + helper; 03-03: boot handshake live) |
 | DRAFT-02 | Phase 3 | Pending |
 | DRAFT-03 | Phase 5 | Pending |
 | DRAFT-04 | Phase 5 | Pending |
