@@ -21,7 +21,6 @@ from typing import Any
 
 import numpy as np
 
-
 _FIXTURE = Path(__file__).parent / "fixtures" / "mini_outline.md"
 
 
