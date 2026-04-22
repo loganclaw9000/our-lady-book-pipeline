@@ -2,21 +2,21 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
+status: planning
 stopped_at: Completed 03-07-PLAN.md (book-pipeline draft CLI + SceneStateMachine wiring + W-1 factory + ch01_sc01 stub + B-3 invariant enforced; 11 mocked integration tests land; Plan 03-08 real-world smoke next)
-last_updated: "2026-04-22T20:44:32.843Z"
+last_updated: "2026-04-22T21:04:22.501Z"
 progress:
   total_phases: 6
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 20
-  completed_plans: 19
-  percent: 95
+  completed_plans: 20
+  percent: 100
 ---
 
 # STATE: our-lady-book-pipeline
 
 **Last updated:** 2026-04-22 after Plan 03-06 (SceneLocalRegenerator kernel — Opus 4.7 + ±10% word-count guard + tenacity retry + severity grouping; REGEN-01 partially complete — kernel live, CLI composition + smoke pending in 03-07/03-08)
-**Status:** Executing Phase 03
+**Status:** Ready to plan
 
 ---
 
@@ -48,8 +48,8 @@ Plan 03-04 LANDED (Mode-A drafter + sampling profiles + V-2 memorization gate + 
 Phase: 03 (Mode-A Drafter + Scene Critic + Basic Regen) — EXECUTING
 Plan: 7 of 8 complete (03-08 real-world smoke next; 03-01..03-07 all landed)
 
-- **Phase:** 3
-- **Plan:** 7 (03-08 human-verify smoke on live vLLM + live Opus 4.7 next)
+- **Phase:** 4
+- **Plan:** Not started
 - **Status:** Plan 03-07 complete (`book-pipeline draft <scene_id>` CLI composition root: bundler + 5 retrievers via W-1 factory + ModeADrafter + SceneCritic + SceneLocalRegenerator + SceneStateMachine wired through a single scene loop; B-3 invariant enforced in _commit_scene — voice_pin_sha == checkpoint_sha == draft.voice_pin_sha; ch01_sc01.yaml stub hand-authored from outline; 11 mocked integration tests + 5 factory tests land). REGEN-01 at kernel + CLI layer; real-world smoke deferred to 03-08.
 - **Plans complete:** 7 / 8 (Phase 3: 03-01 + 03-02 + 03-03 + 03-04 + 03-05 + 03-06 + 03-07); 19 / 20 total (Phase 1: 6; Phase 2: 6; Phase 3: 7)
 - **Progress:** [█████████▌] 95%
