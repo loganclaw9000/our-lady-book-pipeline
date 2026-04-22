@@ -6,11 +6,10 @@ the real BGE-M3 model to be loaded.
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any
 
 import numpy as np
 import pytest
-import yaml
+from pydantic import ValidationError
 
 from book_pipeline.voice_fidelity.anchors import (
     Anchor,
@@ -207,7 +206,7 @@ def test_compute_per_sub_genre_centroids_groups_correctly() -> None:
     per_sg = compute_per_sub_genre_centroids(anchors, embedder)
 
     assert set(per_sg.keys()) == {"essay", "analytic"}
-    for sg, cent in per_sg.items():
+    for _sg, cent in per_sg.items():
         assert cent.shape == (EMBEDDING_DIM,)
         assert cent.dtype == np.float32
         np.testing.assert_allclose(np.linalg.norm(cent), 1.0, atol=1e-5)
@@ -220,5 +219,5 @@ def test_anchor_set_sha_property_matches_compute_function() -> None:
 
 
 def test_anchor_rejects_invalid_sub_genre() -> None:
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationError):
         _make_anchor(id="bad", text="t", sub_genre="poetry")  # type: ignore[arg-type]
