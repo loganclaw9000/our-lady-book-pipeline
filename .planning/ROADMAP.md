@@ -36,10 +36,16 @@
   5. A smoke invocation of the EventLogger writes a well-formed JSONL line to `runs/events.jsonl` with all OBS-01 fields (ts, role, model, prompt_hash, token counts, latency, temp, top_p, caller, output_hash, mode_tag) — this line is the first demonstration that OBS-01 is live from day one.
   6. Module-boundary lint (ruff rule or custom check) flags book-specific imports inside generic-kernel-candidate modules and passes CI.
 
-**Plans**: TBD
+**Plans**: 6 plans in 4 waves (Wave 1: 01 skeleton → Wave 2 parallel: 02 Protocols + 03 configs + 04 openclaw → Wave 3: 05 EventLogger → Wave 4: 06 import-linter)
+- [ ] 01-01-PLAN.md — Package skeleton (pyproject, uv.lock, CLI subcommand dispatcher, dev tooling) [FOUND-01]
+- [ ] 01-02-PLAN.md — 13 Protocol interfaces + Pydantic type contracts + stubs [FOUND-04]
+- [ ] 01-03-PLAN.md — 4 YAML configs + Pydantic-Settings models + validate-config CLI [FOUND-02]
+- [ ] 01-04-PLAN.md — openclaw.json + drafter workspace + bootstrap/register-cron CLI [FOUND-03]
+- [ ] 01-05-PLAN.md — JsonlEventLogger concrete + xxhash helpers + smoke-event CLI [OBS-01]
+- [ ] 01-06-PLAN.md — import-linter module boundary contracts + violation-proof test [FOUND-05]
 **UI hint**: no
 
-**Parallelization**: Plans within this phase are largely independent (config loader, EventLogger, Protocol definitions, openclaw wiring, lint rule). Safe to run 2-3 plans in parallel once the package skeleton exists.
+**Parallelization**: Plans 02 + 03 + 04 run in parallel in Wave 2 after Plan 01's skeleton lands (zero file-overlap — plans 03/04 append to main.py's SUBCOMMAND_IMPORTS via strictly-additive one-line edits). Plan 05 (Wave 3) depends on Plan 02's Event model + EventLogger Protocol. Plan 06 (Wave 4) must be last so it lints real committed modules.
 
 ---
 
@@ -161,7 +167,7 @@
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation + Observability Baseline | 0/TBD | Not started | - |
+| 1. Foundation + Observability Baseline | 0/6 | Not started | - |
 | 2. Corpus Ingestion + Typed RAG | 0/TBD | Not started | - |
 | 3. Mode-A Drafter + Scene Critic + Basic Regen | 0/TBD | Not started | - |
 | 4. Chapter Assembly + Post-Commit DAG | 0/TBD | Not started | - |
