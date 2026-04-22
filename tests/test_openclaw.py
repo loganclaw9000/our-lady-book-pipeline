@@ -1,6 +1,7 @@
 """Tests for the openclaw bootstrap + register-cron helpers + CLI entry."""
 from __future__ import annotations
 
+import contextlib
 import json
 import shutil
 from pathlib import Path
@@ -145,7 +146,7 @@ def test_register_nightly_ingest_invokes_subprocess_with_correct_args(
     cmd = captured["cmd"]
     # Must include the key argv elements.
     assert isinstance(cmd, list)
-    assert "openclaw" == cmd[0]
+    assert cmd[0] == "openclaw"
     assert "cron" in cmd
     assert "add" in cmd
     # --name book-pipeline:nightly-ingest
@@ -225,9 +226,7 @@ def test_register_cron_cli_ingest_only_flag(
 
 def test_register_cron_help_lists_ingest_only_flag(capsys: object) -> None:
     """--help output must surface the --ingest-only flag."""
-    try:
+    with contextlib.suppress(SystemExit):
         main(["openclaw", "register-cron", "--help"])
-    except SystemExit:
-        pass
     captured = capsys.readouterr()  # type: ignore[attr-defined]
     assert "--ingest-only" in captured.out

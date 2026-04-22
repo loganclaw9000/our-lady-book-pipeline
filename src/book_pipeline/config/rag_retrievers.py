@@ -30,6 +30,25 @@ class EmbeddingsConfig(BaseModel):
     device: str
 
 
+class RerankerConfig(BaseModel):
+    """BGE reranker-v2-m3 cross-encoder config (Plan 02-06 additive section).
+
+    Defaults reflect the values Plan 02-03 hardcoded in BgeReranker.__init__;
+    the loader accepts legacy configs that omit the `reranker:` section
+    (defaults take over). Custom values in the YAML override the defaults.
+
+    model_revision: resolved at first successful ingest and persisted to
+    indexes/resolved_model_revision.json (per W-4 policy — never written
+    back to this YAML file).
+    """
+
+    model: str = "BAAI/bge-reranker-v2-m3"
+    model_revision: str = "TBD-phase2"
+    device: str = "cuda:0"
+    candidate_k: int = Field(default=50, ge=1)
+    final_k: int = Field(default=8, ge=1)
+
+
 class BundlerConfig(BaseModel):
     """ContextPack assembler — caps payload at max_bytes per RAG-03."""
 
@@ -49,11 +68,15 @@ class RetrieverConfig(BaseModel):
 
 
 class RagRetrieversConfig(BaseSettings):
-    """Root loader — validates and exposes the 5 retrievers + embeddings + bundler."""
+    """Root loader — validates and exposes the 5 retrievers + embeddings + bundler + reranker."""
 
     embeddings: EmbeddingsConfig
     bundler: BundlerConfig
     retrievers: dict[str, RetrieverConfig]
+    # Plan 02-06: additive section. Legacy configs (without a reranker: block)
+    # validate via defaults. The default_factory is the hinge that keeps the
+    # Phase 1 freeze policy honest ("OPTIONAL additions only").
+    reranker: RerankerConfig = Field(default_factory=RerankerConfig)
 
     model_config = SettingsConfigDict(
         yaml_file="config/rag_retrievers.yaml",

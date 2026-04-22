@@ -12,6 +12,17 @@ embeddings:
   model_revision: "TBD-phase2"
   dim: 1024
   device: "cuda:0"
+reranker:
+  # Plan 02-06: hoist the BgeReranker defaults into config. Before this plan
+  # the values were hardcoded in src/book_pipeline/rag/reranker.py. The
+  # model_revision is resolved lazily per W-4 policy — this value is only a
+  # placeholder; the actual resolved SHA lives in
+  # indexes/resolved_model_revision.json (never written back to this file).
+  model: "BAAI/bge-reranker-v2-m3"
+  model_revision: "TBD-phase2"
+  device: "cuda:0"
+  candidate_k: 50
+  final_k: 8
 bundler:
   max_bytes: 40960
   assembly_strategy: "round_robin"

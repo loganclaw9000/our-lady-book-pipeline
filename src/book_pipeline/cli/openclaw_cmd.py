@@ -19,7 +19,12 @@ import argparse
 import sys
 
 from book_pipeline.cli.main import register_subcommand
-from book_pipeline.openclaw.bootstrap import BootstrapReport, bootstrap, register_placeholder_cron
+from book_pipeline.openclaw.bootstrap import (
+    BootstrapReport,
+    bootstrap,
+    register_nightly_ingest,
+    register_placeholder_cron,
+)
 
 
 def _add_parser(
@@ -45,7 +50,19 @@ def _add_parser(
 
     r = sub.add_parser(
         "register-cron",
-        help="Install Phase 1 placeholder nightly cron via `openclaw cron add`",
+        help=(
+            "Install cron entries via `openclaw cron add`: Phase 1 placeholder "
+            "+ Phase 2 book-pipeline:nightly-ingest. Use --ingest-only to "
+            "register just the nightly ingest."
+        ),
+    )
+    r.add_argument(
+        "--ingest-only",
+        action="store_true",
+        help=(
+            "Skip the Phase 1 placeholder cron; only register the Phase 2 "
+            "nightly ingest job."
+        ),
     )
     r.set_defaults(_handler=_run_register_cron)
 
@@ -78,13 +95,37 @@ def _run_bootstrap(_args: argparse.Namespace) -> int:
     return _print_report(bootstrap())
 
 
-def _run_register_cron(_args: argparse.Namespace) -> int:
-    ok, out, err = register_placeholder_cron()
-    if out:
-        print(out)
-    if err:
-        print(err, file=sys.stderr)
-    return 0 if ok else 1
+def _run_register_cron(args: argparse.Namespace) -> int:
+    """Register Phase 1 placeholder + Phase 2 nightly-ingest cron jobs.
+
+    By default invokes both `register_placeholder_cron` (Phase 1) and
+    `register_nightly_ingest` (Phase 2). With `--ingest-only`, skips the
+    Phase 1 placeholder and only registers the nightly ingest job.
+
+    Returns 0 if all invocations succeeded; 1 otherwise. Prints stdout +
+    stderr for each step so the operator can see the openclaw CLI's
+    confirmation or the manual-fallback command.
+    """
+    overall_ok = True
+
+    if not getattr(args, "ingest_only", False):
+        print("[1] Phase 1 placeholder cron:")
+        ok1, out1, err1 = register_placeholder_cron()
+        if out1:
+            print(out1)
+        if err1:
+            print(err1, file=sys.stderr)
+        overall_ok = overall_ok and ok1
+
+    print("[2] Phase 2 nightly-ingest cron:" if not getattr(args, "ingest_only", False) else "Phase 2 nightly-ingest cron:")
+    ok2, out2, err2 = register_nightly_ingest()
+    if out2:
+        print(out2)
+    if err2:
+        print(err2, file=sys.stderr)
+    overall_ok = overall_ok and ok2
+
+    return 0 if overall_ok else 1
 
 
 register_subcommand("openclaw", _add_parser)

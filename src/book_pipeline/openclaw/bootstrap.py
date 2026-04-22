@@ -4,6 +4,11 @@ bootstrap() — load openclaw.json, validate shape, probe gateway reachability,
               return a BootstrapReport (no side effects beyond HTTP probe).
 register_placeholder_cron() — invoke `openclaw cron add ...` for a no-op
                               Phase 1 nightly; returns (ok, stdout, stderr).
+register_nightly_ingest() — invoke `openclaw cron add ...` for the Phase 2
+                            nightly `book-pipeline ingest` job; returns
+                            (ok, stdout, stderr). Same shape as
+                            register_placeholder_cron; user-aware fallback
+                            when openclaw CLI is not on PATH.
 """
 from __future__ import annotations
 
@@ -146,6 +151,75 @@ def register_placeholder_cron() -> tuple[bool, str, str]:
         "--system-event",
         "Phase 1 placeholder. No-op tick. Phase 5 ORCH-01 replaces this with "
         "the real nightly drafter loop per workspaces/drafter/AGENTS.md.",
+        "--wake",
+        "now",
+    ]
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+    except subprocess.TimeoutExpired:
+        return (False, "", "openclaw cron add timed out after 30s")
+    return (result.returncode == 0, result.stdout, result.stderr)
+
+
+NIGHTLY_INGEST_JOB_NAME = "book-pipeline:nightly-ingest"
+NIGHTLY_INGEST_CRON = "0 2 * * *"
+NIGHTLY_INGEST_TZ = "America/New_York"
+NIGHTLY_INGEST_SYSTEM_EVENT = (
+    "Run nightly ingest: book-pipeline ingest; if any corpus file mtime "
+    "changed, rebuild the 5 LanceDB tables. Details: Phase 2 Plan 06 "
+    "(RAG-04 baseline maintenance + CORPUS-01 freshness)."
+)
+
+
+def register_nightly_ingest() -> tuple[bool, str, str]:
+    """Install the Phase 2 nightly `book-pipeline ingest` cron via openclaw.
+
+    Returns (ok, stdout, stderr). If openclaw CLI is not on PATH, returns
+    (False, "", diagnostic with the exact manual command). Does NOT raise
+    on subprocess failure — returns (False, stdout, stderr) so the CLI can
+    display the diagnostic to the operator.
+
+    The job is idempotent at the openclaw layer: re-running with the same
+    --name invokes openclaw's dedupe semantics. No systemd timer is
+    installed (STACK.md forbids; openclaw's persistent cron is the
+    contract per ORCH-01).
+    """
+    manual_cmd = (
+        "  openclaw cron add \\\n"
+        f'    --name "{NIGHTLY_INGEST_JOB_NAME}" \\\n'
+        f'    --cron "{NIGHTLY_INGEST_CRON}" \\\n'
+        f'    --tz "{NIGHTLY_INGEST_TZ}" \\\n'
+        "    --session isolated \\\n"
+        "    --session-agent drafter \\\n"
+        f'    --system-event "{NIGHTLY_INGEST_SYSTEM_EVENT}" \\\n'
+        "    --wake now"
+    )
+    if shutil.which("openclaw") is None:
+        return (
+            False,
+            "",
+            (
+                "openclaw CLI not on PATH. Expected (from STACK.md): "
+                "~/.npm-global/lib/node_modules/openclaw installed via npm. "
+                "Run manually:\n" + manual_cmd
+            ),
+        )
+    cmd = [
+        "openclaw",
+        "cron",
+        "add",
+        "--name",
+        NIGHTLY_INGEST_JOB_NAME,
+        "--cron",
+        NIGHTLY_INGEST_CRON,
+        "--tz",
+        NIGHTLY_INGEST_TZ,
+        "--session",
+        "isolated",
+        "--session-agent",
+        "drafter",
+        "--system-event",
+        NIGHTLY_INGEST_SYSTEM_EVENT,
         "--wake",
         "now",
     ]

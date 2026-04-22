@@ -51,9 +51,12 @@ def test_kernel_does_not_import_book_specifics() -> None:
         pathlib.Path("src/book_pipeline/rag"),
         pathlib.Path("src/book_pipeline/corpus_ingest"),
     ]
-    # Phase 2 plan 02: CLI-composition exemption per pyproject ignore_imports.
+    # Phase 2 plan 02 + 06: CLI-composition exemptions per pyproject ignore_imports.
+    # - cli/ingest.py: kernel corpus_ingest + book_specifics.{corpus_paths,heading_classifier}
+    # - cli/_entity_list.py: bundler entity_list DI + book_specifics.nahuatl_entities
     documented_exemptions = {
         pathlib.Path("src/book_pipeline/cli/ingest.py"),
+        pathlib.Path("src/book_pipeline/cli/_entity_list.py"),
     }
     for d in kernel_dirs:
         if not d.exists():

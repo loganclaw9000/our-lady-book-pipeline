@@ -22,7 +22,7 @@ import re
 import sys
 from pathlib import Path
 
-from book_pipeline.book_specifics.corpus_paths import CORPUS_FILES
+from book_pipeline.book_specifics.corpus_paths import CORPUS_FILES, OUTLINE
 from book_pipeline.book_specifics.heading_classifier import classify_brief_heading
 from book_pipeline.cli.main import register_subcommand
 from book_pipeline.config.rag_retrievers import RagRetrieversConfig
@@ -142,6 +142,34 @@ def _run(args: argparse.Namespace) -> int:
     )
     report = ingester.ingest(indexes_dir, force=args.force)
 
+    # Plan 02-06: post-ingest ArcPositionRetriever.reindex() hook.
+    # CorpusIngester ingests outline.md as plain markdown chunks routed to
+    # the arc_position axis by the filename router (Plan 02-02). After a
+    # non-skipped ingest, overwrite those rows with beat-ID-stable rows
+    # (Plan 02-04 RAG-02 guarantee). B-2: reindex() takes no args; all state
+    # lives on the retriever (outline_path, embedder, reranker, ingestion_run_id).
+    if not report.skipped:
+        # Local imports keep mypy + import-linter scope tight; these kernel
+        # imports do NOT cross into book_specifics (OUTLINE is already
+        # resolved above).
+        from book_pipeline.rag.reranker import BgeReranker
+        from book_pipeline.rag.retrievers.arc_position import ArcPositionRetriever
+
+        reranker = BgeReranker(
+            model_name=cfg.reranker.model, device=cfg.reranker.device
+        )
+        arc = ArcPositionRetriever(
+            db_path=indexes_dir,
+            outline_path=OUTLINE,
+            embedder=embedder,
+            reranker=reranker,
+            ingestion_run_id=report.ingestion_run_id,
+        )
+        arc.reindex()  # B-2: no args — state from __init__
+        arc_note = "arc_position reindex: beat-ID-stable rows written"
+    else:
+        arc_note = None
+
     if args.json:
         print(report.model_dump_json(indent=2))
     else:
@@ -161,6 +189,8 @@ def _run(args: argparse.Namespace) -> int:
             print(
                 "  (config/rag_retrievers.yaml is NOT modified by the ingester — W-4)"
             )
+        if arc_note is not None:
+            print(f"  {arc_note}")
     return 0
 
 

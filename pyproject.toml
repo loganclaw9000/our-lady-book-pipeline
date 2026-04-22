@@ -83,13 +83,16 @@ source_modules = [
 forbidden_modules = [
     "book_pipeline.book_specifics",
 ]
-# CLI-composition exemption (Phase 2 Plan 02): book_pipeline.cli.ingest is the
-# documented composition seam that wires kernel (corpus_ingest) with
-# book-specific CORPUS_FILES + heading_classifier. Every other kernel module
-# stays ignorant of book_specifics.
+# CLI-composition exemption (Phase 2 Plan 02 + 06): book_pipeline.cli.* modules
+# are documented composition seams that wire kernel packages with book-specific
+# tables (corpus_paths, heading_classifier, nahuatl_entities). Every other
+# kernel module stays ignorant of book_specifics.
+# Plan 02-06 addition: cli._entity_list bridges to nahuatl_entities for the
+# W-1 entity_list DI seam on ContextPackBundlerImpl.
 ignore_imports = [
     "book_pipeline.cli.ingest -> book_pipeline.book_specifics.corpus_paths",
     "book_pipeline.cli.ingest -> book_pipeline.book_specifics.heading_classifier",
+    "book_pipeline.cli._entity_list -> book_pipeline.book_specifics.nahuatl_entities",
 ]
 
 [[tool.importlinter.contracts]]
