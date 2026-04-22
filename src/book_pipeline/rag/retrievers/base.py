@@ -62,6 +62,7 @@ class LanceDBRetrieverBase:
         reranker: BgeReranker,
         candidate_k: int = 50,
         final_k: int = 8,
+        ingestion_run_id: str | None = None,
     ) -> None:
         self.name = name
         self.db_path = Path(db_path)
@@ -69,6 +70,11 @@ class LanceDBRetrieverBase:
         self.reranker = reranker
         self.candidate_k = candidate_k
         self.final_k = final_k
+        # Plan 03-07 W-1: uniform ingestion_run_id kw accepted by the factory
+        # (build_retrievers_from_config). Subclasses that need it for reindex
+        # (ArcPositionRetriever) may override by also setting it on self; the
+        # base stores it defensively so the factory signature stays uniform.
+        self.ingestion_run_id = ingestion_run_id
 
     # --- Subclass hooks ----------------------------------------------------
 

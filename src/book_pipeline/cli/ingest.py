@@ -33,7 +33,7 @@ from book_pipeline.corpus_ingest.mtime_index import (
     read_resolved_model_revision,
 )
 from book_pipeline.observability import JsonlEventLogger
-from book_pipeline.rag import BgeM3Embedder
+from book_pipeline.rag import BgeM3Embedder, build_retrievers_from_config
 
 _TBD_PATTERN = re.compile(r"^TBD-.*$")
 
@@ -149,22 +149,24 @@ def _run(args: argparse.Namespace) -> int:
     # (Plan 02-04 RAG-02 guarantee). B-2: reindex() takes no args; all state
     # lives on the retriever (outline_path, embedder, reranker, ingestion_run_id).
     if not report.skipped:
-        # Local imports keep mypy + import-linter scope tight; these kernel
-        # imports do NOT cross into book_specifics (OUTLINE is already
-        # resolved above).
+        # Plan 03-07 W-1: use the shared build_retrievers_from_config factory
+        # (also consumed by cli/draft.py). Local imports keep import-linter
+        # scope tight; these kernel imports do NOT cross into book_specifics
+        # (OUTLINE is already resolved above).
         from book_pipeline.rag.reranker import BgeReranker
-        from book_pipeline.rag.retrievers.arc_position import ArcPositionRetriever
 
         reranker = BgeReranker(
             model_name=cfg.reranker.model, device=cfg.reranker.device
         )
-        arc = ArcPositionRetriever(
-            db_path=indexes_dir,
-            outline_path=OUTLINE,
+        retrievers = build_retrievers_from_config(
+            cfg=cfg,
             embedder=embedder,
             reranker=reranker,
+            indexes_dir=indexes_dir,
             ingestion_run_id=report.ingestion_run_id,
+            outline_path=OUTLINE,
         )
+        arc = retrievers["arc_position"]
         arc.reindex()  # B-2: no args — state from __init__
         arc_note = "arc_position reindex: beat-ID-stable rows written"
     else:
