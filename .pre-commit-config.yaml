@@ -21,3 +21,9 @@ repos:
         language: system
         pass_filenames: false
         stages: [pre-push]
+      - id: golden-queries
+        name: RAG-04 golden-query gate (schema + coverage; skips slow end-to-end)
+        entry: uv run pytest tests/rag/test_golden_queries.py -m "not slow" -x
+        language: system
+        pass_filenames: false
+        stages: [pre-push]
