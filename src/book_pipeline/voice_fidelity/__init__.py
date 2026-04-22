@@ -56,9 +56,19 @@ with _contextlib.suppress(ImportError):
         _anchors, "compute_per_sub_genre_centroids", None
     )
 
+# pin.py ships in Plan 03-04 Task 1 — AnchorSetProvider + AnchorSetDrift.
+AnchorSetProvider: _Any = None
+AnchorSetDrift: _Any = None
+with _contextlib.suppress(ImportError):
+    _pin = _importlib.import_module("book_pipeline.voice_fidelity.pin")
+    AnchorSetProvider = getattr(_pin, "AnchorSetProvider", None)
+    AnchorSetDrift = getattr(_pin, "AnchorSetDrift", None)
+
 __all__ = [
     "Anchor",
     "AnchorSet",
+    "AnchorSetDrift",
+    "AnchorSetProvider",
     "VoicePinMismatch",
     "check_anchor_dominance",
     "compute_adapter_sha",

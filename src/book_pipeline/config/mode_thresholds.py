@@ -14,6 +14,7 @@ from pydantic_settings import (
 )
 
 from book_pipeline.config.sources import YamlConfigSettingsSource
+from book_pipeline.drafter.sampling_profiles import SamplingProfiles
 
 
 class VoiceFidelityBand(BaseModel):
@@ -110,6 +111,10 @@ class ModeThresholdsConfig(BaseSettings):
     alerts: AlertsConfig
     preflag_beats: list[str]
     voice_fidelity: VoiceFidelityConfig
+    # Plan 03-04: DRAFT-02 per-scene-type sampling profiles. default_factory
+    # means legacy mode_thresholds.yaml files (without a sampling_profiles:
+    # block) still validate — the drafter gets plan-pinned defaults.
+    sampling_profiles: SamplingProfiles = Field(default_factory=SamplingProfiles)
 
     model_config = SettingsConfigDict(
         yaml_file="config/mode_thresholds.yaml",

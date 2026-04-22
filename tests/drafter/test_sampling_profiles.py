@@ -16,7 +16,6 @@ from book_pipeline.drafter.sampling_profiles import (
     resolve_profile,
 )
 
-
 # --- Test 1: resolve_profile returns prose profile with expected defaults ----
 
 def test_resolve_profile_prose_defaults() -> None:
@@ -52,7 +51,7 @@ def test_resolve_profile_unknown_scene_type_raises() -> None:
 
 
 def test_valid_scene_types_are_exactly_three() -> None:
-    assert VALID_SCENE_TYPES == frozenset({"prose", "dialogue_heavy", "structural_complex"})
+    assert frozenset({"prose", "dialogue_heavy", "structural_complex"}) == VALID_SCENE_TYPES
 
 
 def test_sampling_profile_temperature_bounds() -> None:

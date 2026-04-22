@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import logging
 from pathlib import Path
-from typing import Any
 
 import numpy as np
 import pytest
@@ -17,7 +16,6 @@ from book_pipeline.voice_fidelity.anchors import (
     EMBEDDING_DIM,
     Anchor,
     AnchorSet,
-    compute_centroid,
 )
 from book_pipeline.voice_fidelity.pin import AnchorSetDrift, AnchorSetProvider
 
@@ -93,7 +91,7 @@ alerts:
   dedup_window_seconds: 3600
 preflag_beats: []
 voice_fidelity:
-  anchor_set_sha: {anchor_set_sha}
+  anchor_set_sha: "{anchor_set_sha}"
   pass_threshold: 0.78
   flag_band_min: 0.75
   flag_band_max: 0.78
@@ -181,7 +179,7 @@ def test_anchor_set_provider_uses_parquet_when_shape_matches(
     from book_pipeline.config.mode_thresholds import ModeThresholdsConfig
     monkeypatch.setitem(ModeThresholdsConfig.model_config, "yaml_file", str(thresholds_path))
 
-    # Write a parquet with 3 rows × 1024-dim to the conventional location.
+    # Write a parquet with 3 rows x 1024-dim to the conventional location.
     parquet_dir = tmp_path / "indexes" / "voice_anchors"
     parquet_dir.mkdir(parents=True)
     parquet_path = parquet_dir / "embeddings.parquet"
@@ -206,9 +204,9 @@ def test_anchor_set_provider_uses_parquet_when_shape_matches(
         embedder=embedder,
         parquet_path=parquet_path,
     )
-    centroid, sha, _vf = provider.load()
+    centroid, _sha, _vf = provider.load()
 
-    # W-2: parquet consumed → embedder never called.
+    # W-2: parquet consumed -> embedder never called.
     assert embedder.call_count == 0
     # Centroid of 3 orthonormal unit vectors (L2-norm'd then meaned then norm'd) = unit.
     assert abs(float(np.linalg.norm(centroid)) - 1.0) < 1e-5

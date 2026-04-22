@@ -32,3 +32,24 @@ voice_fidelity:
   flag_band_max: 0.78
   fail_threshold: 0.75
   memorization_flag_threshold: 0.95
+# Plan 03-04: DRAFT-02 per-scene-type sampling profiles. Keys must match
+# VALID_SCENE_TYPES in drafter.sampling_profiles. Heuristic fallback: if
+# scene_type is absent from the request AND prior_scenes contain >=3 paired
+# quote marks, the drafter resolves scene_type='dialogue_heavy'; otherwise
+# defaults to 'prose'.
+sampling_profiles:
+  prose:
+    temperature: 0.85
+    top_p: 0.92
+    repetition_penalty: 1.05
+    max_tokens: 2048
+  dialogue_heavy:
+    temperature: 0.7
+    top_p: 0.90
+    repetition_penalty: 1.05
+    max_tokens: 2048
+  structural_complex:
+    temperature: 0.6
+    top_p: 0.88
+    repetition_penalty: 1.05
+    max_tokens: 2048
