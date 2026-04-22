@@ -167,6 +167,107 @@ def test_rag_retrievers_rejects_wrong_names(
 
 
 # ---------------------------------------------------------------------------
+# Plan 02-06 — RerankerConfig additive section (defaults-safe)
+# ---------------------------------------------------------------------------
+
+
+def _minimal_rag_yaml_without_reranker() -> str:
+    """Valid rag_retrievers.yaml *without* a reranker: section (legacy shape)."""
+    return (
+        "embeddings:\n"
+        "  model: BAAI/bge-m3\n"
+        "  model_revision: TBD-phase2\n"
+        "  dim: 1024\n"
+        "  device: cuda:0\n"
+        "bundler:\n"
+        "  max_bytes: 40960\n"
+        "  assembly_strategy: round_robin\n"
+        "  enforce_cap: true\n"
+        "  emit_conflicts_to: drafts/retrieval_conflicts/\n"
+        "retrievers:\n"
+        "  historical:\n"
+        "    index_path: indexes/historical/\n"
+        "    source_files: []\n"
+        "    chunk_strategy: paragraph\n"
+        "  metaphysics:\n"
+        "    index_path: indexes/metaphysics/\n"
+        "    source_files: []\n"
+        "    chunk_strategy: rule_card\n"
+        "  entity_state:\n"
+        "    index_path: indexes/entity_state/\n"
+        "    source_files: []\n"
+        "    chunk_strategy: named_entity\n"
+        "  arc_position:\n"
+        "    index_path: indexes/arc_position/\n"
+        "    source_files: []\n"
+        "    chunk_strategy: beat_function\n"
+        "  negative_constraint:\n"
+        "    index_path: indexes/negative_constraint/\n"
+        "    source_files: []\n"
+        "    chunk_strategy: topic_tag\n"
+    )
+
+
+def test_rag_retrievers_loads_without_reranker_section_uses_defaults(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Legacy config (no reranker: section) must still load via defaults.
+
+    Plan 02-06 adds RerankerConfig as an additive section; the loader must
+    NOT reject configs that omit it.
+    """
+    from book_pipeline.config.rag_retrievers import RagRetrieversConfig
+
+    (tmp_path / "config").mkdir()
+    (tmp_path / "config" / "rag_retrievers.yaml").write_text(
+        _minimal_rag_yaml_without_reranker()
+    )
+    monkeypatch.chdir(tmp_path)
+    cfg = RagRetrieversConfig()  # type: ignore[call-arg]
+    # Defaults from RerankerConfig.
+    assert cfg.reranker.model == "BAAI/bge-reranker-v2-m3"
+    assert cfg.reranker.device == "cuda:0"
+    assert cfg.reranker.candidate_k == 50
+    assert cfg.reranker.final_k == 8
+
+
+def test_rag_retrievers_respects_custom_reranker_section(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Custom reranker: block overrides the defaults."""
+    from book_pipeline.config.rag_retrievers import RagRetrieversConfig
+
+    (tmp_path / "config").mkdir()
+    (tmp_path / "config" / "rag_retrievers.yaml").write_text(
+        _minimal_rag_yaml_without_reranker()
+        + "reranker:\n"
+          "  model: custom/reranker\n"
+          "  model_revision: sha-abc\n"
+          "  device: cpu\n"
+          "  candidate_k: 25\n"
+          "  final_k: 4\n"
+    )
+    monkeypatch.chdir(tmp_path)
+    cfg = RagRetrieversConfig()  # type: ignore[call-arg]
+    assert cfg.reranker.model == "custom/reranker"
+    assert cfg.reranker.model_revision == "sha-abc"
+    assert cfg.reranker.device == "cpu"
+    assert cfg.reranker.candidate_k == 25
+    assert cfg.reranker.final_k == 4
+
+
+def test_rag_retrievers_reranker_defaults_in_real_yaml() -> None:
+    """Real config/rag_retrievers.yaml gains a reranker: section after Plan 02-06."""
+    from book_pipeline.config.rag_retrievers import RagRetrieversConfig
+
+    cfg = RagRetrieversConfig()  # type: ignore[call-arg]
+    # Values come from the committed yaml OR the RerankerConfig defaults —
+    # either way the final_k=8 contract is the Phase 2 cemented value.
+    assert cfg.reranker.final_k == 8
+    assert cfg.reranker.candidate_k == 50
+
+
+# ---------------------------------------------------------------------------
 # Test 5 — ModeThresholdsConfig.mode_a.regen_budget_R == 3
 # ---------------------------------------------------------------------------
 
