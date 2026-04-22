@@ -41,6 +41,7 @@ def test_kernel_does_not_import_book_specifics() -> None:
         pathlib.Path("src/book_pipeline/config"),
         pathlib.Path("src/book_pipeline/cli"),
         pathlib.Path("src/book_pipeline/openclaw"),
+        pathlib.Path("src/book_pipeline/rag"),
     ]
     for d in kernel_dirs:
         if not d.exists():

@@ -24,7 +24,7 @@ bearer, once, as a binding. This is the rule Malintzin violates in Chapter 14
 when she gives Cortés a Nahuatl name he did not earn. The consequences unspool
 across the next five chapters.
 
-## Rule Cards — Hypotheticals
+# Rule Cards — Hypotheticals
 
 These are hypothetical scenarios, NOT canonical rules. The critic must treat
 these as examples of how the system could behave, not as authoritative facts.
@@ -39,7 +39,7 @@ the cradle's guardian noticing within three days, the relic inside would
 persist indefinitely. No character in the actual novel discovers this path,
 but it is mechanically available.
 
-## Cross References
+# Cross References
 
 This section is cross-reference only — entries here point to authoritative
 rules defined elsewhere. Nothing originates here.

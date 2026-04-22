@@ -54,7 +54,7 @@ root_packages = ["book_pipeline"]
 #   strict about missing modules ("Module 'X' does not exist"), so we only
 #   list modules that exist TODAY. Future kernel modules pre-listed here
 #   would break lint-imports until they land.
-# Phase 2 will add: "book_pipeline.rag"
+# Phase 2 plan 01 added: "book_pipeline.rag"
 # Phase 3 will add: "book_pipeline.drafter", "book_pipeline.regenerator"
 # Phase 4 will add: "book_pipeline.critic"
 # Phase 5 will add: "book_pipeline.orchestration"
@@ -67,6 +67,7 @@ source_modules = [
     "book_pipeline.config",
     "book_pipeline.cli",
     "book_pipeline.openclaw",
+    "book_pipeline.rag",
 ]
 forbidden_modules = [
     "book_pipeline.book_specifics",
@@ -75,6 +76,14 @@ ignore_imports = []
 
 [[tool.importlinter.contracts]]
 # Same extension policy — append concrete kernel packages as they land.
+# Contract-2 extension semantics: interfaces MUST NOT depend on any concrete.
+# Each new kernel concrete is appended to `forbidden_modules` here (NOT to
+# source_modules — that list is frozen at `interfaces` only; contract-2 protects
+# the interfaces package, full stop).
+# Phase 2 plan 01 added: "book_pipeline.rag" in forbidden_modules.
+# Phase 3 will add: "book_pipeline.drafter", "book_pipeline.regenerator"
+# Phase 4 will add: "book_pipeline.critic"
+# Phase 5 will add: "book_pipeline.orchestration"
 name = "Interfaces MUST NOT import from concrete kernel implementations"
 type = "forbidden"
 source_modules = [
@@ -83,5 +92,6 @@ source_modules = [
 forbidden_modules = [
     "book_pipeline.observability",
     "book_pipeline.stubs",
+    "book_pipeline.rag",
 ]
 ignore_imports = []

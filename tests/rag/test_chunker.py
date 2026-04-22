@@ -219,6 +219,8 @@ def test_chunker_empty_sections_produce_no_chunks() -> None:
 
 def test_chunk_is_frozen_and_forbids_extra() -> None:
     """Chunk Pydantic model: frozen=True, extra='forbid'."""
+    from pydantic import ValidationError
+
     from book_pipeline.rag.types import Chunk
 
     c = Chunk(
@@ -230,11 +232,11 @@ def test_chunk_is_frozen_and_forbids_extra() -> None:
         ingestion_run_id="run-1",
         chapter=None,
     )
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationError):
         # frozen → assignment should raise
         c.text = "mutated"  # type: ignore[misc]
 
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationError):
         # extra='forbid' → unknown field should raise at construction
         Chunk(  # type: ignore[call-arg]
             chunk_id="abc",

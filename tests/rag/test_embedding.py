@@ -12,7 +12,7 @@ avoid downloading the real ~2GB BGE-M3 model during unit tests.
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, ClassVar
 
 import numpy as np
 import pytest
@@ -21,7 +21,7 @@ import pytest
 class _FakeSentenceTransformer:
     """Stand-in for sentence_transformers.SentenceTransformer used in unit tests."""
 
-    _instances: list["_FakeSentenceTransformer"] = []
+    _instances: ClassVar[list[_FakeSentenceTransformer]] = []
 
     def __init__(
         self,
