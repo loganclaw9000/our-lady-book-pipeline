@@ -3,19 +3,19 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-04-PLAN.md (entity_state + arc_position retrievers + outline_parser; RAG-01/RAG-02 closed)
-last_updated: "2026-04-22T07:45:00.000Z"
+stopped_at: Completed 02-05-PLAN.md (ContextPackBundlerImpl + 40KB cap + conflict detection + 6-event emission; RAG-03 closed)
+last_updated: "2026-04-22T08:05:00.000Z"
 progress:
   total_phases: 6
   completed_phases: 1
   total_plans: 12
-  completed_plans: 10
-  percent: 83
+  completed_plans: 11
+  percent: 92
 ---
 
 # STATE: our-lady-book-pipeline
 
-**Last updated:** 2026-04-22 after Plan 02-04 (entity_state + arc_position retrievers + outline_parser; RAG-01/RAG-02 closed; all 5 typed retrievers operational)
+**Last updated:** 2026-04-22 after Plan 02-05 (ContextPackBundlerImpl + conflict detector + budget enforcer; RAG-03 closed; 6 events/bundle invariant cemented)
 **Status:** Executing Phase 02
 
 ---
@@ -42,18 +42,18 @@ Phase 2: Corpus Ingestion + Typed RAG. Build the 5-axis LanceDB retrieval plane 
 ## Current Position
 
 Phase: 02 (Corpus Ingestion + Typed RAG) — EXECUTING
-Plan: 5 of 6 (next: 02-05 ContextPackBundler + negative_constraint assembly-time filter)
+Plan: 6 of 6 (next: 02-06 RAG-04 golden-query CI gate)
 
 - **Phase:** 2
-- **Plan:** 02-04 COMPLETE; 02-05 next
+- **Plan:** 02-05 COMPLETE; 02-06 next
 - **Status:** In progress
-- **Plans complete:** 4 / 6 (Phase 2); 10 / 12 total (Phase 1: 6; Phase 2: 4)
-- **Progress:** [████████░░] 83%
+- **Plans complete:** 5 / 6 (Phase 2); 11 / 12 total (Phase 1: 6; Phase 2: 5)
+- **Progress:** [█████████░] 92%
 
 ### Roadmap progress
 
 - [x] **Phase 1:** Foundation + Observability Baseline (6/6 plans)
-- [ ] **Phase 2:** Corpus Ingestion + Typed RAG (4/6 plans — 02-01 RAG kernel + 02-02 corpus ingester + 02-03 3-of-5 retrievers + 02-04 entity_state/arc_position + outline_parser)
+- [ ] **Phase 2:** Corpus Ingestion + Typed RAG (5/6 plans — 02-01 RAG kernel + 02-02 corpus ingester + 02-03 3-of-5 retrievers + 02-04 entity_state/arc_position + outline_parser + 02-05 ContextPackBundler)
 - [ ] **Phase 3:** Mode-A Drafter + Scene Critic + Basic Regen
 - [ ] **Phase 4:** Chapter Assembly + Post-Commit DAG
 - [ ] **Phase 5:** Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration
@@ -73,6 +73,7 @@ No prose-generation metrics yet — pipeline has not produced artifacts. First r
 | 02-02 | 16             | 2     | 14            | 6              | 36          | 167           | 2026-04-22  |
 | 02-03 | 14             | 2     | 11            | 0              | 25          | 192           | 2026-04-22  |
 | 02-04 | 12             | 2     | 7             | 0              | 17          | 209           | 2026-04-22  |
+| 02-05 | 12             | 2     | 7             | 3              | 26          | 235           | 2026-04-22  |
 
 ### Target metrics (will populate once pipeline runs)
 
@@ -115,11 +116,16 @@ No prose-generation metrics yet — pipeline has not produced artifacts. First r
 - **(02-04) ArcPositionRetriever uses state-in-__init__ + zero-arg reindex.** `outline_path` + `ingestion_run_id` stored at construction; `reindex(self) -> None` matches frozen Protocol exactly. No classmethod workaround, no method-level args. CorpusIngester (Plan 02-02) ingests outline.md generically; ArcPositionRetriever.reindex() overwrites arc_position table with beat-ID-stable rows (`tbl.delete("true")` + `tbl.add(rows)`). Plan 06 CLI composes: construct retriever + call reindex().
 - **(02-04) B-1 honored: Plan 02-04 did NOT modify `retrievers/__init__.py`.** `git log --oneline --all -- src/book_pipeline/rag/retrievers/__init__.py` shows only Plan 02-03 commits (`4ea3dac`, `e7acc52`). Plan 02-03's `importlib.import_module(...)` + `contextlib.suppress(ImportError)` guards now resolve to real classes (verified: `from book_pipeline.rag.retrievers import EntityStateRetriever, ArcPositionRetriever` returns non-None classes).
 - **(02-04) All 5 concrete retrievers satisfy runtime-checkable `isinstance(r, Retriever)` + `inspect.signature(r.reindex).parameters == {}`.** B-2 complete across the retriever surface. Plan 02-05 bundler can safely accept `list[Retriever]` without further validation.
+- **(02-05) Bundler is the SOLE event-emission site for retrieval Events.** Exactly 6 Events per `bundle()` call: 5 `role="retriever"` + 1 `role="context_pack_bundler"`. Retrievers never emit (grep-guarded from Plan 02-03 + count-asserted from Plan 02-05). `test_d_retrievers_do_not_emit_events` locks the invariant.
+- **(02-05) detect_conflicts runs on FULL retrievals BEFORE enforce_budget trims.** Rationale: key claims may sit in low-score hits the budget pass drops; catching them early preserves the safety signal. Reject silent-concat; Phase 3 critic reads `drafts/retrieval_conflicts/{stem}.json` alongside scene text.
+- **(02-05) W-1 entity_list DI seam — kernel stays book-domain-free.** `ContextPackBundlerImpl.__init__(entity_list=None)` + `detect_conflicts(retrievals, entity_list=None)`; `grep -c "book_specifics" src/book_pipeline/rag/{bundler,conflict_detector}.py` returns 0. Plan 06 CLI flattens `NAHUATL_CANONICAL_NAMES` keys+values and passes into the bundler. Mesoamerican accented names (Motecuhzoma, Malintzin, Tenochtitlán) surface via entity_list that English-capitalization regex would miss.
+- **(02-05) ContextPack additive-only extension — 2 new OPTIONAL fields (`conflicts`, `ingestion_run_id`) under Phase 1 freeze.** Old-schema JSON round-trips cleanly. All 5 pre-existing fields (scene_request, retrievals, total_bytes, assembly_strategy, fingerprint) unchanged in name/type/order. Event v1.0 18-field schema untouched — `test_f_event_schema_v1_fields_preserved` regression-guards every emitted event.
+- **(02-05) Budget is PURE: deep-copy input, trim on copy, return (trimmed, trim_log).** Sentinel test (`test_enforce_budget_never_mutates_input`) uses `copy.deepcopy` compare to prove no input mutation. Per-axis soft caps (12/8/8/6/6 KB = 40KB total) enforced first; global hard cap (40960) enforced second via lowest-score-globally scan. trim_log surfaces inside the bundler Event's `extra` field for observability.
+- **(02-05) Graceful retriever failure (T-02-05-04).** Retriever exceptions yield empty RetrievalResult + Event with `extra["error"]`; bundle still emits exactly 6 Events. Empty conflicts coerce to None on `ContextPack.conflicts` so downstream critic doesn't see false-positive "review needed" signals.
 
 ### Open todos
-- Plan 02-05: ContextPackBundler + negative_constraint assembly-time tag filter. Consumes the 5 Retriever instances; emits exactly one `role="bundler"` Event per `bundle()` call carrying per-axis RetrievalResult + conflict flags. 40KB cap math assumes 8 hits/axis × 5 axes = up to 40 hits.
 - Before Phase 3 starts: curate the 20-30 voice-fidelity anchor passages from paul-thinkpiece-pipeline training corpus (blocker for the anchor-set pin, not a line item in a plan).
-- Plan 02-06: run the first REAL `book-pipeline ingest --force` on a machine with GPU + HF access; capture `chunk_counts_per_axis` + `indexes/resolved_model_revision.json` as the golden-query CI baseline. Also the first real BGE reranker-v2-m3 load.
+- Plan 02-06: run the first REAL `book-pipeline ingest --force` on a machine with GPU + HF access; capture `chunk_counts_per_axis` + `indexes/resolved_model_revision.json` as the golden-query CI baseline. Also the first real BGE reranker-v2-m3 load. Seed 12 golden queries (≥2 per axis) with `expected_chunks` allowlist + `forbidden_chunks` denylist.
 - Watch: `lancedb.table_names()` deprecation — migrate to `list_tables().tables` when old API is actually removed (3 call sites now: `rag/lance_schema.py`, `corpus_ingest/ingester.py`, and test_lance_schema.py). `rag/retrievers/base.py` goes through `open_or_create_table` so it benefits from a single-site migration.
 - Optional: T-02-02-04 harden — wrap 5-table rebuild in try/except that restores prior mtime_index.json on failure. Current ordering (write mtime last) is equivalent in practice but the explicit safety net is deferred.
 
@@ -140,15 +146,15 @@ None.
 ### Last session
 
 - **Date:** 2026-04-22
-- **Action:** Executed Plan 02-03 — 3 of 5 typed retrievers (historical, metaphysics with PITFALLS R-4 filter + injection guard, negative_constraint with PITFALLS R-5 deliberate-no-filter) on top of a shared `LanceDBRetrieverBase` (candidate_k=50 -> final_k=8 pipeline with empty-table tolerance + B-2 frozen `reindex(self) -> None` + `empty` sentinel on index_fingerprint for empty tables) and a lazy `BgeReranker` cross-encoder wrapper. B-1: Plan 03 sole-owns `retrievers/__init__.py` with all 5 imports pre-declared (Plan 04's entity_state + arc_position loaded via `importlib.import_module` inside `contextlib.suppress(ImportError)`).
-- **Outcome:** New module tree `src/book_pipeline/rag/retrievers/` (5 source files — base + 3 concrete retrievers + __init__.py) and `src/book_pipeline/rag/reranker.py`. 25 new tests green (4 reranker + 8 retriever_base + 4 historical + 5 metaphysics + 4 negative_constraint); full suite 192 passed (was 167). Aggregate gate `bash scripts/lint_imports.sh` green (2 contracts kept, ruff clean, mypy 68 files clean — added retrievers subpackage under existing `src/book_pipeline/rag` mypy scope). 4 per-task commits: 2b2dab1 + e7acc52 (Task 1 RED/GREEN) + 0de228b + 4ea3dac (Task 2 RED/GREEN). RAG-01 progresses from 0% to 60% complete (3 of 5 retrievers).
-- **Stopped at:** Completed 02-03-PLAN.md (3 of 5 typed retrievers + shared base + BGE reranker)
+- **Action:** Executed Plan 02-05 — `ContextPackBundlerImpl` + `enforce_budget` + `detect_conflicts` (W-1 hybrid entity_list + regex). RAG-03 (40KB hard cap + per-axis soft caps) delivered. Bundler emits exactly 6 OBS-01 Events per `bundle()` call (5 `role="retriever"` + 1 `role="context_pack_bundler"`); retrievers remain silent. `ContextPack` gains 2 OPTIONAL fields (`conflicts`, `ingestion_run_id`) under the Phase 1 freeze policy; `ConflictReport` lands as a new top-level Pydantic model. Conflict artifacts persist to `drafts/retrieval_conflicts/{ingestion_run_id}__{scene_id}.json` (or `{scene_id}.json` without a run_id) for Phase 3 critic consumption. W-1 entity_list DI seam keeps the kernel free of book-domain imports — `grep -c "book_specifics"` over both `src/book_pipeline/rag/{bundler,conflict_detector}.py` returns 0.
+- **Outcome:** New files `src/book_pipeline/rag/budget.py` + `src/book_pipeline/rag/conflict_detector.py` + `src/book_pipeline/rag/bundler.py`; modified `src/book_pipeline/interfaces/types.py` (ConflictReport model + 2 optional ContextPack fields), `src/book_pipeline/interfaces/__init__.py` (re-export), `src/book_pipeline/rag/__init__.py` (re-export new symbols). 26 new tests green (5 contextpack-optional-fields + 6 conflict_detector + 6 budget + 9 bundler); full suite 235 passed (was 209). Aggregate gate `bash scripts/lint_imports.sh` green (2 contracts kept, ruff clean, mypy 74 files clean). 4 per-task commits: f38400b + 98f2da6 (Task 1 RED/GREEN) + 7e5117e + 26b5509 (Task 2 RED/GREEN). RAG-03 closes.
+- **Stopped at:** Completed 02-05-PLAN.md (ContextPackBundlerImpl + 40KB cap + conflict detection + 6-event emission)
 
 ### Next session
 
-- **Expected action:** `/gsd-execute-phase 2` continuation (or explicit `gsd-execute-plan 02-04`) — Plan 02-04: entity_state + arc_position retrievers. Creates 2 new retriever source files; does NOT modify `__init__.py` (B-1 contract). ArcPositionRetriever parses `~/Source/our-lady-of-champion/our-lady-of-champion-outline.md` into beat-function granularity chunks (27 chapters × blocks × beats) with stable `ch{NN}_b{block}_beat{NN}` IDs, overriding `reindex()` body (NOT signature — B-2). EntityStateRetriever reads `entity-state/` cards, tolerating the zero-cards case (empty-table path already in the base).
-- **Key continuation note:** Plan 02-04 MUST follow the W-2 explicit-kwargs `__init__` template (no `*args` forwarding) and MUST preserve the B-2 zero-arg `reindex(self) -> None` signature. Dedicated test in each new retriever test file: `assert isinstance(r, Retriever)` (runtime_checkable Protocol) AND `assert len(inspect.signature(r.reindex).parameters) == 0`.
-- **Key precedent:** Plan 02-03 established the retriever-subclass template: override `_build_query_text(request) -> str` (required) and optionally `_where_clause(request) -> str | None` (default `None`). Any axis-specific state for a non-trivial `reindex()` override is stored on `self` at `__init__` time. Never emit observability events from retrievers (grep-guarded to 0 matches — the bundler in Plan 02-05 is the sole emission site).
+- **Expected action:** `/gsd-execute-phase 2` continuation (or explicit `gsd-execute-plan 02-06`) — Plan 02-06: RAG-04 golden-query CI gate. Seed 12 SceneRequest fixtures (≥2 per axis) at `tests/rag/golden_queries.jsonl` + expected_chunks allowlist at `tests/rag/fixtures/expected_chunks.jsonl`. CI passes iff ≥90% golden queries return all expected chunks in top-8 AND 0 forbidden-chunk leaks. First real ingestion run against `~/Source/our-lady-of-champion/` captures the ingestion_run_id baseline. First real BGE reranker-v2-m3 load (~2GB download) happens here on a GPU box.
+- **Key continuation note:** Plan 02-06 should assert `ContextPackBundlerImpl` emits exactly 6 Events per bundle (regression guard from this plan) and that `ContextPack.conflicts` is populated on deliberate-contradiction fixture scenes. Golden queries can pin against the query-text shapes already documented in 02-03 and 02-04 SUMMARY files.
+- **Key precedent:** Plan 02-05 established the bundler emission contract + conflict artifact path convention + ContextPack additive-extension pattern (2 OPTIONAL fields added under freeze policy). Phase 3 drafter/critic plans will consume these artifacts directly (ContextPack + drafts/retrieval_conflicts/*.json).
 
 ### Session continuity invariants
 

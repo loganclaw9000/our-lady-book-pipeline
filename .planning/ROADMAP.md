@@ -69,7 +69,7 @@
 - [x] 02-02-PLAN.md — CorpusIngester + router + mtime idempotency + `book-pipeline ingest` CLI + 5 LanceDB tables populated [CORPUS-01]
 - [x] 02-03-PLAN.md — LanceDBRetrieverBase + BgeReranker + 3 retrievers (historical, metaphysics rule_type-filtered, negative_constraint always-top-K) [RAG-01]
 - [x] 02-04-PLAN.md — outline_parser with stable beat IDs + entity_state (zero-cards-tolerant) + arc_position retriever [RAG-01, RAG-02]
-- [ ] 02-05-PLAN.md — ContextPackBundler: 40KB hard cap + per-axis soft caps + cross-retriever conflict detection + 6-event emission [RAG-03]
+- [x] 02-05-PLAN.md — ContextPackBundler: 40KB hard cap + per-axis soft caps + cross-retriever conflict detection + 6-event emission [RAG-03]
 - [ ] 02-06-PLAN.md — golden-query CI gate (>=12 queries, 0 forbidden leaks) + openclaw nightly-ingest cron + human-verify baseline [RAG-04, CORPUS-01]
 **UI hint**: no
 
