@@ -3,19 +3,19 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-01-PLAN.md (Phase 3 kernel skeletons + REAL V6 voice pin)
-last_updated: "2026-04-22T17:20:24Z"
+stopped_at: Completed 03-02-PLAN.md (OBS-03 voice-fidelity anchor curation)
+last_updated: "2026-04-22T18:06:32.840Z"
 progress:
   total_phases: 6
   completed_phases: 2
   total_plans: 20
-  completed_plans: 13
-  percent: 65
+  completed_plans: 14
+  percent: 70
 ---
 
 # STATE: our-lady-book-pipeline
 
-**Last updated:** 2026-04-22 after Plan 03-01 (Phase 3 kernel skeletons + REAL V6 voice pin landed)
+**Last updated:** 2026-04-22 after Plan 03-02 (OBS-03 voice-fidelity anchor curation — 22 anchors pinned, SHA 28fd890bc4c8afc1…df31, real BGE-M3 cosine scorer live)
 **Status:** Executing Phase 03
 
 ---
@@ -35,26 +35,26 @@ Autonomously produce first-draft novel chapters that are both voice-faithful (Pa
 
 ### Current focus
 
-Phase 3 executing. Plan 03-01 LANDED (kernel skeletons + REAL V6 voice pin): 4 empty kernel packages (drafter/, critic/, regenerator/, voice_fidelity/) wired into import-linter contracts + scripts/lint_imports.sh mypy scope; `book_pipeline.voice_fidelity.sha` ships `compute_adapter_sha` + `verify_pin` + `VoicePinMismatch` (V-3 PITFALLS mitigation); `book-pipeline pin-voice <adapter_dir>` CLI computes + atomically writes voice_pin.yaml + emits role='voice_pin' Event; and the REAL V6 qwen3-32b LoRA pin `3f0ac5e2290dab63…d094` is committed to `config/voice_pin.yaml` (source_commit_sha `c571bb7b...` from paul-thinkpiece-pipeline HEAD). Phase 1 placeholders obliterated. Plan 03-02 (voice-fidelity scorer + drafter/vllm_client) ready to start.
+Phase 3 executing. Plan 03-02 LANDED (OBS-03 voice-fidelity anchor curation): `book_pipeline.voice_fidelity.anchors` ships AnchorSet + Anchor Pydantic models, compute_centroid (L2-normalized BGE-M3 mean), compute_per_sub_genre_centroids, deterministic compute_anchor_set_sha, and check_anchor_dominance; `voice_fidelity.scorer.score_voice_fidelity` replaces the Plan 03-01 stub with real BGE-M3 cosine-vs-centroid (Plan 03-01's importlib-suppress fallback auto-resolves); `book-pipeline curate-anchors` CLI builds the curated anchor set with W-3/W-5 pre-flight quota check + --override-quotas escape hatch + --skip-embed + role='anchor_curator' Event emission; `config/voice_anchors/anchor_set_v1.yaml` ships 22 real curated anchors (essay=8 analytic=8 narrative=6) from paul-thinkpiece-pipeline v3_data/train_filtered.jsonl (ANALYTIC keyword set EXTENDED beyond the plan's narrow ML-jargon list per Rule 2 — the plan-original set yielded only 5 analytic-passing rows vs. the V-1 minimum of 6); `config/mode_thresholds.yaml` gains a voice_fidelity: block with `anchor_set_sha=28fd890bc4c8afc1…df31` + pass=0.78/flag-band=0.75-0.78/fail=0.75/memorization=0.95 thresholds validated by a VoiceFidelityConfig Pydantic interval validator. BGE-M3 revision resolved to `5617a9f61b028005…`. All 22 anchors flag as 'dominant' — threshold-calibration artifact (contribution range 0.63-0.76, spread only 19%), documented as Phase 6 refinement. Plan 03-03 (vLLM bootstrap + scene critic + SceneState orchestration) ready to start.
 
 ---
 
 ## Current Position
 
 Phase: 03 (Mode-A Drafter + Scene Critic + Basic Regen) — EXECUTING
-Plan: 2 of 8
+Plan: 3 of 8
 
 - **Phase:** 3
-- **Plan:** 2 (03-02 next)
-- **Status:** Plan 03-01 complete; ready for `/gsd-execute-phase 3` wave 2 (Plan 03-02)
-- **Plans complete:** 1 / 8 (Phase 3); 13 / 20 total (Phase 1: 6; Phase 2: 6; Phase 3: 1)
-- **Progress:** [█████████▌] 65%
+- **Plan:** 3 (03-03 next)
+- **Status:** Plan 03-02 complete (OBS-03 anchor curation live, 22 anchors pinned, SHA 28fd890bc4c8afc1…df31); ready for `/gsd-execute-phase 3` wave 3 (Plan 03-03)
+- **Plans complete:** 2 / 8 (Phase 3); 14 / 20 total (Phase 1: 6; Phase 2: 6; Phase 3: 2)
+- **Progress:** [███████░░░] 70%
 
 ### Roadmap progress
 
 - [x] **Phase 1:** Foundation + Observability Baseline (6/6 plans)
 - [x] **Phase 2:** Corpus Ingestion + Typed RAG (6/6 plans — 02-01 RAG kernel + 02-02 corpus ingester + 02-03 3-of-5 retrievers + 02-04 entity_state/arc_position + outline_parser + 02-05 ContextPackBundler + 02-06 RAG-04 golden-query CI gate + nightly cron)
-- [~] **Phase 3:** Mode-A Drafter + Scene Critic + Basic Regen (1/8 plans — 03-01 kernel skeletons + REAL V6 voice pin)
+- [~] **Phase 3:** Mode-A Drafter + Scene Critic + Basic Regen (2/8 plans — 03-01 kernel skeletons + REAL V6 voice pin; 03-02 OBS-03 voice-fidelity anchor curation)
 - [ ] **Phase 4:** Chapter Assembly + Post-Commit DAG
 - [ ] **Phase 5:** Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration
 - [ ] **Phase 6:** Testbed Plane + Production Hardening + First Draft
@@ -76,6 +76,7 @@ No prose-generation metrics yet — pipeline has not produced artifacts. First r
 | 02-05 | 12             | 2     | 7             | 3              | 26          | 235           | 2026-04-22  |
 | 02-06 | 45             | 3     | 10            | 11             | 19          | 254           | 2026-04-22  |
 | 03-01 | 12             | 3     | 12            | 6              | 14          | 280           | 2026-04-22  |
+| Phase 03 P02 | 32 | 2 tasks | 9 files |
 
 ### Target metrics (will populate once pipeline runs)
 
@@ -135,10 +136,15 @@ No prose-generation metrics yet — pipeline has not produced artifacts. First r
 - **(03-01) voice_fidelity/__init__.py uses importlib+contextlib.suppress for BOTH sha AND scorer.** Plan spec only covered scorer; extending to sha keeps the 3-task commit chain atomic (Task 1's GREEN state doesn't depend on Task 2 having landed sha.py). Downstream pattern: Plan 03-02 replaces scorer stub body WITHOUT touching __init__.py — `score_voice_fidelity` attribute re-resolves through the fallback.
 - **(03-01) VoicePinConfig round-trip skip for non-canonical --yaml-path in pin-voice CLI.** pydantic-settings hardcodes `yaml_file='config/voice_pin.yaml'` via SettingsConfigDict; tests using tmp_path for yaml_path fall back to direct `VoicePinData(**payload)` construction (same schema gate). Happy path (real `book-pipeline pin-voice` against canonical path) takes the full VoicePinConfig branch and exercises the pydantic-settings loader end-to-end.
 - **(03-01) Pre-existing SIM105 ruff violation in rag/bundler.py auto-fixed under Rule 3 (blocker).** `bash scripts/lint_imports.sh` was failing before Plan 03-01 started (Phase 2 Plan 05's try/except/pass block from commit d4f35ac). Fixed to `contextlib.suppress(Exception)` — same semantics, unblocks the aggregate gate. Regression likely introduced by a ruff version bump between Plan 02-06 close and Plan 03-01 start (both on 2026-04-22).
+- **(03-02) anchor_set_sha algorithm pinned: SHA256 over `JSON.dumps(sorted([(a.id, a.text, a.sub_genre) for a in anchors]), sort_keys=True, ensure_ascii=False)`.** Sort on tuple → shuffle-stable. ensure_ascii=False preserves em-dashes + smart quotes byte-exact across machines. Real V3 curation SHA `28fd890bc4c8afc1d0e8cc33b444bc0978002b96fbd7516ca50460773e97df31`. Plan 03-04 drafter boot handshake: recompute vs `cfg.voice_fidelity.anchor_set_sha` → HARD_BLOCK on drift.
+- **(03-02) ANALYTIC keyword set EXTENDED beyond plan-original narrow ML-jargon list** to include metric/data/analysis/system/measure/pattern/signal/framework/tradeoff/infrastructure/protocol/api/algorithm. Rule 2 deviation: plan-original 6-keyword set yielded only 5 analytic-passing rows from paul-thinkpiece-pipeline v3_data/train_filtered.jsonl vs V-1 minimum 6. Widened set honors Paul's actual tech-culture analytic register (founders, infra, institutional dynamics — not just ML benchmarks). Post-widening distribution: 191 essay / 15 analytic / 22 narrative — 8/8/6 quotas met with headroom.
+- **(03-02) check_anchor_dominance(threshold=0.15) flagged all 22 curated anchors** — threshold mis-calibration artifact, not real dominance. Actual contribution range 0.6355-0.7573 (mean 0.7014, spread 19%). 0.15 threshold was calibrated for random-orthogonal baseline (3× 1/sqrt(22)); same-author BGE-M3 embeddings cluster too tightly for that bar. Phase 6 should switch to MEDIAN-relative threshold (flag when contribution > 2× median) or equivalent z-score. Plan 03-02 warning is logged + non-fatal.
+- **(03-02) VoiceFidelityConfig Pydantic validator enforces 4 interval invariants at construction time:** fail_threshold == flag_band_min (==0.75), pass_threshold == flag_band_max (==0.78), fail_threshold <= pass_threshold, pass_threshold < memorization_flag_threshold (0.78 < 0.95). Prevents silent-threshold-drift class of bug. Test 5 in test_curate_anchors.py regression-guards the rejection path.
+- **(03-02) curate-anchors atomic YAML rewrite strips comments — known limitation of yaml.safe_dump.** Documented inline in mode_thresholds.yaml header; operators re-adding comments is manual. NOT fixing via ruumel.yaml dep per STACK.md ("PyYAML unless we round-trip-edit YAML programmatically — we don't"). File's load-bearing bytes are the data, not comments.
+- **(03-02) Plan 03-01 stub test `tests/voice_fidelity/test_scorer.py` DELETED.** The stub test asserted `NotImplementedError`; replacing the stub body with the real BGE-M3 cosine impl (Plan 03-02 Task 1) makes it false-fail. Plan 03-01 summary explicitly anticipated this sunset. 5 new centroid-behavior tests in `tests/voice_fidelity/test_scorer_centroid.py` supersede.
+- **(03-02) env-var override pattern for CLI-tested paths: OBS_CURATE_ANCHORS_{THINKPIECE,BLOG}_PATH.** Lets tests swap corpus locations without monkeypatching module constants. Production uses default paths inside anchor_sources.py. Same idiom as Phase 2 path overrides — keep in mind for future book-specifics CLI pointer tables.
 
 ### Open todos
-
-- **Before Phase 3 starts:** curate the 20-30 voice-fidelity anchor passages from paul-thinkpiece-pipeline training corpus (blocker for the anchor-set pin, not a line item in a plan).
 - **Operator action (low-priority):** set OPENCLAW_GATEWAY_TOKEN in env and run `book-pipeline openclaw register-cron --ingest-only` (or apply `openclaw/cron_jobs.json` manually) to activate the nightly-ingest cron.
 - **Plan 02-06 deferred:** re-run `pytest tests/rag/test_golden_queries.py -m slow` with the refined `forbidden_chunks` seed to confirm the >=90% pass + 0 forbidden-leaks criterion on the pinned baseline. Plumbing proven to work (Gate 3 initial run ran 11m31s end-to-end; deterministic test passed).
 - Watch: `lancedb.table_names()` deprecation — migrate to `list_tables().tables` when old API is actually removed (4 call sites now including `_capture_expected_chunks.py`). `rag/retrievers/base.py` goes through `open_or_create_table` so it benefits from a single-site migration.
@@ -163,18 +169,20 @@ None. Phase 3 readiness confirmed by Plan 02-06 Gate 5 end-to-end smoke.
 - **Date:** 2026-04-22
 - **Action:** Executed Plan 03-01 — Phase 3 kernel skeletons (drafter/, critic/, regenerator/, voice_fidelity/) + import-linter extension + scripts/lint_imports.sh mypy-scope extension + `book_pipeline.voice_fidelity.sha` (compute_adapter_sha + verify_pin + VoicePinMismatch) + `book_pipeline.voice_fidelity.scorer` signature stub + `book-pipeline pin-voice <adapter_dir>` CLI + REAL V6 qwen3-32b LoRA SHA pinned in config/voice_pin.yaml. TDD: 3 RED/GREEN commit pairs (6 commits total).
 - **Outcome:** 12 files created (4 kernel __init__.py + sha.py + scorer.py + pin_voice.py CLI + 4 test files); 6 files modified (pyproject.toml, scripts/lint_imports.sh, cli/main.py, voice_fidelity/__init__.py's eager-vs-fallback choice, config/voice_pin.yaml obliterated Phase 1 placeholder, rag/bundler.py Rule-3 auto-fix for pre-existing SIM105). 14 tests added (3 import-contract structural + 7 sha non-slow + 1 scorer + 4 pin_voice); 280 total passing (was 266 baseline). REAL V6 SHA `3f0ac5e2290dab63…d094` computed in 10.7s over the 537MB safetensors at /home/admin/finetuning/output/paul-v6-qwen3-32b-lora/. Source commit SHA `c571bb7b...` from paul-thinkpiece-pipeline HEAD. Aggregate gate `bash scripts/lint_imports.sh` green (2 contracts kept, ruff clean, mypy clean on 82 source files). 6 per-task commits: d547ae8 (T1 RED) + e785525 (T1 GREEN + Rule-3 bundler fix) + 26df024 (T2 RED) + c987a3e (T2 GREEN) + 42bcdf9 (T3 RED) + 9c1b9c1 (T3 GREEN + REAL V6 pin).
-- **Stopped at:** Completed 03-01-PLAN.md (Phase 3 kernel skeletons + REAL V6 voice pin)
+- **Stopped at:** Completed 03-02-PLAN.md (OBS-03 voice-fidelity anchor curation)
 
 ### Next session
 
-- **Expected action:** `/gsd-execute-phase 3` wave 2 — execute Plan 03-02 (voice-fidelity real scorer + drafter/vllm_client). Plan 03-02 replaces the `score_voice_fidelity` stub body with the BGE-M3 cosine impl (reuse `book_pipeline.rag.embedder.BgeM3Embedder`), lands the anchor-set curation helpers, and begins drafter/vllm_client.py.
+- **Expected action:** `/gsd-execute-phase 3` wave 3 — execute Plan 03-03 (vLLM bootstrap + scene critic + SceneState orchestration). Plan 03-03 lands `book-pipeline vllm-bootstrap` subcommand writing the systemd --user unit, calls verify_pin(strict=True) at boot with HARD_BLOCK("checkpoint_sha_mismatch") on drift, wires SceneCritic against Opus 4.7 with `client.messages.parse(response_format=CriticResponse)`, and ships the SceneStateMachine orchestrator that composes drafter + critic + regenerator per `book-pipeline draft <scene_id>`.
 - **Key continuation notes:**
-  - Plan 03-01 pinned the exact `compute_adapter_sha` algorithm (safetensors || config.json, 1 MiB chunks, fixed order). Plan 03-03 boot handshake uses this same algorithm on both sides of the comparison.
-  - Plan 03-02 MUST NOT touch `voice_fidelity/__init__.py` — the importlib+contextlib.suppress fallback pattern auto-resolves the real `score_voice_fidelity` implementation once it replaces the stub body. Signature is frozen: `score_voice_fidelity(scene_text: str, anchor_centroid: Any | None = None, embedder: Any | None = None) -> float`.
-  - Plan 03-02 MUST NOT touch `pyproject.toml` import-linter contracts — voice_fidelity is already in both contracts. Same for drafter/critic/regenerator (plans 03-03..05 add files inside without contract churn).
-  - REAL V6 SHA available at `cfg.voice_pin.checkpoint_sha`: `3f0ac5e2290dab633a19b6fb7a37d75f59d4961497e7957947b6428e4dc9d094`. Drafter plans stamp this onto `DraftResponse.voice_pin_sha` and `Event.checkpoint_sha`.
-- **Key precedent:** Plan 03-01 established: (a) kernel skeleton + contract + mypy-scope extension land in the SAME plan (Phase 1 Plan 06 policy); (b) compute_adapter_sha deterministic algorithm with file-order locking; (c) atomic YAML write pattern (tempfile + os.replace); (d) role='voice_pin' Event emission pattern for one-time pin events; (e) VoicePinMismatch attribute surface (expected_sha, actual_sha, adapter_dir) for Plan 03-03 error handling.
-- **Phase 3 progress:** 1/8 plans complete. Kernel skeleton + real voice pin = Plan 03-02..08 foundation laid.
+  - Plan 03-02 pinned the anchor set SHA `28fd890bc4c8afc1d0e8cc33b444bc0978002b96fbd7516ca50460773e97df31` in `config/mode_thresholds.yaml voice_fidelity.anchor_set_sha`. Plan 03-04 drafter boot handshake will recompute `AnchorSet.load_from_yaml(...).sha` and compare — HARD_BLOCK on drift (T-03-02-01 mitigation).
+  - Plan 03-04 drafter imports: `from book_pipeline.voice_fidelity import AnchorSet, compute_centroid, score_voice_fidelity` + `from book_pipeline.rag import BgeM3Embedder`. Construct centroid ONCE per CLI tick; pass to scorer per scene. Score → `Event.caller_context.voice_fidelity_score`.
+  - Plan 03-04 MUST NOT touch `voice_fidelity/__init__.py` — Plan 03-01's B-1 fallback pattern resolves all 10 exports (VoicePinMismatch, compute_adapter_sha, verify_pin, score_voice_fidelity, Anchor, AnchorSet, compute_centroid, compute_per_sub_genre_centroids, compute_anchor_set_sha, check_anchor_dominance).
+  - Plan 03-03..05 MUST NOT touch `pyproject.toml` import-linter contracts — all 4 Phase 3 kernel packages are already in both contracts (Plan 03-01). New files inside the packages land without contract churn.
+  - REAL V6 SHA: `3f0ac5e2290dab633a19b6fb7a37d75f59d4961497e7957947b6428e4dc9d094` (Plan 03-01). Plan 03-04 drafter stamps this onto `DraftResponse.voice_pin_sha` + `Event.checkpoint_sha`.
+  - BGE-M3 resolved revision: `5617a9f61b028005a4858fdac845db406aefb181`. Plan 03-02 used this same revision as Phase 2 RAG. If Plan 03-04 drafter detects a different revision from the anchor-curation run, that's a drift signal — Phase 5 stale-pin detector will eventually catch this.
+- **Key precedent:** Plan 03-02 established: (a) classifier-first-match-wins heuristic with essay as default register; (b) deterministic `anchor_set_sha` algorithm over sorted (id, text, sub_genre) tuples; (c) pre-flight quota check with structured stderr + exit 3 (W-3/W-5 pattern); (d) CLI-composition seam to book_specifics.anchor_sources mirroring Plan 02-06 cli/_entity_list; (e) role='anchor_curator' Event emission pattern for curation runs; (f) VoiceFidelityConfig Pydantic interval validator for threshold consistency; (g) check_anchor_dominance as a V-1 warning-sign guard (Phase 6 refinement pending — 0.15 threshold mis-calibrated for same-author prose).
+- **Phase 3 progress:** 2/8 plans complete. Kernel skeletons + voice pin (03-01) + OBS-03 anchor curation + real cosine scorer (03-02) = drafter-ready foundation. Plans 03-03..08 build on top without further config/pyproject churn.
 
 ### Session continuity invariants
 
