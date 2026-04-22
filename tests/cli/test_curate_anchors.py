@@ -47,38 +47,43 @@ def _write_thinkpiece_fixture(
     """
     jsonl_path.parent.mkdir(parents=True, exist_ok=True)
 
-    def row_text(prefix: str, idx: int) -> str:
-        # ~200 words, contains an em-dash (voice marker) + a number (specificity).
-        body = (
-            f"{prefix} thought {idx} — the moment the screen blinked to life "
+    def body_neutral(idx: int) -> str:
+        # ~200 words, em-dash + numeric specificity, no classifier-keyword
+        # markers so the row_text doesn't fight the prefix's sub-genre tag.
+        # (Classifier keywords to avoid: writing/craft/reading/what-i/why-i/how-i
+        # for essay; dataset/benchmark/token/model/evaluation/score/metric/data/
+        # analysis/system/measure/pattern/signal/framework/tradeoff/
+        # infrastructure/protocol/api/algorithm for analytic; dialogue-quote +
+        # she/he-said/walked/turned/looked for narrative.)
+        return (
+            f"Thought {idx} — the moment the screen blinked to life "
             f"at 3:47 AM was something I had imagined 47 times but never "
             f"quite like this. What surprised me was not the hardware but "
-            f"the way it made me reconsider everything I had written down "
-            f"the day before. The test was simple: would the 128 examples "
-            f"I had curated by hand actually produce something coherent? "
-            "They did, mostly, and then they did not, and then the pattern "
-            "repeated in ways that felt like a small revelation — not the "
-            "kind you write home about but the kind you mention in "
-            "passing to a friend a week later, wondering if it holds up. "
-            "The answer: it mostly does, but in a narrower band than I had "
-            "expected. Still, there is something to say here about how "
-            "the numbers change the way you think about the thing you are "
-            "actually doing, which is writing, or reading, or just "
-            "watching the cursor blink at 3:47 AM on a Tuesday."
+            f"the quiet way the room changed around it. The test was "
+            f"simple: would the 128 examples I had curated by hand "
+            "actually produce something coherent? They did, mostly, "
+            "and then they did not, and then it repeated in ways that "
+            "felt like a small revelation — not the kind you announce "
+            "but the kind you mention in passing to a friend a week "
+            "later, wondering if it holds up. The answer: it mostly "
+            "does, but in a narrower band than I had expected. Still, "
+            "there is something to say here about how the numbers "
+            "change the way you think about the thing you are actually "
+            "doing, which matters more than it seems at 3:47 AM on a "
+            "Tuesday when the only company is the fan's steady hum."
         )
-        return body
 
     rows = []
     for i in range(essay_count):
-        text = f"I care about writing and craft — {row_text('essay', i)}"
+        text = f"I care about writing and craft — {body_neutral(i)}"
         rows.append(_mk_conv_row(text))
     for i in range(analytic_count):
-        text = f"The dataset contained 10751 rows — {row_text('analytic', i)}"
+        text = f"The dataset contained 10751 rows — {body_neutral(i)}"
         rows.append(_mk_conv_row(text))
     for i in range(narrative_count):
         text = (
             f'"This is it," she said. She walked to the edge. '
-            f'He turned and looked at her — {row_text("narrative", i)}'
+            f'He turned and looked at her — {body_neutral(i)}'
         )
         rows.append(_mk_conv_row(text))
 

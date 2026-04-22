@@ -6,7 +6,7 @@ plus oscillation + Telegram alert tuning.
 
 from __future__ import annotations
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 from pydantic_settings import (
     BaseSettings,
     PydanticBaseSettingsSource,
@@ -21,6 +21,53 @@ class VoiceFidelityBand(BaseModel):
 
     min: float = Field(ge=0.0, le=1.0)
     max: float = Field(ge=0.0, le=1.0)
+
+
+class VoiceFidelityConfig(BaseModel):
+    """OBS-03 voice-fidelity scoring thresholds + anchor set pin.
+
+    Landed by Plan 03-02 Task 2. The `anchor_set_sha` is the 64-hex SHA over
+    the curated anchor YAML (see `book_pipeline.voice_fidelity.anchors.AnchorSet.sha`);
+    curate-anchors CLI rewrites it whenever the anchor set changes.
+
+    Threshold invariants (enforced by `_check_threshold_interval`):
+      - fail_threshold == flag_band_min
+      - pass_threshold == flag_band_max
+      - fail_threshold <= pass_threshold
+      - pass_threshold < memorization_flag_threshold
+    """
+
+    anchor_set_sha: str
+    pass_threshold: float = Field(ge=0.0, le=1.0)
+    flag_band_min: float = Field(ge=0.0, le=1.0)
+    flag_band_max: float = Field(ge=0.0, le=1.0)
+    fail_threshold: float = Field(ge=0.0, le=1.0)
+    memorization_flag_threshold: float = Field(ge=0.0, le=1.0)
+
+    @model_validator(mode="after")
+    def _check_threshold_interval(self) -> VoiceFidelityConfig:
+        if self.fail_threshold > self.pass_threshold:
+            raise ValueError(
+                f"fail_threshold ({self.fail_threshold}) must be <= "
+                f"pass_threshold ({self.pass_threshold})"
+            )
+        if self.pass_threshold >= self.memorization_flag_threshold:
+            raise ValueError(
+                f"pass_threshold ({self.pass_threshold}) must be < "
+                f"memorization_flag_threshold "
+                f"({self.memorization_flag_threshold})"
+            )
+        if self.flag_band_min != self.fail_threshold:
+            raise ValueError(
+                f"flag_band_min ({self.flag_band_min}) must equal "
+                f"fail_threshold ({self.fail_threshold})"
+            )
+        if self.flag_band_max != self.pass_threshold:
+            raise ValueError(
+                f"flag_band_max ({self.flag_band_max}) must equal "
+                f"pass_threshold ({self.pass_threshold})"
+            )
+        return self
 
 
 class ModeAConfig(BaseModel):
@@ -62,6 +109,7 @@ class ModeThresholdsConfig(BaseSettings):
     oscillation: OscillationConfig
     alerts: AlertsConfig
     preflag_beats: list[str]
+    voice_fidelity: VoiceFidelityConfig
 
     model_config = SettingsConfigDict(
         yaml_file="config/mode_thresholds.yaml",

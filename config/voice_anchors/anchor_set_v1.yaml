@@ -1,0 +1,797 @@
+anchors:
+- id: train_filtered_essay_000
+  text: 1. Spanky the Cattle Dog lying on a big lawn in front of a big house. 2. Spanky
+    in a pound, hurt and scared. 3. Spanky being taken by a kind woman and a scary
+    man to a big city. 4. Spanky's reaction to the tall buildings and small houses
+    in the city. 5. Spanky barking at strangers in the city. 6. Spanky with his new
+    owner, the kind woman. 7. Spanky living happily with his new owner in the city.
+    8. Spanky and his owner, a year later. 9. Pancake the Bernese Mountain Dog puppy
+    on a farm. 10. Pancake being taken away by a wide man. 11. Pancake in her new
+    home with the kind woman and the scary man, and meeting her new friend Spanky.
+    12. Pancake exploring her new home by biting everything. 13. Spanky reacting to
+    Pancake's biting. 14. Pancake trying to play with Spanky. 15. Pancake's many attempts
+    to play with Spanky. 16. Spanky's hatred for Pancake. 17. Pancake making friends
+    with all the dogs in the park. 18. Spanky watching Pancake come home safely from
+    the park. 19. Pancake getting sick and being taken to the hospital. 20. Pancake
+    recovering from her illness. 21. Spanky wondering if he could have been brave
+    like Pancake. 22. Spanky, Pancake, the kind woman, and the scary man going on
+    a road trip. 23. Spanky arriving at his new home. 24. Spanky playing with Pancake.
+    25. Spanky and Pancake playing on their way home. 26. Pancake introducing Spanky
+    to her friends in the park. 27. Spanky meeting Pancake's friends. 28. Pancake
+    getting sick again. 29. Pancake recovering from her illness. 30. Pancake's death.
+    31. Spanky going to the park and making new friends.
+  sub_genre: essay
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 69-69
+  provenance_sha: 5629866bcd4be6f3
+- id: train_filtered_essay_001
+  text: 'I once watched a $30 piece of foam board out-convert a $10,000 ad budget,
+    and I''ve never really gotten over it. It wasn''t a growth hack. It wasn''t a
+    funnel. It was just a sign with a question on it, *What''s your trail story?*,propped
+    up near the entrance to a thru-hiking festival while I was still limping from
+    the injury that ended my PCT hike six months earlier. I didn''t have a product
+    to sell or a brand to push. I just had this stubborn suspicion that people were
+    walking around absolutely loaded with stories they''d never been asked to tell.
+    Turns out I was right. Eighteen strangers submitted. Two hundred more showed up
+    to read them. And something I can only describe as a community materialized out
+    of thin air; not because I said something worth hearing, but because I shut up
+    and asked a question worth answering. That''s the thing nobody tells you about
+    building an audience: the talking part is usually the least important part.'
+  sub_genre: essay
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 209-209
+  provenance_sha: b8c2e00740a66a59
+- id: train_filtered_essay_002
+  text: 'I have been thinking about what it actually feels like to trust something
+    that isn''t alive.
+
+
+    Not in a philosophical way. In a practical, sweaty-palmed, your-life-depends-on-this
+    way. Because there''s this moment in the piece I''ve been working on: a woman
+    on a tumbling warship, gravity pointing the wrong direction, 20 feet of wall between
+    her and survival: where she has to decide, in about half a second, whether to
+    trust a robot dog named Doc to be exactly where her foot needs it to be, 12 feet
+    off the ground, with a 10% chance of success blinking in her HUD. And she kicks.
+    She just kicks. And I''ve been sitting with that decision for three days now because
+    I think it''s actually the most human thing I''ve ever written. Not the action.
+    The surrender inside the action. The specific texture of letting go when letting
+    go is the only move left.'
+  sub_genre: essay
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 433-433
+  provenance_sha: f3caaa7ddf26b7c2
+- id: train_filtered_essay_003
+  text: 'Concerning Workshop Hemeticism, Wallace is on the offensive: he speaks out
+    against the boom in fiction programs and their “safe” environments that attempt
+    to make fiction uniform, thus endangering creativity; as well as the idea that
+    many teachers may rather be working on their own fiction than teaching. His stance
+    here immediately made me think of a November 2014 New Yorker article entitled
+    “Why I Am Teaching a Course Called ‘Wasting Time on the Internet’” by Kenneth
+    Goldsmith, which describes a weekly three hour class of unstructured internet
+    time to be used as inspiration for creative writing. It goes without saying that
+    much of Alt Lit ignores common “good writing” conventions taught in workshop,
+    as well as purposefully including spelling and formatting errors. In this case
+    there is at least one exception to Wallace’s attacks on fiction workshops, but
+    I’d be willing to bet that things have changed in the almost 30 year window since
+    he initially published Fictional Futures.'
+  sub_genre: essay
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 453-453
+  provenance_sha: c8e889fcac156a56
+- id: train_filtered_essay_004
+  text: 'The 17 year Lovesong of the Periodical Cicada
+
+
+    Do you feel this way? I think you do.
+
+
+    After nearly two decades
+
+
+    spent inch-ing among tree roots
+
+
+    suckling at the sun’s gangly subterranean fingers, you are
+
+
+    so bursting with the need and desire to procreate that your entire body can’t
+    help but quiver and shake to its own rhythm.
+
+
+    It must be generational; that I am so wrought quaking like this.
+
+
+    Some epigenetic mistake that’s led to our depravity here;
+
+
+    that my brothers and I gather and shout for sex,
+
+
+    burst from our shells to convulse in mass orgies,
+
+
+    undulate with scary new wings in scary new places:
+
+
+    “Pharoh, Phar-oh, Pharrrrrrrr-Ohhhhhhhhh”
+
+
+    Our fathers must have been more proper about it,
+
+
+    engaged our mothers with more chivalry
+
+
+    than to just shout at them over the din of a thousand others
+
+
+    vying to be loudest in their 5 weeks of sexual maturity.
+
+
+    Our mothers must have had more tact,
+
+
+    than to buzz through choruses of suitors
+
+
+    convinced to bed by the loudest and brashest
+
+
+    of our fathers, puffed-up drunk on summer air.
+
+
+    No,
+
+
+    no brood before us has felt this.
+
+
+    We are the first of our species to discover pure passion
+
+
+    in the creases of each other’s exoskeletons.
+
+
+    It is our birthright,
+
+
+    after 17 years spent locked inside our bodies and homes,
+
+
+    to fuck.
+
+
+    Right?'
+  sub_genre: essay
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 494-494
+  provenance_sha: a597b6475ffe7d61
+- id: train_filtered_essay_005
+  text: 'I opened this email in an attempt to ask you what your availability was mid
+    June, were I to visit England. However, I said I''d write you, and there is no
+    better time than 6:29 AM, on a Tuesday.
+
+
+    I''ve been up since around 3:50. I don''t really know when I went to bed. This
+    happens occasionally when I drink. I''ve been drinking more than occasionally
+    though, and need to cut back. That''s been on mind- and stomach- for a bit now.
+    Whether maybe going sober entirely wouldn''t be a bad decision. I have the rare
+    chance of a currently happy and pretty relaxed life, save one or two problems,
+    which we will get to in a bit just you wait. You know me, i''m used to slothing
+    around. Sloth a bit here, sloth a smidge there, don''t leave the house for a whole
+    weekend- you know the drill. Now I haven''t had adequate time for slothage lately
+    which I think is a good problem to have: it''s good to be busy.
+
+
+    Although here''s one thing i''ve noticed about all these meddlesome perfect-lifers
+    in New York: they actually do a ton of shit with their freetime. As opposed to
+    me, with the videogames and weed and drinking. Now i''m generalizing a bit, but
+    I think they may be onto something. I''ve been thinking about that a lot, too,
+    how to better use my free time for not getting high and stuff(More on this later).
+    It IS a comfortable lifestyle- don''t get me wrong- but probably an unhealthy
+    one ultimately.'
+  sub_genre: essay
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 534-534
+  provenance_sha: a21e492fc0a10ec4
+- id: train_filtered_essay_006
+  text: “My father worked all his life saving up to go see his mother’s homeland.
+    He got two weeks of vacation after a total of 40 years on the job. Keeled over
+    dead his first day back. I could mention wanting to spend a month there offhandedly
+    to Erin right now and wake up there to a homecooked meal from Alfonz- my chef-
+    tomorrow morning. I could stay as long as I want and do whatever I want. My father
+    just got to walk into the shop, smell the pizza, look at the ovens, and say ‘Wow,
+    isn’t that an incredible thing that pizza exists? It smells so good. I’m so humbled
+    I was able to experience pizza before I died.’ I can eat the pizza. I can go and
+    pay a dollar and eat and throw away in an afternoon what it takes any american
+    a lifetime to even get into the room with. Hell; I can buy the whole store, burn
+    it down, and be bored by breakfast.”
+  sub_genre: essay
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 545-545
+  provenance_sha: 5272b8cd95d8b814
+- id: train_filtered_essay_007
+  text: Mark, I really love the pragmatic angle you’ve asked us to take in these reports,
+    your predecessor was all sunshine and rainbows- but you get the idea of a life
+    with gritty details. This punk thinks he does too, he’s wrong though. His “pragmatism”
+    in the early twenties is a solid move, when you don’t know what play to make,
+    make the play that leaves the most options open. It’s not real pragmatism, just
+    macroprocrastination. He’s convinced that he’ll know the right thing when he sees
+    it- be it a girl, a job, or a city. That’s all great, except the for the first
+    20 years this kid’s jumped up and down trying to decide whether he wants white
+    or red sauce on his spaghetti, and then deciding he made the wrong choice once
+    he gets his food. His decisions, ultimately, come down to laziness- a snap judgment
+    at the last second- if you’re not seeing the theme here, it’s procrastination.
+    This wouldn’t be a problem if he wasn’t going to treat life like a plate of fucking
+    pasta, but here we are aren’t we? He’s got a foolish hope that life will just
+    set down the perfect opportunity in front of him. Someone really needs to explain
+    to him how opportunity works.
+  sub_genre: essay
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 575-575
+  provenance_sha: 4b6f3cfb10378ef0
+- id: train_filtered_analytic_008
+  text: 'Two of the examples adapt the pattern by adding the stage direction “coda”
+    to Guildenstern’s lines. This addition is an oddity because the term coda is shared
+    between the literary and musical field, where it is defined as a passage which
+    brings a movement or piece to a conclusion through prolongation. The first occurrence
+    happens before R&G take listen to Hamlet talking to Fortinbras’ soldier and then
+    accompany him to England: “ROS: There it is again. (In anguish.) All I ask is
+    a change of ground!/GUIL (coda): Give us this day our daily round...” (Stoppard
+    47). The substitution of “round” in this passage complements the coda nicely,
+    as a round can refer to a recurring cycle, such as the repetition of lines in
+    a musical piece with a coda or such as R&G’s acting out of the Player’s depiction
+    of The Murder of Gonzago. These rounds represent fate- R&G are shown what is to
+    happen to them by the players yet ignore the warning and are unable to change
+    the eventual outcome despite having their prayers granted by being shown the first
+    “round” in The Murder of Gonzago. R&G’s inability to take action in changing their
+    fate is shown further later in the play when they discover Hamlet’s change to
+    the letter demanding their execution, yet still turn the letter in. The Second
+    example of the coda occurs after the pirate attack and Hamlet’s disappearance:
+    “ROS: I thought I heard a band. (In anguish.) Plausibility is all I presume!/
+    GUIL:(coda) Call us this day our daily tune….” (Stoppard 58) There is irony here
+    in the ambiguous use of coda, as both the tune and the prayer are repeating. However,
+    after this repetition the play continues, which doesn’t make sense as the function
+    of a coda is conclusion and prolongation. Since the coda does not conclude, it
+    therefore prolongs. Every line filled with a prayer by R&G is one line extra before
+    their eventual death at the end of the play. Although these prayers do not provide
+    solace or protection from fate, they extend the time R&G have before fate kills
+    them off.'
+  sub_genre: analytic
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 74-74
+  provenance_sha: ea64b7d27794f722
+- id: train_filtered_analytic_009
+  text: 'Broader Context of the January 1986 Teleconference
+
+
+    The teleconference occurred amidst intense pressure on NASA to meet launch schedules
+    due to political and financial constraints. Despite known issues with the O-rings,
+    NASA and Morton Thiokol operated under a “fly-as-we-fix” mindset. NASA’s culture
+    prioritized keeping missions on track, even at the expense of safety, making it
+    harder for engineers like Boisjoly to halt the launch. This environment heightened
+    the risk of groupthink and risk normalization.
+
+
+    Roger Boisjoly’s Approach in the Teleconference
+
+
+    Boisjoly needs to shift the focus to the catastrophic risk posed by the cold weather
+    and O-ring failures.
+
+
+    Approach
+
+
+    Present Data: Use hard evidence from past launches to highlight the risk of O-ring
+    failure at low temperatures.
+
+
+    Focus on Safety: Emphasize the human risk and irreversible consequences of proceeding.
+
+
+    Invite Dialogue: Encourage questions to foster understanding rather than resistance.
+
+
+    What I Would Say
+
+
+    "The forecasted 29°F is well below previous thresholds where O-ring erosion occurred.
+    Proceeding could cause a catastrophic failure. We must prioritize safety and delay
+    the launch until the conditions are safer."
+
+
+    Issues Facing Bob Lund
+
+
+    Lund is torn between the safety concerns raised by his engineers and the pressure
+    from management to avoid delays.
+
+
+    Concerns
+
+
+    Pressure from Leadership: Fear of upsetting NASA by suggesting delays.
+
+
+    Safety vs. Reputation: Balancing technical risks with the need to maintain the
+    company’s reputation.
+
+
+    What I Would Say as Bob Lund
+
+
+    "Roger’s data shows real risk. We need to consider delaying the launch to address
+    these issues. Safety must come first, even if it’s unpopular."
+
+
+    Issues Facing Larry Mulloy
+
+
+    Mulloy faces intense pressure to avoid delays and sees the O-ring issue as manageable
+    given the shuttle''s prior success with similar problems.
+
+
+    Concerns
+
+
+    Schedule Pressure: Strong motivation to maintain launch schedules and avoid further
+    delays.
+
+
+    Risk Tolerance: Believes past success with O-ring issues means risks are acceptable.
+
+
+    What I Would Say as Larry Mulloy
+
+
+    "We’ve managed O-ring concerns before without incident. I believe we can monitor
+    and move forward without holding up the launch."
+
+
+    Conclusion
+
+
+    The teleconference exemplifies the tension between technical risks and operational
+    pressure. Boisjoly must push through resistance to highlight the critical safety
+    concerns, while Lund and Mulloy weigh safety against NASA’s broader goals of maintaining
+    launch schedules.'
+  sub_genre: analytic
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 191-191
+  provenance_sha: 82fc40fe94742fb9
+- id: train_filtered_analytic_010
+  text: Speaking of waste, the rangers at Golden Gate Park in San Francisco were spending
+    hours of their day informing dog owners that they weren’t allowed to have their
+    dogs off leash in certain areas of the park. Rec and Park’s signage and information
+    around where owners could have their dogs off leash was abysmal, and compounded
+    by contradictory signs informing owners they had to leash their dogs in certain
+    areas (implying everywhere else was offleash). When I first moved to the area,
+    tensions were high. One ranger I spoke with, Carlo, said that their jobs were
+    being threatened if they didn’t start actively ticketing dog owners. What’s more,
+    many of the rangers were dog owners themselves who felt the rules and punishments
+    were overly harsh. They were stuck between a rock and a hard place that was eating
+    up an increasing amount of their time as they received more downward pressure
+    from R&P Department management and more pushback from an increasingly agitated
+    community of confused dog owners. Every person they steered in the direction of
+    the designated areas was a drop in the ocean of uninformed owners who visited
+    the park each day. I felt deeply for them, and didn’t want them to lose their
+    jobs. I reached out to R&P department management to discuss the issue and received
+    minimal communication. I was persistent in emailing and calling, and was eventually
+    able to speak to a representative who admitted they didn’t have an information
+    campaign, and that the lack of signage made things confusing. I launched a website,
+    ggpodd.com, that included a survey asking owners if they were aware of the proper
+    areas. In doing so I launched an informal education campaign to step in and do
+    R&P’s job for them, while simultaneously collecting data on gaps in their information
+    and signage policy and signatures on a petition to amend the rules. I printed
+    out flyers with QR codes and recruited other concerned dog owners to the cause.
+    Within the month the website had received over 5,000 hits, we’d directly educated
+    400 dog owners on the official rules and off leash areas, and we’d collected over
+    100 signatures to amend the off-leash rules. According to Carlo, conflict between
+    rangers and owners dropped from an everyday occurrence to once-monthly, and their
+    bosses were no longer threatening to fire them!
+  sub_genre: analytic
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 915-915
+  provenance_sha: fa2e3b5ce5063458
+- id: train_filtered_analytic_011
+  text: Rangers at Golden Gate Park spent hours issuing warnings to off-leash dog
+    owners, while Rec and Park’s signage and information around where owners could
+    have their dogs off leash were abysmal. Carlo, a ranger I spoke with, shared that
+    their jobs were being threatened if they didn’t start ticketing. I reached out
+    to R&P for information, where a representative admitted they didn’t have an information
+    campaign. Fueled by this experience, I launched a website, ggpodd.com, as an informal
+    education campaign to step in and help everyone get along while simultaneously
+    collecting data on gaps in R&P’s information and signage policy. Additionally,
+    I used the website to collect signatures on a petition for better off-leash space.
+    I printed out flyers with QR codes and recruited other concerned dog owners to
+    the cause. Within the month, the website had received over 5,000 hits, we’d directly
+    educated 400 dog owners on the official rules and off-leash areas, and we’d collected
+    over 100 signatures to amend the off-leash rules. The conflict between rangers
+    and owners dropped from every day to once monthly, and their jobs were no longer
+    at risk!
+  sub_genre: analytic
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 969-969
+  provenance_sha: 00b1d0e87ecd2b0e
+- id: train_filtered_analytic_012
+  text: '1. Surrogation - a measure of a construct of interest evolves to replace
+    that construct.
+
+    2. Campbell''s Law - The more any quantitative social indicator is used for social
+    decision-making, the more subject it will be to corruption pressures and the more
+    apt it will be to distort and corrupt the social processes it is intended to monitor
+
+    3. Map-Territory Relation - A map *is not* the territory it represents, but, if
+    correct, it has a *similar structure* to the territory, which accounts for its
+    usefulness.
+
+    4. McNamara Fallacy - Making a decision based solely on quantitative observations
+    (or metrics) and ignoring all others.
+
+    5. Goodhart''s Law - "When a measure becomes a target, it ceases to be a good
+    measure."
+
+    6. Lucas Critique (economics) It is naive to try to predict the effects of a change
+    in economic policy entirely on the basis of relationships observed in historical
+    data.
+
+    7. Reification (fallacy) - The error of treating something that is not concrete,
+    such as an idea, as a concrete thing.
+
+    8. Overfitting - The production of an analysis that corresponds too closely or
+    exactly to a particular set of data, and may therefore fail to fit to additional
+    data or predict future observations reliably.
+
+    9. Faulty Generalization - A conclusion is drawn about all or many instances of
+    a phenomenon on the basis of one or a few instances of that phenomenon.
+
+    10. Black swan problem // Problem of induction (philosophy) - Rejection of knowledge
+    that goes beyond a mere collection of observations.
+
+    11. Perverse Incentive // Cobra Effect - An incentive that has an unintended and
+    undesirable result that is contrary to the intentions of its designers.
+
+    12. Instrumental convergence (The Paperclip Problem) - The tendency to pursue
+    unbounded instrumental goals.
+
+    13. All models are wrong, but some are useful.'
+  sub_genre: analytic
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 979-979
+  provenance_sha: b0b22c8e3e1b93d4
+- id: train_filtered_analytic_013
+  text: Rangers at Golden Gate Park spent hours issuing warnings to off-leash dog
+    owners. Rec and Park’s signage and information around where owners could have
+    their dogs off leash were abysmal. Carlo, a ranger I spoke with, shared that their
+    jobs were being threatened if they didn’t start ticketing. I reached out to R&P
+    for information, where a representative admitted they didn’t have an information
+    campaign. I launched a website, ggpodd.com as an informal education campaign to
+    step in and help everyone get along while simultaneously collecting data on gaps
+    in R&P’s information and signage policy. Additionally, I used the website to collect
+    signatures on a petition for better off leash space. I printed out flyers with
+    QR codes and recruited other concerned dog owners to the cause. Within the month,
+    the website had received over 5,000 hits, we’d directly educated 400 dog owners
+    on the official rules and off-leash areas, and we’d collected over 100 signatures
+    to amend the off-leash rules. The conflict between rangers and owners dropped
+    from every day to once monthly, and their jobs were no longer at risk! With a
+    little elbow grease, I was able to resolve conflict that came down to a lack of
+    understanding between parties.
+  sub_genre: analytic
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 1239-1239
+  provenance_sha: d86102ed9c16c5e3
+- id: train_filtered_analytic_014
+  text: '1. **Token economy:** Word count matters, **a lot**. There’s a sweet spot
+    between providing the model a good amount of information to reason with, and being
+    so sparse it just repeats exactly what you told it in different words. The trade
+    off between the two is that **due to token limits, the bigger the input, the smaller
+    the response.** Upping the temperature from the base .7 can inject variance as
+    your input gets more sparse.
+
+    2. **Cut the Chaff:** Chapter headings appeared to have no effect on GPT-3’s accuracy
+    or organization, so they were cut between drafts 3 and 4 to save on tokens. Lots
+    of whitespace in the text seemed to effect the model’s likelihood to correctly
+    follow requests to generate per-page image prompts, and was also aggressively
+    cut between drafts 3 and 4. **I don’t think this is any sort of significant signal
+    of model behavior**. It was likely just normal variance that I’m going all apophenic
+    on.
+
+    3. **Correct execution of request prompt:** I found that temperatures above .8
+    were less likely to return a text-to-image prompt for every single page, often
+    returning between 11-24 prompts, as opposed to the requested 32.
+
+    4. **Request Prompt Shaping:** Leaving out **specific requests for per-page return
+    prompts** also led to the model returning too few text-to-image prompts for the
+    number of pages provided, even if the input was specified as a children’s book
+    and tagged with pages.
+
+    5. **Keep it simple:** Adding in words like ‘vivid,’ ‘detailed,’ ‘imagery’, ‘action,’
+    and ‘background’ had the tendency to cause the model to wildly misinterpret my
+    desires. At one point it just spit out a list of nouns:'
+  sub_genre: analytic
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 1264-1264
+  provenance_sha: 3996fec854d16cf0
+- id: train_filtered_analytic_015
+  text: 'I’ve wasted hours of my life on builds that consume an API that gets me 90%
+    of the way there due to half-reading documentation. If you are a developer, read!
+    Have at least a rough sketch of the calls you will be using and what logic you
+    need to fill in the gaps. If you are approaching an implementation from the business
+    side, don’t buy into a provider without consulting the technical teams who will
+    be consuming it.
+
+
+    So here I am. About to build a new project that is going to touch maybe five different
+    services. I know one of them needs to be location but I don’t even know what location
+    services are out there. Spending the time to find and evaluate proper dependencies
+    is a huge blocker during design.
+
+
+    Thankfully, Postman has a solution for this: The API Network. It’s a portal that
+    allows you to search through thousands of APIs that have been submitted as collections.
+    You can even submit one yourself!'
+  sub_genre: analytic
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 1308-1308
+  provenance_sha: eb19540c920bd7ca
+- id: train_filtered_narrative_016
+  text: Upon receiving summons to the Captains quarter’s, Sam walked in the exact
+    opposite direction, towards the boiler room rather than the upper decks of the
+    ship. In his entry, 049 had described a control mechanism that manipulated the
+    dead men ceaselessly. The device, it said, looked like a heart. It rested in the
+    corner of the same boiler room Sam had visited before. He carefully removed a
+    small piece of cryon from the pile the dead men shoveled, and placed it on top
+    of the machine. Then, he ripped a small corner of the poster from the wall, set
+    it alight in the boiler, placed it next to the tiny black crystal, and ran. Seconds
+    later, an explosion lit up the surrounding corridors and shook the Uganda’s superstructure.
+    The dead men inside the boiler room stood awestruck as smoke flooded the lower
+    levels of the ship. Among them, 049 seemed to immediately recognize what was happening,
+    and swiveled to face Sam at the doorway. He did not seem to be able to speak,
+    but he looked at Sam very earnestly, and pointed to a single word on the far wall’s
+    poster. “Revolution”.
+  sub_genre: narrative
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 261-261
+  provenance_sha: f74112ab63387675
+- id: train_filtered_narrative_017
+  text: 'Hoarfrost crusts the windows of the ATM enclosure. Bet was lucky last night-
+    she’d been able to make it inside with an old debit card she kept around for just
+    this scenario. Whatever algo registered her and called the Pinkies must have been
+    pretty cheap, it was and the rest of the city was exploding, so no one ever came.
+
+
+    Shame though, in the morning when she tried to leave her debit card wasn’t working.
+    She thought back to the night before.
+
+
+    Shit. Her gait. The little glass cubicle’s caretaker must have talked to some
+    of its neighbors and conspired to have her ID’d and her information canceled.
+    Her social credit being what it was the bank could act with impunity in canceling
+    her card, charging her a luxury hotel rate for the overnight in the ATM room,
+    and locking her inside until the authorities arrived. As I mentioned earlier,
+    the caretaker was second rate- so the authorities weren’t forthcoming.
+
+
+    She put her hand against the glass, the condensation and sudden stab of cold cleared
+    her head. It reminded her of Chicago winter. The gale coming in strong off the
+    lake and tossing snow up in people’s faces- forcing them to pop their collars
+    against it.
+
+
+    Outside of her little cage, the street was still. It was still around 5 am and
+    the night’s cyclone was dying down enough to venture outside, if she could make
+    it. She got a ping from Sam.
+
+
+    “I’m watching you.”
+
+
+    “Oh yeah?” She answered while running her fingers along the edges of the doorframe,
+    looking for some sort of fire release. She found it, but it was keyed at 400 SS
+    or above. Shit.
+
+
+    “Yeah! We’ve got a micro options market going on whether it’ll be sex or debt
+    to get out of this one.”
+
+
+    “Place a side bet and advance me 300 social and we can split the profits 50/50.”
+
+
+    “Sister if you think I have 300 social to advance my dying mother then I have
+    a bridge to sell you.”
+
+
+    “Cut Jeej in on the action.”
+
+
+    “Jeej?”
+
+
+    “Jeej.”
+
+
+    “No.”'
+  sub_genre: narrative
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 330-330
+  provenance_sha: 31351ebe4e919776
+- id: train_filtered_narrative_018
+  text: 'Its pulling its pulling idk what to do
+
+
+    The massive arm moved and the building began to lean
+
+
+    Chase''s chair begins to slide slightly as the floor inclined. He furiously navigate
+    folders and subfolders looking for tendon controls
+
+
+    “E13 snapped, e15 fraying”
+
+
+    Chase looked up to the corner of his screen. E12. Nothing was working. He could
+    hear masonry and beams beginning to crack and creeeeeeeak.
+
+
+    He was entirely locked out. No recourse. He clenched his teeth and took in breath
+    sharp as he remembered almost getting fired in october.
+
+
+    He clicked into a folder he should have deleted and ran the forbidden script
+
+
+    Were seeing a buffer overload on 12. 12 is slack. A massive wrenching thud went
+    through the building
+
+
+    25 slack. 30, 66, 132. All tendons in critical buffer overflow. We’re at risk
+    of losing neuromotor training.
+
+
+    Dump it, dump it all. Who the fuck needs muscle memory anyways.
+
+
+    The massive tendon out the window relaxed, graphite plates playing their characteristic
+    eerie shuddered clank as they passed over one another. Chase looked out the window
+    and up, out to the massive arm that seemed to penetrate the sky, and the even
+    bigger skyscraper being hauled up out of the sand beside it.
+
+
+    That was close. He wiped his forehead, and the hand came away sopping wet. No
+    telling where those plates go when tendons snap, but 10 tons of frictionless slip-graphite
+    flung at four times the speed of sound tends to turn humans into loosely associated
+    clouds of red mist, and buildings into atom clouds. Sometimes they find them embedded
+    inside of mountains, or out in the asteroid belt.
+
+
+    He kisses the cross around his neck, kisses Bertha’s chassy, and swings down the
+    ladder to lunch.'
+  sub_genre: narrative
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 522-522
+  provenance_sha: db5af9b27137b959
+- id: train_filtered_narrative_019
+  text: 'Not metaphorically arrested. Actually hauled in by actual cops. Because in
+    1900, if a man bought you dinner and you accepted, you looked indistinguishable
+    from a prostitute to the authorities. The whole apparatus we now call "dating",
+    the dinner reservation, the movie, the drink at the bar where you both pretend
+    to be more interesting than you actually are; was so new and so strange that society
+    had no idea what to do with it except panic. Which, honestly, feels about right.
+    I spent the better part of two years on Hinge treating the whole enterprise like
+    a mildly embarrassing software bug that would eventually get patched. Turns out
+    it''s not a bug. It''s not even that old. It''s an invention, like the refrigerator
+    or the limited liability corporation, and it was built by the same forces that
+    built everything else: money, migration, and people trying to get something they
+    needed without admitting exactly what that something was.'
+  sub_genre: narrative
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 528-528
+  provenance_sha: 634a0b349dff62a2
+- id: train_filtered_narrative_020
+  text: 'Story idea: the gallery of right angles
+
+
+    The house of right?
+
+
+    L 90?
+
+
+    Perpendicular?
+
+
+    As you moved through, the halls lined up like mirror illusions, kaleidoscoping
+    to what looked like an infinite distance. Almost as if one were stuck in a colossal
+    forest, or crammed between massive pillars some idiot had placed much to close
+    to one another.
+
+
+    The sleep vampires that roamed the halls were awful, gangly, ink-blot things that
+    siphon rest from you whenever they were in view.
+
+
+    So obsessed were they with the right angle that they bound their babies’ spines
+    to achieve staircase perfection ridging every back. One might count the notches
+    in the same way one might play with their hand, making it a little man and having
+    it walk up tiny stairs with fingers as legs. Maybe in your imagination it has
+    a tiny businessman’s hat on, and a miniscule newspaper tucked under the thumb.
+    Your pinky somehow holds (at a perfect 90 degree angle) a tiny cup of coffee that
+    reads “I ♥️ MOM” in old english. He’s on his way up the stairs, coming home from
+    work-
+
+
+    Why is he carrying a cup of coffee and newspaper you may ask, if he is returning
+    home? Well, don’t ask. But, if you must: perhaps this handman always carries around
+    a newspaper and coffee mug. He probably smokes a little pipe too. I don’t know
+    why you imagined the hand smoking a pipe with the hat on wearing *glasses* but
+    I did too!
+
+
+    Anyways, those hand~steps our hand-man is taking up to see his hand-wife and hand-child;
+    they are trod on bone.
+
+
+    So obsessed is the Court of Right, they twist themselves into zig zags and wwwwwwwwwww’s
+    and Charlie Brown shirts.'
+  sub_genre: narrative
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 1207-1207
+  provenance_sha: ab12646f53c23ba1
+- id: train_filtered_narrative_021
+  text: 'Hoarfrost crusts the windows of the ATM enclosure. Bet was lucky last night-
+    she’d been able to make it inside with an old debit card she kept around for just
+    this scenario. Whatever algo registered her and called the Pinkies must have been
+    pretty cheap, it was 4th of July and the rest of the city was exploding, so no
+    one ever came.
+
+
+    Shame though, in the morning when she tried to leave her debit card wasn’t working.
+    She thought back to the night before.
+
+
+    Shit. Her gait. The little glass cubicle’s caretaker must have talked to some
+    of its neighbors and conspired to have her ID’d and her information canceled.
+    Her social credit being what it was the bank could act with impunity in canceling
+    her card, charging her a luxury hotel rate for the overnight in the ATM room,
+    and locking her inside until the authorities arrived. As I mentioned earlier,
+    the caretaker was second rate- so the authorities weren’t forthcoming.
+
+
+    She put her hand against the glass, the condensation and sudden stab of cold cleared
+    her head. It reminded her of Chicago winter. The gale coming in strong off the
+    lake and tossing snow up in people’s faces- forcing them to pop their collars
+    against it.
+
+
+    Outside of her little cage, the street was still. It was still around 5 am and
+    the night’s cyclone was dying down enough to venture outside, if she could make
+    it. She got a ping from Sam.
+
+
+    “I’m watching you.”
+
+    “Oh yeah?” She answered while running her fingers along the edges of the doorframe,
+    looking for some sort of fire release. She found it, but it was keyed at 400 SS
+    or above. Shit.
+
+    “Yeah! We’ve got a micro options market going on whether it’ll be sex or debt
+    to get out of this one.”
+
+    “Place a side bet and advance me 300 social and we can split the profits 50/50.”
+
+    “Sister if you think I have 300 social to advance my dying mother then I have
+    a bridge to sell you.”
+
+    “Cut Jeej in on the action.”
+
+    “Jeej?”
+
+    “Jeej.”
+
+    “No.”'
+  sub_genre: narrative
+  source_file: /home/admin/paul-thinkpiece-pipeline/v3_data/train_filtered.jsonl
+  source_line_range: 1639-1639
+  provenance_sha: ebec8932dad37080

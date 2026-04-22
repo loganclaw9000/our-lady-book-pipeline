@@ -1,20 +1,23 @@
 # mode_thresholds.yaml — Mode A (voice-FT local) / Mode B (frontier) dial
-# per ADR-001, plus oscillation + alert tuning.
+# per ADR-001, plus oscillation + alert tuning + voice-fidelity (OBS-03).
 #
-# Phase 1 ships the structure + placeholders. Phase 5 flips `oscillation.enabled`
-# to live and populates preflag_beats with the chapters known to exceed the
-# voice model's structural reach (Cholula stir, two-thirds reveal, siege climax).
+# voice_fidelity.anchor_set_sha is rewritten by `book-pipeline curate-anchors`
+# whenever the anchor set changes (Plan 03-02). Thresholds are the Plan 03-02
+# defaults (pass 0.78 / flag-band 0.75-0.78 / fail 0.75 / memorization flag
+# 0.95 per PITFALLS V-1 + V-2). The CLI's atomic rewrite does NOT preserve
+# this header — if you re-run curate-anchors and want the header back, you
+# have to re-add it manually OR restore from git.
 mode_a:
   regen_budget_R: 3
   per_scene_cost_cap_usd: 0.0
   voice_fidelity_band:
-    min: 0.60
+    min: 0.6
     max: 0.88
 mode_b:
-  model_id: "claude-opus-4-7"
-  per_scene_cost_cap_usd: 2.00
+  model_id: claude-opus-4-7
+  per_scene_cost_cap_usd: 2.0
   regen_attempts: 1
-  prompt_cache_ttl: "1h"
+  prompt_cache_ttl: 1h
 oscillation:
   enabled: true
   max_axis_flips: 2
@@ -22,3 +25,10 @@ alerts:
   telegram_cool_down_seconds: 3600
   dedup_window_seconds: 3600
 preflag_beats: []
+voice_fidelity:
+  anchor_set_sha: 28fd890bc4c8afc1d0e8cc33b444bc0978002b96fbd7516ca50460773e97df31
+  pass_threshold: 0.78
+  flag_band_min: 0.75
+  flag_band_max: 0.78
+  fail_threshold: 0.75
+  memorization_flag_threshold: 0.95

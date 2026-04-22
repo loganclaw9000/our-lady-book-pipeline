@@ -97,6 +97,10 @@ ignore_imports = [
     "book_pipeline.cli.ingest -> book_pipeline.book_specifics.corpus_paths",
     "book_pipeline.cli.ingest -> book_pipeline.book_specifics.heading_classifier",
     "book_pipeline.cli._entity_list -> book_pipeline.book_specifics.nahuatl_entities",
+    # Plan 03-02 addition: curate-anchors bridges to book-domain anchor pointers
+    # (paul-thinkpiece-pipeline training rows + held-out blog posts). OBS-03
+    # anchor curation is the CLI composition seam, same pattern as cli.ingest.
+    "book_pipeline.cli.curate_anchors -> book_pipeline.book_specifics.anchor_sources",
 ]
 
 [[tool.importlinter.contracts]]

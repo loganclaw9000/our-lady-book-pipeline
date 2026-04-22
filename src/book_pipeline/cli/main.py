@@ -31,6 +31,7 @@ SUBCOMMAND_IMPORTS: list[str] = [
     "book_pipeline.cli.smoke_event",       # created by plan 05
     "book_pipeline.cli.ingest",            # created by phase-2 plan 02
     "book_pipeline.cli.pin_voice",         # created by phase-3 plan 01
+    "book_pipeline.cli.curate_anchors",    # created by phase-3 plan 02
 ]
 
 

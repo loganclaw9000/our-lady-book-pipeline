@@ -8,7 +8,8 @@ BGE-M3 embeddings; Mode-A drafts are scored by cosine similarity against it.
 This module lives in the kernel and MUST NOT carry book-domain-specific
 logic. Import-linter contract 1 (pyproject.toml) guards the kernel boundary;
 the CLI composition seam at src/book_pipeline/cli/curate_anchors.py is the
-ONE sanctioned bridge into book_specifics.anchor_sources.
+ONE sanctioned bridge into the book-domain pointer tables (see the anchor
+candidates declared in the book-specific module referenced by that CLI).
 
 Algorithm pins (do not drift):
 
