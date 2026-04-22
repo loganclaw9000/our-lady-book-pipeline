@@ -8,7 +8,6 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-import httpx
 import numpy as np
 import pytest
 
@@ -18,7 +17,7 @@ from book_pipeline.drafter.memorization_gate import (
     TrainingBleedGate,
 )
 from book_pipeline.drafter.sampling_profiles import SamplingProfiles
-from book_pipeline.drafter.vllm_client import VllmClient, VllmUnavailable
+from book_pipeline.drafter.vllm_client import VllmUnavailable
 from book_pipeline.interfaces.drafter import Drafter
 from book_pipeline.interfaces.types import (
     ContextPack,
@@ -365,7 +364,7 @@ def test_draft_voice_fidelity_status_classification(cos: float, expected_status:
     drafter, logger = _build_drafter(vllm_client=client, embedder_for_fidelity=embedder)
     request = DraftRequest(context_pack=_context_pack())
     drafter.draft(request)
-    evt = [e for e in logger.events if e.role == "drafter"][0]
+    evt = next(e for e in logger.events if e.role == "drafter")
     assert evt.caller_context["voice_fidelity_status"] == expected_status
 
 
@@ -375,7 +374,7 @@ def test_draft_event_schema_roundtrip() -> None:
     client = _FakeVllmClient(scene_text="scene body text")
     drafter, logger = _build_drafter(vllm_client=client)
     drafter.draft(DraftRequest(context_pack=_context_pack()))
-    evt = [e for e in logger.events if e.role == "drafter"][0]
+    evt = next(e for e in logger.events if e.role == "drafter")
     # model_validate round-trip succeeds.
     dumped = evt.model_dump()
     restored = Event.model_validate(dumped)
