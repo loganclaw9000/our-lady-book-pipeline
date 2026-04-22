@@ -1,7 +1,7 @@
 """Tests for book_pipeline.rag.outline_parser.
 
 Behavior under test (from 02-04-PLAN.md Task 1 <behavior>):
-  Test 1: 3-chapter × 2-block × 2-beat synthetic outline -> 12 Beats with stable IDs.
+  Test 1: 3-chapter x 2-block x 2-beat synthetic outline -> 12 Beats with stable IDs.
   Test 2: Parse twice -> identical beat_id set and field-equal Beats.
   Test 3: Mutate only body text -> beat_ids and other fields stable, bodies differ.
   Test 4: Missing one # Chapter heading -> logs warning, returns partial Beats, no raise.
@@ -18,7 +18,6 @@ import logging
 from pathlib import Path
 
 import pytest
-
 
 _FIXTURE = Path(__file__).parent / "fixtures" / "mini_outline.md"
 
