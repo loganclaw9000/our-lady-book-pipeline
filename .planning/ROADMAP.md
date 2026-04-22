@@ -66,7 +66,7 @@
 
 **Plans**: 6 plans in 5 waves (Wave 1: 01 rag foundation → Wave 2: 02 CorpusIngester → Wave 3 parallel: 03 text retrievers + 04 entity_state + arc_position → Wave 4: 05 ContextPackBundler → Wave 5: 06 golden-query CI + openclaw cron)
 - [x] 02-01-PLAN.md — rag kernel module: chunker + BGE-M3 embedder + LanceDB schema + import-linter extension [CORPUS-01]
-- [ ] 02-02-PLAN.md — CorpusIngester + router + mtime idempotency + `book-pipeline ingest` CLI + 5 LanceDB tables populated [CORPUS-01]
+- [x] 02-02-PLAN.md — CorpusIngester + router + mtime idempotency + `book-pipeline ingest` CLI + 5 LanceDB tables populated [CORPUS-01]
 - [ ] 02-03-PLAN.md — LanceDBRetrieverBase + BgeReranker + 3 retrievers (historical, metaphysics rule_type-filtered, negative_constraint always-top-K) [RAG-01]
 - [ ] 02-04-PLAN.md — outline_parser with stable beat IDs + entity_state (zero-cards-tolerant) + arc_position retriever [RAG-01, RAG-02]
 - [ ] 02-05-PLAN.md — ContextPackBundler: 40KB hard cap + per-axis soft caps + cross-retriever conflict detection + 6-event emission [RAG-03]

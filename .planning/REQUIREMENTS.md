@@ -24,7 +24,7 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 
 ### Corpus + Typed RAG
 
-- [ ] **CORPUS-01**: `~/Source/our-lady-of-champion/` lore bibles ingested (read-only mount/copy) into LanceDB with 5 separate tables: `historical`, `metaphysics`, `entity_state`, `arc_position`, `negative_constraint`.
+- [x] **CORPUS-01**: `~/Source/our-lady-of-champion/` lore bibles ingested (read-only mount/copy) into LanceDB with 5 separate tables: `historical`, `metaphysics`, `entity_state`, `arc_position`, `negative_constraint`.
 - [ ] **CORPUS-02**: Entity-state auto-extraction agent runs post-commit, writes structured markdown entity cards (YAML frontmatter + body) into `entity-state/chapter_NN/<entity>.md`, and re-indexes the `entity_state` LanceDB table.
 - [ ] **RAG-01**: The 5 typed retrievers each return structured findings with provenance (source file + chunk id) given a scene request keyed on `{POV, date, location, beat_function, chapter_num}`.
 - [ ] **RAG-02**: Chapter outline (`our-lady-of-champion-outline.md`, 27 chapters × 3 blocks × 3 beats nominal) parsed into the arc-position retriever at beat-function-level granularity; stable beat IDs.
@@ -140,7 +140,7 @@ Populated by roadmapper during roadmap creation. Every v1 REQ-ID maps to exactly
 | OBS-02 | Phase 6 | Pending |
 | OBS-03 | Phase 3 | Pending |
 | OBS-04 | Phase 6 | Pending |
-| CORPUS-01 | Phase 2 | Pending |
+| CORPUS-01 | Phase 2 | Complete |
 | CORPUS-02 | Phase 4 | Pending |
 | RAG-01 | Phase 2 | Pending |
 | RAG-02 | Phase 2 | Pending |
