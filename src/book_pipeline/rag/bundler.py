@@ -37,6 +37,7 @@ Threat mitigations:
 
 from __future__ import annotations
 
+import contextlib
 import json
 import time
 from pathlib import Path
@@ -324,13 +325,11 @@ class ContextPackBundlerImpl:
                     output_hash="error",
                     extra=fallback_extra,
                 )
-                try:
+                # Last-resort swallow: we CANNOT let an emit failure abort
+                # the bundle loop. Downstream will miss this one event but
+                # the bundler event still emits.
+                with contextlib.suppress(Exception):
                     self._emit(fallback_event)
-                except Exception:
-                    # Last-resort swallow: we CANNOT let an emit failure
-                    # abort the bundle loop. Downstream will miss this one
-                    # event but the bundler event still emits.
-                    pass
             except Exception:
                 # Even Event() construction failed. Nothing left to do — do
                 # NOT propagate; the bundle must continue so remaining

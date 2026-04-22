@@ -65,8 +65,7 @@ root_packages = ["book_pipeline"]
 #   would break lint-imports until they land.
 # Phase 2 plan 01 added: "book_pipeline.rag"
 # Phase 2 plan 02 added: "book_pipeline.corpus_ingest"
-# Phase 3 will add: "book_pipeline.drafter", "book_pipeline.regenerator"
-# Phase 4 will add: "book_pipeline.critic"
+# Phase 3 plan 01 added: drafter, critic, regenerator, voice_fidelity
 # Phase 5 will add: "book_pipeline.orchestration"
 name = "Kernel packages MUST NOT import from book_specifics"
 type = "forbidden"
@@ -79,6 +78,11 @@ source_modules = [
     "book_pipeline.openclaw",
     "book_pipeline.rag",
     "book_pipeline.corpus_ingest",
+    # Phase 3 plan 01 added: drafter, critic, regenerator, voice_fidelity
+    "book_pipeline.drafter",
+    "book_pipeline.critic",
+    "book_pipeline.regenerator",
+    "book_pipeline.voice_fidelity",
 ]
 forbidden_modules = [
     "book_pipeline.book_specifics",
@@ -103,8 +107,7 @@ ignore_imports = [
 # the interfaces package, full stop).
 # Phase 2 plan 01 added: "book_pipeline.rag" in forbidden_modules.
 # Phase 2 plan 02 added: "book_pipeline.corpus_ingest" in forbidden_modules.
-# Phase 3 will add: "book_pipeline.drafter", "book_pipeline.regenerator"
-# Phase 4 will add: "book_pipeline.critic"
+# Phase 3 plan 01 added: drafter, critic, regenerator, voice_fidelity
 # Phase 5 will add: "book_pipeline.orchestration"
 name = "Interfaces MUST NOT import from concrete kernel implementations"
 type = "forbidden"
@@ -116,5 +119,10 @@ forbidden_modules = [
     "book_pipeline.stubs",
     "book_pipeline.rag",
     "book_pipeline.corpus_ingest",
+    # Phase 3 plan 01 added: drafter, critic, regenerator, voice_fidelity
+    "book_pipeline.drafter",
+    "book_pipeline.critic",
+    "book_pipeline.regenerator",
+    "book_pipeline.voice_fidelity",
 ]
 ignore_imports = []
