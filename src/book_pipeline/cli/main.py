@@ -29,6 +29,7 @@ SUBCOMMAND_IMPORTS: list[str] = [
     "book_pipeline.cli.validate_config",   # created by plan 03
     "book_pipeline.cli.openclaw_cmd",      # created by plan 04
     "book_pipeline.cli.smoke_event",       # created by plan 05
+    "book_pipeline.cli.ingest",            # created by phase-2 plan 02
 ]
 
 

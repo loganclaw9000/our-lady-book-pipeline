@@ -26,6 +26,7 @@ uv run mypy \
   src/book_pipeline/openclaw \
   src/book_pipeline/cli \
   src/book_pipeline/book_specifics \
-  src/book_pipeline/rag
+  src/book_pipeline/rag \
+  src/book_pipeline/corpus_ingest
 
 echo "OK — module boundaries, ruff, and scoped mypy all pass."

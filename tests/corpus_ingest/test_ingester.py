@@ -22,7 +22,6 @@ from pathlib import Path
 from typing import Any, ClassVar
 
 import numpy as np
-import pytest
 
 # ---------------------------------------------------------------------------
 # Fixtures: fake embedder, fake event logger, fake heading_classifier.
@@ -381,13 +380,15 @@ def test_w3_multi_axis_file_routes_by_heading_classifier(tmp_path: Path) -> None
     ing.ingest(indexes_dir)
 
     db = lancedb.connect(str(indexes_dir))
-    metaphysics = db.open_table("metaphysics").to_pandas()
-    historical = db.open_table("historical").to_pandas()
+    metaphysics_rows = db.open_table("metaphysics").to_arrow().to_pylist()
+    historical_rows = db.open_table("historical").to_arrow().to_pylist()
 
-    # brief_seed.md has the "The Metaphysics" and "Engagement Doctrine ... Engine"
-    # headings; both should route to metaphysics.
-    brief_meta = metaphysics[metaphysics["source_file"].str.endswith("brief_seed.md")]
-    brief_hist = historical[historical["source_file"].str.endswith("brief_seed.md")]
+    brief_meta = [
+        r for r in metaphysics_rows if r["source_file"].endswith("brief_seed.md")
+    ]
+    brief_hist = [
+        r for r in historical_rows if r["source_file"].endswith("brief_seed.md")
+    ]
 
     assert len(brief_meta) > 0, (
         "brief_seed.md has Metaphysics-tagged headings; expected ≥1 chunk in metaphysics table"
@@ -398,7 +399,8 @@ def test_w3_multi_axis_file_routes_by_heading_classifier(tmp_path: Path) -> None
     )
 
     # Every brief chunk in metaphysics must have a heading with Metaphysics or Engine.
-    for hp in brief_meta["heading_path"]:
+    for r in brief_meta:
+        hp = r["heading_path"]
         assert "Metaphysics" in hp or "Engine" in hp, (
             f"brief chunk in metaphysics table has non-metaphysics heading {hp!r}"
         )
@@ -430,14 +432,14 @@ def test_w5_chapter_column_present_in_rows(tmp_path: Path) -> None:
 
     db = lancedb.connect(str(indexes_dir))
     tbl = db.open_table("historical")
-    df = tbl.to_pandas()
-    assert "chapter" in df.columns, (
-        f"chapter column missing from historical table: {df.columns.tolist()}"
-    )
-    # Non-chapter fixtures → all values None/NaN.
-    # (pandas converts nullable int64 Arrow → object with None, or Int64 with NA;
-    # accept either shape so long as no row has a concrete chapter number from
-    # this non-chapter fixture set.)
+    rows = tbl.to_arrow().to_pylist()
+    assert rows, "expected at least one row in the historical table"
+    # Every row dict must carry a `chapter` key (per CHUNK_SCHEMA); value may
+    # be None for these non-chapter fixtures, but the key must exist.
+    for row in rows:
+        assert "chapter" in row, (
+            f"chapter column missing from row; keys={sorted(row.keys())}"
+        )
 
 
 def test_rebuild_truncates_tables(tmp_path: Path) -> None:
@@ -465,7 +467,7 @@ def test_rebuild_truncates_tables(tmp_path: Path) -> None:
     ing.ingest(indexes_dir)
 
     db = lancedb.connect(str(indexes_dir))
-    count_before = len(db.open_table("historical").to_pandas())
+    count_before = db.open_table("historical").count_rows()
 
     # Touch one file and rebuild.
     target = corpus / "historical_seed.md"
@@ -474,7 +476,7 @@ def test_rebuild_truncates_tables(tmp_path: Path) -> None:
     ing.ingest(indexes_dir)
 
     db2 = lancedb.connect(str(indexes_dir))
-    count_after = len(db2.open_table("historical").to_pandas())
+    count_after = db2.open_table("historical").count_rows()
     assert count_after == count_before, (
         f"rebuild should produce the same row count (not append): "
         f"before={count_before}, after={count_after}"
@@ -511,7 +513,8 @@ def test_handoff_is_not_ingested(tmp_path: Path) -> None:
 
     db = lancedb.connect(str(indexes_dir))
     for axis in ("historical", "metaphysics"):
-        df = db.open_table(axis).to_pandas()
-        assert not df["source_file"].str.endswith("handoff_seed.md").any(), (
-            f"handoff content leaked into {axis} axis"
-        )
+        rows = db.open_table(axis).to_arrow().to_pylist()
+        for r in rows:
+            assert not r["source_file"].endswith("handoff_seed.md"), (
+                f"handoff content leaked into {axis} axis"
+            )

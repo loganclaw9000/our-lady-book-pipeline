@@ -75,7 +75,7 @@ def test_route_handoff_returns_empty() -> None:
 def test_route_unknown_raises_valueerror() -> None:
     from book_pipeline.corpus_ingest.router import route_file_to_axis
 
-    with pytest.raises(ValueError, match="[Uu]nknown"):
+    with pytest.raises(ValueError, match=r"[Uu]nknown"):
         route_file_to_axis(Path("our-lady-of-champion-totally-fake.md"))
 
 

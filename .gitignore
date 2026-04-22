@@ -17,6 +17,8 @@ indexes/*.db
 indexes/*.sqlite
 indexes/*.lance/
 indexes/*.parquet
+indexes/mtime_index.json
+indexes/resolved_model_revision.json
 drafts/in_flight/
 
 # IDE

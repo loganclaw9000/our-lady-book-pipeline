@@ -31,7 +31,14 @@ def test_book_specifics_module_importable() -> None:
 
 def test_kernel_does_not_import_book_specifics() -> None:
     """Static grep fallback — even if lint-imports is misconfigured, no kernel source
-    file should contain the literal substring 'book_specifics'."""
+    file should contain the literal substring 'book_specifics'.
+
+    Documented CLI-composition exemptions (see pyproject.toml contract 1
+    ignore_imports): `src/book_pipeline/cli/ingest.py` is the composition seam
+    between kernel (corpus_ingest) and book_specifics and is allowed to import
+    corpus_paths + heading_classifier. Every other kernel file remains under
+    the substring-level guard.
+    """
     import pathlib
 
     kernel_dirs = [
@@ -42,11 +49,18 @@ def test_kernel_does_not_import_book_specifics() -> None:
         pathlib.Path("src/book_pipeline/cli"),
         pathlib.Path("src/book_pipeline/openclaw"),
         pathlib.Path("src/book_pipeline/rag"),
+        pathlib.Path("src/book_pipeline/corpus_ingest"),
     ]
+    # Phase 2 plan 02: CLI-composition exemption per pyproject ignore_imports.
+    documented_exemptions = {
+        pathlib.Path("src/book_pipeline/cli/ingest.py"),
+    }
     for d in kernel_dirs:
         if not d.exists():
             continue
         for py in d.rglob("*.py"):
+            if py in documented_exemptions:
+                continue
             text = py.read_text(encoding="utf-8")
             assert "book_specifics" not in text, f"kernel file {py} imports book_specifics"
 

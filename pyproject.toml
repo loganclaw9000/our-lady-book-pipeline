@@ -55,6 +55,7 @@ root_packages = ["book_pipeline"]
 #   list modules that exist TODAY. Future kernel modules pre-listed here
 #   would break lint-imports until they land.
 # Phase 2 plan 01 added: "book_pipeline.rag"
+# Phase 2 plan 02 added: "book_pipeline.corpus_ingest"
 # Phase 3 will add: "book_pipeline.drafter", "book_pipeline.regenerator"
 # Phase 4 will add: "book_pipeline.critic"
 # Phase 5 will add: "book_pipeline.orchestration"
@@ -68,11 +69,19 @@ source_modules = [
     "book_pipeline.cli",
     "book_pipeline.openclaw",
     "book_pipeline.rag",
+    "book_pipeline.corpus_ingest",
 ]
 forbidden_modules = [
     "book_pipeline.book_specifics",
 ]
-ignore_imports = []
+# CLI-composition exemption (Phase 2 Plan 02): book_pipeline.cli.ingest is the
+# documented composition seam that wires kernel (corpus_ingest) with
+# book-specific CORPUS_FILES + heading_classifier. Every other kernel module
+# stays ignorant of book_specifics.
+ignore_imports = [
+    "book_pipeline.cli.ingest -> book_pipeline.book_specifics.corpus_paths",
+    "book_pipeline.cli.ingest -> book_pipeline.book_specifics.heading_classifier",
+]
 
 [[tool.importlinter.contracts]]
 # Same extension policy — append concrete kernel packages as they land.
@@ -81,6 +90,7 @@ ignore_imports = []
 # source_modules — that list is frozen at `interfaces` only; contract-2 protects
 # the interfaces package, full stop).
 # Phase 2 plan 01 added: "book_pipeline.rag" in forbidden_modules.
+# Phase 2 plan 02 added: "book_pipeline.corpus_ingest" in forbidden_modules.
 # Phase 3 will add: "book_pipeline.drafter", "book_pipeline.regenerator"
 # Phase 4 will add: "book_pipeline.critic"
 # Phase 5 will add: "book_pipeline.orchestration"
@@ -93,5 +103,6 @@ forbidden_modules = [
     "book_pipeline.observability",
     "book_pipeline.stubs",
     "book_pipeline.rag",
+    "book_pipeline.corpus_ingest",
 ]
 ignore_imports = []
