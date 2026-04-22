@@ -33,6 +33,7 @@ SUBCOMMAND_IMPORTS: list[str] = [
     "book_pipeline.cli.pin_voice",         # created by phase-3 plan 01
     "book_pipeline.cli.curate_anchors",    # created by phase-3 plan 02
     "book_pipeline.cli.vllm_bootstrap",    # created by phase-3 plan 03
+    "book_pipeline.cli.draft",             # created by phase-3 plan 07
 ]
 
 

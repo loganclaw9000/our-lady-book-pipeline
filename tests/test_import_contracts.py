@@ -58,17 +58,20 @@ def test_kernel_does_not_import_book_specifics() -> None:
         pathlib.Path("src/book_pipeline/regenerator"),
         pathlib.Path("src/book_pipeline/voice_fidelity"),
     ]
-    # Phase 2 plan 02 + 06 / Phase 3 plans 02-03: CLI-composition exemptions per
-    # pyproject ignore_imports.
+    # Phase 2 plan 02 + 06 / Phase 3 plans 02-03 + 03-07: CLI-composition
+    # exemptions per pyproject ignore_imports.
     # - cli/ingest.py: kernel corpus_ingest + book_specifics.{corpus_paths,heading_classifier}
     # - cli/_entity_list.py: bundler entity_list DI + book_specifics.nahuatl_entities
     # - cli/curate_anchors.py: OBS-03 anchor curation + book_specifics.anchor_sources
     # - cli/vllm_bootstrap.py: vLLM unit + handshake + book_specifics.vllm_endpoints
+    # - cli/draft.py: full scene-loop composition root (Plan 03-07) bridging
+    #   book_specifics.{vllm_endpoints,training_corpus,corpus_paths,nahuatl_entities}
     documented_exemptions = {
         pathlib.Path("src/book_pipeline/cli/ingest.py"),
         pathlib.Path("src/book_pipeline/cli/_entity_list.py"),
         pathlib.Path("src/book_pipeline/cli/curate_anchors.py"),
         pathlib.Path("src/book_pipeline/cli/vllm_bootstrap.py"),
+        pathlib.Path("src/book_pipeline/cli/draft.py"),
     }
     for d in kernel_dirs:
         if not d.exists():

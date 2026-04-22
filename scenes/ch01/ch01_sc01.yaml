@@ -1,0 +1,18 @@
+# Hand-authored Scene 1 stub for Phase 3 smoke.
+# Phase 4 (outline-parser integration) auto-generates these from
+# ~/Source/our-lady-of-champion/our-lady-of-champion-outline.md.
+#
+# Source-of-truth: outline Ch 1 Block 1 Beat 1 — "Life as usual (multiplied
+# by three)". The outline describes a triptych (Itzcoatl / Malintzin /
+# Andrés); this stub narrows to the Andrés fragment — the Spanish pilot in
+# Havana receiving final communion before boarding — because it maps most
+# cleanly onto a single 1000-word scene for Phase 3 smoke. Phase 4 may
+# re-split the triptych into three scene records at ingestion time.
+chapter: 1
+scene_index: 1
+beat_function: "first contact — opening voyage tension; Andrés receives final communion in Havana before boarding La Niña de Córdoba"
+pov: "Andrés de Mora"
+date_iso: "1519-02-18"
+location: "Chapel of Havana, Cuba — harbor departure"
+word_target: 1000
+scene_type: "prose"

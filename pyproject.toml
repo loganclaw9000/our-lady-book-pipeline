@@ -107,6 +107,23 @@ ignore_imports = [
     # HEALTH_POLL_TIMEOUT_S). CLI composition seam — kernel drafter/vllm_client
     # stays ignorant of these book-domain values.
     "book_pipeline.cli.vllm_bootstrap -> book_pipeline.book_specifics.vllm_endpoints",
+    # Plan 03-07 addition: cli.draft is the full scene-loop composition root
+    # (bundler + drafter + critic + regen + state machine + commit/hardblock).
+    # It is the ONLY site in the codebase that instantiates all 6 kernel
+    # components together; the 3 book-domain imports below are documented
+    # composition seams (ADR-004 / Plan 02-06 precedent).
+    #
+    # Note (Deviation Rule 1): The plan text specifies 4 exemptions including
+    # `cli.draft -> nahuatl_entities`, but cli/draft.py accesses the nahuatl
+    # entity set indirectly via cli/_entity_list.build_nahuatl_entity_set()
+    # (which already owns its own `cli._entity_list -> nahuatl_entities`
+    # exemption above). Adding a duplicate cli.draft -> nahuatl_entities
+    # exemption would produce an import-linter "no matches for ignored import"
+    # warning (import-linter treats unused exemptions as an error). The plan
+    # spec's 4th entry is redundant; 3 exemptions match the actual edges.
+    "book_pipeline.cli.draft -> book_pipeline.book_specifics.vllm_endpoints",
+    "book_pipeline.cli.draft -> book_pipeline.book_specifics.training_corpus",
+    "book_pipeline.cli.draft -> book_pipeline.book_specifics.corpus_paths",
 ]
 
 [[tool.importlinter.contracts]]

@@ -23,6 +23,10 @@ indexes/mtime_index.json
 indexes/resolved_model_revision.json
 drafts/in_flight/
 drafts/retrieval_conflicts/
+# Plan 03-07: per-scene SceneStateRecord buffer — transient, rebuildable
+# from runs/events.jsonl. Committed scenes land in drafts/ch{NN}/{scene_id}.md
+# (which ARE tracked).
+drafts/scene_buffer/
 
 # IDE
 .vscode/
