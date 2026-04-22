@@ -72,14 +72,14 @@ def test_compute_adapter_sha_matches_manual_concat_reference(tmp_path: Path) -> 
 def test_compute_adapter_sha_raises_when_safetensors_missing(tmp_path: Path) -> None:
     """Test 2: FileNotFoundError when adapter_model.safetensors missing."""
     (tmp_path / _CONFIG_NAME).write_bytes(b"{}")
-    with pytest.raises(FileNotFoundError, match="adapter_model.safetensors"):
+    with pytest.raises(FileNotFoundError, match=r"adapter_model\.safetensors"):
         compute_adapter_sha(tmp_path)
 
 
 def test_compute_adapter_sha_raises_when_config_missing(tmp_path: Path) -> None:
     """Test 3: FileNotFoundError when adapter_config.json missing."""
     (tmp_path / _SAFETENSORS_NAME).write_bytes(b"S" * 8)
-    with pytest.raises(FileNotFoundError, match="adapter_config.json"):
+    with pytest.raises(FileNotFoundError, match=r"adapter_config\.json"):
         compute_adapter_sha(tmp_path)
 
 
