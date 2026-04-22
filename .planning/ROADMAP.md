@@ -93,10 +93,20 @@
   5. On a critic FAIL with severity >= mid, the Regenerator takes the structured issue list and rewrites only affected passages within +/-10% word count; the regenerated draft is scored again and its event log entry records `attempt_number=2`.
   6. The voice-fidelity anchor set (20-30 curated passages) is committed to the repo before any production Mode-A scene commits, and its SHA is pinned in config — retroactive baselines are prevented by construction.
 
-**Plans**: TBD
+**Plans**: 8 plans in 7 waves (Wave 1: 01 kernel-skeleton+voice-pin-V6 → Wave 2: 02 anchor-curation+voice_fidelity → Wave 3 parallel: 03 vLLM systemd+client + 05 Scene critic → Wave 4: 04 Mode-A drafter → Wave 5: 06 Regenerator kernel-only → Wave 6: 07 CLI composition+SceneStateMachine+stub+mocked integration → Wave 7: 08 human-verify real-world smoke)
+
+Plans:
+- [ ] 03-01-PLAN.md — Kernel package skeletons (drafter/critic/regenerator/voice_fidelity) + V6 SHA pin + pin-voice CLI [DRAFT-01]
+- [ ] 03-02-PLAN.md — OBS-03 anchor curation (20-30 passages) + voice_fidelity module (centroid + scorer) + mode_thresholds voice_fidelity block [OBS-03]
+- [ ] 03-03-PLAN.md — vLLM systemd unit + httpx/tenacity VllmClient + boot_handshake SHA gate [DRAFT-01]
+- [ ] 03-04-PLAN.md — Mode-A drafter: Jinja2 template + sampling profiles + memorization gate + voice-fidelity Event [DRAFT-01, DRAFT-02, OBS-03]
+- [ ] 03-05-PLAN.md — Scene critic: Anthropic Opus 4.7 messages.parse + ephemeral 1h cache + CRIT-04 audit log + rubric_version stamp [CRIT-01, CRIT-04]
+- [ ] 03-06-PLAN.md — SceneLocalRegenerator kernel module: Jinja2 regen template + tenacity + ±10% word-count guard + Event emission (mocked Anthropic tests only) [REGEN-01]
+- [ ] 03-07-PLAN.md — book-pipeline draft CLI composition + SceneStateMachine wiring + ch01_sc01 stub + build_retrievers_from_config factory + mocked integration tests [REGEN-01]
+- [ ] 03-08-PLAN.md — Human-verify real-world smoke on ch01_sc01 (REAL vLLM + REAL Anthropic Opus + REAL RAG) [REGEN-01]
 **UI hint**: no
 
-**Parallelization**: Drafter and Critic can be built partly in parallel once the DraftRequest/DraftResponse and CriticRequest/CriticResponse schemas are pinned in Phase 1 (FOUND-04). The Critic can be developed against a stubbed drafter output file; the Drafter can be exercised against a stubbed critic until both land. Regenerator strictly depends on both.
+**Parallelization**: Plan 01 lands kernel skeletons + pyproject.toml import-linter extension + V6 SHA pin FIRST (Wave 1) so later plans can land concrete code inside drafter/critic/regenerator/voice_fidelity without pyproject churn. Plan 02 consumes 01 scaffolding to curate anchors + fill the voice_fidelity scorer. Wave 3 plans 03 + 05 run in parallel (03 owns drafter/vllm_client + drafter/systemd_unit + cli/vllm_bootstrap; 05 owns critic/scene + critic/audit + critic/templates; zero file overlap). Wave 4 Plan 04 composes the Mode-A drafter on top of voice_fidelity (02) + vLLM client (03). Wave 5 Plan 06 ships SceneLocalRegenerator kernel-only (no CLI composition) — depends on 01 + 05 for VOICE_DESCRIPTION + tenacity pattern reuse. Wave 6 Plan 07 is the CLI composition + state machine + ch01_sc01 stub + build_retrievers_from_config factory (W-1) + mocked integration tests — depends on 01..06 for full kernel availability. Wave 7 Plan 08 is the human-verify real-world smoke with operator pre-flight checklist — depends on 07 for the CLI to exist. The 03-06→03-07→03-08 split was introduced via planner-checker revision pass B-1 closure to keep each plan within executor-quality budget (~50% context / 2-3 tasks).
 
 ---
 
@@ -175,7 +185,7 @@
 |-------|----------------|--------|-----------|
 | 1. Foundation + Observability Baseline | 6/6 | Complete    | 2026-04-22 |
 | 2. Corpus Ingestion + Typed RAG | 6/6 | Complete    | 2026-04-22 |
-| 3. Mode-A Drafter + Scene Critic + Basic Regen | 0/TBD | Not started | - |
+| 3. Mode-A Drafter + Scene Critic + Basic Regen | 0/8 | Not started | - |
 | 4. Chapter Assembly + Post-Commit DAG | 0/TBD | Not started | - |
 | 5. Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration | 0/TBD | Not started | - |
 | 6. Testbed Plane + Production Hardening + First Draft | 0/TBD | Not started | - |
