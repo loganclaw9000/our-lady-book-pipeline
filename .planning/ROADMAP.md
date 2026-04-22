@@ -174,7 +174,7 @@
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation + Observability Baseline | 6/6 | Complete    | 2026-04-22 |
-| 2. Corpus Ingestion + Typed RAG | 3/6 | In progress | - |
+| 2. Corpus Ingestion + Typed RAG | 6/6 | Complete    | 2026-04-22 |
 | 3. Mode-A Drafter + Scene Critic + Basic Regen | 0/TBD | Not started | - |
 | 4. Chapter Assembly + Post-Commit DAG | 0/TBD | Not started | - |
 | 5. Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration | 0/TBD | Not started | - |

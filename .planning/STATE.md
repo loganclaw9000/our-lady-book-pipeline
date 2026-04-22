@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: phase-complete
+status: planning
 stopped_at: Completed 02-06-PLAN.md (RAG-04 golden-query CI gate + nightly-ingest cron; Phase 2 CLOSED)
-last_updated: "2026-04-22T08:57:36Z"
+last_updated: "2026-04-22T10:10:36.595Z"
 progress:
   total_phases: 6
   completed_phases: 2
@@ -16,7 +16,7 @@ progress:
 # STATE: our-lady-book-pipeline
 
 **Last updated:** 2026-04-22 after Plan 02-06 (RAG-04 golden-query CI gate + nightly-ingest cron; Phase 2 CLOSED)
-**Status:** Phase 2 complete — ready for Phase 3 (Mode-A Drafter + Scene Critic + Basic Regen)
+**Status:** Ready to plan
 
 ---
 
@@ -44,8 +44,8 @@ Phase 2 CLOSED. All 5 Phase 2 REQs complete (CORPUS-01, RAG-01, RAG-02, RAG-03, 
 Phase: 02 (Corpus Ingestion + Typed RAG) — COMPLETE
 Plan: 6 of 6 complete
 
-- **Phase:** 2 (complete); next: 3 (Mode-A Drafter)
-- **Plan:** 02-06 COMPLETE
+- **Phase:** 3
+- **Plan:** Not started
 - **Status:** Phase 2 complete; ready for `/gsd-plan-phase 3`
 - **Plans complete:** 6 / 6 (Phase 2); 12 / 12 total (Phase 1: 6; Phase 2: 6)
 - **Progress:** [██████████] 100%
