@@ -43,6 +43,15 @@ from book_pipeline.rag import CHUNK_SCHEMA, chunk_markdown, open_or_create_table
 DB_VERSION: str = "lancedb>=0.30.2"
 _BATCH_SIZE: int = 32
 
+# WR-03: crash-safety marker files. `.ingest_in_progress` is written at the
+# START of a non-skipped ingest and removed only after mtime_index.json is
+# written. If the process dies mid-ingest the marker survives, and the next
+# run forces a full re-ingest regardless of mtime. `.last_ingestion_ok` is
+# written after a successful run so Phase 3 can diagnose "when did the last
+# ingest complete?".
+_INGEST_IN_PROGRESS_MARKER: str = ".ingest_in_progress"
+_LAST_INGEST_OK_MARKER: str = ".last_ingestion_ok"
+
 
 class IngestionReport(BaseModel):
     """Structured return value from CorpusIngester.ingest."""
@@ -211,9 +220,21 @@ class CorpusIngester:
         flat_sources = self._flat_source_files()
         current_mtimes = corpus_mtime_map(flat_sources) if flat_sources else {}
 
+        # --- WR-03 crash-safety check --------------------------------------
+        # If an in-progress marker exists from a prior crashed run, the index
+        # state is unknown (possibly half-populated after drop+rebuild). Force
+        # a full re-ingest regardless of mtime match.
+        in_progress_marker = indexes_dir / _INGEST_IN_PROGRESS_MARKER
+        crash_recovery = in_progress_marker.exists()
+
         # --- Idempotency check --------------------------------------------
         stored_mtimes = read_mtime_index(indexes_dir)
-        if not force and stored_mtimes == current_mtimes and flat_sources:
+        if (
+            not force
+            and not crash_recovery
+            and stored_mtimes == current_mtimes
+            and flat_sources
+        ):
             # No changes — skip. Do not touch tables, do not emit Event.
             zero_counts = {axis: 0 for axis in AXIS_NAMES}
             return IngestionReport(
@@ -236,6 +257,22 @@ class CorpusIngester:
 
         # Connect + drop tables that will be rebuilt.
         indexes_dir.mkdir(parents=True, exist_ok=True)
+
+        # WR-03: write the in-progress marker BEFORE dropping tables. If the
+        # process dies anywhere between here and mtime_index.json being
+        # written, the marker survives + forces the next invocation to
+        # re-ingest. On clean completion we remove the marker below.
+        in_progress_marker.write_text(
+            json.dumps(
+                {
+                    "started_at_iso": datetime.now(UTC).isoformat(),
+                    "ingestion_run_id": ingestion_run_id,
+                    "crash_recovery": crash_recovery,
+                }
+            ),
+            encoding="utf-8",
+        )
+
         db = lancedb.connect(str(indexes_dir))
         self._drop_tables_for_rebuild(db)
 
@@ -315,6 +352,20 @@ class CorpusIngester:
 
         # --- Persist mtime index ------------------------------------------
         write_mtime_index(indexes_dir, current_mtimes)
+
+        # WR-03: mtime index + tables are both written. Remove the
+        # in-progress marker and drop a success marker that Phase 3 can
+        # read for diagnostics ("when did the last ingest complete?").
+        in_progress_marker.unlink(missing_ok=True)
+        (indexes_dir / _LAST_INGEST_OK_MARKER).write_text(
+            json.dumps(
+                {
+                    "completed_at_iso": datetime.now(UTC).isoformat(),
+                    "ingestion_run_id": ingestion_run_id,
+                }
+            ),
+            encoding="utf-8",
+        )
 
         wall_time_ms = int((time.monotonic() - start_epoch) * 1000)
         sorted_source_strs = sorted(str(p) for p in flat_sources)

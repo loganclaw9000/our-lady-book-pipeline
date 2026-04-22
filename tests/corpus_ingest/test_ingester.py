@@ -483,6 +483,118 @@ def test_rebuild_truncates_tables(tmp_path: Path) -> None:
     )
 
 
+def test_ingester_writes_in_progress_marker_and_removes_it_on_success(
+    tmp_path: Path,
+) -> None:
+    """WR-03: a successful non-skipped ingest removes the in-progress marker
+    and writes the success marker."""
+    from book_pipeline.corpus_ingest.ingester import CorpusIngester
+
+    corpus = _copy_corpus_to(tmp_path)
+    indexes_dir = tmp_path / "indexes"
+    src_by_axis = _build_source_files_by_axis(corpus)
+
+    emb = _FakeEmbedder()
+    logger = _FakeEventLogger()
+    ing = CorpusIngester(
+        source_files_by_axis=src_by_axis,
+        embedder=emb,
+        event_logger=logger,
+        heading_classifier=_fake_heading_classifier,
+    )
+    ing.ingest(indexes_dir)
+
+    # Markers at end of successful run.
+    assert not (indexes_dir / ".ingest_in_progress").exists(), (
+        "WR-03: in-progress marker must be removed after a successful ingest"
+    )
+    assert (indexes_dir / ".last_ingestion_ok").is_file(), (
+        "WR-03: success marker .last_ingestion_ok must exist post-ingest"
+    )
+    import json as _json
+
+    ok_payload = _json.loads(
+        (indexes_dir / ".last_ingestion_ok").read_text(encoding="utf-8")
+    )
+    assert "ingestion_run_id" in ok_payload
+    assert "completed_at_iso" in ok_payload
+
+
+def test_ingester_recovers_from_crash_between_drop_and_mtime_write(
+    tmp_path: Path,
+) -> None:
+    """WR-03: simulate the pre-fix pathological state — empty indexes dir
+    with a STALE mtime_index.json matching the current corpus mtimes AND
+    an in-progress marker left over from a crashed run. The next ingest
+    must force a full re-ingest rather than honor the stale mtime match.
+    """
+    from book_pipeline.corpus_ingest.ingester import CorpusIngester
+    from book_pipeline.corpus_ingest.mtime_index import (
+        corpus_mtime_map,
+        write_mtime_index,
+    )
+
+    corpus = _copy_corpus_to(tmp_path)
+    indexes_dir = tmp_path / "indexes"
+    indexes_dir.mkdir(parents=True, exist_ok=True)
+    src_by_axis = _build_source_files_by_axis(corpus)
+    flat_sources = [p for files in src_by_axis.values() for p in files]
+    # Stale mtime index matching CURRENT mtimes — without the marker the
+    # ingester would skip. With the marker it must re-ingest.
+    write_mtime_index(indexes_dir, corpus_mtime_map(flat_sources))
+    # Crash-leftover marker.
+    (indexes_dir / ".ingest_in_progress").write_text(
+        '{"started_at_iso": "2026-04-21T00:00:00Z", "ingestion_run_id": "ing_crashed", "crash_recovery": false}',
+        encoding="utf-8",
+    )
+
+    emb = _FakeEmbedder()
+    logger = _FakeEventLogger()
+    ing = CorpusIngester(
+        source_files_by_axis=src_by_axis,
+        embedder=emb,
+        event_logger=logger,
+        heading_classifier=_fake_heading_classifier,
+    )
+    report = ing.ingest(indexes_dir)
+
+    assert report.skipped is False, (
+        "WR-03: crashed-run marker must force a non-skipped re-ingest "
+        "even when mtimes match"
+    )
+    assert len(logger.emitted) == 1
+    # Post-run: marker cleaned up, success marker written, tables populated.
+    assert not (indexes_dir / ".ingest_in_progress").exists()
+    assert (indexes_dir / ".last_ingestion_ok").is_file()
+    assert report.chunk_counts_per_axis["historical"] > 0
+
+
+def test_ingester_skips_cleanly_when_no_marker_and_no_changes(
+    tmp_path: Path,
+) -> None:
+    """WR-03 regression: the marker-check path must NOT falsely trigger
+    re-ingest when there is no marker and mtimes match. (Ensures we didn't
+    break the happy-path idempotency.)"""
+    from book_pipeline.corpus_ingest.ingester import CorpusIngester
+
+    corpus = _copy_corpus_to(tmp_path)
+    indexes_dir = tmp_path / "indexes"
+    src_by_axis = _build_source_files_by_axis(corpus)
+
+    emb = _FakeEmbedder()
+    logger = _FakeEventLogger()
+    ing = CorpusIngester(
+        source_files_by_axis=src_by_axis,
+        embedder=emb,
+        event_logger=logger,
+        heading_classifier=_fake_heading_classifier,
+    )
+    ing.ingest(indexes_dir)
+    # Second ingest: no marker (first run cleaned it), no mtime changes.
+    r2 = ing.ingest(indexes_dir)
+    assert r2.skipped is True
+
+
 def test_handoff_is_not_ingested(tmp_path: Path) -> None:
     """Negative test: if source_files_by_axis has no handoff file, ingester should
     never produce chunks for it. This is a sanity check on the axis-scoped ingest."""
