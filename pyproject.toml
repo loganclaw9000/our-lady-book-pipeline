@@ -15,6 +15,7 @@ dependencies = [
   "sentence-transformers>=3.3",
   "httpx>=0.27",
   "tenacity>=9.0",
+  "jinja2>=3.1",
   "python-json-logger>=3.0",
   "xxhash>=3.0",
   "tiktoken",
@@ -101,6 +102,11 @@ ignore_imports = [
     # (paul-thinkpiece-pipeline training rows + held-out blog posts). OBS-03
     # anchor curation is the CLI composition seam, same pattern as cli.ingest.
     "book_pipeline.cli.curate_anchors -> book_pipeline.book_specifics.anchor_sources",
+    # Plan 03-03 addition: vllm-bootstrap bridges to paul-voice endpoint + LoRA
+    # module constants (port 8002, LORA_MODULE_NAME='paul-voice',
+    # HEALTH_POLL_TIMEOUT_S). CLI composition seam — kernel drafter/vllm_client
+    # stays ignorant of these book-domain values.
+    "book_pipeline.cli.vllm_bootstrap -> book_pipeline.book_specifics.vllm_endpoints",
 ]
 
 [[tool.importlinter.contracts]]

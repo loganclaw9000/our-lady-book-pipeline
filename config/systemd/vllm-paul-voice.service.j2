@@ -1,0 +1,30 @@
+# Managed by book-pipeline. Regenerate via `book-pipeline vllm-bootstrap`.
+# Serves the pinned voice-FT LoRA adapter on {{ port }}. Do NOT edit by hand —
+# edits are overwritten on the next bootstrap run.
+
+[Unit]
+Description=vLLM serving Paul voice-FT LoRA adapter ({{ ft_run_id }}) on port {{ port }}
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+Environment=PYTHONUNBUFFERED=1
+EnvironmentFile=-{{ environment_file }}
+ExecStartPre=/bin/sh -c 'nvidia-smi > /dev/null 2>&1 || exit 1'
+ExecStart={{ venv_python }} -m vllm.entrypoints.openai.api_server \
+    --model {{ base_model }} \
+    --enable-lora \
+    --lora-modules paul-voice={{ adapter_path }} \
+    --port {{ port }} \
+    --dtype {{ dtype }} \
+    --max-model-len {{ max_model_len }} \
+    --tensor-parallel-size {{ tensor_parallel_size }} \
+    --gpu-memory-utilization {{ gpu_memory_utilization }} \
+    --host 127.0.0.1
+Restart=on-failure
+RestartSec=15
+TimeoutStartSec=180
+
+[Install]
+WantedBy=default.target
