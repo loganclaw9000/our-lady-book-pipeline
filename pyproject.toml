@@ -64,6 +64,9 @@ source_modules = [
     "book_pipeline.interfaces",
     "book_pipeline.observability",
     "book_pipeline.stubs",
+    "book_pipeline.config",
+    "book_pipeline.cli",
+    "book_pipeline.openclaw",
 ]
 forbidden_modules = [
     "book_pipeline.book_specifics",
