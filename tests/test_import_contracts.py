@@ -50,6 +50,13 @@ def test_kernel_does_not_import_book_specifics() -> None:
         pathlib.Path("src/book_pipeline/openclaw"),
         pathlib.Path("src/book_pipeline/rag"),
         pathlib.Path("src/book_pipeline/corpus_ingest"),
+        # Phase 3 plan 01: 4 new kernel packages (drafter, critic, regenerator,
+        # voice_fidelity). Each lands with at least an __init__.py; scan them
+        # too so book_specifics drift is caught from Phase 3 onward.
+        pathlib.Path("src/book_pipeline/drafter"),
+        pathlib.Path("src/book_pipeline/critic"),
+        pathlib.Path("src/book_pipeline/regenerator"),
+        pathlib.Path("src/book_pipeline/voice_fidelity"),
     ]
     # Phase 2 plan 02 + 06: CLI-composition exemptions per pyproject ignore_imports.
     # - cli/ingest.py: kernel corpus_ingest + book_specifics.{corpus_paths,heading_classifier}
@@ -66,6 +73,64 @@ def test_kernel_does_not_import_book_specifics() -> None:
                 continue
             text = py.read_text(encoding="utf-8")
             assert "book_specifics" not in text, f"kernel file {py} imports book_specifics"
+
+
+def test_phase_3_kernel_packages_importable() -> None:
+    """Phase 3 plan 01: the 4 new kernel packages must be importable.
+
+    Drafter, critic, regenerator, and voice_fidelity are introduced as empty
+    kernel packages that downstream Phase 3 plans fill in. They exist from
+    plan 03-01 onward so import-linter contracts can reference them.
+    """
+    import importlib
+
+    for pkg in (
+        "book_pipeline.drafter",
+        "book_pipeline.critic",
+        "book_pipeline.regenerator",
+        "book_pipeline.voice_fidelity",
+    ):
+        importlib.import_module(pkg)
+
+
+def test_phase_3_packages_listed_in_both_contracts() -> None:
+    """Phase 3 plan 01: the 4 new kernel packages must be appended to BOTH
+    import-linter contracts (source_modules of contract 1, forbidden_modules
+    of contract 2). Matches the Phase 2 Plan 01 / 02 extension-policy
+    precedent."""
+    import pathlib
+
+    content = pathlib.Path("pyproject.toml").read_text(encoding="utf-8")
+    for pkg in (
+        "book_pipeline.drafter",
+        "book_pipeline.critic",
+        "book_pipeline.regenerator",
+        "book_pipeline.voice_fidelity",
+    ):
+        # Each Phase 3 kernel package appears in contract 1 source_modules AND
+        # contract 2 forbidden_modules → at least 2 occurrences total.
+        assert content.count(f'"{pkg}"') >= 2, (
+            f"Phase 3 kernel package {pkg!r} must appear in BOTH import-linter "
+            f"contracts in pyproject.toml."
+        )
+
+
+def test_phase_3_packages_in_lint_imports_mypy_scope() -> None:
+    """Phase 3 plan 01: scripts/lint_imports.sh mypy targets must include the
+    4 new Phase 3 kernel packages.
+    """
+    import pathlib
+
+    content = pathlib.Path("scripts/lint_imports.sh").read_text(encoding="utf-8")
+    for target in (
+        "src/book_pipeline/drafter",
+        "src/book_pipeline/critic",
+        "src/book_pipeline/regenerator",
+        "src/book_pipeline/voice_fidelity",
+    ):
+        assert target in content, (
+            f"scripts/lint_imports.sh missing Phase 3 mypy target: {target}"
+        )
 
 
 def test_lint_imports_mypy_scope_matches_phase_1_packages() -> None:
