@@ -126,7 +126,15 @@ Plans:
   5. The RetrospectiveWriter output passes a lint rule that rejects generic boilerplate (e.g., must cite specific scene IDs, must reference at least one critic-issue artifact) — the first retrospective proves the testing machinery before Phase 5 depends on it.
   6. EntityCards carry a `source_chapter_sha` field; the bundler flags any card whose source SHA no longer matches the current canon file (stale-card detection from day one).
 
-**Plans**: TBD
+**Plans**: 6 plans in 5 waves (Wave 1: 01 kernel skeletons + ChapterStateMachine → Wave 2 parallel: 02 ConcatAssembler + ChapterCritic && 03 EntityExtractor + RetrospectiveWriter → Wave 3: 04 Post-commit DAG orchestrator + AblationRun harness → Wave 4: 05 book-pipeline chapter + chapter-status + ablate CLIs → Wave 5: 06 end-to-end mocked integration test)
+
+Plans:
+- [ ] 04-01-PLAN.md — Kernel package skeletons (chapter_assembler/entity_extractor/retrospective/ablation) + ChapterStateMachine + import-linter extension [LOOP-02, LOOP-03]
+- [ ] 04-02-PLAN.md — ConcatAssembler deterministic scene-join + ChapterCritic (≥3/5 threshold, fresh ContextPack, CRIT-04 audit log) [LOOP-02, CRIT-02]
+- [ ] 04-03-PLAN.md — OpusEntityExtractor (incremental update, source_chapter_sha stamping) + OpusRetrospectiveWriter (lint-enforced output) [CORPUS-02, TEST-01]
+- [ ] 04-04-PLAN.md — ChapterDagOrchestrator (4-commit strict-order DAG + resumability + scene buffer archival) + AblationRun harness skeleton [LOOP-02, LOOP-03, TEST-01]
+- [ ] 04-05-PLAN.md — book-pipeline chapter <N> + chapter-status + ablate CLIs + EXPECTED_SCENE_COUNTS book-specifics table [LOOP-03, LOOP-04, TEST-01]
+- [ ] 04-06-PLAN.md — End-to-end mocked integration test (3-scene stub chapter → 4 commits + 3 artifacts + fresh-pack invariant + lint-pass retrospective) [LOOP-02, LOOP-03, LOOP-04, CRIT-02, CORPUS-02, TEST-01]
 **UI hint**: no
 
 **Parallelization**: ChapterAssembler, EntityExtractor, and RetrospectiveWriter can be scaffolded in parallel once their Protocols are pinned. The post-commit DAG ordering (extractor -> reindex -> retrospective -> ready_for_next) is strict and must be sequenced; building the DAG orchestrator is one plan, building the three agents is three plans.
@@ -186,7 +194,7 @@ Plans:
 | 1. Foundation + Observability Baseline | 6/6 | Complete    | 2026-04-22 |
 | 2. Corpus Ingestion + Typed RAG | 6/6 | Complete    | 2026-04-22 |
 | 3. Mode-A Drafter + Scene Critic + Basic Regen | 8/8 | Complete    | 2026-04-22 |
-| 4. Chapter Assembly + Post-Commit DAG | 0/TBD | Not started | - |
+| 4. Chapter Assembly + Post-Commit DAG | 0/6 | Planned    | - |
 | 5. Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration | 0/TBD | Not started | - |
 | 6. Testbed Plane + Production Hardening + First Draft | 0/TBD | Not started | - |
 
