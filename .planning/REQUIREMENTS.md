@@ -56,12 +56,12 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 
 - [ ] **LOOP-01**: Scene loop runs end-to-end autonomously: request → RAG bundle → Drafter → Critic → (PASS=buffer | FAIL=regen | EXHAUST=Mode B | BLOCK=alert); ≤1 human-touch per nominal scene.
 - [ ] **LOOP-02**: Chapter assembler stitches scene-buffer scenes into a chapter markdown file; runs a chapter-level critic pass; on PASS, atomically commits to `canon/chapter_NN.md` and re-indexes.
-- [ ] **LOOP-03**: Post-chapter DAG runs to completion before next chapter's scenes begin: entity extractor → LanceDB re-index → retrospective writer; subsequent drafting blocks on DAG completion.
-- [ ] **LOOP-04**: Rollback on chapter-level critic FAIL: surgical scene-kick by default, full-chapter redraft on explicit severity signal.
+- [x] **LOOP-03**: Post-chapter DAG runs to completion before next chapter's scenes begin: entity extractor → LanceDB re-index → retrospective writer; subsequent drafting blocks on DAG completion.
+- [x] **LOOP-04**: Rollback on chapter-level critic FAIL: surgical scene-kick by default, full-chapter redraft on explicit severity signal.
 
 ### Testbed (Theses + Retrospective + Ablation)
 
-- [ ] **TEST-01**: Retrospective writer (Opus) runs post-chapter-commit and produces markdown (`retrospectives/chapter_NN.md`) with sections for what-worked / what-didn't / candidate-theses, with a lint rule that rejects generic output.
+- [x] **TEST-01**: Retrospective writer (Opus) runs post-chapter-commit and produces markdown (`retrospectives/chapter_NN.md`) with sections for what-worked / what-didn't / candidate-theses, with a lint rule that rejects generic output.
 - [ ] **TEST-02**: Thesis registry under `theses/open/` and `theses/closed/` stores experiments with frontmatter schema `{id, title, status, opened, closed, tags, metric, owner}`; thesis matcher closes theses when evidence threshold is met and writes resolution + transferable-artifact block.
 - [ ] **TEST-03**: Ablation harness runs N scenes under variant-A vs variant-B configs with everything else held fixed (SHA-snapshot of config + corpus + checkpoint), outputs to `runs/ablations/<ts>/` with structured deltas.
 - [ ] **TEST-04**: Weekly digest includes open-thesis health (age since last evidence), with linter flagging theses open > 30 days without new evidence.
@@ -160,9 +160,9 @@ Populated by roadmapper during roadmap creation. Every v1 REQ-ID maps to exactly
 | REGEN-04 | Phase 5 | Pending |
 | LOOP-01 | Phase 5 | Pending |
 | LOOP-02 | Phase 4 | Pending |
-| LOOP-03 | Phase 4 | Pending |
-| LOOP-04 | Phase 4 | Pending |
-| TEST-01 | Phase 4 | Pending |
+| LOOP-03 | Phase 4 | Complete |
+| LOOP-04 | Phase 4 | Complete |
+| TEST-01 | Phase 4 | Complete |
 | TEST-02 | Phase 6 | Pending |
 | TEST-03 | Phase 6 | Pending |
 | TEST-04 | Phase 6 | Pending |
