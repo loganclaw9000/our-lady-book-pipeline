@@ -66,6 +66,12 @@
         "name": "drafter",
         "workspace": "/home/admin/Source/our-lady-book-pipeline/workspaces/drafter",
         "model": "vllm/paul-voice-latest"
+      },
+      {
+        "id": "nightly-runner",
+        "name": "nightly-runner",
+        "workspace": "/home/admin/Source/our-lady-book-pipeline/workspaces/nightly-runner",
+        "model": "anthropic/claude-opus-4-7"
       }
     ]
   },

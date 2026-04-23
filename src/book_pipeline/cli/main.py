@@ -42,6 +42,8 @@ SUBCOMMAND_IMPORTS: list[str] = [
     "book_pipeline.cli.curate_voice_samples",
     # Plan 05-04: OBS-02 SQLite ledger ingester + nightly orchestration suite.
     "book_pipeline.cli.ingest_events",
+    "book_pipeline.cli.register_cron",
+    "book_pipeline.cli.check_cron_freshness",
 ]
 
 
