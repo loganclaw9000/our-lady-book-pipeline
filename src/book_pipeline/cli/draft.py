@@ -88,6 +88,12 @@ class CompositionRoot:
     ingestion_run_id: str | None = None
     anchor_set_sha: str | None = None
     event_logger: Any | None = None
+    # Phase 5 additions — constructed via build_llm_client in _build_composition_root
+    # when config/env prereqs are satisfied; None in test harnesses + when the
+    # CLI is invoked without Mode-B/alerter prereqs (voice_samples.yaml populated,
+    # TELEGRAM_BOT_TOKEN set).
+    mode_b_drafter: Any | None = None
+    telegram_alerter: Any | None = None
 
 
 # --------------------------------------------------------------------------- #
@@ -1047,6 +1053,17 @@ def _build_composition_root(
         model_id=critic_backend_cfg.model,
     )
 
+    # --- Mode-B drafter (Plan 05-01) — optional; skipped if voice_samples.yaml not populated ---
+    mode_b_drafter = _maybe_build_mode_b_drafter(
+        event_logger=event_logger,
+        voice_pin=pin_data,
+        model_id=critic_backend_cfg.model,
+        backend_config=critic_backend_cfg,
+    )
+
+    # --- TelegramAlerter (Plan 05-03) — optional; skipped if env vars unset ---
+    telegram_alerter = _maybe_build_telegram_alerter(event_logger=event_logger)
+
     return CompositionRoot(
         bundler=bundler,
         retrievers=retrievers_list,
@@ -1059,7 +1076,65 @@ def _build_composition_root(
         commit_dir=Path("drafts"),
         ingestion_run_id=ingestion_run_id,
         event_logger=event_logger,
+        mode_b_drafter=mode_b_drafter,
+        telegram_alerter=telegram_alerter,
     )
+
+
+def _maybe_build_mode_b_drafter(
+    *,
+    event_logger: Any,
+    voice_pin: Any,
+    model_id: str,
+    backend_config: Any,
+) -> Any | None:
+    """Construct a ModeBDrafter wired via build_llm_client (claude_code_cli by default).
+
+    Returns None if ``config/voice_samples.yaml`` has no passages — D-03 requires
+    ≥3 curated samples. The scene loop's Mode-B escalation branches tolerate
+    None (silently skip Mode-B and fall through to HARD_BLOCKED).
+    """
+    try:
+        from book_pipeline.config.voice_samples import VoiceSamplesConfig
+        from book_pipeline.drafter.mode_b import ModeBDrafter
+        from book_pipeline.llm_clients import build_llm_client
+
+        samples_cfg = VoiceSamplesConfig()
+        passages = list(samples_cfg.passages)
+        if len(passages) < 3:
+            return None
+        llm_client = build_llm_client(backend_config)
+        return ModeBDrafter(
+            anthropic_client=llm_client,
+            event_logger=event_logger,
+            voice_pin=voice_pin,
+            voice_samples=passages,
+            model_id=model_id,
+        )
+    except Exception:
+        # Fail-soft: Mode-B wiring is optional at composition time.
+        return None
+
+
+def _maybe_build_telegram_alerter(*, event_logger: Any) -> Any | None:
+    """Construct a TelegramAlerter if TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID are set."""
+    import os as _os
+
+    bot_token = _os.environ.get("TELEGRAM_BOT_TOKEN")
+    chat_id = _os.environ.get("TELEGRAM_CHAT_ID")
+    if not bot_token or not chat_id:
+        return None
+    try:
+        from book_pipeline.alerts.telegram import TelegramAlerter
+
+        return TelegramAlerter(
+            bot_token=bot_token,
+            chat_id=chat_id,
+            cooldown_path=Path("runs/alert_cooldowns.json"),
+            event_logger=event_logger,
+        )
+    except Exception:
+        return None
 
 
 def _read_latest_ingestion_run_id(indexes_dir: Path) -> str:
