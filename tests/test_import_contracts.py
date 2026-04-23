@@ -212,6 +212,23 @@ def test_phase_4_packages_in_lint_imports_mypy_scope() -> None:
         )
 
 
+def test_cli_curate_voice_samples_exemption_registered() -> None:
+    """Plan 05-01 Task 3: pyproject.toml contract 1 ignore_imports MUST
+    carry the `cli.curate_voice_samples -> book_specifics.voice_samples`
+    exemption. Mirrors the Plan 03-02 anchor_sources pattern — a CLI
+    composition seam with one book-domain import."""
+    import pathlib
+
+    content = pathlib.Path("pyproject.toml").read_text(encoding="utf-8")
+    assert (
+        "book_pipeline.cli.curate_voice_samples -> book_pipeline.book_specifics.voice_samples"
+        in content
+    ), (
+        "Plan 05-01 curate-voice-samples CLI composition seam exemption not "
+        "registered in pyproject.toml contract 1 ignore_imports."
+    )
+
+
 def test_lint_imports_mypy_scope_matches_phase_1_packages() -> None:
     """scripts/lint_imports.sh mypy step MUST be scoped to Phase 1 packages,
     not whole-tree `mypy src`. Whole-tree mypy can surface cross-module
