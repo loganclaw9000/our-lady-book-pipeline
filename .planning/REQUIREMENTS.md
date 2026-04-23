@@ -25,7 +25,7 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 ### Corpus + Typed RAG
 
 - [x] **CORPUS-01**: `~/Source/our-lady-of-champion/` lore bibles ingested (read-only mount/copy) into LanceDB with 5 separate tables: `historical`, `metaphysics`, `entity_state`, `arc_position`, `negative_constraint`.
-- [x] **CORPUS-02**: Entity-state auto-extraction agent runs post-commit, writes structured markdown entity cards (YAML frontmatter + body) into `entity-state/chapter_NN/<entity>.md`, and re-indexes the `entity_state` LanceDB table.
+- [~] **CORPUS-02**: Entity-state auto-extraction agent runs post-commit, writes structured markdown entity cards (YAML frontmatter + body) into `entity-state/chapter_NN/<entity>.md`, and re-indexes the `entity_state` LanceDB table. *(write side complete: Plan 04-03 OpusEntityExtractor stamps source_chapter_sha on every card; Plan 04-04 post-commit DAG step 3 reindexes. READ side — bundler flagging stale cards on canon SHA drift — deferred to Phase 5 alongside regen-routing work since both share the detect-staleness + route-response shape. Not load-bearing for first-draft smoke: stale cards only matter for chapters 2+.)*
 - [x] **RAG-01**: The 5 typed retrievers each return structured findings with provenance (source file + chunk id) given a scene request keyed on `{POV, date, location, beat_function, chapter_num}`.
 - [x] **RAG-02**: Chapter outline (`our-lady-of-champion-outline.md`, 27 chapters × 3 blocks × 3 beats nominal) parsed into the arc-position retriever at beat-function-level granularity; stable beat IDs.
 - [x] **RAG-03**: Context Pack Bundler enforces a hard cap of ≤40KB total retrieved context per drafter call, with a cross-retriever reconciliation step that surfaces contradictions instead of silently concatenating.
@@ -57,7 +57,7 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 - [ ] **LOOP-01**: Scene loop runs end-to-end autonomously: request → RAG bundle → Drafter → Critic → (PASS=buffer | FAIL=regen | EXHAUST=Mode B | BLOCK=alert); ≤1 human-touch per nominal scene.
 - [x] **LOOP-02**: Chapter assembler stitches scene-buffer scenes into a chapter markdown file; runs a chapter-level critic pass; on PASS, atomically commits to `canon/chapter_NN.md` and re-indexes.
 - [x] **LOOP-03**: Post-chapter DAG runs to completion before next chapter's scenes begin: entity extractor → LanceDB re-index → retrospective writer; subsequent drafting blocks on DAG completion.
-- [x] **LOOP-04**: Rollback on chapter-level critic FAIL: surgical scene-kick by default, full-chapter redraft on explicit severity signal.
+- [~] **LOOP-04**: Rollback on chapter-level critic FAIL: surgical scene-kick by default, full-chapter redraft on explicit severity signal. *(terminal side complete: Plan 04-04 CHAPTER_FAIL transitions + blocker-tag audit land; scene-kick routing — CriticIssue→scene_id mapping + per-scene state reset — deferred to Phase 5 where REGEN-03 Mode-B escape lives. Both regen-routing shapes ship together.)*
 
 ### Testbed (Theses + Retrospective + Ablation)
 
