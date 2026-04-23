@@ -98,15 +98,38 @@ def reindex_entity_state_from_jsons(
 
     tbl = open_or_create_table(indexes_dir, "entity_state")
     # Idempotent rebuild: wipe existing rows, then insert fresh batch.
+    # CR-02: On bulk-delete failure we MUST NOT fall through to tbl.add(rows) —
+    # that would double-insert against the stable `chunk_id = entity_name`
+    # assumption and break retriever scoring. Try a per-row delete fallback;
+    # if that also fails, raise (caller DAG step 3 routes to DAG_BLOCKED).
     try:
         tbl.delete("true")
-    except Exception:
-        # Fall back to a per-row pattern — most LanceDB 0.30.x versions
-        # accept `true` as the predicate.
-        logger.exception(
-            "reindex: entity_state bulk delete via `true` predicate failed"
+    except Exception as exc:
+        logger.warning(
+            "reindex: bulk delete(`true`) failed (%s); "
+            "falling back to row-by-row delete",
+            exc,
         )
+        try:
+            existing_ids = [
+                r["chunk_id"]
+                for r in tbl.to_pandas().to_dict("records")
+            ]
+            for chunk_id in existing_ids:
+                # Use parameterized-style quoting: chunk_id values are
+                # derived from EntityCard.entity_name which is free-form
+                # text. Escape single quotes to avoid predicate breakage.
+                safe = str(chunk_id).replace("'", "''")
+                tbl.delete(f"chunk_id = '{safe}'")
+        except Exception:
+            logger.exception("reindex: per-row fallback also failed")
+            raise RuntimeError(
+                "entity_state reindex could not clear prior rows; "
+                "refusing to double-insert"
+            ) from exc
 
+    # Only reached when the table is verified empty (either bulk delete
+    # succeeded or per-row fallback completed).
     if rows:
         tbl.add(rows)
 
