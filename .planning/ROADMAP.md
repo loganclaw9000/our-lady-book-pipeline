@@ -12,7 +12,7 @@
 - [x] **Phase 1: Foundation + Observability Baseline** - uv scaffolding, Pydantic config, Protocol contracts, EventLogger, voice-pin + SHA canary, openclaw workspace, module-boundary lint, Telegram plumbing. (completed 2026-04-22)
 - [x] **Phase 2: Corpus Ingestion + Typed RAG** - 5 LanceDB indexes, ContextPackBundler with 40KB cap + conflict reconciliation, arc-position beat parser, golden-query CI gate. (completed 2026-04-22)
 - [x] **Phase 3: Mode-A Drafter + Scene Critic + Basic Regen** - vLLM-served voice checkpoint, scene Critic with 5-axis rubric, scene-local Regenerator (R=1), voice-fidelity anchor set, SceneStateMachine end-to-end. (completed 2026-04-22)
-- [ ] **Phase 4: Chapter Assembly + Post-Commit DAG** - ChapterAssembler, chapter-level Critic (fresh RAG pack), atomic canon commit, EntityExtractor with SHA-linked cards, RetrospectiveWriter with lint.
+- [~] **Phase 4: Chapter Assembly + Post-Commit DAG** - ChapterAssembler, chapter-level Critic (fresh RAG pack), atomic canon commit, EntityExtractor with SHA-linked cards, RetrospectiveWriter with lint. (1/6 — 04-01 kernel skeletons + ChapterStateMachine)
 - [ ] **Phase 5: Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration** - Mode-B Drafter (Opus), full R-cap regen with cost gate, oscillation detector, Mode-B preflags, hard-block Telegram alerts, nightly openclaw cron.
 - [ ] **Phase 6: Testbed Plane + Production Hardening + First Draft** - Thesis registry + matcher, ablation harness, cross-family critic, weekly digest, metrics ledger ingester, 27-chapter production run with >=3 closed theses.
 
@@ -129,7 +129,7 @@ Plans:
 **Plans**: 6 plans in 5 waves (Wave 1: 01 kernel skeletons + ChapterStateMachine → Wave 2 parallel: 02 ConcatAssembler + ChapterCritic && 03 EntityExtractor + RetrospectiveWriter → Wave 3: 04 Post-commit DAG orchestrator + AblationRun harness → Wave 4: 05 book-pipeline chapter + chapter-status + ablate CLIs → Wave 5: 06 end-to-end mocked integration test)
 
 Plans:
-- [ ] 04-01-PLAN.md — Kernel package skeletons (chapter_assembler/entity_extractor/retrospective/ablation) + ChapterStateMachine + import-linter extension [LOOP-02, LOOP-03]
+- [x] 04-01-PLAN.md — Kernel package skeletons (chapter_assembler/entity_extractor/retrospective/ablation) + ChapterStateMachine + import-linter extension [LOOP-02, LOOP-03]
 - [ ] 04-02-PLAN.md — ConcatAssembler deterministic scene-join + ChapterCritic (≥3/5 threshold, fresh ContextPack, CRIT-04 audit log) [LOOP-02, CRIT-02]
 - [ ] 04-03-PLAN.md — OpusEntityExtractor (incremental update, source_chapter_sha stamping) + OpusRetrospectiveWriter (lint-enforced output) [CORPUS-02, TEST-01]
 - [ ] 04-04-PLAN.md — ChapterDagOrchestrator (4-commit strict-order DAG + resumability + scene buffer archival) + AblationRun harness skeleton [LOOP-02, LOOP-03, TEST-01]

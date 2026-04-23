@@ -2,21 +2,21 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Completed 03-07-PLAN.md (book-pipeline draft CLI + SceneStateMachine wiring + W-1 factory + ch01_sc01 stub + B-3 invariant enforced; 11 mocked integration tests land; Plan 03-08 real-world smoke next)
-last_updated: "2026-04-22T21:04:22.501Z"
+status: executing
+stopped_at: Completed 04-01-PLAN.md (Phase 4 kernel skeletons — 4 packages chapter_assembler/entity_extractor/retrospective/ablation + ChapterStateMachine module with 10-value ChapterState StrEnum + 7-field ChapterStateRecord + pure transition() helper parallel to frozen SceneStateMachine; import-linter contracts 1+2 extended; tests: 440 passed from 431 baseline)
+last_updated: "2026-04-21T00:00:00Z"
 progress:
   total_phases: 6
   completed_phases: 3
-  total_plans: 20
-  completed_plans: 20
-  percent: 100
+  total_plans: 26
+  completed_plans: 22
+  percent: 85
 ---
 
 # STATE: our-lady-book-pipeline
 
-**Last updated:** 2026-04-22 after Plan 03-06 (SceneLocalRegenerator kernel — Opus 4.7 + ±10% word-count guard + tenacity retry + severity grouping; REGEN-01 partially complete — kernel live, CLI composition + smoke pending in 03-07/03-08)
-**Status:** Ready to plan
+**Last updated:** 2026-04-21 after Plan 04-01 (Phase 4 kernel skeletons + ChapterStateMachine — 4 new kernel packages (chapter_assembler, entity_extractor, retrospective, ablation) + NEW interfaces.chapter_state_machine module with 10-value StrEnum + 7-field Pydantic record + pure transition() helper; SceneStateMachine frozen and untouched; import-linter contracts 1+2 extended; Plans 04-02..06 can now land concrete impls without further pyproject.toml / lint-script churn)
+**Status:** Executing Phase 04
 
 ---
 
@@ -45,21 +45,21 @@ Plan 03-04 LANDED (Mode-A drafter + sampling profiles + V-2 memorization gate + 
 
 ## Current Position
 
-Phase: 03 (Mode-A Drafter + Scene Critic + Basic Regen) — EXECUTING
-Plan: 7 of 8 complete (03-08 real-world smoke next; 03-01..03-07 all landed)
+Phase: 04 (Chapter Assembly + Post-Commit DAG) — EXECUTING
+Plan: 2 of 6
 
 - **Phase:** 4
-- **Plan:** Not started
-- **Status:** Plan 03-07 complete (`book-pipeline draft <scene_id>` CLI composition root: bundler + 5 retrievers via W-1 factory + ModeADrafter + SceneCritic + SceneLocalRegenerator + SceneStateMachine wired through a single scene loop; B-3 invariant enforced in _commit_scene — voice_pin_sha == checkpoint_sha == draft.voice_pin_sha; ch01_sc01.yaml stub hand-authored from outline; 11 mocked integration tests + 5 factory tests land). REGEN-01 at kernel + CLI layer; real-world smoke deferred to 03-08.
-- **Plans complete:** 7 / 8 (Phase 3: 03-01 + 03-02 + 03-03 + 03-04 + 03-05 + 03-06 + 03-07); 19 / 20 total (Phase 1: 6; Phase 2: 6; Phase 3: 7)
-- **Progress:** [█████████▌] 95%
+- **Plan:** 04-01 complete → next: 04-02 (ConcatAssembler)
+- **Status:** Plan 04-01 complete (Phase 4 kernel skeletons + ChapterStateMachine): 4 new kernel packages (`chapter_assembler/`, `entity_extractor/`, `retrospective/`, `ablation/`) landed as empty `__init__.py` anchors with docstrings citing the downstream plan that fills each one; `src/book_pipeline/interfaces/chapter_state_machine.py` ships the NEW Phase 4 chapter-grain state machine parallel to the FROZEN `scene_state_machine.py` — 10-value `ChapterState` StrEnum (`PENDING_SCENES → ASSEMBLING → ASSEMBLED → CHAPTER_CRITIQUING → (CHAPTER_FAIL | CHAPTER_PASS) → COMMITTING_CANON → POST_COMMIT_DAG → (DAG_COMPLETE | DAG_BLOCKED)`) + 7-field `ChapterStateRecord` Pydantic (`chapter_num`, `state`, `scene_ids`, `chapter_sha`, `dag_step` 0..4, `history`, `blockers`) + pure `transition(record, to_state, note)` helper (byte-for-byte structural parallel to scene variant: `model_copy` + history append with `{from, to, ts_iso, note}`, caller persists). `SceneStateMachine` bytes-identical pre/post plan (empty diff). `types.py` additive-only (65 insertions / 0 deletions). pyproject.toml contract 1 source_modules + contract 2 forbidden_modules each extended with the 4 new dotted names. `scripts/lint_imports.sh` mypy scope extended with the 4 dirs. `bash scripts/lint_imports.sh` green (2 contracts kept, ruff clean, mypy clean on 106 source files). 9 new non-slow tests (3 import-contract structural + 6 chapter_state_machine behavior) — full non-slow suite 440 passed (was 431 baseline). 4 atomic TDD commits: `29a345e` (Task 1 RED), `ad009c8` (Task 1 GREEN — 4 packages + lint extensions), `6c5ee05` (Task 2 RED), `e497497` (Task 2 GREEN — ChapterStateMachine module). Plans 04-02..04-06 can now add files INSIDE the 4 new directories without touching pyproject.toml or scripts/lint_imports.sh.
+- **Plans complete:** 1 / 6 (Phase 4: 04-01); 20 / 26 total (Phase 1: 6; Phase 2: 6; Phase 3: 7; Phase 3.1 gap-closure; Phase 4: 1)
+- **Progress:** [██████████] 85%
 
 ### Roadmap progress
 
 - [x] **Phase 1:** Foundation + Observability Baseline (6/6 plans)
 - [x] **Phase 2:** Corpus Ingestion + Typed RAG (6/6 plans — 02-01 RAG kernel + 02-02 corpus ingester + 02-03 3-of-5 retrievers + 02-04 entity_state/arc_position + outline_parser + 02-05 ContextPackBundler + 02-06 RAG-04 golden-query CI gate + nightly cron)
 - [~] **Phase 3:** Mode-A Drafter + Scene Critic + Basic Regen (7/8 plans — 03-01 kernel skeletons + REAL V6 voice pin; 03-02 OBS-03 voice-fidelity anchor curation; 03-03 vLLM bootstrap plane + boot_handshake SHA gate [DRAFT-01 complete]; 03-04 Mode-A ModeADrafter + Jinja2 template + sampling profiles + V-2 memorization gate + AnchorSetProvider [DRAFT-01 + DRAFT-02 + OBS-03 complete]; 03-05 SceneCritic Anthropic Opus 4.7 + CRIT-04 audit log [CRIT-01 + CRIT-04 complete]; 03-06 SceneLocalRegenerator kernel — Opus 4.7 + ±10% word-count guard + tenacity retry + severity grouping [REGEN-01 kernel]; 03-07 book-pipeline draft CLI composition + SceneStateMachine + W-1 factory + ch01_sc01 stub + B-3 invariant + 11 mocked tests [REGEN-01 CLI layer]; 03-08 real-world smoke pending)
-- [ ] **Phase 4:** Chapter Assembly + Post-Commit DAG
+- [~] **Phase 4:** Chapter Assembly + Post-Commit DAG (1/6 plans — 04-01 kernel skeletons for chapter_assembler/entity_extractor/retrospective/ablation + NEW ChapterStateMachine module parallel to frozen SceneStateMachine; 10-value ChapterState StrEnum + 7-field ChapterStateRecord + pure transition() helper; import-linter contracts 1+2 + scripts/lint_imports.sh mypy scope extended; Plans 04-02..04-06 land concrete impls)
 - [ ] **Phase 5:** Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration
 - [ ] **Phase 6:** Testbed Plane + Production Hardening + First Draft
 
@@ -86,6 +86,7 @@ No prose-generation metrics yet — pipeline has not produced artifacts. First r
 | Phase 03 P04 | 28m | 2 tasks | 14 files |
 | Phase 03 P06 | 40 | 2 tasks | 5 files |
 | 03-07        | 13             | 2     | 4             | 5              | 16          | 396           | 2026-04-22  |
+| 04-01        | 18             | 2     | 12            | 4              | 9           | 440           | 2026-04-21  |
 
 ### Target metrics (will populate once pipeline runs)
 
