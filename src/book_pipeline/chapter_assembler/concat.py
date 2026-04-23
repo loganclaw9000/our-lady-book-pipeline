@@ -180,18 +180,23 @@ class ConcatAssembler:
                 f"(expected `{commit_dir}/ch{chapter_num:02d}/`)"
             )
 
-        # Collect regex-validated filenames; sort by (chapter, scene) integer tuple.
-        entries: list[tuple[int, int, Path]] = []
+        # Narrow regex to THIS chapter only (WR-02). Matches the gate in
+        # ChapterDagOrchestrator._preflight_scene_count_gate — a stray
+        # ch01_sc01.md left in drafts/ch02/ (crash residue, manual copy-
+        # paste, git rebase artifact) must NOT cross-contaminate the ch02
+        # assembly. Previous code used the module-level _SCENE_MD_RE which
+        # accepted any chNN prefix regardless of the chapter_dir location.
+        scene_re = re.compile(rf"^ch{chapter_num:02d}_sc(\d+)\.md$")
+        entries: list[tuple[int, Path]] = []
         for path in chapter_dir.iterdir():
             if not path.is_file():
                 continue
-            m = _SCENE_MD_RE.match(path.name)
+            m = scene_re.match(path.name)
             if m is None:
                 continue
-            ch_num = int(m.group(1))
-            sc_idx = int(m.group(2))
-            entries.append((ch_num, sc_idx, path))
-        entries.sort(key=lambda t: (t[0], t[1]))
+            sc_idx = int(m.group(1))
+            entries.append((sc_idx, path))
+        entries.sort(key=lambda t: t[0])
 
         if not entries:
             raise FileNotFoundError(
@@ -200,7 +205,7 @@ class ConcatAssembler:
             )
 
         drafts: list[DraftResponse] = []
-        for _ch_num, _sc_idx, path in entries:
+        for _sc_idx, path in entries:
             fm, body = _parse_scene_md(path)
             pin_sha = fm.get("voice_pin_sha")
             if not isinstance(pin_sha, str) or not pin_sha:
