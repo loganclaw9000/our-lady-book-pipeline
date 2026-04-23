@@ -44,6 +44,7 @@ SUBCOMMAND_IMPORTS: list[str] = [
     "book_pipeline.cli.ingest_events",
     "book_pipeline.cli.register_cron",
     "book_pipeline.cli.check_cron_freshness",
+    "book_pipeline.cli.nightly_run",
 ]
 
 

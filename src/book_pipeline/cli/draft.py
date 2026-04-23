@@ -340,6 +340,70 @@ def _synth_critic_events_from_severities(
     return out
 
 
+def _try_send_alert(
+    alerter: Any,
+    condition: str,
+    detail: dict[str, Any],
+    *,
+    event_logger: Any | None = None,
+) -> None:
+    """Fire a TelegramAlerter.send_alert; log delivery failures (OQ 4 soft-fail).
+
+    Wraps TelegramPermanentError so scene-loop correctness is independent of
+    alert delivery: HARD_BLOCKED state transitions still happen regardless
+    of network / token health. Records a role='telegram_alert' Event with
+    extra.delivery='failed' on permanent errors so the weekly digest can
+    surface alert-delivery drift.
+    """
+    if alerter is None:
+        return
+    # Lazy import — keeps cli.draft's import footprint unchanged for callers
+    # that don't wire an alerter.
+    try:
+        from book_pipeline.alerts.telegram import TelegramPermanentError
+    except ImportError:  # pragma: no cover
+        TelegramPermanentError = Exception  # type: ignore[misc,assignment]
+    try:
+        alerter.send_alert(condition, detail)
+    except TelegramPermanentError as exc:
+        # OQ 4 soft-fail: emit role='telegram_alert' Event with
+        # delivery='failed' so the digest can surface delivery drift,
+        # but do NOT alter the scene-loop's HARD_BLOCKED trajectory.
+        if event_logger is None:
+            return
+        try:
+            ts_iso = _now_iso()
+            prompt_h = hash_text(f"alert_failure:{condition}:{detail.get('scene_id', '')}")
+            event_logger.emit(
+                Event(
+                    event_id=event_id(
+                        ts_iso, "telegram_alert", "cli.draft._try_send_alert", prompt_h
+                    ),
+                    ts_iso=ts_iso,
+                    role="telegram_alert",
+                    model="telegram-bot-api",
+                    prompt_hash=prompt_h,
+                    input_tokens=0,
+                    cached_tokens=0,
+                    output_tokens=0,
+                    latency_ms=0,
+                    caller_context={
+                        "module": "cli.draft",
+                        "function": "_try_send_alert",
+                        "scene_id": str(detail.get("scene_id", "")),
+                    },
+                    output_hash=hash_text(f"{condition}:failed"),
+                    extra={
+                        "condition": condition,
+                        "delivery": "failed",
+                        "error": str(exc),
+                    },
+                )
+            )
+        except Exception:  # pragma: no cover — observability best-effort
+            pass
+
+
 def _run_mode_b_attempt(
     *,
     scene_id: str,
@@ -352,6 +416,8 @@ def _run_mode_b_attempt(
     commit_dir: Path,
     ingestion_run_id: str | None,
     record: SceneStateRecord,
+    alerter: Any = None,
+    event_logger: Any = None,
 ) -> int:
     """Run one Mode-B draft attempt; on success critic-gate; else HARD_BLOCK.
 
@@ -372,7 +438,12 @@ def _run_mode_b_attempt(
         )
         b_draft = mode_b_drafter.draft(draft_request)
     except ModeBDrafterBlocked:
-        # TODO(05-03): alerter.send_alert('mode_b_exhausted', {...})
+        _try_send_alert(
+            alerter,
+            "mode_b_exhausted",
+            {"scene_id": scene_id},
+            event_logger=event_logger,
+        )
         record = transition(record, SceneState.HARD_BLOCKED, "mode_b_exhausted")
         record.blockers.append("mode_b_exhausted")
         _persist(record, state_path)
@@ -395,7 +466,12 @@ def _run_mode_b_attempt(
         return 3
 
     if not b_critic_resp.overall_pass:
-        # TODO(05-03): alerter.send_alert('mode_b_critic_fail', {...})
+        _try_send_alert(
+            alerter,
+            "regen_stuck_loop",
+            {"scene_id": scene_id, "axes": "mode_b_critic_fail"},
+            event_logger=event_logger,
+        )
         record = transition(record, SceneState.HARD_BLOCKED, "mode_b_critic_fail")
         record.blockers.append("mode_b_critic_fail")
         _persist(record, state_path)
@@ -562,6 +638,8 @@ def run_draft_loop(
             commit_dir=commit_dir,
             ingestion_run_id=ingestion_run_id,
             record=record,
+            alerter=getattr(composition_root, "alerter", None),
+            event_logger=event_logger,
         )
 
     prior_draft: Any = None
@@ -707,7 +785,12 @@ def run_draft_loop(
                 _emit_mode_escalation(
                     event_logger, scene_id, "A", "A", "spend_cap_exceeded", []
                 )
-                # TODO(05-03): alerter.send_alert('spend_cap_exceeded', {...})
+                _try_send_alert(
+                    getattr(composition_root, "alerter", None),
+                    "spend_cap_exceeded",
+                    {"scene_id": scene_id, "spent_usd": spent},
+                    event_logger=event_logger,
+                )
                 record = transition(
                     record,
                     SceneState.HARD_BLOCKED,
@@ -751,6 +834,8 @@ def run_draft_loop(
                     commit_dir=commit_dir,
                     ingestion_run_id=ingestion_run_id,
                     record=record,
+                    alerter=getattr(composition_root, "alerter", None),
+                    event_logger=event_logger,
                 )
 
         # --- Plan 05-02 D-09 step (d): R-cap exhausted. ---
@@ -778,6 +863,8 @@ def run_draft_loop(
                     commit_dir=commit_dir,
                     ingestion_run_id=ingestion_run_id,
                     record=record,
+                    alerter=getattr(composition_root, "alerter", None),
+                    event_logger=event_logger,
                 )
             # Legacy Phase 3 path (no Mode-B wired) — preserve HARD_BLOCKED.
             record = transition(
