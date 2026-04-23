@@ -143,6 +143,13 @@ ignore_imports = [
     # deviation Rule 1 precedent: 2 exemptions match the actual edges).
     "book_pipeline.cli.chapter -> book_pipeline.book_specifics.outline_scene_counts",
     "book_pipeline.cli.chapter -> book_pipeline.book_specifics.corpus_paths",
+    # Plan 05-01 addition: cli.curate_voice_samples is the CLI composition
+    # seam that builds config/voice_samples.yaml from curated 400-600-word
+    # passages. It is the ONLY site that imports from
+    # book_specifics.voice_samples (DEFAULT_SOURCE_DIRS + GENRE_BALANCE +
+    # TARGET_WORD_MIN/MAX + classify_filename). Same CLI-composition-seam
+    # pattern as Plan 03-02 curate_anchors → anchor_sources.
+    "book_pipeline.cli.curate_voice_samples -> book_pipeline.book_specifics.voice_samples",
 ]
 
 [[tool.importlinter.contracts]]

@@ -38,6 +38,8 @@ SUBCOMMAND_IMPORTS: list[str] = [
     "book_pipeline.cli.chapter",
     "book_pipeline.cli.chapter_status",
     "book_pipeline.cli.ablate",
+    # Plan 05-01: curate-voice-samples for Mode-B drafter voice-samples prefix
+    "book_pipeline.cli.curate_voice_samples",
 ]
 
 

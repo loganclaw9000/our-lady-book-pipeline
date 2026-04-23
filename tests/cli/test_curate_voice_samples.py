@@ -14,12 +14,9 @@ All tests use tmp_path — no reads of /home/admin/paul-thinkpiece-pipeline.
 from __future__ import annotations
 
 import subprocess
-import sys
 from pathlib import Path
 
-import pytest
 import yaml
-
 
 # --- helpers --------------------------------------------------------- #
 
@@ -51,9 +48,9 @@ def _make_source_dir(tmp_path: Path) -> Path:
 
 
 def _run_cli(args: list[str]) -> subprocess.CompletedProcess[str]:
-    """Run book-pipeline with given args; capture stdout/stderr."""
+    """Run book-pipeline via uv (mirrors Plan 04-05 CLI-test pattern)."""
     return subprocess.run(
-        [sys.executable, "-m", "book_pipeline.cli.main", *args],
+        ["uv", "run", "book-pipeline", *args],
         capture_output=True,
         text=True,
         cwd="/home/admin/Source/our-lady-book-pipeline",

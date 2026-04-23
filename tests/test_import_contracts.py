@@ -83,6 +83,10 @@ def test_kernel_does_not_import_book_specifics() -> None:
         pathlib.Path("src/book_pipeline/cli/vllm_bootstrap.py"),
         pathlib.Path("src/book_pipeline/cli/draft.py"),
         pathlib.Path("src/book_pipeline/cli/chapter.py"),
+        # Plan 05-01: curate-voice-samples CLI composition seam to
+        # book_specifics.voice_samples (DEFAULT_SOURCE_DIRS + GENRE_BALANCE +
+        # classify_filename). Mirrors Plan 03-02 curate_anchors pattern.
+        pathlib.Path("src/book_pipeline/cli/curate_voice_samples.py"),
     }
     for d in kernel_dirs:
         if not d.exists():
