@@ -32,6 +32,10 @@ uv run mypy \
   src/book_pipeline/critic \
   src/book_pipeline/regenerator \
   src/book_pipeline/voice_fidelity \
-  src/book_pipeline/llm_clients
+  src/book_pipeline/llm_clients \
+  src/book_pipeline/chapter_assembler \
+  src/book_pipeline/entity_extractor \
+  src/book_pipeline/retrospective \
+  src/book_pipeline/ablation
 
 echo "OK — module boundaries, ruff, and scoped mypy all pass."
