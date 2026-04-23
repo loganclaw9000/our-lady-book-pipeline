@@ -48,9 +48,9 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 ### Regeneration + Mode Dial
 
 - [ ] **REGEN-01**: Regenerator takes critic issue list + severities and rewrites only affected passages (scene-local regeneration preferred over full regen).
-- [ ] **REGEN-02**: Max-iteration budget R per scene, configurable; per-scene spend cap enforces a frontier-cost ceiling during Mode-B.
-- [ ] **REGEN-03**: After R Mode-A failures on a scene, controller auto-escalates that scene to Mode B; escape event logged with triggering issue IDs.
-- [ ] **REGEN-04**: Stuck-loop detector flags when a scene oscillates between two failure modes across regen iterations; triggers hard-block alert instead of continuing.
+- [x] **REGEN-02**: Max-iteration budget R per scene, configurable; per-scene spend cap enforces a frontier-cost ceiling during Mode-B.
+- [x] **REGEN-03**: After R Mode-A failures on a scene, controller auto-escalates that scene to Mode B; escape event logged with triggering issue IDs.
+- [x] **REGEN-04**: Stuck-loop detector flags when a scene oscillates between two failure modes across regen iterations; triggers hard-block alert instead of continuing.
 
 ### Loop + Chapter Commit
 
@@ -155,9 +155,9 @@ Populated by roadmapper during roadmap creation. Every v1 REQ-ID maps to exactly
 | CRIT-03 | Phase 6 | Pending |
 | CRIT-04 | Phase 3 | Complete |
 | REGEN-01 | Phase 3 | In Progress (kernel landed 03-06; CLI composition + smoke pending 03-07/03-08) |
-| REGEN-02 | Phase 5 | Pending |
-| REGEN-03 | Phase 5 | Pending |
-| REGEN-04 | Phase 5 | Pending |
+| REGEN-02 | Phase 5 | Complete |
+| REGEN-03 | Phase 5 | Complete |
+| REGEN-04 | Phase 5 | Complete |
 | LOOP-01 | Phase 5 | Pending |
 | LOOP-02 | Phase 4 | Complete |
 | LOOP-03 | Phase 4 | Complete |
