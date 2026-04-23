@@ -542,7 +542,14 @@ class ChapterDagOrchestrator:
             chapter_scene_request, self.retrievers
         )
 
-        # Call the critic.
+        # Call the critic. WR-05: thread voice_pin_shas so ChapterCritic
+        # can stamp Event.checkpoint_sha with the most-recent pin (V-3
+        # continuity at chapter grain — matches B-3 latest-pin convention
+        # and lets Phase 6 digest compute voice-pin drift across chapter
+        # boundaries from events alone).
+        voice_pin_shas_from_drafts = [
+            d.voice_pin_sha for d in drafts if d.voice_pin_sha
+        ]
         critic_req = CriticRequest(
             scene_text=chapter_text,
             context_pack=chapter_pack,
@@ -551,6 +558,7 @@ class ChapterDagOrchestrator:
             chapter_context={
                 "chapter_num": chapter_num,
                 "assembly_commit_sha": None,
+                "voice_pin_shas": voice_pin_shas_from_drafts,
             },
         )
         critic_resp = self.chapter_critic.review(critic_req)

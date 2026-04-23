@@ -209,6 +209,12 @@ class ChapterCritic:
     def review(self, request: CriticRequest) -> CriticResponse:
         chapter_num = _derive_chapter_num(request)
         assembly_commit_sha = _derive_assembly_sha(request)
+        # WR-05: If the caller threads `voice_pin_shas` via chapter_context,
+        # stamp the most-recent pin onto Event.checkpoint_sha so Phase 6
+        # digest can correlate chapter-critic events with the voice-FT
+        # pin that produced the scenes. Matches B-3 latest-pin convention.
+        voice_pin_shas = _derive_voice_pin_shas(request)
+        latest_pin = voice_pin_shas[-1] if voice_pin_shas else None
         ts_iso = _now_iso()
         context_pack_fingerprint = request.context_pack.fingerprint
         request_rubric_mismatch = (
@@ -238,6 +244,7 @@ class ChapterCritic:
                 assembly_commit_sha=assembly_commit_sha,
                 request_rubric_mismatch=request_rubric_mismatch,
                 start_time=start,
+                latest_pin=latest_pin,
             )
             raise ChapterCriticError(
                 "anthropic_unavailable",
@@ -344,7 +351,7 @@ class ChapterCritic:
             output_hash=parsed.output_sha,
             mode=None,
             rubric_version=self.rubric.chapter_rubric.rubric_version,
-            checkpoint_sha=None,
+            checkpoint_sha=latest_pin,  # WR-05: V-3 continuity at chapter grain
             extra=extra,
         )
         self._emit(event)
@@ -503,6 +510,7 @@ class ChapterCritic:
         assembly_commit_sha: str | None,
         request_rubric_mismatch: bool,
         start_time: float,
+        latest_pin: str | None = None,
     ) -> None:
         """W-7: audit record + error Event written BEFORE raise on tenacity
         exhaustion. Matches SceneCritic's _handle_failure shape exactly."""
@@ -575,7 +583,7 @@ class ChapterCritic:
             output_hash="",
             mode=None,
             rubric_version=self.rubric.chapter_rubric.rubric_version,
-            checkpoint_sha=None,
+            checkpoint_sha=latest_pin,  # WR-05: V-3 continuity at chapter grain
             extra=extra,
         )
         self._emit(error_event)
@@ -615,6 +623,22 @@ def _derive_assembly_sha(request: CriticRequest) -> str | None:
     if raw is None:
         return None
     return str(raw)
+
+
+def _derive_voice_pin_shas(request: CriticRequest) -> list[str]:
+    """Extract voice_pin_shas from CriticRequest.chapter_context (WR-05).
+
+    Returns empty list if the caller didn't populate the field, the value
+    is None, not a list, or carries no strings. Tolerates heterogeneous
+    list contents (filter to str entries only).
+    """
+    ctx = request.chapter_context
+    if ctx is None:
+        return []
+    raw = ctx.get("voice_pin_shas")
+    if not isinstance(raw, list):
+        return []
+    return [str(s) for s in raw if isinstance(s, str) and s]
 
 
 def _safe_model_dump(response: Any) -> dict[str, Any]:
