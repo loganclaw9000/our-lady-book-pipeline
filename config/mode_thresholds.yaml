@@ -64,3 +64,11 @@ critic_backend:
   model: claude-opus-4-7
   timeout_s: 180
   max_budget_usd_per_scene: 1.0
+# Plan 05-02 D-05 + D-06: regen budget + per-scene USD spend cap.
+# r_cap_mode_a = number of Mode-A regen attempts allowed before escalating to
+# Mode-B (total = 1 initial + r_cap_mode_a). spend_cap_usd_per_scene is a hard
+# abort on cumulative scene spend (drafter + critic + regen + mode_b events
+# summed via book_pipeline.observability.pricing.event_cost_usd).
+regen:
+  r_cap_mode_a: 3
+  spend_cap_usd_per_scene: 0.75

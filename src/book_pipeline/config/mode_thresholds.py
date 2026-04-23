@@ -110,6 +110,25 @@ class AlertsConfig(BaseModel):
     dedup_window_seconds: int = Field(ge=0)
 
 
+class RegenConfig(BaseModel):
+    """Plan 05-02 D-05/D-06 — R-cap + per-scene USD spend cap.
+
+    Additive under the Phase 1 freeze — no existing ModeThresholdsConfig
+    field is renamed or removed.
+
+    ``r_cap_mode_a`` = number of Mode-A regen attempts allowed BEFORE
+    escalating to Mode-B (default 3 → 4 total attempts = 1 initial + 3
+    regens). Attempt #4's critic-fail triggers Mode-B escalation.
+
+    ``spend_cap_usd_per_scene`` = hard abort threshold for cumulative USD
+    spend on one scene across drafter / critic / regenerator / mode_b
+    events (default $0.75 per D-06).
+    """
+
+    r_cap_mode_a: int = Field(default=3, gt=0)
+    spend_cap_usd_per_scene: float = Field(default=0.75, gt=0.0)
+
+
 class CriticBackendConfig(BaseModel):
     """Which backend SceneCritic + SceneLocalRegenerator use for Opus calls.
 
@@ -150,6 +169,10 @@ class ModeThresholdsConfig(BaseSettings):
     # still validate (and get the claude_code_cli default — operator
     # directive 2026-04-21).
     critic_backend: CriticBackendConfig = Field(default_factory=CriticBackendConfig)
+    # Plan 05-02 D-05 + D-06: R-cap + per-scene USD spend cap. default_factory
+    # means legacy mode_thresholds.yaml files without a `regen:` block still
+    # validate (getting 3 / $0.75 defaults).
+    regen: RegenConfig = Field(default_factory=RegenConfig)
 
     model_config = SettingsConfigDict(
         yaml_file="config/mode_thresholds.yaml",
