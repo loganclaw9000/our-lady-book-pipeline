@@ -171,7 +171,12 @@ class TelegramAlerter:
         reraise=True,
     )
     def _post_with_retry(self, text: str) -> dict[str, Any]:
-        """POST sendMessage; translate 429 → TelegramRetryAfter, 4xx → permanent."""
+        """POST sendMessage; translate 429 → TelegramRetryAfter, 4xx → permanent.
+
+        Target URL shape: ``api.telegram.org/bot{token}/sendMessage`` (per
+        core.telegram.org/bots/api). Built from _TELEGRAM_BASE_URL at module
+        top so the literal host stays in one place.
+        """
         url = f"{_TELEGRAM_BASE_URL}/bot{self.bot_token}/sendMessage"
         r = self._http_post(
             url,
