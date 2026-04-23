@@ -1,0 +1,11 @@
+# voice_samples.yaml — Plan 05-01 D-03.
+#
+# Curated 3-5 voice-sample passages (400-600 words each) from the Paul-
+# thinkpiece training corpus. These are used as the cached 1h ephemeral prefix
+# on every Mode-B drafter call (cache-read cost $0.50/MTok vs uncached $5).
+#
+# PLACEHOLDER: Task 1 ships an empty list so the loader is exercised; Task 3's
+# curate-voice-samples CLI overwrites this file with real passages. The
+# ModeBDrafter.__init__ validator rejects empty/short lists — production runs
+# MUST run `book-pipeline curate-voice-samples` before the first Mode-B call.
+passages: []

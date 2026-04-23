@@ -1,0 +1,21 @@
+# mode_preflags.yaml — Plan 05-01 D-04.
+#
+# Scenes whose beat_id appears here route directly to Mode-B drafter (frontier
+# Opus 4.7) without going through Mode-A voice-FT first. Rationale: certain
+# structurally complex beats (e.g. the Cholula stir, two-thirds reveal, siege
+# climax) are known to exceed the voice model's structural reach — better to
+# budget frontier cost explicitly than fight regen loops.
+#
+# Shape: preflagged_beats is a list of canonical scene_id strings
+# ("ch{NN:02d}_sc{II:02d}") or beat_id strings. The reader at
+# drafter/preflag.py::is_preflagged does a direct membership check.
+#
+# Demotion: removing a beat from this file re-enables Mode-A for that beat.
+# Never silent — every removal emits a pre-commit audit log entry.
+#
+# TODO(phase6): verify beat IDs against outline.md + REQUIREMENTS.md scene
+# inventory; current seeds are placeholders for Plan 05-02 wiring.
+preflagged_beats:
+  - ch01_sc01
+  - ch14_sc02
+  - ch26_sc03

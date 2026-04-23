@@ -1,0 +1,24 @@
+# pricing.yaml — Anthropic model USD/MTok pricing table (Plan 05-01, D-17).
+#
+# Source: platform.claude.com/docs/en/about-claude/pricing (verified 2026-04-23).
+#
+# PITFALL 5 WARNING: openclaw/cron_jobs.json carries outdated $15/$75 Opus 4.7
+# pricing. THIS file is authoritative; operator-follow-up (Phase 6 task) will
+# reconcile the openclaw source. The Plan 05-01 test_pricing_yaml_loads test
+# hard-codes the 5.0 canary so drift is caught at CI time.
+#
+# Schema: by_model[model_id] = {input, output, cache_read, cache_write_1h,
+#   cache_write_5m}. Values are USD per 1_000_000 tokens.
+by_model:
+  claude-opus-4-7:
+    input_usd_per_mtok: 5.0
+    output_usd_per_mtok: 25.0
+    cache_read_usd_per_mtok: 0.5
+    cache_write_1h_usd_per_mtok: 10.0
+    cache_write_5m_usd_per_mtok: 6.25
+  claude-sonnet-4-6:
+    input_usd_per_mtok: 3.0
+    output_usd_per_mtok: 15.0
+    cache_read_usd_per_mtok: 0.3
+    cache_write_1h_usd_per_mtok: 6.0
+    cache_write_5m_usd_per_mtok: 3.75
