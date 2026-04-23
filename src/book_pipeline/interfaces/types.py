@@ -211,6 +211,69 @@ class SceneStateRecord(BaseModel):
     blockers: list[str] = Field(default_factory=list)
 
 
+# --- Chapter state (Phase 4 Plan 04-01 — additive under Phase 1 freeze) ---
+# SceneStateMachine (Phase 1, frozen) does NOT cover chapter-grain states
+# (assembling, chapter_critiquing, post_commit_dag, etc.). Phase 4 introduces
+# ChapterStateMachine as a SEPARATE module (src/book_pipeline/interfaces/
+# chapter_state_machine.py); SceneState/SceneStateRecord remain untouched.
+# Match SceneState's `class X(str, Enum)` convention (suppress the UP042
+# StrEnum suggestion via a noqa on the class line) so the visible MRO
+# matches downstream code expectations.
+class ChapterState(str, Enum):  # noqa: UP042 — match SceneState convention
+    """States a chapter can occupy in the Phase 4 assembly + DAG flow.
+
+    Persisted as JSON values. Transitions managed by the Phase 4 orchestrator
+    via `chapter_state_machine.transition()`. Strict sequence — no skipping.
+
+    Happy path: PENDING_SCENES → ASSEMBLING → ASSEMBLED → CHAPTER_CRITIQUING
+    → CHAPTER_PASS → COMMITTING_CANON → POST_COMMIT_DAG → DAG_COMPLETE.
+    Failure branches: CHAPTER_CRITIQUING → CHAPTER_FAIL (caller routes to
+    Phase 5 Mode-B), POST_COMMIT_DAG → DAG_BLOCKED (caller alerts + halts
+    next-chapter gate).
+    """
+
+    PENDING_SCENES = "pending_scenes"
+    ASSEMBLING = "assembling"
+    ASSEMBLED = "assembled"
+    CHAPTER_CRITIQUING = "chapter_critiquing"
+    CHAPTER_FAIL = "chapter_fail"
+    CHAPTER_PASS = "chapter_pass"
+    COMMITTING_CANON = "committing_canon"
+    POST_COMMIT_DAG = "post_commit_dag"
+    DAG_COMPLETE = "dag_complete"
+    DAG_BLOCKED = "dag_blocked"
+
+
+class ChapterStateRecord(BaseModel):
+    """Persisted chapter state — one file per chapter under drafts/chapter_buffer/.
+
+    Parallel to SceneStateRecord; Phase 4 ChapterStateMachine governs
+    chapter transitions while SceneStateMachine stays frozen. Persisted
+    via atomic tmp+rename to drafts/chapter_buffer/ch{NN:02d}.state.json.
+
+    Fields:
+        chapter_num: 1-indexed chapter number (matches outline.md).
+        state: current ChapterState.
+        scene_ids: scene ids assembled for this chapter (["ch01_sc01", ...]).
+        chapter_sha: git HEAD sha after canon commit — gates DAG steps
+            (stale-card detection for Phase 4 success criterion 6). None
+            until COMMITTING_CANON completes.
+        dag_step: 0=not-started, 1=canon, 2=entity-extraction, 3=rag-reindex,
+            4=retrospective. 4 == DAG_COMPLETE.
+        history: ordered transition entries ({from, to, ts_iso, note}).
+        blockers: caller-appended blocker tags (e.g. "chapter_critic_axis_fail",
+            "entity_extractor_unavailable").
+    """
+
+    chapter_num: int
+    state: ChapterState
+    scene_ids: list[str] = Field(default_factory=list)
+    chapter_sha: str | None = None  # git HEAD sha after canon commit
+    dag_step: int = 0  # 0=not-started, 1=canon, 2=entity, 3=rag, 4=retro
+    history: list[dict[str, object]] = Field(default_factory=list)
+    blockers: list[str] = Field(default_factory=list)
+
+
 # --- Entity & retrospective types ---
 class EntityCard(BaseModel):
     """Per-chapter entity state produced by EntityExtractor (CORPUS-02)."""
@@ -275,6 +338,8 @@ class Event(BaseModel):
 
 
 __all__ = [
+    "ChapterState",
+    "ChapterStateRecord",
     "ConflictReport",
     "ContextPack",
     "CriticIssue",
