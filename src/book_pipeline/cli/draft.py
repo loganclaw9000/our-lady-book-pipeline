@@ -589,23 +589,34 @@ def _build_composition_root(
     )
 
     # --- Critic (Plan 03-05) ---
-    from anthropic import Anthropic
-
+    # Phase 3 gap-closure (2026-04-21): backend chosen via
+    # mode_thresholds_cfg.critic_backend.kind. Default = claude_code_cli
+    # (subscription-covered OAuth subprocess); alternative = anthropic_sdk
+    # (requires ANTHROPIC_API_KEY). SceneCritic + SceneLocalRegenerator
+    # take ``anthropic_client: Any`` — any client with a .messages.parse()/
+    # .messages.create() surface works (see book_pipeline.llm_clients).
     from book_pipeline.critic.scene import SceneCritic
+    from book_pipeline.llm_clients import build_llm_client
+
+    critic_backend_cfg = mode_thresholds_cfg.critic_backend
+    critic_client = build_llm_client(critic_backend_cfg)
+    regen_client = build_llm_client(critic_backend_cfg)
 
     critic = SceneCritic(
-        anthropic_client=Anthropic(),
+        anthropic_client=critic_client,
         event_logger=event_logger,
         rubric=rubric_cfg,
+        model_id=critic_backend_cfg.model,
     )
 
     # --- Regenerator (Plan 03-06) ---
     from book_pipeline.regenerator.scene_local import SceneLocalRegenerator
 
     regenerator = SceneLocalRegenerator(
-        anthropic_client=Anthropic(),
+        anthropic_client=regen_client,
         event_logger=event_logger,
         voice_pin=pin_data,
+        model_id=critic_backend_cfg.model,
     )
 
     return CompositionRoot(

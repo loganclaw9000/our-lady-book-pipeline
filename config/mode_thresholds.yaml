@@ -53,3 +53,14 @@ sampling_profiles:
     top_p: 0.88
     repetition_penalty: 1.05
     max_tokens: 2048
+# Phase 3 gap-closure (2026-04-21): backend-swappable critic. Default backend
+# is `claude_code_cli` — shells out to `claude -p --json-schema ...` using
+# OAuth credentials from ~/.claude/ (subscription-covered, no API key).
+# Switch to `anthropic_sdk` (requires ANTHROPIC_API_KEY env var) if you need
+# the SDK path specifically (e.g. for non-interactive CI without a logged-in
+# claude CLI).
+critic_backend:
+  kind: claude_code_cli
+  model: claude-opus-4-7
+  timeout_s: 180
+  max_budget_usd_per_scene: 1.0
