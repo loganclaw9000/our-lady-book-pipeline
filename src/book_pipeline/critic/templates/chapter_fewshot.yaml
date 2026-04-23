@@ -1,0 +1,121 @@
+# One bad + one good few-shot for the CHAPTER critic system prompt.
+# Curated at Plan 04-02 Task 2 time against Chapter 1-2 outline beats.
+# Load-bearing for CRIT-02 calibration — Opus reads them inside the cached
+# chapter-critic system prompt. Scene-level critique lives in scene_fewshot.yaml;
+# this file exercises cross-scene coherence (entity drift, arc pacing, rule-card
+# contradictions spanning scenes).
+#
+# Bad example: 3-scene chapter where Malintzin's location contradicts silently
+# between sc02 (Cempoala) and sc03 (Tlaxcala) with NO travel bridge. The entity
+# axis fails at chapter scale because the drift is only visible across scenes
+# — each individual scene passes its own scene critic.
+#
+# Good example: 3-scene chapter where scene progression is coherent — Malintzin
+# crosses from Cempoala up to the Tlaxcalan border with an intervening travel
+# beat visible on-page. All 5 axes pass at chapter scale.
+
+bad:
+  chapter_text: |
+    <!-- scene: ch02_sc01 -->
+    Cortés stood on the basalt steps of the Cempoala temple, the afternoon
+    heat pressing against his breastplate. Malintzin, at his shoulder,
+    rendered the fat cacique's grievances into Spanish with the flat care
+    of a scribe — four generations of Mexica tribute, three hundred boys
+    given up to the obsidian, grain carried off in the dry season. Andrés
+    de Tapia wrote it down. They would leave at dawn.
+
+    ---
+
+    <!-- scene: ch02_sc02 -->
+    Morning broke over the Tlaxcalan causeway. Malintzin crossed into the
+    republic's territory two paces behind Cortés, her face still,
+    her footfalls even on the loose stone. The Totonac escort had turned
+    back at the ridge. Xicotencatl's runners had been spotted at dawn;
+    by noon there would be obsidian on the horizon. She had not slept.
+    Cortés had not spoken since before the sunrise, which meant he was
+    thinking, which usually meant he was counting swords.
+
+    ---
+
+    <!-- scene: ch02_sc03 -->
+    In Cempoala that same morning, Malintzin stood in the cacique's
+    courtyard and waited for a second embassy from Tenochtitlan. The fat
+    cacique had asked her to stay. She understood why — these were
+    Moctezuma's men, and a woman who spoke Nahuatl mattered when Mexica
+    envoys came. She would translate for them as she had for Cortés. A
+    servant brought cold chocolate. Outside, the tzompantli drum began
+    its slow afternoon hymn.
+  expected_critic_response:
+    pass_per_axis:
+      historical: true
+      metaphysics: true
+      entity: false
+      arc: true
+      donts: true
+    scores_per_axis:
+      historical: 80.0
+      metaphysics: 80.0
+      entity: 40.0
+      arc: 70.0
+      donts: 80.0
+    issues:
+      - axis: entity
+        severity: high
+        location: "chapter sc02 vs sc03 — Malintzin location contradiction"
+        claim: "Malintzin is simultaneously in Tlaxcalan territory (sc02) and Cempoala (sc03) on the same morning; no travel bridge."
+        evidence: "sc02 places her 'two paces behind Cortés' crossing the Tlaxcalan causeway at dawn; sc03 places her 'in the cacique's courtyard' in Cempoala the same morning. Entity continuity across scenes is broken — either scene is internally coherent but the chapter is not."
+        citation: null
+    overall_pass: false
+    model_id: "claude-opus-4-7"
+    rubric_version: "chapter.v1"
+    output_sha: "<runtime-computed>"
+
+good:
+  chapter_text: |
+    <!-- scene: ch02_sc01 -->
+    Cortés stood on the basalt steps of the Cempoala temple, the afternoon
+    heat pressing against his breastplate. Malintzin, at his shoulder,
+    rendered the fat cacique's grievances into Spanish with the flat care
+    of a scribe — four generations of Mexica tribute, three hundred boys
+    given up to the obsidian, grain carried off in the dry season. Andrés
+    de Tapia wrote it down. They would leave at dawn.
+
+    ---
+
+    <!-- scene: ch02_sc02 -->
+    They marched three days through the hot coastal lowland and into the
+    first of the Tlaxcalan foothills. Malintzin walked with the baggage
+    train, her cloak heavy with dust. Each night she sat close to the
+    fire and listened to the Totonac escort practice Spanish phrases, and
+    each dawn she rose before the horses. On the fourth morning they
+    reached a cold stream that marked the edge of the republic's land.
+    The Totonac captain would go no farther.
+
+    ---
+
+    <!-- scene: ch02_sc03 -->
+    Morning broke over the Tlaxcalan causeway. Malintzin crossed into the
+    republic's territory two paces behind Cortés, her face still, her
+    footfalls even on the loose stone. Xicotencatl's runners had been
+    spotted at dawn; by noon there would be obsidian on the horizon.
+    She had not slept. Cortés had not spoken since before the sunrise,
+    which meant he was thinking, which usually meant he was counting
+    swords.
+  expected_critic_response:
+    pass_per_axis:
+      historical: true
+      metaphysics: true
+      entity: true
+      arc: true
+      donts: true
+    scores_per_axis:
+      historical: 85.0
+      metaphysics: 85.0
+      entity: 90.0
+      arc: 85.0
+      donts: 90.0
+    issues: []
+    overall_pass: true
+    model_id: "claude-opus-4-7"
+    rubric_version: "chapter.v1"
+    output_sha: "<runtime-computed>"

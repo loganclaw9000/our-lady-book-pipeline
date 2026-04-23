@@ -82,6 +82,9 @@ def test_rubric_accepts_valid_5_axes(tmp_path: Path, monkeypatch: pytest.MonkeyP
     """Sanity counterpart — confirms monkeypatch.chdir actually loads the tmp
     file (not the real repo config) by making a valid 5-axis rubric at
     tmp_path and asserting it loads.
+
+    Plan 04-02 added `chapter_rubric_version` + `chapter_axes` to the YAML
+    shape; the fixture writes both to match the new RubricConfig requirement.
     """
     from book_pipeline.config.rubric import RubricConfig
 
@@ -95,6 +98,11 @@ def test_rubric_accepts_valid_5_axes(tmp_path: Path, monkeypatch: pytest.MonkeyP
         "      high: 0.8\n"
         "    weight: 1.0\n"
     )
+    chapter_axis_block = (
+        "    description: x\n"
+        "    score_threshold_0to5: 3\n"
+        "    weight: 1.0\n"
+    )
     good.write_text(
         "rubric_version: v1\n"
         "axes:\n"
@@ -103,10 +111,18 @@ def test_rubric_accepts_valid_5_axes(tmp_path: Path, monkeypatch: pytest.MonkeyP
         f"  entity:\n{axis_block}"
         f"  arc:\n{axis_block}"
         f"  donts:\n{axis_block}"
+        "chapter_rubric_version: chapter.v1\n"
+        "chapter_axes:\n"
+        f"  historical:\n{chapter_axis_block}"
+        f"  metaphysics:\n{chapter_axis_block}"
+        f"  entity:\n{chapter_axis_block}"
+        f"  arc:\n{chapter_axis_block}"
+        f"  donts:\n{chapter_axis_block}"
     )
     monkeypatch.chdir(tmp_path)
     cfg = RubricConfig()
     assert set(cfg.axes.keys()) == {"historical", "metaphysics", "entity", "arc", "donts"}
+    assert cfg.chapter_rubric.rubric_version == "chapter.v1"
 
 
 def test_rubric_real_config_has_5_axes() -> None:

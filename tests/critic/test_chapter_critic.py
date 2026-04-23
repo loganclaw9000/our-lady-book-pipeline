@@ -3,7 +3,7 @@
 Covers tests A-K per plan <behavior>:
   A — Protocol conformance (isinstance(c, Critic), level == 'chapter').
   B — Happy path: all axes pass → overall_pass=True + 1 chapter_critic Event.
-  C — Score below 60 threshold (3/5 × 20) → axis fails + overall_pass=False.
+  C — Score below 60 threshold (3/5 x 20) → axis fails + overall_pass=False.
   D — High-severity issue on an axis with passing score → axis fails anyway.
   E — Fresh-pack invariant: audit records chapter_pack fingerprint, distinct
       from scene_pack fingerprints (CRIT-02 core mitigation).
@@ -66,7 +66,7 @@ def _chapter_response(
     high_sev_axis: str | None = None,
     rubric_version: str = "chapter.v1",
 ) -> CriticResponse:
-    """Build a CriticResponse at chapter scale. Scores are 0..100 (= 0..5 × 20)."""
+    """Build a CriticResponse at chapter scale. Scores are 0..100 (= 0..5 x 20)."""
     pass_per_axis = {
         "historical": True,
         "metaphysics": True,
@@ -228,7 +228,7 @@ def test_B_happy_path_passes(tmp_path, make_chapter_critic) -> None:
 
 
 def test_C_below_threshold_fails(tmp_path, make_chapter_critic) -> None:
-    """An axis scoring below the 60 (3/5 × 20) threshold fails AND flips
+    """An axis scoring below the 60 (3/5 x 20) threshold fails AND flips
     overall_pass=False via post-process invariant."""
     # Simulate a response where historical scores 50 but the LLM still claims True
     # (tests post-process threshold enforcement AND invariant fix together).

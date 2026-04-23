@@ -44,3 +44,35 @@ axes:
       mid: 0.6
       high: 0.8
     weight: 1.0
+
+# ---------------------------------------------------------------------------
+# Chapter-level rubric (Plan 04-02, CRIT-02). Additive under Phase 1 freeze.
+#
+# Chapter critic is STRICTER than scene critic: every axis must score >=3/5
+# (equivalent to >=60/100 after the 0..5 -> 0..100 x20 normalization the
+# schema uses) AND carry no high-severity issues, else axis fails. Any axis
+# fail flips overall_pass=False. This replaces the scene critic's
+# score>=70 rule at the chapter grain.
+# ---------------------------------------------------------------------------
+chapter_rubric_version: "chapter.v1"
+chapter_axes:
+  historical:
+    description: "Cross-scene historical coherence; no contradictions between scenes in dates, places, or events."
+    score_threshold_0to5: 3
+    weight: 1.0
+  metaphysics:
+    description: "Cross-scene rule-card consistency; no mid-chapter engine-tier drift or fuel-class contradictions."
+    score_threshold_0to5: 3
+    weight: 1.0
+  entity:
+    description: "Entity continuity across scenes; character states (location, possessions, beliefs) advance coherently chapter-wide."
+    score_threshold_0to5: 3
+    weight: 1.0
+  arc:
+    description: "Chapter hits its outline arc position; beat pacing balanced across scenes; no dead scenes."
+    score_threshold_0to5: 3
+    weight: 1.0
+  donts:
+    description: "No Things-to-Avoid violations detectable at chapter scale (thematic creep across scenes, cumulative drift)."
+    score_threshold_0to5: 3
+    weight: 1.0

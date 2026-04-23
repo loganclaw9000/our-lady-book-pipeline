@@ -8,7 +8,9 @@ interpretable).
 
 from __future__ import annotations
 
-from pydantic import BaseModel, Field, field_validator
+from typing import Any
+
+from pydantic import BaseModel, Field, field_validator, model_validator
 from pydantic_settings import (
     BaseSettings,
     PydanticBaseSettingsSource,
@@ -18,6 +20,11 @@ from pydantic_settings import (
 from book_pipeline.config.sources import YamlConfigSettingsSource
 
 REQUIRED_AXES: frozenset[str] = frozenset({"historical", "metaphysics", "entity", "arc", "donts"})
+# Plan 04-02 (CRIT-02): chapter critic enforces the same 5-axis set. Named
+# separately so future evolution of scene vs chapter axes remains decoupled.
+CHAPTER_REQUIRED_AXES: frozenset[str] = frozenset(
+    {"historical", "metaphysics", "entity", "arc", "donts"}
+)
 
 
 class AxisSeverity(BaseModel):
@@ -36,15 +43,55 @@ class RubricAxis(BaseModel):
     weight: float = Field(ge=0.0, le=2.0)
 
 
+class ChapterAxisConfig(BaseModel):
+    """One chapter-rubric axis — description + 0..5 pass threshold + weight.
+
+    Chapter critic scores on 0..5 (stricter than scene's 0..100 band). The
+    schema still stores 0..100 floats (via x20 normalization); threshold
+    logic lives in ChapterCritic._post_process.
+    """
+
+    description: str
+    score_threshold_0to5: int = Field(ge=0, le=5, default=3)
+    weight: float = Field(ge=0.0, le=2.0, default=1.0)
+
+
+class ChapterRubricConfig(BaseModel):
+    """The chapter-level 5-axis rubric block (Plan 04-02)."""
+
+    rubric_version: str
+    axes: dict[str, ChapterAxisConfig]
+
+    @field_validator("axes")
+    @classmethod
+    def _check_chapter_axes(
+        cls, v: dict[str, ChapterAxisConfig]
+    ) -> dict[str, ChapterAxisConfig]:
+        if set(v.keys()) != CHAPTER_REQUIRED_AXES:
+            raise ValueError(
+                f"chapter_axes must be exactly {sorted(CHAPTER_REQUIRED_AXES)}, "
+                f"got {sorted(v.keys())}"
+            )
+        return v
+
+
 class RubricConfig(BaseSettings):
-    """Root loader — validates and exposes the 5-axis rubric."""
+    """Root loader — validates and exposes BOTH the scene and chapter rubrics.
+
+    Phase 4 Plan 04-02 extends this additively: the scene `rubric_version` +
+    `axes` fields are preserved byte-for-byte; `chapter_rubric` is a new
+    required field parsed from `chapter_rubric_version` + `chapter_axes`
+    keys at the YAML root.
+    """
 
     rubric_version: str
     axes: dict[str, RubricAxis]
+    # --- Phase 4 Plan 04-02 additions (built in __init__ from flat YAML keys) ---
+    chapter_rubric: ChapterRubricConfig
 
     model_config = SettingsConfigDict(
         yaml_file="config/rubric.yaml",
-        extra="forbid",
+        extra="allow",  # flat YAML keys `chapter_rubric_version` + `chapter_axes`
     )
 
     @field_validator("axes")
@@ -55,6 +102,27 @@ class RubricConfig(BaseSettings):
                 f"axes must be exactly {sorted(REQUIRED_AXES)}, got {sorted(v.keys())}"
             )
         return v
+
+    @model_validator(mode="before")
+    @classmethod
+    def _collapse_chapter_keys(cls, data: Any) -> Any:
+        """Collapse flat YAML keys `chapter_rubric_version` + `chapter_axes`
+        into a nested `chapter_rubric` dict consumed by ChapterRubricConfig.
+
+        Additive — leaves all scene-rubric keys untouched.
+        """
+        if not isinstance(data, dict):
+            return data
+        if "chapter_rubric" in data:
+            return data  # already nested; nothing to do
+        cv = data.pop("chapter_rubric_version", None)
+        ca = data.pop("chapter_axes", None)
+        if cv is not None or ca is not None:
+            data["chapter_rubric"] = {
+                "rubric_version": cv,
+                "axes": ca or {},
+            }
+        return data
 
     @classmethod
     def settings_customise_sources(
