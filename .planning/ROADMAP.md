@@ -134,7 +134,7 @@ Plans:
 - [x] 04-03-PLAN.md — OpusEntityExtractor (incremental update, source_chapter_sha stamping) + OpusRetrospectiveWriter (lint-enforced output) [CORPUS-02, TEST-01]
 - [x] 04-04-PLAN.md — ChapterDagOrchestrator (4-commit strict-order DAG + resumability + scene buffer archival) + AblationRun harness skeleton [LOOP-02, LOOP-03, TEST-01]
 - [x] 04-05-PLAN.md — book-pipeline chapter <N> + chapter-status + ablate CLIs + EXPECTED_SCENE_COUNTS book-specifics table [LOOP-03, LOOP-04, TEST-01]
-- [ ] 04-06-PLAN.md — End-to-end mocked integration test (3-scene stub chapter → 4 commits + 3 artifacts + fresh-pack invariant + lint-pass retrospective) [LOOP-02, LOOP-03, LOOP-04, CRIT-02, CORPUS-02, TEST-01]
+- [x] 04-06-PLAN.md — End-to-end mocked integration test (3-scene stub chapter → 4 commits + 3 artifacts + fresh-pack invariant + lint-pass retrospective) [LOOP-02, LOOP-03, LOOP-04, CRIT-02, CORPUS-02, TEST-01]
 **UI hint**: no
 
 **Parallelization**: ChapterAssembler, EntityExtractor, and RetrospectiveWriter can be scaffolded in parallel once their Protocols are pinned. The post-commit DAG ordering (extractor -> reindex -> retrospective -> ready_for_next) is strict and must be sequenced; building the DAG orchestrator is one plan, building the three agents is three plans.

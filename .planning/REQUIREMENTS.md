@@ -25,7 +25,7 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 ### Corpus + Typed RAG
 
 - [x] **CORPUS-01**: `~/Source/our-lady-of-champion/` lore bibles ingested (read-only mount/copy) into LanceDB with 5 separate tables: `historical`, `metaphysics`, `entity_state`, `arc_position`, `negative_constraint`.
-- [ ] **CORPUS-02**: Entity-state auto-extraction agent runs post-commit, writes structured markdown entity cards (YAML frontmatter + body) into `entity-state/chapter_NN/<entity>.md`, and re-indexes the `entity_state` LanceDB table.
+- [x] **CORPUS-02**: Entity-state auto-extraction agent runs post-commit, writes structured markdown entity cards (YAML frontmatter + body) into `entity-state/chapter_NN/<entity>.md`, and re-indexes the `entity_state` LanceDB table.
 - [x] **RAG-01**: The 5 typed retrievers each return structured findings with provenance (source file + chunk id) given a scene request keyed on `{POV, date, location, beat_function, chapter_num}`.
 - [x] **RAG-02**: Chapter outline (`our-lady-of-champion-outline.md`, 27 chapters × 3 blocks × 3 beats nominal) parsed into the arc-position retriever at beat-function-level granularity; stable beat IDs.
 - [x] **RAG-03**: Context Pack Bundler enforces a hard cap of ≤40KB total retrieved context per drafter call, with a cross-retriever reconciliation step that surfaces contradictions instead of silently concatenating.
@@ -41,7 +41,7 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 ### Critic
 
 - [x] **CRIT-01**: Scene critic scores each drafted scene on 5 axes (`historical`, `metaphysics`, `entity`, `arc`, `don'ts`) producing structured JSON via `client.messages.parse()` with Pydantic schema; per-axis `{score: 0-100, severity: low|mid|high, issues: [{location, claim, evidence}]}`.
-- [ ] **CRIT-02**: Chapter-level critic runs after scene assembly with arc-coherence and voice-consistency axes layered on top of the per-scene rubric.
+- [x] **CRIT-02**: Chapter-level critic runs after scene assembly with arc-coherence and voice-consistency axes layered on top of the per-scene rubric.
 - [ ] **CRIT-03**: Cross-family critic audit runs on ≥10% of scenes using a non-Anthropic judge (Gemini 2.5 Pro or GPT-5); disagreement > threshold flags a human review candidate in digest.
 - [x] **CRIT-04**: Critic rubric is versioned (`rubric.yaml` v1, v2, …); score histories tagged with rubric version for meaningful longitudinal comparison.
 
@@ -55,7 +55,7 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 ### Loop + Chapter Commit
 
 - [ ] **LOOP-01**: Scene loop runs end-to-end autonomously: request → RAG bundle → Drafter → Critic → (PASS=buffer | FAIL=regen | EXHAUST=Mode B | BLOCK=alert); ≤1 human-touch per nominal scene.
-- [ ] **LOOP-02**: Chapter assembler stitches scene-buffer scenes into a chapter markdown file; runs a chapter-level critic pass; on PASS, atomically commits to `canon/chapter_NN.md` and re-indexes.
+- [x] **LOOP-02**: Chapter assembler stitches scene-buffer scenes into a chapter markdown file; runs a chapter-level critic pass; on PASS, atomically commits to `canon/chapter_NN.md` and re-indexes.
 - [x] **LOOP-03**: Post-chapter DAG runs to completion before next chapter's scenes begin: entity extractor → LanceDB re-index → retrospective writer; subsequent drafting blocks on DAG completion.
 - [x] **LOOP-04**: Rollback on chapter-level critic FAIL: surgical scene-kick by default, full-chapter redraft on explicit severity signal.
 
@@ -141,7 +141,7 @@ Populated by roadmapper during roadmap creation. Every v1 REQ-ID maps to exactly
 | OBS-03 | Phase 3 | Complete |
 | OBS-04 | Phase 6 | Pending |
 | CORPUS-01 | Phase 2 | Complete |
-| CORPUS-02 | Phase 4 | Pending |
+| CORPUS-02 | Phase 4 | Complete |
 | RAG-01 | Phase 2 | Complete |
 | RAG-02 | Phase 2 | Complete |
 | RAG-03 | Phase 2 | Complete |
@@ -151,7 +151,7 @@ Populated by roadmapper during roadmap creation. Every v1 REQ-ID maps to exactly
 | DRAFT-03 | Phase 5 | Pending |
 | DRAFT-04 | Phase 5 | Pending |
 | CRIT-01 | Phase 3 | Complete |
-| CRIT-02 | Phase 4 | Pending |
+| CRIT-02 | Phase 4 | Complete |
 | CRIT-03 | Phase 6 | Pending |
 | CRIT-04 | Phase 3 | Complete |
 | REGEN-01 | Phase 3 | In Progress (kernel landed 03-06; CLI composition + smoke pending 03-07/03-08) |
@@ -159,7 +159,7 @@ Populated by roadmapper during roadmap creation. Every v1 REQ-ID maps to exactly
 | REGEN-03 | Phase 5 | Pending |
 | REGEN-04 | Phase 5 | Pending |
 | LOOP-01 | Phase 5 | Pending |
-| LOOP-02 | Phase 4 | Pending |
+| LOOP-02 | Phase 4 | Complete |
 | LOOP-03 | Phase 4 | Complete |
 | LOOP-04 | Phase 4 | Complete |
 | TEST-01 | Phase 4 | Complete |
