@@ -162,7 +162,7 @@ Plans:
 Plans:
 - [x] 05-01-PLAN.md — Mode-B Drafter (Opus 4.7 + cache_control 1h) + preflag reader + pricing table + curate-voice-samples CLI [DRAFT-03, DRAFT-04]
 - [x] 05-02-PLAN.md — Regen-budget wrapper + oscillation detector + spend-cap enforcement + surgical scene-kick routing (SC4 closure) [REGEN-02, REGEN-03, REGEN-04, LOOP-04]
-- [ ] 05-03-PLAN.md — alerts/ kernel package + TelegramAlerter + cooldown persistence + bundler stale-card flag (SC6 closure) [ALERT-01, ALERT-02, CORPUS-02]
+- [x] 05-03-PLAN.md — alerts/ kernel package + TelegramAlerter + cooldown persistence + bundler stale-card flag (SC6 closure) [ALERT-01, ALERT-02, CORPUS-02]
 - [ ] 05-04-PLAN.md — Nightly orchestrator CLI + openclaw cron registration + stale-cron detector + OBS-02 SQLite ledger ingester [ORCH-01, LOOP-01]
 **UI hint**: no
 

@@ -70,8 +70,8 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 
 - [ ] **ORCH-01**: Nightly cron (via `openclaw cron add`) at 02:00 kicks the scene-generation loop; gateway running under systemd user unit; persistent state across reboots verified.
 - [ ] **ORCH-02**: Digest cron at 07:00 produces `digests/week_YYYY-WW.md` summarizing production (chapters committed, voice fidelity trend), experiments (open/closed theses, ablation results), cost spend, and blockers.
-- [ ] **ALERT-01**: Hard-block conditions (stuck regen loop, rubric conflict, critic budget blown, voice-drift > threshold, checkpoint SHA mismatch, vLLM health failure, stale cron run) emit Telegram alerts via the existing channel.
-- [ ] **ALERT-02**: Alert deduplication + cool-down prevents alert storms; re-alert after 1 hour of continued condition.
+- [x] **ALERT-01**: Hard-block conditions (stuck regen loop, rubric conflict, critic budget blown, voice-drift > threshold, checkpoint SHA mismatch, vLLM health failure, stale cron run) emit Telegram alerts via the existing channel.
+- [x] **ALERT-02**: Alert deduplication + cool-down prevents alert storms; re-alert after 1 hour of continued condition.
 
 ### First Draft
 
@@ -168,8 +168,8 @@ Populated by roadmapper during roadmap creation. Every v1 REQ-ID maps to exactly
 | TEST-04 | Phase 6 | Pending |
 | ORCH-01 | Phase 5 | Pending |
 | ORCH-02 | Phase 6 | Pending |
-| ALERT-01 | Phase 5 | Pending |
-| ALERT-02 | Phase 5 | Pending |
+| ALERT-01 | Phase 5 | Complete |
+| ALERT-02 | Phase 5 | Complete |
 | FIRST-01 | Phase 6 | Pending |
 | FIRST-02 | Phase 6 | Pending |
 
