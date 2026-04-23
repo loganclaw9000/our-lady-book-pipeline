@@ -31,7 +31,6 @@ from book_pipeline.interfaces.types import (
     SceneStateRecord,
 )
 
-
 # --- Fake components (kept local so we don't couple to test_draft_loop) ----- #
 
 
@@ -336,16 +335,23 @@ def test_r_cap_exhaust_escalates_to_mode_b(
     mode_b_draft: DraftResponse,
     mid_issue: CriticIssue,
 ) -> None:
-    """4 critic fails (1 initial + 3 regens) -> Mode-B escalation."""
+    """4 critic fails (1 initial + 3 regens) with DIFFERENT axis+severity per
+    attempt (so oscillation does NOT fire) -> Mode-B escalation via r_cap."""
     import book_pipeline.cli.draft as draft_mod
 
+    # Use 4 unique (axis, severity) tuples so detect_oscillation never fires
+    # (it would fire if N == N-2 at mid/high; ensure axes rotate).
+    issue_1 = CriticIssue(axis="historical", severity="mid", location="p", claim="c", evidence="e")
+    issue_2 = CriticIssue(axis="arc", severity="high", location="p", claim="c", evidence="e")
+    issue_3 = CriticIssue(axis="metaphysics", severity="mid", location="p", claim="c", evidence="e")
+    issue_4 = CriticIssue(axis="donts", severity="high", location="p", claim="c", evidence="e")
     regen_draft = canonical_draft.model_copy(update={"attempt_number": 2})
     bundler = _FakeBundler(context_pack)
     drafter = _FakeDrafter(response=canonical_draft)
     # 4 Mode-A critic fails + 1 Mode-B critic pass = 5 review calls total.
     critic = _FakeCritic(
         pass_sequence=[False, False, False, False, True],
-        issues_sequence=[[mid_issue], [mid_issue], [mid_issue], [mid_issue], []],
+        issues_sequence=[[issue_1], [issue_2], [issue_3], [issue_4], []],
     )
     regenerator = _FakeRegenerator(response_sequence=[regen_draft, regen_draft, regen_draft])
     mode_b = _FakeModeBDrafter(response=mode_b_draft)
@@ -369,9 +375,9 @@ def test_r_cap_exhaust_escalates_to_mode_b(
     escalations = [e for e in logger.events if e.role == "mode_escalation"]
     assert len(escalations) == 1
     assert escalations[0].extra.get("trigger") == "r_cap_exhausted"
-    # issue_ids extracted from last critic response (historical:mid).
+    # issue_ids extracted from LAST critic response (issue_4 = donts:high).
     issue_ids = escalations[0].extra.get("issue_ids") or []
-    assert "historical:mid" in issue_ids
+    assert "donts:high" in issue_ids
     # Mode-B drafter called exactly once.
     assert len(mode_b.calls) == 1
 

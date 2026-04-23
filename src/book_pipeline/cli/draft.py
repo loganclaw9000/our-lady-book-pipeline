@@ -48,11 +48,13 @@ from book_pipeline.interfaces.scene_state_machine import transition
 from book_pipeline.interfaces.types import (
     CriticRequest,
     DraftRequest,
+    Event,
     RegenRequest,
     SceneRequest,
     SceneState,
     SceneStateRecord,
 )
+from book_pipeline.observability.hashing import event_id, hash_text
 
 # --------------------------------------------------------------------------- #
 # Constants                                                                    #
@@ -212,6 +214,212 @@ def _persist(record: SceneStateRecord, state_path: Path) -> None:
 
 
 # --------------------------------------------------------------------------- #
+# Plan 05-02 escalation helpers                                                #
+# --------------------------------------------------------------------------- #
+
+
+def _now_iso() -> str:
+    return (
+        datetime.now(UTC)
+        .isoformat(timespec="milliseconds")
+        .replace("+00:00", "Z")
+    )
+
+
+def _emit_mode_escalation(
+    event_logger: Any,
+    scene_id: str,
+    from_mode: str,
+    to_mode: str,
+    trigger: str,
+    issue_ids: list[str],
+) -> None:
+    """Emit exactly one role='mode_escalation' Event (D-08).
+
+    No-op when event_logger is None (test fixtures may pass None).
+    """
+    if event_logger is None:
+        return
+    ts_iso = _now_iso()
+    caller = f"cli.draft.run_draft_loop:{scene_id}"
+    prompt_h = hash_text(f"mode_escalation:{scene_id}:{trigger}:{from_mode}:{to_mode}")
+    eid = event_id(ts_iso, "mode_escalation", caller, prompt_h)
+    event = Event(
+        event_id=eid,
+        ts_iso=ts_iso,
+        role="mode_escalation",
+        model="n/a",
+        prompt_hash=prompt_h,
+        input_tokens=0,
+        cached_tokens=0,
+        output_tokens=0,
+        latency_ms=0,
+        caller_context={
+            "module": "cli.draft",
+            "function": "run_draft_loop",
+            "scene_id": scene_id,
+        },
+        output_hash=hash_text(f"mode_escalation:{trigger}"),
+        extra={
+            "from_mode": from_mode,
+            "to_mode": to_mode,
+            "trigger": trigger,
+            "issue_ids": list(issue_ids),
+        },
+    )
+    event_logger.emit(event)
+
+
+def _scene_events(event_logger: Any, scene_id: str) -> list[Event]:
+    """Filter event_logger.events to those tagged caller_context.scene_id=scene_id.
+
+    Defensive: handles loggers that don't expose an .events list (production
+    JsonlEventLogger doesn't) — returns [] in that case, so spend-cap +
+    oscillation never fire on those paths (test-only observables).
+    """
+    evs = getattr(event_logger, "events", None)
+    if evs is None:
+        return []
+    out: list[Event] = []
+    for e in evs:
+        if not isinstance(e, Event):
+            continue
+        if e.caller_context.get("scene_id") == scene_id:
+            out.append(e)
+    return out
+
+
+def _compute_scene_spent_usd(
+    event_logger: Any, scene_id: str, pricing_by_model: Any
+) -> float:
+    """Sum event_cost_usd across all scene events. 0.0 if logger lacks events."""
+    # Lazy import to avoid eager-loading the pricing kernel for callers that
+    # don't exercise spend-cap.
+    from book_pipeline.observability.pricing import event_cost_usd
+
+    total = 0.0
+    for e in _scene_events(event_logger, scene_id):
+        total += event_cost_usd(e, pricing_by_model)
+    return total
+
+
+def _critic_events_for_scene(
+    event_logger: Any, scene_id: str
+) -> list[Event]:
+    """Subset of scene events with role='critic', oldest→newest."""
+    return [e for e in _scene_events(event_logger, scene_id) if e.role == "critic"]
+
+
+def _synth_critic_events_from_severities(
+    scene_id: str, attempt_severities: list[dict[str, str]]
+) -> list[Event]:
+    """Build synthetic role='critic' Events from per-attempt severity maps.
+
+    Used by the oscillation detector so the signal is independent of whether
+    the critic concrete emitted OBS-01 events to the logger (production
+    SceneCritic does; unit tests often stub it).
+    """
+    out: list[Event] = []
+    for idx, sev_map in enumerate(attempt_severities, start=1):
+        out.append(
+            Event(
+                event_id=f"synth_{scene_id}_{idx}",
+                ts_iso="1970-01-01T00:00:00Z",
+                role="critic",
+                model="synthetic",
+                prompt_hash="p",
+                input_tokens=0,
+                cached_tokens=0,
+                output_tokens=0,
+                latency_ms=0,
+                caller_context={"scene_id": scene_id, "attempt_number": idx},
+                output_hash="o",
+                extra={"severities": dict(sev_map)},
+            )
+        )
+    return out
+
+
+def _run_mode_b_attempt(
+    *,
+    scene_id: str,
+    chapter: int,
+    pack: Any,
+    mode_b_drafter: Any,
+    critic: Any,
+    rubric: Any,
+    state_path: Path,
+    commit_dir: Path,
+    ingestion_run_id: str | None,
+    record: SceneStateRecord,
+) -> int:
+    """Run one Mode-B draft attempt; on success critic-gate; else HARD_BLOCK.
+
+    Returns:
+        0 on Mode-B COMMITTED, 3 on Mode-B critic FAIL or ModeBDrafterBlocked.
+    """
+    # Lazy import so the Phase 3 scene-loop paths don't pull mode_b eagerly
+    # (not every CLI invocation needs it).
+    from book_pipeline.drafter.mode_b import ModeBDrafterBlocked
+
+    record = transition(record, SceneState.ESCALATED_B, "mode_b_attempt_start")
+    _persist(record, state_path)
+    try:
+        draft_request = DraftRequest(
+            context_pack=pack,
+            prior_scenes=[],
+            generation_config={"attempt_number": 1},
+        )
+        b_draft = mode_b_drafter.draft(draft_request)
+    except ModeBDrafterBlocked:
+        # TODO(05-03): alerter.send_alert('mode_b_exhausted', {...})
+        record = transition(record, SceneState.HARD_BLOCKED, "mode_b_exhausted")
+        record.blockers.append("mode_b_exhausted")
+        _persist(record, state_path)
+        return 3
+
+    # Critic-gate the Mode-B draft.
+    critic_req = CriticRequest(
+        scene_text=b_draft.scene_text,
+        context_pack=pack,
+        rubric_id="scene.v1",
+        rubric_version=getattr(rubric, "rubric_version", "v1"),
+        chapter_context={"attempt_number": 1, "mode": "B"},
+    )
+    try:
+        b_critic_resp = critic.review(critic_req)
+    except Exception:
+        record = transition(record, SceneState.HARD_BLOCKED, "mode_b_critic_error")
+        record.blockers.append("mode_b_critic_error")
+        _persist(record, state_path)
+        return 3
+
+    if not b_critic_resp.overall_pass:
+        # TODO(05-03): alerter.send_alert('mode_b_critic_fail', {...})
+        record = transition(record, SceneState.HARD_BLOCKED, "mode_b_critic_fail")
+        record.blockers.append("mode_b_critic_fail")
+        _persist(record, state_path)
+        return 3
+
+    # Mode-B PASS — commit.
+    record = transition(record, SceneState.CRITIC_PASS, "mode_b passed critic")
+    _persist(record, state_path)
+    _commit_scene(
+        draft=b_draft,
+        critic_response=b_critic_resp,
+        pack=pack,
+        scene_id=scene_id,
+        chapter=chapter,
+        commit_dir=commit_dir,
+        ingestion_run_id=ingestion_run_id,
+        attempt_count=1,
+    )
+    record = transition(record, SceneState.COMMITTED, "mode_b committed")
+    _persist(record, state_path)
+    return 0
+
+
+# --------------------------------------------------------------------------- #
 # Scene commit (B-3 invariant)                                                 #
 # --------------------------------------------------------------------------- #
 
@@ -262,7 +470,8 @@ def _commit_scene(
         ),
         "draft_timestamp": datetime.now(UTC).isoformat(timespec="seconds"),
         "voice_fidelity_score": voice_fidelity_score,
-        "mode": "A",
+        # Plan 05-02: Mode-B commits use draft.mode='B'; Mode-A commits keep 'A'.
+        "mode": getattr(draft, "mode", "A"),
         "rubric_version": critic_response.rubric_version,
     }
 
@@ -315,14 +524,54 @@ def run_draft_loop(
     scene_request: SceneRequest = composition_root.scene_request
     rubric = composition_root.rubric
     ingestion_run_id = getattr(composition_root, "ingestion_run_id", None)
+    event_logger = getattr(composition_root, "event_logger", None)
+
+    # Plan 05-02 composition-root additions (optional; default-safe for
+    # existing Phase 3 callers that don't supply them).
+    preflag_set: frozenset[str] = getattr(
+        composition_root, "preflag_set", frozenset()
+    )
+    mode_b_drafter = getattr(composition_root, "mode_b_drafter", None)
+    pricing_by_model: Any = getattr(
+        composition_root, "pricing_by_model", {}
+    )
+    spend_cap_usd: float = float(
+        getattr(composition_root, "spend_cap_usd_per_scene", 0.0)
+    )
 
     # --- PENDING → RAG_READY ---
     pack = composition_root.bundler.bundle(scene_request, composition_root.retrievers)
     record = transition(record, SceneState.RAG_READY, "bundler returned pack")
     _persist(record, state_path)
 
+    # --- Plan 05-02 D-09 step (a): preflag check BEFORE first drafter call. ---
+    from book_pipeline.drafter.preflag import is_preflagged
+
+    if mode_b_drafter is not None and is_preflagged(scene_id, preflag_set):
+        _emit_mode_escalation(
+            event_logger, scene_id, "A", "B", "preflag", []
+        )
+        return _run_mode_b_attempt(
+            scene_id=scene_id,
+            chapter=chapter,
+            pack=pack,
+            mode_b_drafter=mode_b_drafter,
+            critic=composition_root.critic,
+            rubric=rubric,
+            state_path=state_path,
+            commit_dir=commit_dir,
+            ingestion_run_id=ingestion_run_id,
+            record=record,
+        )
+
     prior_draft: Any = None
     critic_resp: Any = None
+    # Plan 05-02: accumulate per-attempt critic severities so the oscillation
+    # detector can compare attempts N vs N-2 independently of the event-logger
+    # surface (production emits critic events via SceneCritic; tests inject
+    # fake critics that don't emit — this local tracking keeps both paths
+    # deterministic).
+    attempt_severities: list[dict[str, str]] = []
 
     for attempt in range(1, max_regen + 2):  # 1..R+1
         # --- DRAFTING / REGENERATING → DRAFTED_A (via exception on failure) ---
@@ -438,7 +687,99 @@ def run_draft_loop(
         )
         _persist(record, state_path)
 
+        # Plan 05-02: record this attempt's worst-severity-per-axis map so the
+        # oscillation detector can compare N vs N-2 axis+severity sets (D-07).
+        severities_this_attempt: dict[str, str] = {}
+        _SEV_RANK = {"low": 1, "mid": 2, "high": 3}
+        for issue in critic_resp.issues:
+            prior = severities_this_attempt.get(issue.axis)
+            if prior is None or _SEV_RANK.get(issue.severity, 0) > _SEV_RANK.get(prior, 0):
+                severities_this_attempt[issue.axis] = issue.severity
+        attempt_severities.append(severities_this_attempt)
+
+        # --- Plan 05-02 D-09 step (c): spend-cap check (cheapest + most-
+        # severe — $0.75 is unrecoverable, so it runs before oscillation). ---
+        if spend_cap_usd > 0.0 and pricing_by_model:
+            spent = _compute_scene_spent_usd(
+                event_logger, scene_id, pricing_by_model
+            )
+            if spent >= spend_cap_usd:
+                _emit_mode_escalation(
+                    event_logger, scene_id, "A", "A", "spend_cap_exceeded", []
+                )
+                # TODO(05-03): alerter.send_alert('spend_cap_exceeded', {...})
+                record = transition(
+                    record,
+                    SceneState.HARD_BLOCKED,
+                    f"spend_cap_exceeded ${spent:.3f}",
+                )
+                record.blockers.append("spend_cap_exceeded")
+                _persist(record, state_path)
+                return 4
+
+        # --- Plan 05-02 D-09 step (b): oscillation check. ---
+        if mode_b_drafter is not None:
+            from book_pipeline.regenerator.oscillation import (
+                detect_oscillation,
+            )
+
+            # Synthesize in-memory critic Events from attempt_severities so the
+            # detector is fed the same shape regardless of whether the critic
+            # concrete actually emitted OBS-01 events to the logger. Production
+            # SceneCritic does emit; unit tests often stub it.
+            critic_events = _synth_critic_events_from_severities(
+                scene_id, attempt_severities
+            )
+            fired, common = detect_oscillation(critic_events)
+            if fired:
+                issue_ids = (
+                    [f"{a}:{s}" for a, s in sorted(common)]
+                    if common
+                    else []
+                )
+                _emit_mode_escalation(
+                    event_logger, scene_id, "A", "B", "oscillation", issue_ids
+                )
+                return _run_mode_b_attempt(
+                    scene_id=scene_id,
+                    chapter=chapter,
+                    pack=pack,
+                    mode_b_drafter=mode_b_drafter,
+                    critic=composition_root.critic,
+                    rubric=rubric,
+                    state_path=state_path,
+                    commit_dir=commit_dir,
+                    ingestion_run_id=ingestion_run_id,
+                    record=record,
+                )
+
+        # --- Plan 05-02 D-09 step (d): R-cap exhausted. ---
         if attempt >= max_regen + 1:
+            if mode_b_drafter is not None:
+                issue_ids = [
+                    f"{i.axis}:{i.severity}" for i in critic_resp.issues
+                ]
+                _emit_mode_escalation(
+                    event_logger,
+                    scene_id,
+                    "A",
+                    "B",
+                    "r_cap_exhausted",
+                    issue_ids,
+                )
+                return _run_mode_b_attempt(
+                    scene_id=scene_id,
+                    chapter=chapter,
+                    pack=pack,
+                    mode_b_drafter=mode_b_drafter,
+                    critic=composition_root.critic,
+                    rubric=rubric,
+                    state_path=state_path,
+                    commit_dir=commit_dir,
+                    ingestion_run_id=ingestion_run_id,
+                    record=record,
+                )
+            # Legacy Phase 3 path (no Mode-B wired) — preserve HARD_BLOCKED.
             record = transition(
                 record, SceneState.HARD_BLOCKED, "failed_critic_after_R_attempts"
             )

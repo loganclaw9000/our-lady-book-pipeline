@@ -295,15 +295,17 @@ def test_all_four_branches_in_one_run(
         assert rc == 0
         expected_trigger = "preflag"
     elif branch == "r_cap_exhausted":
-        issue = CriticIssue(
-            axis="historical", severity="mid", location="p1",
-            claim="c", evidence="e",
-        )
+        # Rotate axis+severity each attempt so oscillation doesn't fire
+        # before R exhaustion.
+        i1 = CriticIssue(axis="historical", severity="mid", location="p", claim="c", evidence="e")
+        i2 = CriticIssue(axis="arc", severity="high", location="p", claim="c", evidence="e")
+        i3 = CriticIssue(axis="metaphysics", severity="mid", location="p", claim="c", evidence="e")
+        i4 = CriticIssue(axis="donts", severity="high", location="p", claim="c", evidence="e")
         regen = canonical.model_copy(update={"attempt_number": 2})
         drafter = _FakeDrafter(response=canonical)
         critic = _FakeCritic(
             pass_sequence=[False, False, False, False, True],
-            issues_sequence=[[issue], [issue], [issue], [issue], []],
+            issues_sequence=[[i1], [i2], [i3], [i4], []],
         )
         regenerator = _FakeRegenerator(response_sequence=[regen, regen, regen])
         mode_b_drafter = _FakeModeBDrafter(response=mode_b)
