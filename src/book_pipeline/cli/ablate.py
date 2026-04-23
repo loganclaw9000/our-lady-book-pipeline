@@ -73,7 +73,20 @@ class _ModeThresholdsShape(BaseModel):
 
     model_config = {"extra": "forbid"}
 
-_RUN_ID_RE = re.compile(r"^[A-Za-z0-9_.-]{1,64}$")
+# Regex + defense-in-depth check: run_id must be 1-64 chars of
+# [A-Za-z0-9_.-], not start with `.` or `-`, not end with `.`, and not be
+# a pure dot-sequence (`.`, `..`, `...`). This blocks path traversal via
+# `run_dir = ablations_root / run_id` (CR-01 mitigation).
+_RUN_ID_RE = re.compile(r"^(?![.-])[A-Za-z0-9_.-]{1,64}(?<![.])$")
+
+
+def _validate_run_id(run_id: str) -> None:
+    """Reject run_ids that enable path traversal or escape ablations_root."""
+    if not _RUN_ID_RE.match(run_id):
+        raise ValueError(f"invalid run_id {run_id!r}")
+    # Defense-in-depth: reject any segment of only dots (e.g. `...`).
+    if run_id in {".", ".."} or set(run_id) == {"."}:
+        raise ValueError(f"run_id must not be a dot-sequence: {run_id!r}")
 
 
 def _default_run_id() -> str:
@@ -224,10 +237,13 @@ def _run(args: argparse.Namespace) -> int:
 
     # --- run_id ---
     run_id: str = args.run_id if args.run_id is not None else _default_run_id()
-    if not _RUN_ID_RE.match(run_id):
+    try:
+        _validate_run_id(run_id)
+    except ValueError as exc:
         print(
             f"Error: invalid run_id {run_id!r}; "
-            f"must match ^[A-Za-z0-9_.-]{{1,64}}$",
+            f"must match ^[A-Za-z0-9_.-]{{1,64}}$ and must not be a "
+            f"dot-sequence ({exc})",
             file=sys.stderr,
         )
         return 2

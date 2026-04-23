@@ -45,8 +45,26 @@ def create_ablation_run_skeleton(
 
     Idempotent: if the run dir exists, the config JSON is rewritten but
     variant subdirectories are not emptied. Returns the run root path.
+
+    Defense-in-depth (CR-01): resolve both ablations_root and the computed
+    run_dir, then assert run_dir is a descendant of ablations_root before
+    any mkdir. Blocks path traversal if the caller supplies a run_id that
+    slipped past the CLI regex (e.g. programmatic callers).
     """
-    run_dir = Path(ablations_root) / run.run_id
+    ablations_root_resolved = Path(ablations_root).resolve()
+    run_dir = (ablations_root_resolved / run.run_id).resolve()
+    # Containment check — run_dir must be a strict descendant of the root.
+    try:
+        run_dir.relative_to(ablations_root_resolved)
+    except ValueError as exc:
+        raise ValueError(
+            f"run_id {run.run_id!r} escapes ablations_root "
+            f"{ablations_root_resolved}: resolved run_dir={run_dir}"
+        ) from exc
+    if run_dir == ablations_root_resolved:
+        raise ValueError(
+            f"run_id {run.run_id!r} resolves to the ablations_root itself"
+        )
     run_dir.mkdir(parents=True, exist_ok=True)
     (run_dir / "a").mkdir(exist_ok=True)
     (run_dir / "b").mkdir(exist_ok=True)
