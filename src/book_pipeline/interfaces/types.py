@@ -118,7 +118,15 @@ class DraftRequest(BaseModel):
 
 
 class DraftResponse(BaseModel):
-    """Drafter output — one scene draft with telemetry fields for OBS-01."""
+    """Drafter output — one scene draft with telemetry fields for OBS-01.
+
+    Phase 1 freeze policy: additive-optional fields are allowed. WR-07
+    added ``voice_fidelity_score`` in Phase 4 so Plan 04-02's
+    ConcatAssembler can aggregate per-scene fidelity scores via proper
+    model construction (no more ``object.__setattr__`` sibling-attr
+    injection, which was brittle against future ``frozen=True`` or
+    Pydantic patch releases).
+    """
 
     scene_text: str
     mode: str  # "A" | "B"
@@ -129,6 +137,10 @@ class DraftResponse(BaseModel):
     latency_ms: int
     output_sha: str  # xxhash of scene_text
     attempt_number: int = 1
+    # WR-07 (Phase 4 additive-optional field). Present when the scene
+    # frontmatter carried a voice_fidelity_score; None for fresh drafter
+    # invocations that don't compute fidelity locally.
+    voice_fidelity_score: float | None = None
 
 
 # --- Critic types ---

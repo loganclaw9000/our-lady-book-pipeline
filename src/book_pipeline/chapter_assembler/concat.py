@@ -216,6 +216,17 @@ class ConcatAssembler:
             # Build a DraftResponse whose telemetry fields are zeroed (this
             # instance represents a RE-READ of a committed scene, not a fresh
             # drafter invocation). output_sha is recomputed downstream.
+            # WR-07: voice_fidelity_score is now a proper optional field on
+            # DraftResponse; no more object.__setattr__ sibling-attr injection.
+            fid_raw = fm.get("voice_fidelity_score")
+            fid_value: float | None
+            if fid_raw is None:
+                fid_value = None
+            else:
+                try:
+                    fid_value = float(fid_raw)
+                except (TypeError, ValueError):
+                    fid_value = None
             drafts.append(
                 DraftResponse(
                     scene_text=body,
@@ -227,13 +238,9 @@ class ConcatAssembler:
                     latency_ms=0,
                     output_sha="",  # re-read artifact; downstream recomputes if needed
                     attempt_number=int(fm.get("attempt_count", 1)),
+                    voice_fidelity_score=fid_value,
                 )
             )
-            # Attach optional voice_fidelity_score sibling attribute so
-            # `.assemble` can aggregate.
-            fid = fm.get("voice_fidelity_score")
-            if fid is not None:
-                object.__setattr__(drafts[-1], "voice_fidelity_score", fid)
 
         assembled = cls().assemble(drafts, chapter_num)
         return drafts, assembled
