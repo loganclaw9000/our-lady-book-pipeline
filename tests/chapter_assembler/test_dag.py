@@ -671,3 +671,87 @@ def test_H_pipeline_state_json_written_atomically(tmp_path: Path) -> None:
     data = json.loads(rig.pipeline_state_path.read_text(encoding="utf-8"))
     assert data["last_committed_chapter"] == 99
     assert data["dag_complete"] is True
+
+
+# --------------------------------------------------------------------- #
+# Plan 05-02 Task 2: CHAPTER_FAIL scene-kick routing (LOOP-04)          #
+# --------------------------------------------------------------------- #
+
+
+def test_I_chapter_fail_with_implicated_scenes_kicks_and_sets_substate(
+    tmp_path: Path,
+) -> None:
+    """ChapterCritic FAIL citing ch99_sc02 → CHAPTER_FAIL_SCENE_KICKED;
+    sc02 reset to PENDING; sc01 COMMITTED state preserved."""
+    issue = CriticIssue(
+        axis="entity",
+        severity="high",
+        location="ch99_sc02 paragraph 3",
+        claim="entity drift",
+        evidence="Motecuhzoma spelling inconsistent",
+    )
+    rig = _build_rig(tmp_path, critic_pass=False, critic_issues=[issue])
+    _seed_scene_md(rig.commit_dir, 99, 1)
+    _seed_scene_md(rig.commit_dir, 99, 2)
+
+    # Seed scene state files (COMMITTED) for both sc01 and sc02.
+    from book_pipeline.interfaces.types import SceneState, SceneStateRecord
+
+    for idx in (1, 2):
+        ch_dir = rig.scene_buffer_dir / "ch99"
+        ch_dir.mkdir(parents=True, exist_ok=True)
+        scene_id = f"ch99_sc{idx:02d}"
+        rec = SceneStateRecord(
+            scene_id=scene_id,
+            state=SceneState.COMMITTED,
+            attempts={"mode_a_regens": 0},
+            mode_tag="A",
+            history=[],
+            blockers=[],
+        )
+        (ch_dir / f"{scene_id}.state.json").write_text(
+            rec.model_dump_json(indent=2), encoding="utf-8"
+        )
+
+    orchestrator = _build_orchestrator(rig)
+    result = orchestrator.run(99)
+
+    assert result.state == ChapterState.CHAPTER_FAIL_SCENE_KICKED
+    assert "chapter_critic_scene_kick" in result.blockers
+
+    # sc02 state reset to PENDING; sc01 unchanged.
+    sc01 = SceneStateRecord.model_validate_json(
+        (rig.scene_buffer_dir / "ch99" / "ch99_sc01.state.json").read_text()
+    )
+    sc02 = SceneStateRecord.model_validate_json(
+        (rig.scene_buffer_dir / "ch99" / "ch99_sc02.state.json").read_text()
+    )
+    assert sc01.state == SceneState.COMMITTED
+    assert sc02.state == SceneState.PENDING
+
+    # No canon commit (CHAPTER_FAIL — whether terminal or scene-kicked,
+    # step 1 does NOT proceed to canon commit).
+    assert not (rig.canon_dir / "chapter_99.md").exists()
+
+
+def test_J_chapter_fail_all_non_specific_remains_chapter_fail(
+    tmp_path: Path,
+) -> None:
+    """ChapterCritic FAIL with issues that cite NO ch/sc → terminal CHAPTER_FAIL
+    (existing behavior preserved; no scene-kick)."""
+    issue = CriticIssue(
+        axis="arc",
+        severity="high",
+        location="arc pacing — chapter reads too fast",
+        claim="arc beat flattens in final third",
+        evidence="outline says rising action peaks at scene 3",
+    )
+    rig = _build_rig(tmp_path, critic_pass=False, critic_issues=[issue])
+    _seed_scene_md(rig.commit_dir, 99, 1)
+
+    orchestrator = _build_orchestrator(rig)
+    result = orchestrator.run(99)
+
+    # Non-specific → existing CHAPTER_FAIL terminal path.
+    assert result.state == ChapterState.CHAPTER_FAIL
+    assert "chapter_critic_axis_fail" in result.blockers

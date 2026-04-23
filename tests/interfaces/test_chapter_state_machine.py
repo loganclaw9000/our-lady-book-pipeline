@@ -28,14 +28,16 @@ from book_pipeline.interfaces.chapter_state_machine import (
 )
 
 
-def test_chapter_state_enum_has_10_values() -> None:
-    """ChapterState Enum carries exactly the 10 states from 04-CONTEXT.md."""
+def test_chapter_state_enum_has_11_values() -> None:
+    """ChapterState Enum carries the 10 Phase 4 states plus Phase 5's
+    CHAPTER_FAIL_SCENE_KICKED substate (Plan 05-02 Task 2 / LOOP-04)."""
     expected = {
         "pending_scenes",
         "assembling",
         "assembled",
         "chapter_critiquing",
         "chapter_fail",
+        "chapter_fail_scene_kicked",  # Phase 5 addition (LOOP-04)
         "chapter_pass",
         "committing_canon",
         "post_commit_dag",
@@ -44,7 +46,7 @@ def test_chapter_state_enum_has_10_values() -> None:
     }
     actual = {member.value for member in ChapterState}
     assert actual == expected
-    assert len(list(ChapterState)) == 10
+    assert len(list(ChapterState)) == 11
 
 
 def test_chapter_state_is_str_enum() -> None:
