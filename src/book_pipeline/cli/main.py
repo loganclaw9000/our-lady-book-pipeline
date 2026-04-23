@@ -40,6 +40,8 @@ SUBCOMMAND_IMPORTS: list[str] = [
     "book_pipeline.cli.ablate",
     # Plan 05-01: curate-voice-samples for Mode-B drafter voice-samples prefix
     "book_pipeline.cli.curate_voice_samples",
+    # Plan 05-04: OBS-02 SQLite ledger ingester + nightly orchestration suite.
+    "book_pipeline.cli.ingest_events",
 ]
 
 

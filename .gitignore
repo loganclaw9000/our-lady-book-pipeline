@@ -31,6 +31,11 @@ drafts/scene_buffer/
 # from runs/events.jsonl. Survives process restart for 1h TTL dedup but is
 # advisory state, not source of truth.
 runs/alert_cooldowns.json
+# Plan 05-04: OBS-02 SQLite metric ledger (+ byte-offset sidecar). Rebuildable
+# from runs/events.jsonl via `book-pipeline ingest-events`; per D-17, ledger
+# is never source of truth.
+runs/metrics.sqlite3
+runs/metrics.sqlite3.last_offset
 
 # IDE
 .vscode/
