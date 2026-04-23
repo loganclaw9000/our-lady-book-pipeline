@@ -137,15 +137,27 @@ def _write_pipeline_state(
 
 
 def _strip_chapter_frontmatter(chapter_md: str) -> str:
-    """Return the body of a chapter markdown document (post-frontmatter)."""
+    """Return the body of a chapter markdown document (post-frontmatter).
+
+    WR-03: if the chapter markdown starts with the opening `---\\n` fence
+    but has NO closing `\\n---\\n`, raise — silently returning the whole
+    document would leak frontmatter YAML (chapter_num, voice_pin_shas,
+    assembled_from_scenes) into the entity extractor's user prompt, and
+    Opus would extract those keys as entities ("chapter_num" cards are
+    corrosive downstream).
+    """
     if not chapter_md.startswith("---\n"):
-        return chapter_md
+        return chapter_md  # no frontmatter at all: OK as-is
     _, rest = chapter_md.split("---\n", 1)
     # Second `---\n` divider ends the frontmatter block.
-    if "\n---\n" in rest:
-        _, body = rest.split("\n---\n", 1)
-        return body
-    return chapter_md
+    if "\n---\n" not in rest:
+        raise RuntimeError(
+            "chapter markdown has opening `---` fence without closing "
+            "fence; refusing to ship frontmatter-tainted text to the "
+            "entity extractor"
+        )
+    _, body = rest.split("\n---\n", 1)
+    return body
 
 
 def _load_chapter_events(
