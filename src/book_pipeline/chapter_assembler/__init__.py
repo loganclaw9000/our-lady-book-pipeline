@@ -12,5 +12,21 @@ contract 1 (pyproject.toml) guards the boundary on every commit.
 from __future__ import annotations
 
 from book_pipeline.chapter_assembler.concat import ConcatAssembler
+from book_pipeline.chapter_assembler.dag import (
+    ChapterDagOrchestrator,
+    ChapterGateError,
+)
+from book_pipeline.chapter_assembler.git_commit import (
+    GitCommitError,
+    check_worktree_dirty,
+    commit_paths,
+)
 
-__all__ = ["ConcatAssembler"]
+__all__ = [
+    "ChapterDagOrchestrator",
+    "ChapterGateError",
+    "ConcatAssembler",
+    "GitCommitError",
+    "check_worktree_dirty",
+    "commit_paths",
+]

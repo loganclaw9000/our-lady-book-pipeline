@@ -15,7 +15,6 @@ from unittest import mock
 
 import pytest
 
-
 # --------------------------------------------------------------------- #
 # Fixtures                                                              #
 # --------------------------------------------------------------------- #
@@ -99,13 +98,15 @@ def test_commit_paths_fails_on_dirty_subprocess(tmp_path: Path) -> None:
             )
         return real_run(argv, *args, **kwargs)
 
-    with mock.patch("subprocess.run", side_effect=fake_run):
-        with pytest.raises(GitCommitError) as excinfo:
-            commit_paths(
-                ["scratch.txt"],
-                message="test: dirty subprocess",
-                repo_root=repo,
-            )
+    with (
+        mock.patch("subprocess.run", side_effect=fake_run),
+        pytest.raises(GitCommitError) as excinfo,
+    ):
+        commit_paths(
+            ["scratch.txt"],
+            message="test: dirty subprocess",
+            repo_root=repo,
+        )
 
     # Carry stderr.
     assert "nothing to add" in excinfo.value.stderr or (

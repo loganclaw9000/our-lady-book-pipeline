@@ -21,7 +21,7 @@ import json
 import os
 import re
 import subprocess
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 from unittest import mock
@@ -41,7 +41,6 @@ from book_pipeline.interfaces.types import (
     Retrospective,
     SceneRequest,
 )
-
 
 # --------------------------------------------------------------------- #
 # Test-tree layout helpers                                              #
