@@ -57,6 +57,13 @@ def test_kernel_does_not_import_book_specifics() -> None:
         pathlib.Path("src/book_pipeline/critic"),
         pathlib.Path("src/book_pipeline/regenerator"),
         pathlib.Path("src/book_pipeline/voice_fidelity"),
+        # Phase 4 plan 01: 4 new kernel packages (chapter_assembler,
+        # entity_extractor, retrospective, ablation). Each lands as an
+        # empty __init__.py anchor; downstream Phase 4 plans fill them in.
+        pathlib.Path("src/book_pipeline/chapter_assembler"),
+        pathlib.Path("src/book_pipeline/entity_extractor"),
+        pathlib.Path("src/book_pipeline/retrospective"),
+        pathlib.Path("src/book_pipeline/ablation"),
     ]
     # Phase 2 plan 02 + 06 / Phase 3 plans 02-03 + 03-07: CLI-composition
     # exemptions per pyproject ignore_imports.
@@ -138,6 +145,66 @@ def test_phase_3_packages_in_lint_imports_mypy_scope() -> None:
     ):
         assert target in content, (
             f"scripts/lint_imports.sh missing Phase 3 mypy target: {target}"
+        )
+
+
+def test_phase_4_kernel_packages_importable() -> None:
+    """Phase 4 plan 01: the 4 new kernel packages must be importable.
+
+    chapter_assembler, entity_extractor, retrospective, and ablation are
+    introduced as empty kernel packages that downstream Phase 4 plans (04-02
+    ConcatAssembler, 04-03 OpusEntityExtractor + OpusRetrospectiveWriter,
+    04-04 AblationRun harness) fill in. They exist from plan 04-01 onward so
+    import-linter contracts can reference them.
+    """
+    import importlib
+
+    for pkg in (
+        "book_pipeline.chapter_assembler",
+        "book_pipeline.entity_extractor",
+        "book_pipeline.retrospective",
+        "book_pipeline.ablation",
+    ):
+        importlib.import_module(pkg)
+
+
+def test_phase_4_packages_listed_in_both_contracts() -> None:
+    """Phase 4 plan 01: the 4 new kernel packages must be appended to BOTH
+    import-linter contracts (source_modules of contract 1, forbidden_modules
+    of contract 2). Matches the Phase 2 Plan 01 / Phase 3 Plan 01 extension-
+    policy precedent."""
+    import pathlib
+
+    content = pathlib.Path("pyproject.toml").read_text(encoding="utf-8")
+    for pkg in (
+        "book_pipeline.chapter_assembler",
+        "book_pipeline.entity_extractor",
+        "book_pipeline.retrospective",
+        "book_pipeline.ablation",
+    ):
+        # Each Phase 4 kernel package appears in contract 1 source_modules AND
+        # contract 2 forbidden_modules → at least 2 occurrences total.
+        assert content.count(f'"{pkg}"') >= 2, (
+            f"Phase 4 kernel package {pkg!r} must appear in BOTH import-linter "
+            f"contracts in pyproject.toml."
+        )
+
+
+def test_phase_4_packages_in_lint_imports_mypy_scope() -> None:
+    """Phase 4 plan 01: scripts/lint_imports.sh mypy targets must include the
+    4 new Phase 4 kernel packages.
+    """
+    import pathlib
+
+    content = pathlib.Path("scripts/lint_imports.sh").read_text(encoding="utf-8")
+    for target in (
+        "src/book_pipeline/chapter_assembler",
+        "src/book_pipeline/entity_extractor",
+        "src/book_pipeline/retrospective",
+        "src/book_pipeline/ablation",
+    ):
+        assert target in content, (
+            f"scripts/lint_imports.sh missing Phase 4 mypy target: {target}"
         )
 
 
