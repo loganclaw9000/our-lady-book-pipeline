@@ -132,7 +132,7 @@ Plans:
 - [x] 04-01-PLAN.md — Kernel package skeletons (chapter_assembler/entity_extractor/retrospective/ablation) + ChapterStateMachine + import-linter extension [LOOP-02, LOOP-03]
 - [x] 04-02-PLAN.md — ConcatAssembler deterministic scene-join + ChapterCritic (≥3/5 threshold, fresh ContextPack, CRIT-04 audit log) [LOOP-02, CRIT-02]
 - [x] 04-03-PLAN.md — OpusEntityExtractor (incremental update, source_chapter_sha stamping) + OpusRetrospectiveWriter (lint-enforced output) [CORPUS-02, TEST-01]
-- [ ] 04-04-PLAN.md — ChapterDagOrchestrator (4-commit strict-order DAG + resumability + scene buffer archival) + AblationRun harness skeleton [LOOP-02, LOOP-03, TEST-01]
+- [x] 04-04-PLAN.md — ChapterDagOrchestrator (4-commit strict-order DAG + resumability + scene buffer archival) + AblationRun harness skeleton [LOOP-02, LOOP-03, TEST-01]
 - [ ] 04-05-PLAN.md — book-pipeline chapter <N> + chapter-status + ablate CLIs + EXPECTED_SCENE_COUNTS book-specifics table [LOOP-03, LOOP-04, TEST-01]
 - [ ] 04-06-PLAN.md — End-to-end mocked integration test (3-scene stub chapter → 4 commits + 3 artifacts + fresh-pack invariant + lint-pass retrospective) [LOOP-02, LOOP-03, LOOP-04, CRIT-02, CORPUS-02, TEST-01]
 **UI hint**: no
