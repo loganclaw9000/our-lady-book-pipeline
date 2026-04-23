@@ -24,7 +24,6 @@ from typing import Any
 
 import pytest
 
-
 # --- Test fake for httpx.post -----------------------------------------------
 
 

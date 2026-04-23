@@ -20,10 +20,18 @@ from book_pipeline.alerts.taxonomy import (
     HARD_BLOCK_CONDITIONS,
     MESSAGE_TEMPLATES,
 )
+from book_pipeline.alerts.telegram import (
+    TelegramAlerter,
+    TelegramPermanentError,
+    TelegramRetryAfter,
+)
 
 __all__ = [
     "ALLOWED_DETAIL_KEYS",
     "HARD_BLOCK_CONDITIONS",
     "MESSAGE_TEMPLATES",
     "CooldownCache",
+    "TelegramAlerter",
+    "TelegramPermanentError",
+    "TelegramRetryAfter",
 ]
