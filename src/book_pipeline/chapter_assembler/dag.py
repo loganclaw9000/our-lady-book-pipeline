@@ -867,12 +867,23 @@ class ChapterDagOrchestrator:
         except GitCommitError as exc:
             logger.error("step 4 retro commit failed: %s", exc)
             # Retrospective is ungated — a commit failure here still
-            # transitions to DAG_COMPLETE? CONTEXT.md says retrospective
+            # transitions to DAG_COMPLETE. CONTEXT.md says retrospective
             # failure -> log + skip; next chapter unblocks. Treat as
-            # DAG_COMPLETE but add a blocker tag for digest visibility.
+            # DAG_COMPLETE but add a blocker tag for digest visibility so
+            # the retrospective-untracked state is observable downstream
+            # (WR-01: without this the blocker tag was described in the
+            # comment but never actually appended).
             logger.warning(
                 "retrospective commit failed (ungated); proceeding to "
                 "DAG_COMPLETE with blocker tag"
+            )
+            record = record.model_copy(
+                update={
+                    "blockers": [
+                        *record.blockers,
+                        f"retro_commit_failed:{exc}",
+                    ]
+                }
             )
 
         record = record.model_copy(update={"dag_step": 4})
