@@ -35,6 +35,7 @@ import logging
 import os
 import re
 import shutil
+import subprocess
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -825,16 +826,45 @@ class ChapterDagOrchestrator:
             )
             return record
 
-        # Commit. `indexes/resolved_model_revision.json` is gitignored per
-        # the existing .gitignore — if it is ignored, we use --allow-empty so
-        # the audit-trail commit message still lands.
+        # Commit. `indexes/resolved_model_revision.json` is typically
+        # gitignored per the existing .gitignore — but if a project
+        # decision later tracks the ingestion-pointer file, we stage it
+        # so the audit-trail commit carries a meaningful diff. WR-06:
+        # detect the tracked state at runtime (via `git ls-files
+        # --error-unmatch`) and stage only when tracked. `allow_empty`
+        # stays True so the commit lands either way.
         rel_revision = (
             self.indexes_dir.relative_to(self.repo_root).as_posix()
             + "/resolved_model_revision.json"
         )
+        paths_to_stage: list[str] = []
+        try:
+            check = subprocess.run(
+                [
+                    self.git_binary,
+                    "ls-files",
+                    "--error-unmatch",
+                    rel_revision,
+                ],
+                cwd=self.repo_root,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            if check.returncode == 0:
+                paths_to_stage.append(rel_revision)
+        except Exception:
+            # Best-effort detection — if `git ls-files` itself fails we
+            # fall back to the allow-empty audit commit (prior behavior).
+            logger.exception(
+                "step 3: failed to probe tracked state of %s; "
+                "proceeding with allow-empty audit commit",
+                rel_revision,
+            )
+
         try:
             commit_paths(
-                [],
+                paths_to_stage,
                 message=f"chore(rag): reindex after ch{chapter_num:02d}",
                 repo_root=self.repo_root,
                 git_binary=self.git_binary,
@@ -857,10 +887,6 @@ class ChapterDagOrchestrator:
                 record, last_hard_block="rag_commit"
             )
             return record
-
-        # Silence the "rel_revision unused" warning — the stamp helper
-        # already wrote the file; we reference the path for traceability.
-        _ = rel_revision
 
         record = record.model_copy(update={"dag_step": 3})
         _persist(record, state_path)
