@@ -26,7 +26,6 @@ from book_pipeline.interfaces.retrospective_writer import RetrospectiveWriter
 from book_pipeline.interfaces.types import Event, Retrospective
 from book_pipeline.retrospective.opus import OpusRetrospectiveWriter
 
-
 # --------------------------------------------------------------------- #
 # Fakes                                                                 #
 # --------------------------------------------------------------------- #
