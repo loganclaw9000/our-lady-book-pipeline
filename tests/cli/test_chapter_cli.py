@@ -19,7 +19,6 @@ import subprocess
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
-from unittest import mock
 
 import pytest
 
@@ -27,7 +26,6 @@ from book_pipeline.interfaces.types import (
     ChapterState,
     ChapterStateRecord,
 )
-
 
 # --------------------------------------------------------------------------- #
 # Test 1: --help                                                               #
@@ -203,6 +201,44 @@ def test_build_orchestrator_wires_all_deps(
         chapter_mod,
         "_read_latest_ingestion_run_id",
         lambda indexes_dir: "ing_test_001",
+    )
+
+    # Patch the Phase 4 concrete classes to avoid template file reads
+    # (templates live under src/ and Jinja2 is scoped to the real location;
+    # monkeypatch.chdir(tmp_path) makes relative paths fail).
+    class _FakeAssembler:
+        pass
+
+    class _FakeChapterCritic:
+        def __init__(self, **_kw: Any) -> None:
+            pass
+
+    class _FakeEntityExtractor:
+        def __init__(self, **_kw: Any) -> None:
+            pass
+
+    class _FakeRetrospectiveWriter:
+        def __init__(self, **_kw: Any) -> None:
+            pass
+
+    class _FakeBundler:
+        def __init__(self, **_kw: Any) -> None:
+            pass
+
+    import book_pipeline.chapter_assembler as ca_mod
+    import book_pipeline.critic.chapter as cc_mod
+    import book_pipeline.entity_extractor as ee_mod
+    import book_pipeline.rag.bundler as bundler_mod
+    import book_pipeline.retrospective as rw_mod
+
+    monkeypatch.setattr(ca_mod, "ConcatAssembler", _FakeAssembler)
+    monkeypatch.setattr(cc_mod, "ChapterCritic", _FakeChapterCritic)
+    monkeypatch.setattr(ee_mod, "OpusEntityExtractor", _FakeEntityExtractor)
+    monkeypatch.setattr(
+        rw_mod, "OpusRetrospectiveWriter", _FakeRetrospectiveWriter
+    )
+    monkeypatch.setattr(
+        bundler_mod, "ContextPackBundlerImpl", _FakeBundler
     )
 
     orch = chapter_mod._build_dag_orchestrator(99)

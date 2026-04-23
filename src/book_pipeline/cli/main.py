@@ -34,6 +34,10 @@ SUBCOMMAND_IMPORTS: list[str] = [
     "book_pipeline.cli.curate_anchors",    # created by phase-3 plan 02
     "book_pipeline.cli.vllm_bootstrap",    # created by phase-3 plan 03
     "book_pipeline.cli.draft",             # created by phase-3 plan 07
+    # Plan 04-05: chapter, chapter_status, ablate
+    "book_pipeline.cli.chapter",
+    "book_pipeline.cli.chapter_status",
+    "book_pipeline.cli.ablate",
 ]
 
 

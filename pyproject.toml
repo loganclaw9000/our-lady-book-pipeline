@@ -133,6 +133,16 @@ ignore_imports = [
     "book_pipeline.cli.draft -> book_pipeline.book_specifics.vllm_endpoints",
     "book_pipeline.cli.draft -> book_pipeline.book_specifics.training_corpus",
     "book_pipeline.cli.draft -> book_pipeline.book_specifics.corpus_paths",
+    # Plan 04-05 addition: cli.chapter is the full Phase 4 chapter-DAG
+    # composition root. It is the ONLY site that wires the 11 Phase 4
+    # kernel deps together with the book-domain scene-count table +
+    # corpus paths. Nahuatl entities are accessed indirectly via
+    # cli._entity_list (which already owns its own exemption); a duplicate
+    # cli.chapter -> nahuatl_entities entry would trigger import-linter's
+    # "no matches for ignored import" error (same Plan 03-07 4-exemption
+    # deviation Rule 1 precedent: 2 exemptions match the actual edges).
+    "book_pipeline.cli.chapter -> book_pipeline.book_specifics.outline_scene_counts",
+    "book_pipeline.cli.chapter -> book_pipeline.book_specifics.corpus_paths",
 ]
 
 [[tool.importlinter.contracts]]
