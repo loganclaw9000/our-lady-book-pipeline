@@ -13,6 +13,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+import pytest
 import yaml
 
 from book_pipeline.interfaces.chapter_assembler import ChapterAssembler
@@ -81,7 +82,7 @@ def test_concat_three_scenes_happy_path() -> None:
     fm, body = _split_frontmatter(out)
     assert fm["chapter_num"] == 1
     assert fm["assembled_from_scenes"] == ["ch01_sc01", "ch01_sc02", "ch01_sc03"]
-    # 3 scenes × 3 words = 9; but plan example says 6 for "scene-1 body" style.
+    # 3 scenes x 3 words = 9 (plan example cited 6 for "scene-1 body" style).
     # Our scene texts: "scene one body" / "scene two body" / "scene three body"
     # = 3 + 3 + 3 = 9 words. Spec: sum(len(d.scene_text.split()) for d in drafts).
     assert fm["word_count"] == 9
@@ -203,8 +204,6 @@ def test_from_committed_scenes_missing_voice_pin_sha_raises(tmp_path: Path) -> N
     md = f"---\n{yaml.safe_dump(fm_missing, sort_keys=False)}---\nbody\n"
     (chapter_dir / "ch01_sc01.md").write_text(md, encoding="utf-8")
 
-    import pytest
-
     with pytest.raises(RuntimeError, match="voice_pin_sha"):
         ConcatAssembler.from_committed_scenes(1, tmp_path)
 
@@ -212,8 +211,6 @@ def test_from_committed_scenes_missing_voice_pin_sha_raises(tmp_path: Path) -> N
 def test_from_committed_scenes_missing_dir_raises(tmp_path: Path) -> None:
     """Missing drafts/ch{NN}/ directory raises FileNotFoundError (fail-fast)."""
     from book_pipeline.chapter_assembler.concat import ConcatAssembler
-
-    import pytest
 
     with pytest.raises(FileNotFoundError):
         ConcatAssembler.from_committed_scenes(99, tmp_path)
