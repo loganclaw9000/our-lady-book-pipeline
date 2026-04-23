@@ -1,0 +1,30 @@
+{#- mode_b.j2 — Mode-B USER message template (Plan 05-01).
+
+    Voice-samples + rubric awareness live in the SYSTEM block (cached 1h
+    ephemeral); this USER template only carries per-scene-variable content
+    so the cache prefix stays byte-identical.
+-#}
+Scene request: ch{{ "%02d" | format(scene_request.chapter) }}_sc{{ "%02d" | format(scene_request.scene_index) }} — beat "{{ scene_request.beat_function }}" in chapter {{ scene_request.chapter }}.
+
+POV: {{ scene_request.pov }}
+Date: {{ scene_request.date_iso }}
+Location: {{ scene_request.location }}
+
+Corpus context (do not contradict):
+{% for retriever_name, result in retrievals.items() -%}
+--- {{ retriever_name }} ---
+{% for hit in result.hits -%}
+[{{ hit.chunk_id }}] {{ hit.text }}
+{% endfor %}
+{% endfor %}
+{% if prior_scenes -%}
+Prior scenes (summaries only — do not copy):
+{% for s in prior_scenes -%}
+- {{ s }}
+{% endfor %}
+{% endif %}
+Target: draft approximately {{ word_target }} words of prose for this scene.
+Match the voice demonstrated in the system-side samples.
+{% if preflag_reason %}This scene was pre-flagged for Mode-B because: {{ preflag_reason }}.{% endif %}
+
+Begin the scene directly — no meta commentary, no outline prefix.

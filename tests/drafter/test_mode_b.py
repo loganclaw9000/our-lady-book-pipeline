@@ -15,7 +15,6 @@ from typing import Any
 
 import pytest
 import tenacity
-from anthropic import APIConnectionError
 
 from book_pipeline.config.voice_pin import VllmServeConfig, VoicePinData
 from book_pipeline.interfaces.drafter import Drafter
@@ -27,7 +26,6 @@ from book_pipeline.interfaces.types import (
     RetrievalResult,
     SceneRequest,
 )
-
 
 # --- fakes ------------------------------------------------------------ #
 
@@ -215,7 +213,7 @@ def test_tenacity_exhaustion_raises_ModeBDrafterBlocked(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """After 5 tenacity retries, Mode-B raises ModeBDrafterBlocked(anthropic_transient_exhausted)."""
-    from book_pipeline.drafter.mode_b import ModeBDrafter, ModeBDrafterBlocked
+    from book_pipeline.drafter.mode_b import ModeBDrafterBlocked
     from tests.conftest import FakeAnthropicClient
 
     _patch_tenacity_wait_fast(monkeypatch)
