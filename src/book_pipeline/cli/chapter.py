@@ -39,6 +39,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import subprocess
 import sys
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
@@ -109,6 +110,31 @@ def _add_parser(
 # --------------------------------------------------------------------------- #
 # _read_latest_ingestion_run_id                                                 #
 # --------------------------------------------------------------------------- #
+
+
+def _discover_repo_root() -> Path:
+    """Locate the git repo root via ``git rev-parse --show-toplevel`` (WR-08).
+
+    Replaces the prior ``Path.cwd()`` assumption, which broke when the
+    CLI was invoked from a subdirectory (every ``relative_to(repo_root)``
+    in the DAG orchestrator raised ``ValueError``) or from cron (Phase 5
+    ORCH-01) where openclaw sets cwd to the workspace instead of the repo.
+
+    Falls back to ``RuntimeError`` with an actionable message when not
+    inside a git repo so the caller (``_run``) can return exit code 2.
+    """
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "--show-toplevel"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError) as exc:
+        raise RuntimeError(
+            f"book-pipeline chapter must be run inside a git repo: {exc}"
+        ) from exc
+    return Path(result.stdout.strip())
 
 
 def _read_latest_ingestion_run_id(indexes_dir: Path) -> str:
@@ -229,11 +255,12 @@ def _build_dag_orchestrator(chapter_num: int) -> ChapterDagOrchestrator:
     # --- Orchestrator (12 injected components) ---
     # All directory anchors are resolved to ABSOLUTE paths against repo_root
     # so the orchestrator's `canon_path.relative_to(repo_root)` logic works
-    # regardless of the caller's working directory (04-06 deviation: Plan
-    # 04-05 passed bare relative paths, which failed `.relative_to(cwd)`
-    # inside the DAG when `Path("canon/chapter_99.md").relative_to(cwd_abs)`
-    # raised ValueError). Rule 1 bug-fix.
-    repo_root = Path.cwd()
+    # regardless of the caller's working directory. WR-08: we discover the
+    # repo root via `git rev-parse --show-toplevel` instead of the prior
+    # `Path.cwd()` assumption — the CLI must work when invoked from a
+    # subdirectory or from cron (Phase 5 ORCH-01) where openclaw sets cwd
+    # to the workspace, not the repo.
+    repo_root = _discover_repo_root()
     return ChapterDagOrchestrator(
         assembler=assembler,
         chapter_critic=chapter_critic,

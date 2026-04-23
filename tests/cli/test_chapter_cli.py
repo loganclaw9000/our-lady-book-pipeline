@@ -123,6 +123,15 @@ def test_build_orchestrator_wires_all_deps(
     """
     import book_pipeline.cli.chapter as chapter_mod
 
+    # WR-08: _discover_repo_root now calls `git rev-parse --show-toplevel`
+    # instead of trusting Path.cwd(). Initialize tmp_path as a git repo so
+    # the discovery succeeds; otherwise _build_dag_orchestrator would raise
+    # RuntimeError("must be run inside a git repo") before we get to the
+    # monkeypatched constructors.
+    subprocess.run(
+        ["git", "init", "-q", "--initial-branch=main", str(tmp_path)],
+        check=True,
+    )
     monkeypatch.chdir(tmp_path)
 
     # Fake config loaders with minimal attribute surfaces.
