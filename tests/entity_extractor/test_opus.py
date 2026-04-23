@@ -27,7 +27,6 @@ from book_pipeline.entity_extractor.schema import EntityExtractionResponse
 from book_pipeline.interfaces.entity_extractor import EntityExtractor
 from book_pipeline.interfaces.types import EntityCard
 
-
 # --------------------------------------------------------------------- #
 # Fakes                                                                 #
 # --------------------------------------------------------------------- #
