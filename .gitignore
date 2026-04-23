@@ -27,6 +27,10 @@ drafts/retrieval_conflicts/
 # from runs/events.jsonl. Committed scenes land in drafts/ch{NN}/{scene_id}.md
 # (which ARE tracked).
 drafts/scene_buffer/
+# Plan 05-03: TelegramAlerter CooldownCache state — transient, rebuildable
+# from runs/events.jsonl. Survives process restart for 1h TTL dedup but is
+# advisory state, not source of truth.
+runs/alert_cooldowns.json
 
 # IDE
 .vscode/

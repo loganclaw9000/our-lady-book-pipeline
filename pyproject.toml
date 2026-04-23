@@ -93,6 +93,8 @@ source_modules = [
     "book_pipeline.entity_extractor",
     "book_pipeline.retrospective",
     "book_pipeline.ablation",
+    # Phase 5 plan 03 added: alerts (TelegramAlerter + CooldownCache + taxonomy).
+    "book_pipeline.alerts",
 ]
 forbidden_modules = [
     "book_pipeline.book_specifics",
@@ -183,5 +185,7 @@ forbidden_modules = [
     "book_pipeline.entity_extractor",
     "book_pipeline.retrospective",
     "book_pipeline.ablation",
+    # Phase 5 plan 03 added: alerts (TelegramAlerter + CooldownCache + taxonomy).
+    "book_pipeline.alerts",
 ]
 ignore_imports = []

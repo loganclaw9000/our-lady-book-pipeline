@@ -11,6 +11,7 @@ Behavior (D-13):
 
 from __future__ import annotations
 
+import contextlib
 import json
 from pathlib import Path
 
@@ -75,10 +76,8 @@ def test_cooldown_atomic_write(tmp_path: Path, monkeypatch) -> None:
         raise OSError("simulated disk error during rename")
 
     monkeypatch.setattr(cooldown_mod.os, "replace", _boom_replace)
-    try:
+    with contextlib.suppress(OSError):
         cc.record("rubric_conflict", "ch02_sc03")
-    except OSError:
-        pass
     after = path.read_text()
     # Target file unchanged — atomic tmp+rename held the invariant.
     assert json.loads(after) == json.loads(before)

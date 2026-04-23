@@ -36,6 +36,7 @@ uv run mypy \
   src/book_pipeline/chapter_assembler \
   src/book_pipeline/entity_extractor \
   src/book_pipeline/retrospective \
-  src/book_pipeline/ablation
+  src/book_pipeline/ablation \
+  src/book_pipeline/alerts
 
 echo "OK — module boundaries, ruff, and scoped mypy all pass."

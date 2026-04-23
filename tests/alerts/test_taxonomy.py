@@ -9,7 +9,6 @@ Behavior (D-12):
 
 from __future__ import annotations
 
-
 _EXPECTED_CONDITIONS = {
     "spend_cap_exceeded",
     "regen_stuck_loop",
