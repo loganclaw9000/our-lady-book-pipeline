@@ -249,6 +249,11 @@ class ChapterState(str, Enum):  # noqa: UP042 — match SceneState convention
     ASSEMBLED = "assembled"
     CHAPTER_CRITIQUING = "chapter_critiquing"
     CHAPTER_FAIL = "chapter_fail"
+    # Plan 05-02 Task 2 (LOOP-04): surgical scene-kick routing on CHAPTER_FAIL
+    # when the critic cites specific ch{NN}_sc{II} scenes. Non-implicated
+    # scenes keep COMMITTED state; implicated scenes reset to PENDING. This
+    # sub-state is distinct from CHAPTER_FAIL (terminal, non-specific).
+    CHAPTER_FAIL_SCENE_KICKED = "chapter_fail_scene_kicked"
     CHAPTER_PASS = "chapter_pass"
     COMMITTING_CANON = "committing_canon"
     POST_COMMIT_DAG = "post_commit_dag"

@@ -411,7 +411,12 @@ class ChapterDagOrchestrator:
         # Step 1 — canon commit.
         if record.dag_step < 1:
             record = self._step1_canon(record, state_path, ch)
-            if record.state == ChapterState.CHAPTER_FAIL:
+            # Plan 05-02 LOOP-04: both CHAPTER_FAIL and CHAPTER_FAIL_SCENE_KICKED
+            # are step-1 terminal states — no canon commit, no subsequent DAG.
+            if record.state in (
+                ChapterState.CHAPTER_FAIL,
+                ChapterState.CHAPTER_FAIL_SCENE_KICKED,
+            ):
                 return record
 
         # Step 2 — entity extraction + commit.
@@ -566,6 +571,44 @@ class ChapterDagOrchestrator:
         critic_resp = self.chapter_critic.review(critic_req)
 
         if not critic_resp.overall_pass:
+            # Plan 05-02 Task 2 / LOOP-04: surgical scene-kick routing.
+            # Extract implicated scene_ids from CriticIssue.location; if any
+            # cite specific ch{NN}_sc{II} refs, reset those scenes + route
+            # to CHAPTER_FAIL_SCENE_KICKED substate. Non-specific issues
+            # (no ch/sc ref) preserve the existing CHAPTER_FAIL terminal.
+            from book_pipeline.chapter_assembler.scene_kick import (
+                extract_implicated_scene_ids,
+                kick_implicated_scenes,
+            )
+
+            implicated, _non_specific = extract_implicated_scene_ids(critic_resp)
+            if implicated:
+                issue_refs = [
+                    f"{i.axis}:{i.severity}" for i in critic_resp.issues
+                ]
+                kick_implicated_scenes(
+                    implicated=implicated,
+                    state_dir=self.scene_buffer_dir,
+                    drafts_dir=self.commit_dir,
+                    event_logger=self.event_logger,
+                    chapter_num=chapter_num,
+                    issue_refs=issue_refs,
+                )
+                record = transition(
+                    record,
+                    ChapterState.CHAPTER_FAIL_SCENE_KICKED,
+                    note="scene_kick",
+                )
+                record = record.model_copy(
+                    update={
+                        "blockers": [
+                            *record.blockers,
+                            "chapter_critic_scene_kick",
+                        ]
+                    }
+                )
+                _persist(record, state_path)
+                return record
             record = transition(
                 record,
                 ChapterState.CHAPTER_FAIL,
