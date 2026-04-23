@@ -139,6 +139,12 @@ class LanceDBRetrieverBase:
                     "ingestion_run_id": row["ingestion_run_id"],
                     "chapter": row.get("chapter"),
                     "vector_distance": row.get("_distance"),
+                    # Plan 05-03 (D-11 / SC6): entity_state rows carry the
+                    # source_chapter_sha stamped at extraction time. Other
+                    # axes carry None (corpus-immutable). Bundler's
+                    # scan_for_stale_cards reads this for the stale-card
+                    # conflict signal.
+                    "source_chapter_sha": row.get("source_chapter_sha"),
                 },
             )
             for (text, row, rerank_score) in reranked

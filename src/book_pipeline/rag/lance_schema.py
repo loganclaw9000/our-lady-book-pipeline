@@ -38,6 +38,11 @@ CHUNK_SCHEMA: pa.Schema = pa.schema(
         pa.field("rule_type", pa.string(), nullable=False),
         pa.field("ingestion_run_id", pa.string(), nullable=False),
         pa.field("chapter", pa.int64(), nullable=True),
+        # Plan 05-03: additive nullable column for bundler stale-card scan
+        # (SC6 closure / D-11). Only the entity_state axis writes a non-null
+        # value here — rows from corpus_ingest write None. Schema policy
+        # (docstring L5) allows append-only extension.
+        pa.field("source_chapter_sha", pa.string(), nullable=True),
         pa.field(
             "embedding",
             pa.list_(pa.float32(), EMBEDDING_DIM),

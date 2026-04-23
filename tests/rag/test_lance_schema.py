@@ -1,10 +1,12 @@
 """Tests for book_pipeline.rag.lance_schema.
 
-Behavior under test (from 02-01-PLAN.md <behavior>):
-  - CHUNK_SCHEMA has exactly the 8 pyarrow fields specified:
+Behavior under test (from 02-01-PLAN.md <behavior>; extended Plan 05-03 for
+stale-card support):
+  - CHUNK_SCHEMA has the 9 pyarrow fields specified:
       chunk_id (string), text (string), source_file (string),
       heading_path (string), rule_type (string), ingestion_run_id (string),
-      chapter (int64, nullable), embedding (fixed_size_list<float32, 1024>).
+      chapter (int64, nullable), source_chapter_sha (string, nullable —
+      Plan 05-03 additive), embedding (fixed_size_list<float32, 1024>).
   - open_or_create_table(tmp_path, "historical") creates a lance table with
     CHUNK_SCHEMA; re-opening returns a table with identical schema; opening a
     pre-existing table with a different schema raises RuntimeError.
@@ -29,10 +31,12 @@ def test_chunk_schema_has_eight_expected_fields() -> None:
         ("rule_type", pa.string(), False),
         ("ingestion_run_id", pa.string(), False),
         ("chapter", pa.int64(), True),  # nullable — W-5 revision
+        # Plan 05-03 additive: source_chapter_sha for SC6 closure / D-11.
+        ("source_chapter_sha", pa.string(), True),
         # embedding is fixed_size_list<float32, 1024>; compared via .type below.
     ]
-    assert len(CHUNK_SCHEMA) == 8, (
-        f"expected 8 fields in CHUNK_SCHEMA, got {len(CHUNK_SCHEMA)}: "
+    assert len(CHUNK_SCHEMA) == 9, (
+        f"expected 9 fields in CHUNK_SCHEMA, got {len(CHUNK_SCHEMA)}: "
         f"{[f.name for f in CHUNK_SCHEMA]}"
     )
     for name, arrow_type, nullable in expected:

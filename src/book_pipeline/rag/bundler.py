@@ -39,6 +39,7 @@ from __future__ import annotations
 
 import contextlib
 import json
+import subprocess
 import time
 from pathlib import Path
 from typing import Any
@@ -69,6 +70,90 @@ def _now_iso() -> str:
     )
 
 
+def _git_sha_for_chapter(chapter_num: int, repo_root: Path) -> str | None:
+    """Return git SHA of latest commit touching canon/chapter_{NN:02d}.md.
+
+    Returns None on any failure (non-git repo, file missing, git unavailable,
+    timeout) — Pitfall 6 graceful-degrade behavior. Callers treat None as
+    "cannot determine, assume non-stale".
+
+    T-05-03-05 EoP mitigation: chapter_num is int-cast before f-string
+    formatting (no shell injection possible); subprocess.run uses list args
+    (not shell=True).
+    """
+    path = f"canon/chapter_{int(chapter_num):02d}.md"
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(repo_root), "rev-list", "-1", "HEAD", "--", path],
+            capture_output=True,
+            text=True,
+            timeout=5,
+            check=True,
+        )
+    except (
+        subprocess.CalledProcessError,
+        subprocess.TimeoutExpired,
+        FileNotFoundError,
+        OSError,
+    ):
+        return None
+    sha = result.stdout.strip()
+    return sha or None
+
+
+def scan_for_stale_cards(
+    entity_state_result: RetrievalResult,
+    repo_root: Path,
+) -> list[ConflictReport]:
+    """Compare each entity_state hit's source_chapter_sha to current canon SHA.
+
+    Plan 05-03 / D-11 (Phase 4 SC6 closure). Only the entity_state axis carries
+    source_chapter_sha (stamped at extraction time by Plan 04-03's defense-in-
+    depth override). Mismatch between the stamped SHA and the current HEAD SHA
+    for canon/chapter_NN.md means the card body is stale — the chapter has
+    been rewritten since the card was extracted. Surface as ConflictReport
+    with dimension='stale_card' so the Phase 3 critic sees the drift.
+
+    Per-bundle memoization via a local dict (NOT lru_cache — A6 RESEARCH.md:
+    lru_cache at module scope would persist across bundles and miss new
+    commits between runs).
+    """
+    stale: list[ConflictReport] = []
+    sha_by_chapter: dict[int, str | None] = {}
+    for hit in entity_state_result.hits:
+        card_sha = hit.metadata.get("source_chapter_sha")
+        chapter = hit.metadata.get("chapter")
+        if not card_sha or chapter is None:
+            continue
+        try:
+            chapter_int = int(chapter)  # type: ignore[call-overload]
+        except (TypeError, ValueError):
+            continue
+        if chapter_int not in sha_by_chapter:
+            sha_by_chapter[chapter_int] = _git_sha_for_chapter(
+                chapter_int, repo_root
+            )
+        current_sha = sha_by_chapter[chapter_int]
+        # None → Pitfall 6 graceful-degrade; match → no conflict.
+        if current_sha is None or current_sha == card_sha:
+            continue
+        stale.append(
+            ConflictReport(
+                entity=hit.chunk_id,
+                dimension="stale_card",
+                severity="mid",
+                values_by_retriever={
+                    "entity_state.card_sha": str(card_sha),
+                    "canon.head_sha": current_sha,
+                },
+                source_chunk_ids_by_retriever={
+                    "entity_state": [hit.chunk_id],
+                },
+            )
+        )
+    return stale
+
+
 class ContextPackBundlerImpl:
     """Concrete ContextPackBundler — implements the frozen Protocol.
 
@@ -85,6 +170,7 @@ class ContextPackBundlerImpl:
         per_axis_caps: dict[str, int] | None = None,
         hard_cap: int = HARD_CAP,
         entity_list: set[str] | None = None,
+        repo_root: Path | None = None,
     ) -> None:
         self.event_logger = event_logger
         self.conflicts_dir = Path(conflicts_dir)
@@ -93,6 +179,11 @@ class ContextPackBundlerImpl:
         self.hard_cap = hard_cap
         # W-1: DI entity_list from the CLI layer. None = regex-only fallback.
         self.entity_list = entity_list
+        # Plan 05-03: repo_root for the stale-card scan's git SHA lookup.
+        # Defaults to Path.cwd() so production call sites (cli/draft.py +
+        # cli/chapter.py composition roots) need no changes. Tests inject
+        # a tmp_path-rooted git repo.
+        self.repo_root = Path(repo_root) if repo_root is not None else Path.cwd()
 
     # --- Protocol impl -----------------------------------------------------
 
@@ -122,6 +213,17 @@ class ContextPackBundlerImpl:
         conflicts: list[ConflictReport] = detect_conflicts(
             retrievals, entity_list=self.entity_list
         )
+
+        # Plan 05-03 (D-11 / SC6 closure): stale-card scan on entity_state
+        # hits only. Append to conflicts; Phase 3 critic sees drift via the
+        # unified conflicts list + the persisted conflicts JSON artifact.
+        entity_state_result = retrievals.get("entity_state")
+        if entity_state_result is not None and entity_state_result.hits:
+            stale_conflicts = scan_for_stale_cards(
+                entity_state_result, self.repo_root
+            )
+            if stale_conflicts:
+                conflicts.extend(stale_conflicts)
 
         # Budget enforcement. Returns a new dict + trim_log; never mutates input.
         trimmed, trim_log = enforce_budget(
@@ -405,7 +507,7 @@ class ContextPackBundlerImpl:
         path.write_text(json.dumps(payload, indent=2, ensure_ascii=False))
 
 
-__all__ = ["ContextPackBundlerImpl"]
+__all__ = ["ContextPackBundlerImpl", "scan_for_stale_cards"]
 
 # Silence unused-import analyzer: ContextPackBundler is referenced only for
 # structural conformance tests; keep the explicit import so readers see the

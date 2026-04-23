@@ -20,7 +20,6 @@ from book_pipeline.interfaces.types import (
     RetrievalResult,
 )
 
-
 # --- Helpers ---------------------------------------------------------------
 
 

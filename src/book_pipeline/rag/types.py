@@ -37,6 +37,10 @@ class Chunk(BaseModel):
     rule_type: str = "rule"
     ingestion_run_id: str
     chapter: int | None = None
+    # Plan 05-03: additive nullable column (SC6 closure / D-11). Non-null only
+    # on entity_state rows (_card_to_row stamps it); corpus-ingest rows write
+    # None. Used by bundler.scan_for_stale_cards.
+    source_chapter_sha: str | None = None
 
 
 __all__ = ["Chunk"]

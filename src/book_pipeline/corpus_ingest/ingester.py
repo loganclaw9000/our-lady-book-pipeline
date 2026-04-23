@@ -314,6 +314,11 @@ class CorpusIngester:
                         "rule_type": chunk.rule_type,
                         "ingestion_run_id": chunk.ingestion_run_id,
                         "chapter": chunk.chapter,
+                        # Plan 05-03: corpus ingest does not stamp
+                        # source_chapter_sha — only entity_state reindex
+                        # writes a non-null value. Explicit None so the row
+                        # dict matches CHUNK_SCHEMA.
+                        "source_chapter_sha": None,
                         # embedding filled below in batches.
                     }
                 )

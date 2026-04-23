@@ -50,6 +50,10 @@ def _card_to_row(
         "rule_type": "entity_card",
         "ingestion_run_id": ingestion_run_id,
         "chapter": int(card.last_seen_chapter),
+        # Plan 05-03 (D-11 / SC6 closure): propagate source_chapter_sha into
+        # the LanceDB row so the entity_state retriever can surface it in
+        # RetrievalHit.metadata for the bundler's stale-card scan.
+        "source_chapter_sha": card.source_chapter_sha,
         "embedding": list(vector),
     }
 
