@@ -157,7 +157,13 @@ Plans:
   5. Nightly `openclaw cron add` at 02:00 kicks the loop; the gateway survives a reboot and the cron entry in `~/.openclaw/cron/jobs.json` persists; a stale-cron detector alerts if no run has completed in >36h.
   6. Hard-block conditions (stuck regen, rubric conflict, budget blown, voice-drift beyond threshold, checkpoint SHA mismatch, vLLM health failure) emit deduplicated Telegram alerts with a 1-hour cool-down before re-alerting on the same condition.
 
-**Plans**: TBD
+**Plans**: 4 plans in 3 waves (Wave 1: 05-01 Mode-B kernel + preflag + pricing + voice-samples curator → Wave 2 parallel: 05-02 regen-budget + oscillation + scene-kick routing && 05-03 alerts kernel + TelegramAlerter + bundler stale-card flag → Wave 3: 05-04 nightly orchestrator + openclaw cron + stale-cron detector + OBS-02 SQLite ledger)
+
+Plans:
+- [ ] 05-01-PLAN.md — Mode-B Drafter (Opus 4.7 + cache_control 1h) + preflag reader + pricing table + curate-voice-samples CLI [DRAFT-03, DRAFT-04]
+- [ ] 05-02-PLAN.md — Regen-budget wrapper + oscillation detector + spend-cap enforcement + surgical scene-kick routing (SC4 closure) [REGEN-02, REGEN-03, REGEN-04, LOOP-04]
+- [ ] 05-03-PLAN.md — alerts/ kernel package + TelegramAlerter + cooldown persistence + bundler stale-card flag (SC6 closure) [ALERT-01, ALERT-02, CORPUS-02]
+- [ ] 05-04-PLAN.md — Nightly orchestrator CLI + openclaw cron registration + stale-cron detector + OBS-02 SQLite ledger ingester [ORCH-01, LOOP-01]
 **UI hint**: no
 
 **Parallelization**: Mode-B Drafter (DRAFT-03/04) and the regen-upgrade work (REGEN-02/03/04) are largely independent; alerting (ALERT-01/02) depends on hard-block taxonomy being defined but can be built in parallel against stubbed triggers. ORCH-01 comes last in this phase because it needs every failure path to terminate cleanly.
