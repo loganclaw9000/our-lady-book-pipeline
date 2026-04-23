@@ -216,6 +216,51 @@ def test_phase_4_packages_in_lint_imports_mypy_scope() -> None:
         )
 
 
+def test_phase_5_alerts_package_importable() -> None:
+    """Plan 05-03: the `alerts` kernel package must be importable."""
+    import importlib
+
+    importlib.import_module("book_pipeline.alerts")
+
+
+def test_phase_5_alerts_package_in_contracts() -> None:
+    """Plan 05-03: `book_pipeline.alerts` appears in BOTH import-linter
+    contracts (source_modules of contract 1, forbidden_modules of contract 2).
+    Matches the Phase 4 Plan 01 precedent."""
+    import pathlib
+
+    content = pathlib.Path("pyproject.toml").read_text(encoding="utf-8")
+    # Contract 1 source + contract 2 forbidden → at least 2 occurrences total.
+    assert content.count('"book_pipeline.alerts"') >= 2, (
+        "Phase 5 kernel package 'book_pipeline.alerts' must appear in BOTH "
+        "import-linter contracts in pyproject.toml."
+    )
+
+
+def test_phase_5_alerts_package_in_lint_imports_mypy_scope() -> None:
+    """Plan 05-03: scripts/lint_imports.sh mypy targets must include the
+    new Phase 5 alerts kernel package.
+    """
+    import pathlib
+
+    content = pathlib.Path("scripts/lint_imports.sh").read_text(encoding="utf-8")
+    assert "src/book_pipeline/alerts" in content, (
+        "scripts/lint_imports.sh missing Phase 5 mypy target: "
+        "src/book_pipeline/alerts"
+    )
+
+
+def test_phase_5_alert_cooldowns_gitignored() -> None:
+    """Plan 05-03: runs/alert_cooldowns.json is transient (CooldownCache
+    persistence target) and MUST be gitignored."""
+    import pathlib
+
+    content = pathlib.Path(".gitignore").read_text(encoding="utf-8")
+    assert "runs/alert_cooldowns.json" in content, (
+        ".gitignore missing `runs/alert_cooldowns.json` (Plan 05-03)"
+    )
+
+
 def test_cli_curate_voice_samples_exemption_registered() -> None:
     """Plan 05-01 Task 3: pyproject.toml contract 1 ignore_imports MUST
     carry the `cli.curate_voice_samples -> book_specifics.voice_samples`
