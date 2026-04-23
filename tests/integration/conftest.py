@@ -26,6 +26,7 @@ NO real git push. Every seam above is purely in-process.
 """
 from __future__ import annotations
 
+import contextlib
 import os
 import shutil
 import subprocess
@@ -37,7 +38,6 @@ import pytest
 
 from book_pipeline.entity_extractor.schema import EntityExtractionResponse
 from book_pipeline.interfaces.types import (
-    ChapterStateRecord,
     CriticResponse,
     EntityCard,
     SceneState,
@@ -274,10 +274,8 @@ def tmp_repo(
     hooks_dir = tmp_path / ".git" / "hooks"
     for hook in hooks_dir.glob("*"):
         if hook.is_file():
-            try:
+            with contextlib.suppress(OSError):
                 hook.unlink()
-            except OSError:
-                pass
 
     # --- copy configs from the real repo --------------------------------- #
     cfg_src = REPO_ROOT / "config"
@@ -290,6 +288,12 @@ def tmp_repo(
         "mode_thresholds.yaml",
     ):
         shutil.copy2(cfg_src / name, cfg_dst / name)
+
+    # --- symlink src/ so relative template paths resolve --------------- #
+    # DEFAULT_{CHAPTER,EXTRACTOR,RETROSPECTIVE}_TEMPLATE_PATH are relative
+    # ("src/book_pipeline/.../templates/*.j2"); after monkeypatch.chdir(tmp_path)
+    # they'd fail to resolve without this symlink.
+    (tmp_path / "src").symlink_to(REPO_ROOT / "src")
 
     # --- seed scene md files --------------------------------------------- #
     drafts_dir = tmp_path / "drafts"
