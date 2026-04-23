@@ -132,9 +132,22 @@ class OpusRetrospectiveWriter:
         chapter_text: str,
         chapter_events: list[Event],
         prior_retros: list[Retrospective],
+        *,
+        chapter_num: int | None = None,
     ) -> Retrospective:
+        """Generate a chapter retrospective.
+
+        WR-04: ``chapter_num`` is an explicit keyword-only argument. The
+        caller (Plan 04-04 DAG orchestrator) already knows the
+        authoritative chapter number; passing it here prevents path-vs-
+        content divergence where the retro file at
+        ``retrospectives/chapter_{N:02d}.md`` contains ``chapter_num: 1``
+        in its frontmatter. When the caller does NOT supply it, we fall
+        back to event/prior-retros inference for backward compatibility.
+        """
         ts_iso = _now_iso()
-        chapter_num = _infer_chapter_num(chapter_events, prior_retros)
+        if chapter_num is None:
+            chapter_num = _infer_chapter_num(chapter_events, prior_retros)
 
         # Attempt 1.
         start = time.monotonic()

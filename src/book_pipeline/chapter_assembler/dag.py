@@ -289,6 +289,37 @@ def _parse_retro_md(path: Path) -> Retrospective:
 
 
 # --------------------------------------------------------------------- #
+# Retrospective-writer call shim                                         #
+# --------------------------------------------------------------------- #
+
+
+def _call_retrospective_writer(
+    writer: Any,
+    chapter_text: str,
+    chapter_events: list[Event],
+    prior_retros: list[Retrospective],
+    *,
+    chapter_num: int,
+) -> Retrospective:
+    """Call ``writer.write`` with ``chapter_num`` when supported.
+
+    WR-04: OpusRetrospectiveWriter.write() accepts a keyword-only
+    ``chapter_num`` (authoritative path/body consistency). Legacy test
+    fakes may implement the older 3-positional signature; retry without
+    the kwarg on TypeError so those continue to work unchanged.
+    """
+    try:
+        return writer.write(
+            chapter_text,
+            chapter_events,
+            prior_retros,
+            chapter_num=chapter_num,
+        )
+    except TypeError:
+        return writer.write(chapter_text, chapter_events, prior_retros)
+
+
+# --------------------------------------------------------------------- #
 # Orchestrator                                                          #
 # --------------------------------------------------------------------- #
 
@@ -857,8 +888,16 @@ class ChapterDagOrchestrator:
                     continue
 
         # UNGATED — never raises. Writer returns a stub on failure.
-        retro = self.retrospective_writer.write(
-            chapter_text, chapter_events, prior_retros
+        # WR-04: pass the authoritative chapter_num so the retrospective's
+        # body cannot diverge from the file path the DAG is about to write
+        # to (retros_dir / f"chapter_{chapter_num:02d}.md"). The writer
+        # retains its inference path as a fallback for legacy callers.
+        retro = _call_retrospective_writer(
+            self.retrospective_writer,
+            chapter_text,
+            chapter_events,
+            prior_retros,
+            chapter_num=chapter_num,
         )
 
         md = _render_retrospective_md(retro)
