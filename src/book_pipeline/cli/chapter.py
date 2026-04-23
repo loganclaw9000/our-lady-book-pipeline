@@ -227,6 +227,12 @@ def _build_dag_orchestrator(chapter_num: int) -> ChapterDagOrchestrator:
     )
 
     # --- Orchestrator (12 injected components) ---
+    # All directory anchors are resolved to ABSOLUTE paths against repo_root
+    # so the orchestrator's `canon_path.relative_to(repo_root)` logic works
+    # regardless of the caller's working directory (04-06 deviation: Plan
+    # 04-05 passed bare relative paths, which failed `.relative_to(cwd)`
+    # inside the DAG when `Path("canon/chapter_99.md").relative_to(cwd_abs)`
+    # raised ValueError). Rule 1 bug-fix.
     repo_root = Path.cwd()
     return ChapterDagOrchestrator(
         assembler=assembler,
@@ -238,15 +244,15 @@ def _build_dag_orchestrator(chapter_num: int) -> ChapterDagOrchestrator:
         embedder=embedder,
         event_logger=event_logger,
         repo_root=repo_root,
-        canon_dir=Path("canon"),
-        entity_state_dir=Path("entity-state"),
-        retros_dir=Path("retrospectives"),
-        scene_buffer_dir=Path("drafts/scene_buffer"),
-        chapter_buffer_dir=Path("drafts/chapter_buffer"),
-        commit_dir=Path("drafts"),
-        indexes_dir=indexes_dir,
-        pipeline_state_path=Path(".planning/pipeline_state.json"),
-        events_jsonl_path=Path("runs/events.jsonl"),
+        canon_dir=repo_root / "canon",
+        entity_state_dir=repo_root / "entity-state",
+        retros_dir=repo_root / "retrospectives",
+        scene_buffer_dir=repo_root / "drafts" / "scene_buffer",
+        chapter_buffer_dir=repo_root / "drafts" / "chapter_buffer",
+        commit_dir=repo_root / "drafts",
+        indexes_dir=repo_root / "indexes",
+        pipeline_state_path=repo_root / ".planning" / "pipeline_state.json",
+        events_jsonl_path=repo_root / "runs" / "events.jsonl",
     )
 
 
