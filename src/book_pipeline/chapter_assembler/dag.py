@@ -38,7 +38,7 @@ import shutil
 import subprocess
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from book_pipeline.chapter_assembler.concat import ConcatAssembler
 from book_pipeline.chapter_assembler.git_commit import (
@@ -310,14 +310,15 @@ def _call_retrospective_writer(
     the kwarg on TypeError so those continue to work unchanged.
     """
     try:
-        return writer.write(
+        result = writer.write(
             chapter_text,
             chapter_events,
             prior_retros,
             chapter_num=chapter_num,
         )
     except TypeError:
-        return writer.write(chapter_text, chapter_events, prior_retros)
+        result = writer.write(chapter_text, chapter_events, prior_retros)
+    return cast(Retrospective, result)
 
 
 # --------------------------------------------------------------------- #
