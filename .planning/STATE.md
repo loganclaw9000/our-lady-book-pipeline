@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 05-03-PLAN.md
-last_updated: "2026-04-23T20:46:28.741Z"
+stopped_at: Completed 05-04-PLAN.md (Phase 5 COMPLETE)
+last_updated: "2026-04-23T21:07:31.505Z"
 progress:
   total_phases: 6
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 30
-  completed_plans: 30
+  completed_plans: 31
   percent: 100
 ---
 
@@ -60,7 +60,7 @@ Plan: 3 of 4
 - [x] **Phase 2:** Corpus Ingestion + Typed RAG (6/6 plans — 02-01 RAG kernel + 02-02 corpus ingester + 02-03 3-of-5 retrievers + 02-04 entity_state/arc_position + outline_parser + 02-05 ContextPackBundler + 02-06 RAG-04 golden-query CI gate + nightly cron)
 - [~] **Phase 3:** Mode-A Drafter + Scene Critic + Basic Regen (7/8 plans — 03-01 kernel skeletons + REAL V6 voice pin; 03-02 OBS-03 voice-fidelity anchor curation; 03-03 vLLM bootstrap plane + boot_handshake SHA gate [DRAFT-01 complete]; 03-04 Mode-A ModeADrafter + Jinja2 template + sampling profiles + V-2 memorization gate + AnchorSetProvider [DRAFT-01 + DRAFT-02 + OBS-03 complete]; 03-05 SceneCritic Anthropic Opus 4.7 + CRIT-04 audit log [CRIT-01 + CRIT-04 complete]; 03-06 SceneLocalRegenerator kernel — Opus 4.7 + ±10% word-count guard + tenacity retry + severity grouping [REGEN-01 kernel]; 03-07 book-pipeline draft CLI composition + SceneStateMachine + W-1 factory + ch01_sc01 stub + B-3 invariant + 11 mocked tests [REGEN-01 CLI layer]; 03-08 real-world smoke pending)
 - [x] **Phase 4:** Chapter Assembly + Post-Commit DAG (6/6 plans — 04-01 kernel skeletons for chapter_assembler/entity_extractor/retrospective/ablation + NEW ChapterStateMachine module parallel to frozen SceneStateMachine; 04-02 ConcatAssembler deterministic scene-join + ChapterCritic Opus 4.7 chapter-level reviewer with >=3/5 threshold + fresh ContextPack contract + CRIT-04 audit on every invocation; 04-03 OpusEntityExtractor CORPUS-02 with incremental-update diff + source_chapter_sha defense-in-depth + tenacity 3x retry + raise-on-exhaust; OpusRetrospectiveWriter TEST-01 retro with lint_retrospective + single nudge retry + UNGATED stub-retro failure fallback + 1 role='retrospective_writer' Event per call; 04-04 ChapterDagOrchestrator 4-commit post-commit DAG + AblationRun harness skeleton + rag/reindex.py additive kernel helper + resumability from dag_step+1 + fresh-pack invariant + UNGATED retrospective posture; 04-05 `book-pipeline chapter/chapter-status/ablate` CLIs with ONE shared LLM client across 3 Phase 4 Opus callers + 2 import-linter exemptions for cli.chapter + EXPECTED_SCENE_COUNTS table; 04-06 E2E integration test in tests/integration/test_chapter_dag_end_to_end.py with 3 sibling tests regression-guarding all 9 Phase 4 success criteria + tmp_path `git init` + MockLLMClient + 5 monkeypatch seams + 7.47s wall-clock + Rule 1 cli/chapter.py absolute-path fix)
-- [~] **Phase 5:** Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration (2/4 plans — 05-01 Mode-B drafter kernel + preflag reader + authoritative \$5/\$25 Opus 4.7 pricing table + curate-voice-samples CLI [DRAFT-03 + DRAFT-04]; 05-02 regen-budget + oscillation detector + 4-trigger Mode-B escalation + surgical scene-kick routing [REGEN-02 + REGEN-03 + REGEN-04 + LOOP-04])
+- [x] **Phase 5:** Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration (4/4 plans — 05-01 Mode-B drafter kernel + preflag reader + authoritative \$5/\$25 Opus 4.7 pricing table + curate-voice-samples CLI [DRAFT-03 + DRAFT-04]; 05-02 regen-budget + oscillation detector + 4-trigger Mode-B escalation + surgical scene-kick routing [REGEN-02 + REGEN-03 + REGEN-04 + LOOP-04]; 05-03 TelegramAlerter + CooldownCache + alerts kernel + bundler stale-card flag [ALERT-01 + ALERT-02 + CORPUS-02]; 05-04 nightly-run CLI + openclaw cron registration + stale-cron detector + OBS-02 SQLite ledger [ORCH-01 + LOOP-01])
 - [ ] **Phase 6:** Testbed Plane + Production Hardening + First Draft
 
 ---
@@ -96,6 +96,7 @@ No prose-generation metrics yet — pipeline has not produced artifacts. First r
 | Phase 05 P05-01 | 40 | 3 tasks | 17 files |
 | 05-02           | 60             | 3     | 7             | 7              | 31          | 573           | 2026-04-23  |
 | Phase 05 P03 | 40min | 3 tasks | 21 files |
+| Phase 05 P04 | 16min | 3 tasks | 20 files |
 
 ### Target metrics (will populate once pipeline runs)
 
@@ -117,6 +118,13 @@ No prose-generation metrics yet — pipeline has not produced artifacts. First r
 - **(05-02) Synthetic-Event adapter decouples oscillation detector from event-logger surface.** `_synth_critic_events_from_severities()` synthesizes minimal `role='critic'` Events from locally-tracked `attempt_severities` in `run_draft_loop` — production `SceneCritic` emits OBS-01 events but unit tests often stub the critic. Same detector works on both paths.
 - **(05-02) Composition-root Plan 05-02 additions are optional via getattr.** `preflag_set`, `mode_b_drafter`, `pricing_by_model`, `spend_cap_usd_per_scene` default-safe when absent — preserves all 11 Phase 3 `test_draft_loop` tests without modification.
 - **(05-02) Archive-before-mutate pattern for scene-kick.** Kicked scene's `drafts/ch{NN}/{scene_id}.md` moves to `archive/{scene_id}_rev{K:02d}.md` BEFORE the state record resets to PENDING. Recovery artifact preserved even if state write fails.
+- **(05-04) PRIMARY KEY (event_id, axis) on OBS-02 SQLite ledger.** Critic Events with `extra.per_axis_scores` expand into one row per axis (5 rows each); non-critic Events produce one row with `axis=''`. Lets Phase 6 digest query axes directly via `WHERE axis = 'historical'`. `INSERT ... ON CONFLICT(event_id, axis) DO NOTHING` is the idempotent upsert primitive.
+- **(05-04) Byte-offset sidecar tail-read (Pitfall 4 mitigation).** `<db>.last_offset` file tracks append-only events.jsonl position; O(1) seek on subsequent `book-pipeline ingest-events` runs. Sidecar written atomically via tmp + os.replace. On shrunk-file corruption, fall back to offset=0 (ON CONFLICT saves correctness).
+- **(05-04) Openclaw cron registration CLI is idempotent via string-contains probe of `openclaw cron list` stdout.** Matches Plan 02-06 `register_nightly_ingest` pattern. Missing `OPENCLAW_GATEWAY_TOKEN` exits 2 with actionable stderr pointing at `openclaw auth setup`.
+- **(05-04) D-14 stale-cron detector is an independent 08:00 PT cron entry.** If the 02:00 nightly is broken, the 08:00 `check-cron-freshness` cron still fires — decouples detection from the thing it's detecting. Telegram alert `stale_cron_detected` emits when no `role='nightly_run'` Event within 36h.
+- **(05-04) OQ 4 soft-fail alerter wiring.** `_build_nightly_alerter` + `_try_send_alert` return None/no-op when `TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID` unset; scene-loop HARD_BLOCKED transitions are unchanged regardless of alert delivery. Emit `role='telegram_alert'` `extra.delivery='failed'` Event on `TelegramPermanentError` so the digest surfaces alert drift.
+- **(05-04) `mode_b_critic_fail` is not in HARD_BLOCK_CONDITIONS frozen in Plan 05-03 (8 entries).** Remapped to nearest semantic match `regen_stuck_loop` with `axes='mode_b_critic_fail'` in the detail dict. Phase 6 may add a dedicated condition if operator feedback warrants.
+- **(05-04) Composition-root monkey-patch seams as unit-test primitives.** `boot_vllm_if_needed`, `_build_nightly_alerter`, `_build_event_logger`, `_discover_pending_scenes`, `_run_one_scene`, `_maybe_trigger_chapter_dag` are all module-level function refs (not class attrs); unit + E2E tests monkey-patch them to drive control flow deterministically without touching real infra.
 - **Granularity: standard, 6 phases.** Requirements (41) clustered into 6 coherent delivery boundaries per research SUMMARY.md recommendation; dependencies (EventLogger before LLM calls, RAG before Drafter, scene flow before chapter flow, core loop before testbed) forced this ordering.
 - **Observability is Phase 1, not Phase 6.** Per ADR-003 + pitfall V-3 + V-1/V-2, EventLogger + voice-pin SHA canary + anchor-set curation protocol all land before any prose commits. Retroactive observability baselines are impossible.
 - **Mode-B is Phase 5, not earlier.** Mode-B is an escape from Mode-A failure; Mode-A (Phase 3) must exist and be characterized before Mode-B's escalation logic is meaningful. Moving Mode-B earlier would invert the testbed question ("is voice-FT reach sufficient?") into "how cheap is Mode-B?" — wrong question.
@@ -233,7 +241,7 @@ None. Phase 3 readiness confirmed by Plan 02-06 Gate 5 end-to-end smoke.
 - **Date:** 2026-04-23
 - **Action:** Executed Plan 04-02 — ConcatAssembler (deterministic chapter scene-join + frontmatter aggregation + `from_committed_scenes` classmethod reading `drafts/ch{NN}/*.md` with B-3 invariant enforcement) + ChapterCritic (second Critic Protocol impl: Opus 4.7 chapter-level reviewer with >=3/5 per-axis threshold that the LLM cannot override, FRESH ContextPack by caller contract for C-4 collusion prevention, CRIT-04 audit on every invocation including W-7 failure path, rubric_version='chapter.v1' stamped 3-ways, single role='chapter_critic' OBS-01 Event per call) + additive RubricConfig extension (ChapterAxisConfig + ChapterRubricConfig + required chapter_rubric field built from flat YAML keys via model_validator) + `config/rubric.yaml` chapter_rubric block + 2 templates (chapter_system.j2 + chapter_fewshot.yaml with bad-example cross-scene Malintzin location drift + good-example travel-bridge). 4 atomic TDD commits: Task 1 RED `3303a00` + Task 1 GREEN `32f1ba1` (ConcatAssembler ~237 LOC; 8 tests), Task 2 RED `6a04048` + Task 2 GREEN `d97f697` (ChapterCritic ~654 LOC + rubric.py + templates; 12 tests). 3 auto-fixed deviations: Rule 1 RUF002 multiplication-sign in test docstrings (replaced `×` → `x`); Rule 1 kernel-substring-guard false-positive on `"book_specifics"` in 2 docstrings (reworded to `"book-domain layer"`); Rule 2 tests/test_config.py fixture update for the new required `chapter_rubric` schema shape (additive — fixture now writes chapter_rubric_version + chapter_axes alongside scene keys).
 - **Outcome:** 6 files created (concat.py, chapter.py, chapter_system.j2, chapter_fewshot.yaml, test_concat.py, test_chapter_critic.py) + 5 modified (chapter_assembler/__init__.py, critic/__init__.py, config/rubric.py, config/rubric.yaml, tests/test_config.py). 20 new non-slow tests (8 ConcatAssembler + 12 ChapterCritic); full suite 460 passed (from 440 baseline; 0 regression). `bash scripts/lint_imports.sh` green: 2 contracts kept, ruff clean, mypy clean on 108 source files (was 107 after Plan 04-02 Task 1 — chapter.py adds 1). Commits: `3303a00` (Task 1 RED), `32f1ba1` (Task 1 GREEN), `6a04048` (Task 2 RED), `d97f697` (Task 2 GREEN).
-- **Stopped at:** Completed 05-03-PLAN.md
+- **Stopped at:** Completed 05-04-PLAN.md (Phase 5 COMPLETE)
 
 ### Next session
 

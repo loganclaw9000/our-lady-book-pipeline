@@ -54,7 +54,7 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 
 ### Loop + Chapter Commit
 
-- [ ] **LOOP-01**: Scene loop runs end-to-end autonomously: request → RAG bundle → Drafter → Critic → (PASS=buffer | FAIL=regen | EXHAUST=Mode B | BLOCK=alert); ≤1 human-touch per nominal scene.
+- [x] **LOOP-01**: Scene loop runs end-to-end autonomously: request → RAG bundle → Drafter → Critic → (PASS=buffer | FAIL=regen | EXHAUST=Mode B | BLOCK=alert); ≤1 human-touch per nominal scene.
 - [x] **LOOP-02**: Chapter assembler stitches scene-buffer scenes into a chapter markdown file; runs a chapter-level critic pass; on PASS, atomically commits to `canon/chapter_NN.md` and re-indexes.
 - [x] **LOOP-03**: Post-chapter DAG runs to completion before next chapter's scenes begin: entity extractor → LanceDB re-index → retrospective writer; subsequent drafting blocks on DAG completion.
 - [~] **LOOP-04**: Rollback on chapter-level critic FAIL: surgical scene-kick by default, full-chapter redraft on explicit severity signal. *(terminal side complete: Plan 04-04 CHAPTER_FAIL transitions + blocker-tag audit land; scene-kick routing — CriticIssue→scene_id mapping + per-scene state reset — deferred to Phase 5 where REGEN-03 Mode-B escape lives. Both regen-routing shapes ship together.)*
@@ -68,7 +68,7 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 
 ### Orchestration + Alerting
 
-- [ ] **ORCH-01**: Nightly cron (via `openclaw cron add`) at 02:00 kicks the scene-generation loop; gateway running under systemd user unit; persistent state across reboots verified.
+- [x] **ORCH-01**: Nightly cron (via `openclaw cron add`) at 02:00 kicks the scene-generation loop; gateway running under systemd user unit; persistent state across reboots verified.
 - [ ] **ORCH-02**: Digest cron at 07:00 produces `digests/week_YYYY-WW.md` summarizing production (chapters committed, voice fidelity trend), experiments (open/closed theses, ablation results), cost spend, and blockers.
 - [x] **ALERT-01**: Hard-block conditions (stuck regen loop, rubric conflict, critic budget blown, voice-drift > threshold, checkpoint SHA mismatch, vLLM health failure, stale cron run) emit Telegram alerts via the existing channel.
 - [x] **ALERT-02**: Alert deduplication + cool-down prevents alert storms; re-alert after 1 hour of continued condition.
@@ -158,7 +158,7 @@ Populated by roadmapper during roadmap creation. Every v1 REQ-ID maps to exactly
 | REGEN-02 | Phase 5 | Complete |
 | REGEN-03 | Phase 5 | Complete |
 | REGEN-04 | Phase 5 | Complete |
-| LOOP-01 | Phase 5 | Pending |
+| LOOP-01 | Phase 5 | Complete |
 | LOOP-02 | Phase 4 | Complete |
 | LOOP-03 | Phase 4 | Complete |
 | LOOP-04 | Phase 4 | Complete |
@@ -166,7 +166,7 @@ Populated by roadmapper during roadmap creation. Every v1 REQ-ID maps to exactly
 | TEST-02 | Phase 6 | Pending |
 | TEST-03 | Phase 6 | Pending |
 | TEST-04 | Phase 6 | Pending |
-| ORCH-01 | Phase 5 | Pending |
+| ORCH-01 | Phase 5 | Complete |
 | ORCH-02 | Phase 6 | Pending |
 | ALERT-01 | Phase 5 | Complete |
 | ALERT-02 | Phase 5 | Complete |
