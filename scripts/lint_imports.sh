@@ -31,6 +31,7 @@ uv run mypy \
   src/book_pipeline/drafter \
   src/book_pipeline/critic \
   src/book_pipeline/regenerator \
-  src/book_pipeline/voice_fidelity
+  src/book_pipeline/voice_fidelity \
+  src/book_pipeline/llm_clients
 
 echo "OK — module boundaries, ruff, and scoped mypy all pass."

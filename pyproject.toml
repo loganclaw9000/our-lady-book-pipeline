@@ -67,6 +67,7 @@ root_packages = ["book_pipeline"]
 # Phase 2 plan 01 added: "book_pipeline.rag"
 # Phase 2 plan 02 added: "book_pipeline.corpus_ingest"
 # Phase 3 plan 01 added: drafter, critic, regenerator, voice_fidelity
+# Phase 3 gap-closure (2026-04-21) added: llm_clients
 # Phase 5 will add: "book_pipeline.orchestration"
 name = "Kernel packages MUST NOT import from book_specifics"
 type = "forbidden"
@@ -84,6 +85,8 @@ source_modules = [
     "book_pipeline.critic",
     "book_pipeline.regenerator",
     "book_pipeline.voice_fidelity",
+    # Phase 3 gap-closure (2026-04-21): claude-code CLI backend shim.
+    "book_pipeline.llm_clients",
 ]
 forbidden_modules = [
     "book_pipeline.book_specifics",

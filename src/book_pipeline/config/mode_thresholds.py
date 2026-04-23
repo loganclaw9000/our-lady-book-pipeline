@@ -2,9 +2,17 @@
 
 Mode-A (voice-FT local) / Mode-B (frontier) dial thresholds per ADR-001,
 plus oscillation + Telegram alert tuning.
+
+Phase 3 gap-closure (2026-04-21): added ``critic_backend:`` block for
+backend-swappable critic inference (claude-code CLI vs Anthropic SDK).
+Default = ``claude_code_cli`` — operator is on a Claude Max subscription
+and flat-rate inference via the CLI is strictly cheaper than per-call
+API billing.
 """
 
 from __future__ import annotations
+
+from typing import Literal
 
 from pydantic import BaseModel, Field, model_validator
 from pydantic_settings import (
@@ -102,6 +110,28 @@ class AlertsConfig(BaseModel):
     dedup_window_seconds: int = Field(ge=0)
 
 
+class CriticBackendConfig(BaseModel):
+    """Which backend SceneCritic + SceneLocalRegenerator use for Opus calls.
+
+    Phase 3 gap-closure (2026-04-21): the operator is on a Claude Max
+    subscription; flat-rate inference via the ``claude`` CLI subprocess
+    is strictly cheaper than per-call Anthropic API billing. Default
+    backend = ``claude_code_cli``. Explicit opt-in to the SDK path
+    (requires ``ANTHROPIC_API_KEY``) via ``kind: anthropic_sdk``.
+
+    ``max_budget_usd_per_scene`` is surfaced for future ``--max-budget-usd``
+    enforcement on the CLI subprocess; currently advisory only.
+
+    All fields have defaults so legacy mode_thresholds.yaml files without a
+    ``critic_backend:`` block still validate.
+    """
+
+    kind: Literal["claude_code_cli", "anthropic_sdk"] = "claude_code_cli"
+    model: str = "claude-opus-4-7"
+    timeout_s: int = Field(default=180, ge=1)
+    max_budget_usd_per_scene: float = Field(default=1.0, ge=0.0)
+
+
 class ModeThresholdsConfig(BaseSettings):
     """Root loader — the mode-dial configuration surface."""
 
@@ -115,6 +145,11 @@ class ModeThresholdsConfig(BaseSettings):
     # means legacy mode_thresholds.yaml files (without a sampling_profiles:
     # block) still validate — the drafter gets plan-pinned defaults.
     sampling_profiles: SamplingProfiles = Field(default_factory=SamplingProfiles)
+    # Phase 3 gap-closure: backend-swappable critic. default_factory means
+    # legacy mode_thresholds.yaml files without a critic_backend: block
+    # still validate (and get the claude_code_cli default — operator
+    # directive 2026-04-21).
+    critic_backend: CriticBackendConfig = Field(default_factory=CriticBackendConfig)
 
     model_config = SettingsConfigDict(
         yaml_file="config/mode_thresholds.yaml",
