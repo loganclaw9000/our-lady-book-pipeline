@@ -77,6 +77,56 @@ _DEFAULT_TEMPLATE_PATH = Path(__file__).parent / "templates" / "mode_a.j2"
 _PAIRED_QUOTE_RE = re.compile(r'"[^"]+"')
 
 
+# --- Forge postprocess contract v1.0.0 (2026-04-24 handoff) ----------------- #
+# clean_output strips <think> + mojibake + em-dashes per Paul-style discipline.
+# Soft-import: if path moves, fall back to raw text + warn (don't block draft).
+
+_FORGE_POSTPROCESS_PATH = Path("/home/admin/paul-thinkpiece-pipeline/eval")
+
+
+def _apply_forge_postprocess(
+    text: str, *, event_logger: EventLogger | None, scene_id: str
+) -> str:
+    """Apply Forge clean_output (strip <think> + mojibake + em-dashes)."""
+    try:
+        import sys
+
+        if str(_FORGE_POSTPROCESS_PATH) not in sys.path:
+            sys.path.insert(0, str(_FORGE_POSTPROCESS_PATH))
+        from postprocess import clean_output  # type: ignore[import-not-found]
+
+        return clean_output(text)  # type: ignore[no-any-return]
+    except Exception as exc:  # pragma: no cover - defensive fallback
+        if event_logger is not None:
+            from book_pipeline.observability.hashing import event_id as _eid
+
+            ts_iso = datetime.now(UTC).isoformat()
+            event_logger.emit(
+                Event(
+                    event_id=_eid(ts_iso, "drafter_postprocess", scene_id, "warn"),
+                    ts_iso=ts_iso,
+                    role="drafter_postprocess",
+                    model="forge_clean_output",
+                    prompt_hash=hash_text(text[:200]),
+                    input_tokens=0,
+                    output_tokens=len(text.split()),
+                    latency_ms=1,
+                    caller_context={
+                        "module": "drafter.mode_a",
+                        "function": "_apply_forge_postprocess",
+                        "scene_id": scene_id,
+                    },
+                    output_hash=hash_text(text),
+                    extra={
+                        "status": "warn",
+                        "error": f"forge_postprocess_unavailable: {exc!r}",
+                        "fallback": "raw_text",
+                    },
+                )
+            )
+        return text
+
+
 def _to_int(value: Any, *, default: int) -> int:
     """Safe int() that accepts object-typed generation_config values."""
     if value is None:
@@ -299,6 +349,15 @@ class ModeADrafter:
                 scene_id=scene_id,
                 attempt_number=attempt_number,
             )
+
+        # 8.5: Forge postprocess contract v1.0.0 — strip <think> + mojibake
+        # + em-dashes (Paul-style discipline). Wired 2026-04-24 after first
+        # ch01_sc01 commit leaked 8 em-dashes through to canon-bound prose.
+        # Soft-import: if Forge's postprocess.py path moves, ModeADrafter
+        # falls back to raw scene_text + emits a warning Event.
+        scene_text = _apply_forge_postprocess(
+            scene_text, event_logger=self.event_logger, scene_id=scene_id
+        )
 
         # 9: memorization gate (V-2 HARD BLOCK).
         if self.memorization_gate is not None:
