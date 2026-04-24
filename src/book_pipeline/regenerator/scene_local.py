@@ -56,6 +56,27 @@ except ImportError as _exc:  # pragma: no cover
 
 _DEFAULT_TEMPLATE_PATH = Path(__file__).parent / "templates" / "regen.j2"
 _WORD_COUNT_DRIFT_LIMIT = 0.10
+_FORGE_POSTPROCESS_PATH = Path("/home/admin/paul-thinkpiece-pipeline/eval")
+
+
+def _apply_forge_postprocess_regen(text: str) -> str:
+    """Apply Forge clean_output (strip <think>+mojibake+em-dashes) on regen output.
+
+    Soft-import: silent fallback to raw text if Forge path moves. Regen path
+    runs through Opus (not vLLM Mode-A); previously bypassed mode_a's wrapper.
+    Wired 2026-04-24 after re-drive of ch01_sc01 leaked em-dashes from
+    regen-attempt-2 commit.
+    """
+    try:
+        import sys as _sys
+
+        if str(_FORGE_POSTPROCESS_PATH) not in _sys.path:
+            _sys.path.insert(0, str(_FORGE_POSTPROCESS_PATH))
+        from postprocess import clean_output  # type: ignore[import-not-found]
+
+        return clean_output(text)  # type: ignore[no-any-return]
+    except Exception:
+        return text
 
 
 class RegenWordCountDrift(Exception):
@@ -209,6 +230,12 @@ class SceneLocalRegenerator:
                 scene_id=scene_id,
                 attempt=attempt_number,
             )
+
+        # 8.5: Forge postprocess contract v1.0.0 — strip <think> + mojibake
+        # + em-dashes (Paul-style discipline). Wired into regen path 2026-04-24
+        # after re-drive of ch01_sc01 showed em-dash leak from regen output
+        # (drafter postprocess fired, regen output bypassed it).
+        new_scene_text = _apply_forge_postprocess_regen(new_scene_text)
 
         # 10: ±10% word-count guard.
         new_wc = len(new_scene_text.split())

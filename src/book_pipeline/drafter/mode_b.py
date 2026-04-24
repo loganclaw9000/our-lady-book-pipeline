@@ -86,6 +86,21 @@ _DEFAULT_TEMPLATE_PATH = Path(__file__).parent / "templates" / "mode_b.j2"
 _MIN_VOICE_SAMPLES = 3
 _VOICE_SAMPLE_WC_MIN = 300  # slack window per RESEARCH.md Pattern 1 line 759
 _VOICE_SAMPLE_WC_MAX = 700
+_FORGE_POSTPROCESS_PATH = Path("/home/admin/paul-thinkpiece-pipeline/eval")
+
+
+def _apply_forge_postprocess_modeb(text: str) -> str:
+    """Strip <think>+mojibake+em-dashes on Mode-B Opus output (Forge contract v1)."""
+    try:
+        import sys as _sys
+
+        if str(_FORGE_POSTPROCESS_PATH) not in _sys.path:
+            _sys.path.insert(0, str(_FORGE_POSTPROCESS_PATH))
+        from postprocess import clean_output  # type: ignore[import-not-found]
+
+        return clean_output(text)  # type: ignore[no-any-return]
+    except Exception:
+        return text
 
 
 class ModeBDrafterBlocked(Exception):
@@ -261,6 +276,10 @@ class ModeBDrafter:
                 scene_id=scene_id,
                 attempt_number=attempt_number,
             )
+
+        # Forge postprocess contract v1.0.0 — strip <think>+mojibake+em-dashes
+        # on Mode-B Opus output too (mirrors Mode-A wiring 2026-04-24).
+        scene_text = _apply_forge_postprocess_modeb(scene_text)
 
         latency_ms = max(1, (time.monotonic_ns() - t0_ns) // 1_000_000)
         output_sha = hash_text(scene_text)
