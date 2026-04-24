@@ -1,20 +1,23 @@
 # voice_pin.yaml — pins the voice-FT checkpoint consumed by Mode-A drafter.
-# Phase 3 Plan 01: REAL V6 qwen3-32b LoRA pin. SHA recomputed by
-# book-pipeline pin-voice <adapter_dir>; runtime verified by
-# book_pipeline.voice_fidelity.sha.verify_pin() at vLLM boot (V-3 mitigation).
+# 2026-04-24: REPINNED to V6 Qwen3.5-27B LoRA per Forge handoff (PROTOCOL.md v2.0).
+# Manifest digest sourced from /home/admin/finetuning/output/paul-v6-qwen35-27b-lora/MANIFEST.json
+# Algorithm: sha256(sorted sha256(adapter_model.safetensors + adapter_config.json)) — matches V-3 algo.
+# Runtime verified by book_pipeline.voice_fidelity.sha.verify_pin() at vLLM boot.
 voice_pin:
   source_repo: paul-thinkpiece-pipeline
   source_commit_sha: c571bb7b4622161b8198446266bb43294dec4b63
-  ft_run_id: v6_qwen3_32b
-  checkpoint_path: /home/admin/finetuning/output/paul-v6-qwen3-32b-lora
-  checkpoint_sha: 3f0ac5e2290dab633a19b6fb7a37d75f59d4961497e7957947b6428e4dc9d094
-  base_model: Qwen/Qwen3-32B
-  trained_on_date: '2026-04-14'
-  pinned_on_date: '2026-04-22'
-  pinned_reason: "V6 qwen3-32b LoRA \u2014 newest stable voice-FT as of 2026-04-21\
-    \ (V9/V10 did not materialize). SHA-pinned per V-3 mitigation."
+  ft_run_id: v6_qwen35_27b
+  checkpoint_path: /home/admin/finetuning/output/paul-v6-qwen35-27b-lora
+  checkpoint_sha: 83095d9371f26f7979c85b1ba47f05dd21cd1f677023c98c891b0fab11c72ca1
+  base_model: Qwen/Qwen3.5-27B
+  trained_on_date: '2026-04-22'
+  pinned_on_date: '2026-04-24'
+  pinned_reason: "V6 Qwen3.5-27B LoRA - Forge handoff 2026-04-24 (replaces Qwen3-32B pin). LoRA serve preferred (15s adapter swaps); merged fallback at /home/admin/finetuning/output/paul-v6-qwen35-27b-merged digest f8a04b62c5e993073308499c81ff466dadc10dd103534de16bea6059e0cf94d0. SHA-pinned per V-3 mitigation; manifest verify in /home/admin/finetuning/output/paul-v6-qwen35-27b-lora/MANIFEST.json."
   vllm_serve_config:
-    port: 8002
-    max_model_len: 8192
+    port: 8003
+    max_model_len: 4096
     dtype: bfloat16
     tensor_parallel_size: 1
+    quantization: bitsandbytes
+    gpu_memory_utilization: 0.55
+    safety_ceiling_max_gpu_util: 0.60

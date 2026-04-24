@@ -7,7 +7,9 @@ runs fail loudly if the `book-pipeline curate-voice-samples` CLI hasn't run.
 """
 from __future__ import annotations
 
-from pydantic import Field
+from typing import Any
+
+from pydantic import Field, model_validator
 from pydantic_settings import (
     BaseSettings,
     PydanticBaseSettingsSource,
@@ -18,14 +20,35 @@ from book_pipeline.config.sources import YamlConfigSettingsSource
 
 
 class VoiceSamplesConfig(BaseSettings):
-    """Root loader — validates and exposes ``passages`` list of 400-600-word strings."""
+    """Root loader — validates and exposes ``passages`` list of 400-600-word strings.
+
+    Accepts two on-disk shapes (Forge interop, 2026-04-24):
+      A) Native:  ``{passages: [str, str, ...]}``
+      B) Forge:   ``{count: int, purpose: str, samples: [{body: str, ...}, ...]}``
+                  Coerced to ``passages = [s.body for s in samples]`` at load time.
+    """
 
     passages: list[str] = Field(default_factory=list)
 
     model_config = SettingsConfigDict(
         yaml_file="config/voice_samples.yaml",
-        extra="forbid",
+        extra="ignore",  # tolerate Forge's count/purpose/samples top-level keys
     )
+
+    @model_validator(mode="before")
+    @classmethod
+    def _coerce_forge_shape(cls, data: Any) -> Any:
+        """If `samples: [{body: ...}]` present, hoist .body strings into passages."""
+        if isinstance(data, dict) and "samples" in data and "passages" not in data:
+            samples = data.get("samples") or []
+            if isinstance(samples, list):
+                bodies = [
+                    s["body"]
+                    for s in samples
+                    if isinstance(s, dict) and isinstance(s.get("body"), str)
+                ]
+                data = {**data, "passages": bodies}
+        return data
 
     @classmethod
     def settings_customise_sources(
