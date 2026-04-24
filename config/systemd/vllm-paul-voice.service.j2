@@ -10,18 +10,26 @@ Wants=network-online.target
 [Service]
 Type=simple
 Environment=PYTHONUNBUFFERED=1
+Environment=VLLM_USE_V1=0
+Environment=HF_HUB_DISABLE_XET=1
 EnvironmentFile=-{{ environment_file }}
 ExecStartPre=/bin/sh -c 'nvidia-smi > /dev/null 2>&1 || exit 1'
 ExecStart={{ venv_python }} -m vllm.entrypoints.openai.api_server \
     --model {{ base_model }} \
     --enable-lora \
     --lora-modules paul-voice={{ adapter_path }} \
+    --served-model-name paul-voice \
+    --host 127.0.0.1 \
     --port {{ port }} \
     --dtype {{ dtype }} \
     --max-model-len {{ max_model_len }} \
+    --max-num-seqs 4 \
     --tensor-parallel-size {{ tensor_parallel_size }} \
     --gpu-memory-utilization {{ gpu_memory_utilization }} \
-    --host 127.0.0.1
+{% if quantization and quantization != 'none' %}    --quantization {{ quantization }} \
+{% endif %}    --enforce-eager \
+    --trust-remote-code \
+    --default-chat-template-kwargs '{"enable_thinking": false}'
 Restart=on-failure
 RestartSec=15
 TimeoutStartSec=180

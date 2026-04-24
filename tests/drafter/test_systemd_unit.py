@@ -12,35 +12,40 @@ import pytest
 
 def _minimal_kwargs() -> dict[str, object]:
     return {
-        "base_model": "Qwen/Qwen3-32B",
-        "adapter_path": "/home/admin/finetuning/output/paul-v6-qwen3-32b-lora",
-        "port": 8002,
+        "base_model": "Qwen/Qwen3.5-27B",
+        "adapter_path": "/home/admin/finetuning/output/paul-v6-qwen35-27b-lora",
+        "port": 8003,
         "dtype": "bfloat16",
-        "max_model_len": 8192,
+        "max_model_len": 4096,
         "tensor_parallel_size": 1,
-        "gpu_memory_utilization": 0.85,
+        "gpu_memory_utilization": 0.55,
+        "quantization": "bitsandbytes",
         "venv_python": "/home/admin/finetuning/venv_cu130/bin/python",
         "environment_file": "/home/admin/finetuning/cu130.env",
-        "ft_run_id": "v6_qwen3_32b",
+        "ft_run_id": "v6_qwen35_27b",
     }
 
 
 def test_render_unit_produces_expected_flags(tmp_path: Path) -> None:
-    """Test 1: render_unit contains --model, --enable-lora, --lora-modules paul-voice=, --port 8002."""
+    """Test 1: render_unit contains --model, --enable-lora, --lora-modules paul-voice=, --port 8003 (Forge handoff 2026-04-24)."""
     from book_pipeline.drafter.systemd_unit import render_unit
 
     template_path = Path("config/systemd/vllm-paul-voice.service.j2")
     out = render_unit(template_path, **_minimal_kwargs())
-    assert "--model Qwen/Qwen3-32B" in out
+    assert "--model Qwen/Qwen3.5-27B" in out
     assert "--enable-lora" in out
     assert (
-        "--lora-modules paul-voice=/home/admin/finetuning/output/paul-v6-qwen3-32b-lora"
+        "--lora-modules paul-voice=/home/admin/finetuning/output/paul-v6-qwen35-27b-lora"
         in out
     )
-    assert "--port 8002" in out
+    assert "--port 8003" in out
     assert "--dtype bfloat16" in out
-    assert "--max-model-len 8192" in out
-    assert "--gpu-memory-utilization 0.85" in out
+    assert "--max-model-len 4096" in out
+    assert "--gpu-memory-utilization 0.55" in out
+    assert "--quantization bitsandbytes" in out
+    assert "--enforce-eager" in out
+    assert "--trust-remote-code" in out
+    assert "VLLM_USE_V1=0" in out
     assert "/home/admin/finetuning/venv_cu130/bin/python" in out
 
 

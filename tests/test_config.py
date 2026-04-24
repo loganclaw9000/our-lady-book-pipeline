@@ -30,17 +30,20 @@ def test_yaml_file_exists_and_parses(filename: str) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Test 2 — VoicePinConfig loads and base_model == "Qwen/Qwen3-32B"
+# Test 2 — VoicePinConfig loads, matches Forge handoff (V6 Qwen3.5-27B 2026-04-24)
 # ---------------------------------------------------------------------------
 
 
-def test_voice_pin_loads_with_qwen3_32b() -> None:
+def test_voice_pin_loads_with_qwen35_27b() -> None:
     from book_pipeline.config.voice_pin import VoicePinConfig
 
     cfg = VoicePinConfig()
-    assert cfg.voice_pin.base_model == "Qwen/Qwen3-32B"
-    assert cfg.voice_pin.vllm_serve_config.port == 8002
+    assert cfg.voice_pin.base_model == "Qwen/Qwen3.5-27B"
+    assert cfg.voice_pin.vllm_serve_config.port == 8003
     assert cfg.voice_pin.vllm_serve_config.dtype == "bfloat16"
+    assert cfg.voice_pin.vllm_serve_config.quantization == "bitsandbytes"
+    assert cfg.voice_pin.vllm_serve_config.gpu_memory_utilization == 0.55
+    assert cfg.voice_pin.vllm_serve_config.safety_ceiling_max_gpu_util == 0.60
 
 
 # ---------------------------------------------------------------------------

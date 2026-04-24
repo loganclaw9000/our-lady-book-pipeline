@@ -21,12 +21,20 @@ from book_pipeline.config.sources import YamlConfigSettingsSource
 
 
 class VllmServeConfig(BaseModel):
-    """vLLM-serve flags for the voice-FT checkpoint."""
+    """vLLM-serve flags for the voice-FT checkpoint.
+
+    Extended 2026-04-24 (Forge handoff): quantization + gpu_memory_utilization +
+    safety_ceiling_max_gpu_util added to honor DGX Spark unified-memory wedge
+    constraints. Defaults stay backwards-compatible with prior pin shape.
+    """
 
     port: int = Field(ge=1024, le=65535)
     max_model_len: int = Field(ge=512)
     dtype: Literal["bfloat16", "float16", "fp8", "nvfp4"]
     tensor_parallel_size: int = Field(ge=1, le=8)
+    quantization: Literal["bitsandbytes", "fp8", "nvfp4", "none"] = "none"
+    gpu_memory_utilization: float = Field(default=0.85, ge=0.10, le=0.95)
+    safety_ceiling_max_gpu_util: float = Field(default=0.85, ge=0.10, le=0.95)
 
 
 class VoicePinData(BaseModel):

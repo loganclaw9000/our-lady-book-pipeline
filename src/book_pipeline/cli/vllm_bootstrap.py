@@ -133,15 +133,23 @@ def _render_voice_pin_unit(
     venv_python: str,
     environment_file: str,
 ) -> str:
+    # Honor pin-declared gpu_memory_utilization (Forge handoff added this).
+    # Defensive cap against Spark wedge: clamp to safety_ceiling_max_gpu_util.
+    serve_cfg = pin.vllm_serve_config
+    gpu_util = min(
+        serve_cfg.gpu_memory_utilization,
+        serve_cfg.safety_ceiling_max_gpu_util,
+    )
     return render_unit(
         template_path,
         base_model=pin.base_model,
         adapter_path=pin.checkpoint_path,
-        port=pin.vllm_serve_config.port,
-        dtype=pin.vllm_serve_config.dtype,
-        max_model_len=pin.vllm_serve_config.max_model_len,
-        tensor_parallel_size=pin.vllm_serve_config.tensor_parallel_size,
-        gpu_memory_utilization=DEFAULT_GPU_MEMORY_UTILIZATION,
+        port=serve_cfg.port,
+        dtype=serve_cfg.dtype,
+        max_model_len=serve_cfg.max_model_len,
+        tensor_parallel_size=serve_cfg.tensor_parallel_size,
+        gpu_memory_utilization=gpu_util,
+        quantization=serve_cfg.quantization,
         venv_python=venv_python,
         environment_file=environment_file,
         ft_run_id=pin.ft_run_id,
