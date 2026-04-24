@@ -49,7 +49,7 @@ from book_pipeline.interfaces.types import Event
 from book_pipeline.observability.hashing import event_id, hash_text
 from book_pipeline.voice_fidelity.sha import VoicePinMismatch, compute_adapter_sha
 
-_DEFAULT_TIMEOUT_S = 60.0
+_DEFAULT_TIMEOUT_S = 300.0  # 5min - bumped 60->300 for V6 27B bnb-quant ~5tok/s on Spark (incident 2026-04-24)
 _DEFAULT_LORA_MODULE_NAME = "paul-voice"
 
 
