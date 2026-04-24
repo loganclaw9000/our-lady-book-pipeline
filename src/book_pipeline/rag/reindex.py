@@ -101,34 +101,37 @@ def reindex_entity_state_from_jsons(
     ]
 
     tbl = open_or_create_table(indexes_dir, "entity_state")
-    # Idempotent rebuild: wipe existing rows, then insert fresh batch.
-    # CR-02: On bulk-delete failure we MUST NOT fall through to tbl.add(rows) —
-    # that would double-insert against the stable `chunk_id = entity_name`
-    # assumption and break retriever scoring. Try a per-row delete fallback;
-    # if that also fails, raise (caller DAG step 3 routes to DAG_BLOCKED).
+    # Idempotent rebuild of the per-chapter slice ONLY. Corpus-level rows
+    # (pantheon.md, secondary-characters.md ingested by CorpusIngester) MUST
+    # survive — they hold static lore for entities never re-extracted from
+    # chapter prose. Filter on source_file pattern: rows whose source_file
+    # starts with "entity-state/chapter_" and ends with "_entities.json"
+    # are per-chapter extractor output and safe to wipe; everything else is
+    # corpus-level and stays.
+    chapter_predicate = (
+        "source_file LIKE 'entity-state/chapter_%_entities.json'"
+    )
     try:
-        tbl.delete("true")
+        tbl.delete(chapter_predicate)
     except Exception as exc:
         logger.warning(
-            "reindex: bulk delete(`true`) failed (%s); "
-            "falling back to row-by-row delete",
+            "reindex: predicate delete failed (%s); "
+            "falling back to row-by-row delete on per-chapter rows only",
             exc,
         )
         try:
-            existing_ids = [
-                r["chunk_id"]
-                for r in tbl.to_pandas().to_dict("records")
+            existing = [
+                r for r in tbl.to_arrow().to_pylist()
+                if str(r.get("source_file", "")).startswith("entity-state/chapter_")
+                and str(r.get("source_file", "")).endswith("_entities.json")
             ]
-            for chunk_id in existing_ids:
-                # Use parameterized-style quoting: chunk_id values are
-                # derived from EntityCard.entity_name which is free-form
-                # text. Escape single quotes to avoid predicate breakage.
-                safe = str(chunk_id).replace("'", "''")
+            for r in existing:
+                safe = str(r["chunk_id"]).replace("'", "''")
                 tbl.delete(f"chunk_id = '{safe}'")
         except Exception:
             logger.exception("reindex: per-row fallback also failed")
             raise RuntimeError(
-                "entity_state reindex could not clear prior rows; "
+                "entity_state reindex could not clear prior per-chapter rows; "
                 "refusing to double-insert"
             ) from exc
 
