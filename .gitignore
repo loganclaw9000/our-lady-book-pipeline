@@ -59,3 +59,4 @@ config/secrets.yaml
 *.log
 *.tmp
 *.pyc
+.claude/scheduled_tasks.lock
