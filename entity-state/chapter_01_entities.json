@@ -1,0 +1,716 @@
+{
+  "entities": [
+    {
+      "entity_name": "Andrés de Mora",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [
+          "Andrés"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Spanish soldier, newly appointed second aboard the Santa Bárbara in Havana harbor. Excommunicate since age fourteen; absolution just lifted by letter from an unmet bishop in exchange for enlisting on Cortés's Yucatán fleet. Took communion and viaticum at the Chapel of Havana for the first time in five years, did not cross himself on leaving. Wrote second letter to his mother in Córdoba before the last dusk boat ashore. Sails on the morning tide; feels he has already stopped being the man who lived in Córdoba.",
+        "relationships": [
+          {
+            "to": "Santa Bárbara",
+            "kind": "serves_as_second_aboard"
+          },
+          {
+            "to": "Cortés",
+            "kind": "enlisted_under"
+          },
+          {
+            "to": "Andrés's mother",
+            "kind": "son_of"
+          },
+          {
+            "to": "Genoese cook",
+            "kind": "shipmate_of"
+          }
+        ],
+        "confidence_score": 0.97
+      },
+      "evidence_spans": [
+        "Andrés de Mora knelt alone in the Chapel of Havana.",
+        "Five years of excommunication, lifted by a letter from a bishop who had never met him, in exchange for a place on a fleet that needed soldiers more than it needed clean consciences.",
+        "The Santa Bárbara sailed on the morning tide, in company with ten other hulls, for the coast of Yucatán."
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Chapel of Havana",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 1,
+        "current_state": "Small chapel in Havana where Andrés de Mora receives absolution and viaticum before sailing. Walls lined with Seville-carved saints; two candles burn on the altar beside a painted copy of Our Lady of Antigua donated by a sailor. Dead sleep beneath its flagstones.",
+        "relationships": [
+          {
+            "to": "Our Lady of Antigua",
+            "kind": "houses_painted_copy_of"
+          },
+          {
+            "to": "Havana",
+            "kind": "located_in"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "Andrés de Mora knelt alone in the Chapel of Havana.",
+        "The walls were lined with saints who had never seen an ocean, their glass eyes dull, their wooden hands clasped against chests the woodcarvers of Seville had given them two generations back.",
+        "He spoke quietly, as if afraid to wake the dead who slept beneath the flagstones."
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Our Lady of Antigua",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [
+          "the Virgin",
+          "the Virgin of Antigua"
+        ],
+        "entity_type": "object",
+        "first_mentioned_chapter": 1,
+        "current_state": "Painted panel copy of the Virgin whose original image in Seville Cathedral watches over men sailing for the Indies. Hangs between two candles on the altar of the Chapel of Havana; donation of a sailor. Her painted gaze carries 'a thousand years of patience' but, to Andrés, none of it for him.",
+        "relationships": [
+          {
+            "to": "Chapel of Havana",
+            "kind": "hung_in"
+          },
+          {
+            "to": "Seville",
+            "kind": "original_located_in"
+          }
+        ],
+        "confidence_score": 0.93
+      },
+      "evidence_spans": [
+        "between them hung a painted panel of Our Lady of Antigua, the Virgin whose image in the cathedral at Seville watched over every man who sailed for the Indies.",
+        "A sailor had donated the copy; a sailor had probably paid for the candles.",
+        "She gazed down on him with eyes that held a thousand years of patience, and none of it, he felt, for him."
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Santa Bárbara",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 1,
+        "current_state": "One of eleven hulls gathered by Cortés for the Yucatán crossing. Sits low with stores at a Havana wharf, sails furled, cross nailed to the mast. Sails on the morning tide with ten companions. Andrés de Mora is her new second; a one-eyed Genoese mans the galley.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "gathered_by"
+          },
+          {
+            "to": "Andrés de Mora",
+            "kind": "carries_as_second"
+          },
+          {
+            "to": "Yucatán",
+            "kind": "bound_for"
+          }
+        ],
+        "confidence_score": 0.96
+      },
+      "evidence_spans": [
+        "At the wharf the Santa Bárbara rode at her lines, low with stores, her sails still furled against the yards.",
+        "She was one of eleven hulls Cortés had gathered for the crossing to Yucatán",
+        "The Santa Bárbara sailed on the morning tide, in company with ten other hulls, for the coast of Yucatán."
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Cortés",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Offstage commander of the eleven-hull fleet assembling at Havana for the crossing to Yucatán. Unseen in chapter but named as the organizing authority that recruited Andrés de Mora.",
+        "relationships": [
+          {
+            "to": "Santa Bárbara",
+            "kind": "commands_fleet_of"
+          },
+          {
+            "to": "Yucatán",
+            "kind": "leading_expedition_to"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "She was one of eleven hulls Cortés had gathered for the crossing to Yucatán"
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Córdoba",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 1,
+        "current_state": "Castilian city, home of Andrés de Mora's mother and site of a woman he confesses harming. Andrés's letter is bound there via the last dusk boat and a chain of road-port-ocean, expected to arrive in four or five months.",
+        "relationships": [
+          {
+            "to": "Andrés's mother",
+            "kind": "residence_of"
+          },
+          {
+            "to": "Andrés de Mora",
+            "kind": "former_residence_of"
+          }
+        ],
+        "confidence_score": 0.94
+      },
+      "evidence_spans": [
+        "the woman in Córdoba",
+        "toward a house in Córdoba where his mother would, in four months or five, open a square of paper and read that her son had taken the bread."
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Genoese cook",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [
+          "the cook"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "One-eyed Genoese cook of the Santa Bárbara, some forty years at a paring knife. Advises Andrés to write his mother a second letter saying he took the sacrament, framing it as the ship's rule rather than kindness.",
+        "relationships": [
+          {
+            "to": "Santa Bárbara",
+            "kind": "serves_as_cook_aboard"
+          },
+          {
+            "to": "Andrés de Mora",
+            "kind": "counsels"
+          }
+        ],
+        "confidence_score": 0.88
+      },
+      "evidence_spans": [
+        "he found the cook, a Genoese with one eye, stirring a pot that smelled of old onion and salt pork",
+        "He was paring a turnip with a knife worn thin from forty years of paring turnips",
+        "\"That you took the sacrament. That's what a mother wants. The rest she already knows.\""
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Malintzin",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Young slave girl, roughly a year inside a stockaded compound with drunk guards. Father taught her Nahuatl 'before'; also speaks Mayan and a little coast tongue. Has promised Citlal that if anything happens to her she will befriend Rabbit, speaking Nahuatl to him 'without making it a favor.'",
+        "relationships": [
+          {
+            "to": "Citlal",
+            "kind": "promised_friendship_to_her_nephew"
+          },
+          {
+            "to": "Rabbit",
+            "kind": "pledged_friend_of"
+          }
+        ],
+        "confidence_score": 0.96
+      },
+      "evidence_spans": [
+        "Malintzin woke before the sun cleared the stockade.",
+        "\"I speak Nahuatl and Mayan and a little of the coast tongue,\" she said.",
+        "\"I have not been asked for anything in a year that was not a taking. I will be his friend.\""
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Citlal",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [
+          "Star"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Older, heavier new slave in the compound's kitchen hut; Mayan face, Mexica carriage. Was once betrothed in a city that did not survive the season of her intended marriage. Arrived with her nephew Rabbit in last year's raid. Extracts a pledge from Malintzin to befriend Rabbit 'if anything happens' to her.",
+        "relationships": [
+          {
+            "to": "Rabbit",
+            "kind": "aunt_of"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "enlists_as_future_guardian_of_nephew"
+          }
+        ],
+        "confidence_score": 0.94
+      },
+      "evidence_spans": [
+        "A Mayan face, but a Mexica carriage in the shoulders.",
+        "\"I am Citlal.\"",
+        "\"If anything happens to me,\" Citlal said, quietly, as if it were a further observation about the corn, \"the boy will need a friend in this compound.\""
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Rabbit",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [
+          "the boy",
+          "the tall one"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Tall boy working the fields with the men; the overseer nicknames him Rabbit because he runs. Has not been beaten this week. Citlal's nephew, arrived with her in the prior year's raid; had been betrothed to Citlal's cousin (whereabouts unknown). Once boasted to Malintzin that his aunt was a princess.",
+        "relationships": [
+          {
+            "to": "Citlal",
+            "kind": "nephew_of"
+          },
+          {
+            "to": "Citlal's cousin",
+            "kind": "was_betrothed_to"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "will_be_befriended_by"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "\"The boy in the field. The tall one, the one the overseer calls Rabbit because he runs.\"",
+        "\"He is my sister's son.\"",
+        "\"He said, once, that his aunt was a princess.\""
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Itzcoatl",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Young pupil in a Tenochtitlan priestly school. Dreamed of an obsidian scrying pool in which his own face spoke in a tongue he did not know after he had fallen silent; woke smelling real smoke. Ordered by Quauhtli to hold the dream private until after noon. Passing a window, felt for the first time 'that the stones could be taken down' of the Templo Mayor.",
+        "relationships": [
+          {
+            "to": "Tlacaelle",
+            "kind": "friend_of"
+          },
+          {
+            "to": "Quauhtli",
+            "kind": "pupil_of"
+          },
+          {
+            "to": "Tezcatlipoca",
+            "kind": "dreamed_of_mirror_of"
+          }
+        ],
+        "confidence_score": 0.96
+      },
+      "evidence_spans": [
+        "Itzcoatl woke to the dawn drum and the chanting of the older pupils across the hall.",
+        "\"A black mirror. My face in it. The face kept speaking after I had fallen silent.\"",
+        "felt, clearly and for the first time in his life, that the stones could be taken down."
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Tlacaelle",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Fellow student and friend of Itzcoatl. Immediately identifies the dream's black mirror as Tezcatlipoca's and urges Itzcoatl to tell the master. Marks the shadow angle at the north window with Itzcoatl; notes three-finger northward drift from yesterday. Warns Itzcoatl not to fast today regardless of Quauhtli's instruction.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "friend_and_fellow_pupil_of"
+          },
+          {
+            "to": "Quauhtli",
+            "kind": "pupil_of"
+          }
+        ],
+        "confidence_score": 0.93
+      },
+      "evidence_spans": [
+        "\"That is Tezcatlipoca's mirror. You should tell the master before the sun climbs.\"",
+        "\"Three fingers north of yesterday's,\" Tlacaelle said.",
+        "\"Because if he tells you to fast, it means he believes the dream. And I do not want to see what your face looks like when a priest believes your dream.\""
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Quauhtli",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [
+          "the eldest astronomer"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Eldest astronomer of the school, tlenamacac priest identifiable by his turquoise ear-spool. Reads the sky with Tlacaelle and the older students and interprets Venus's pre-dawn rising as Tlahuizcalpantecuhtli walking early — the Feathered Serpent's sign, not the tlatoani's. Orders the shadow fixed before runners arrive from Tezcoco and tells Itzcoatl to hold the dream until after the sun reaches its height.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "master_of"
+          },
+          {
+            "to": "Tlacaelle",
+            "kind": "master_of"
+          },
+          {
+            "to": "Lord of Two Houses",
+            "kind": "expecting_runners_from"
+          }
+        ],
+        "confidence_score": 0.93
+      },
+      "evidence_spans": [
+        "Itzcoatl recognized Quauhtli, the eldest astronomer, by his turquoise ear-spool.",
+        "\"Tlahuizcalpantecuhtli walks early. When the Lord-of-the-Dawn walks early, he is hunting.\"",
+        "\"Hold the dream. Do not tell it in the corridors. Bring it to me after the sun has reached its height.\""
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Tezcatlipoca",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [
+          "the Smoking Mirror"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Mexica deity whose signature black scrying mirror appears in Itzcoatl's dream, with Itzcoatl's own face speaking in an unknown tongue after he falls silent. Tlacaelle classifies the dream as 'Tezcatlipoca's mirror' — 'a dream that shows the Smoking Mirror is not only a dream.'",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "sent_dream_to"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "\"That is Tezcatlipoca's mirror. You should tell the master before the sun climbs.\"",
+        "\"A dream that shows the Smoking Mirror is not only a dream.\""
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Tlahuizcalpantecuhtli",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [
+          "Lord-of-the-Dawn",
+          "the morning star"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Mexica Lord-of-the-Dawn, associated with Venus. On this chapter's morning Venus rose before her proper hour; Quauhtli reads this as Tlahuizcalpantecuhtli walking early — 'hunting' — and identifies the sign with the Feathered Serpent rather than the tlatoani.",
+        "relationships": [
+          {
+            "to": "Feathered Serpent",
+            "kind": "morning_face_of"
+          },
+          {
+            "to": "Venus early rising",
+            "kind": "embodied_by"
+          }
+        ],
+        "confidence_score": 0.88
+      },
+      "evidence_spans": [
+        "\"Venus has risen already.\"",
+        "\"Tlahuizcalpantecuhtli walks early. When the Lord-of-the-Dawn walks early, he is hunting.\"",
+        "\"It is the morning-face of Feathered Serpent.\""
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Feathered Serpent",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Deity named by Quauhtli as the owner of the pre-dawn Venus sign — 'business older than Tenochtitlan.' Identified by Tlacaelle as having the morning star as his morning-face. Explicitly contrasted with the tlatoani's authority and with Huitzilopochtli's sun.",
+        "relationships": [
+          {
+            "to": "Tlahuizcalpantecuhtli",
+            "kind": "has_morning_face_as"
+          },
+          {
+            "to": "Tenochtitlan",
+            "kind": "older_than"
+          }
+        ],
+        "confidence_score": 0.88
+      },
+      "evidence_spans": [
+        "\"It is the morning-face of Feathered Serpent.\"",
+        "\"That is the Feathered Serpent's sign, and the Feathered Serpent has business older than Tenochtitlan.\""
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Huitzilopochtli",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Mexica patron deity. Quauhtli notes his sun 'rises as it should' — the ordinary celestial order — while Venus has broken step. One of the twin shrines atop the Templo Mayor that Itzcoatl glimpses at dawn.",
+        "relationships": [
+          {
+            "to": "Templo Mayor",
+            "kind": "enshrined_atop"
+          },
+          {
+            "to": "Tlaloc",
+            "kind": "shares_twin_shrine_with"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "\"Huitzilopochtli's sun rises as it should,\" Quauhtli said. \"It is the morning star that has broken step.\"",
+        "the twin shrines, Huitzilopochtli and Tlaloc, the steps bone-white with dawn"
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Tlaloc",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Mexica rain deity; one of the two twin shrines atop the Templo Mayor visible against the pink dawn sky as Itzcoatl passes the corridor window.",
+        "relationships": [
+          {
+            "to": "Templo Mayor",
+            "kind": "enshrined_atop"
+          },
+          {
+            "to": "Huitzilopochtli",
+            "kind": "shares_twin_shrine_with"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "the twin shrines, Huitzilopochtli and Tlaloc, the steps bone-white with dawn"
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Templo Mayor",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 1,
+        "current_state": "Great pyramid-temple of Tenochtitlan, bearing the twin shrines of Huitzilopochtli and Tlaloc, steps bone-white at dawn. Glimpsed by Itzcoatl through a corridor window; for one breath he feels 'that the stones could be taken down.'",
+        "relationships": [
+          {
+            "to": "Huitzilopochtli",
+            "kind": "houses_shrine_of"
+          },
+          {
+            "to": "Tlaloc",
+            "kind": "houses_shrine_of"
+          },
+          {
+            "to": "Tenochtitlan",
+            "kind": "located_in"
+          }
+        ],
+        "confidence_score": 0.93
+      },
+      "evidence_spans": [
+        "the Templo Mayor against the pink sky, the twin shrines, Huitzilopochtli and Tlaloc, the steps bone-white with dawn",
+        "felt, clearly and for the first time in his life, that the stones could be taken down."
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Tenochtitlan",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 1,
+        "current_state": "Mexica capital; setting of Itzcoatl's school and the Templo Mayor. Quauhtli declares the Feathered Serpent's business 'older than Tenochtitlan.' Implicitly the city whose sky is being co-read with Tezcoco's.",
+        "relationships": [
+          {
+            "to": "Templo Mayor",
+            "kind": "contains"
+          },
+          {
+            "to": "Tezcoco",
+            "kind": "paired_sky-reading_city_with"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "\"the Feathered Serpent has business older than Tenochtitlan.\""
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Tezcoco",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 1,
+        "current_state": "Allied city whose Lord of Two Houses has sent word before dawn; runners are expected. Quauhtli wants the shadow fixed before their arrival, reasoning that if the sky is speaking in two cities it is speaking.",
+        "relationships": [
+          {
+            "to": "Lord of Two Houses",
+            "kind": "ruled_by"
+          },
+          {
+            "to": "Tenochtitlan",
+            "kind": "paired_sky-reading_city_with"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "\"I want the shadow fixed before the runners come from Tezcoco.\"",
+        "\"The Lord of Two Houses sent word before dawn. If the sky is speaking in two cities, it is speaking.\""
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Lord of Two Houses",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Ruler of Tezcoco. Sent word to the Tenochtitlan astronomers before dawn regarding the celestial disturbance; runners are expected later in the day.",
+        "relationships": [
+          {
+            "to": "Tezcoco",
+            "kind": "ruler_of"
+          },
+          {
+            "to": "Quauhtli",
+            "kind": "sent_word_to"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "\"The Lord of Two Houses sent word before dawn. If the sky is speaking in two cities, it is speaking.\""
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Chapultepec",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 1,
+        "current_state": "Western landmark visible from the school; Quauhtli predicts Venus will bend westward three fingers before the sun slips behind Chapultepec tonight.",
+        "relationships": [
+          {
+            "to": "Tenochtitlan",
+            "kind": "landmark_of"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "She will cross the zenith near nepantla tonatiuh, then bend westward three fingers before the sun slips behind Chapultepec."
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Venus early rising",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [
+          "the morning star out of its season"
+        ],
+        "entity_type": "event",
+        "first_mentioned_chapter": 1,
+        "current_state": "Pre-dawn rising of Venus before the morning star's proper hour, marked on the floor-map of the heavens at the school. Projected path: cross the zenith near nepantla tonatiuh, bend westward three fingers before sunset behind Chapultepec. Shadow measured at the north window is three fingers north of yesterday's — 'very far.' Read by Quauhtli as Tlahuizcalpantecuhtli hunting, a Feathered Serpent sign, not the tlatoani's.",
+        "relationships": [
+          {
+            "to": "Tlahuizcalpantecuhtli",
+            "kind": "embodied_by"
+          },
+          {
+            "to": "Feathered Serpent",
+            "kind": "interpreted_as_sign_of"
+          },
+          {
+            "to": "Itzcoatl's mirror dream",
+            "kind": "temporally_coincident_with"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "\"Venus has risen already.\" Quauhtli pointed at the chalked mark near the eastern glyph. \"Before the morning star's proper hour.\"",
+        "\"It is a rising out of its season.\"",
+        "\"Three fingers north of yesterday's,\" Tlacaelle said. \"That is very far.\""
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    },
+    {
+      "entity_name": "Itzcoatl's mirror dream",
+      "last_seen_chapter": 1,
+      "state": {
+        "aliases": [
+          "the black mirror dream"
+        ],
+        "entity_type": "event",
+        "first_mentioned_chapter": 1,
+        "current_state": "Night-before dream in which Itzcoatl sees an obsidian scrying pool holding his own face; the face's mouth keeps moving after he stops speaking, in a tongue that is not Nahuatl, Otomí, or any market language — 'something with the shape of words but no inside to them.' On waking his fingers smell of real copal smoke. Tlacaelle classifies it as Tezcatlipoca's mirror; Quauhtli orders it held private until after noon.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "dreamt_by"
+          },
+          {
+            "to": "Tezcatlipoca",
+            "kind": "classified_as_sign_of"
+          },
+          {
+            "to": "Venus early rising",
+            "kind": "temporally_coincident_with"
+          }
+        ],
+        "confidence_score": 0.93
+      },
+      "evidence_spans": [
+        "A pool of obsidian, the kind polished for scrying. His own face in it, and then the face was not his. The mouth kept moving after he stopped speaking.",
+        "When he rubbed his eyes clear, his fingers came away smelling faintly of smoke, real smoke, not the remembered kind",
+        "\"Not a language I know.\""
+      ],
+      "source_chapter_sha": "74452ddecb761ebde78d6dda1b61df98ae57220f"
+    }
+  ],
+  "chapter_num": 1,
+  "extraction_timestamp": "2026-04-24T08:58:39.722174Z"
+}
