@@ -1,0 +1,22 @@
+title: Our Lady of Champion
+description: Autonomous-pipeline first-draft novel. Voice = paul-voice FT (Qwen3.5-27B LoRA). Critic = Claude Opus 4.7.
+theme: jekyll-theme-cayman
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+exclude:
+  - ADRs/
+  - ARCHITECTURE.md
+  - README.md
+
+defaults:
+  - scope:
+      path: "chapters"
+    values:
+      layout: default
+  - scope:
+      path: "retrospectives"
+    values:
+      layout: default
