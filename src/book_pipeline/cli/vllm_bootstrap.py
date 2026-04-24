@@ -244,6 +244,34 @@ def _run(args: argparse.Namespace) -> int:
         print(f"[FAIL] unit render failed: {exc}", file=sys.stderr)
         return 2
 
+    # 2.5. dry_run_gate_v1.1 — verify pin SHA against on-disk adapter BEFORE
+    # the live --start handshake too. Catches digest drift pre-boot. Forge
+    # collab amendment 2026-04-24.
+    try:
+        from book_pipeline.voice_fidelity.sha import compute_adapter_sha
+
+        actual_sha = compute_adapter_sha(Path(pin.checkpoint_path))
+        if actual_sha != pin.checkpoint_sha:
+            print(
+                f"[FAIL] dry-run SHA verify failed: pin.checkpoint_sha "
+                f"= {pin.checkpoint_sha[:16]}... != adapter on-disk "
+                f"= {actual_sha[:16]}... at {pin.checkpoint_path}. "
+                f"Run `book-pipeline pin-voice {pin.checkpoint_path}` to repin.",
+                file=sys.stderr,
+            )
+            return 3
+        print(
+            f"[OK] dry-run SHA verify: {actual_sha[:16]}... matches pin",
+            file=sys.stderr,
+        )
+    except FileNotFoundError as exc:
+        print(
+            f"[FAIL] dry-run SHA verify: adapter files missing at "
+            f"{pin.checkpoint_path}: {exc}",
+            file=sys.stderr,
+        )
+        return 3
+
     enable_status = "skipped"
     start_status = "skipped"
     handshake_status = "skipped"

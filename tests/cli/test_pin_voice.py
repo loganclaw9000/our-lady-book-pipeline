@@ -24,6 +24,18 @@ import yaml
 from book_pipeline.voice_fidelity.sha import compute_adapter_sha
 
 
+def _forge_digest(safetensors_bytes: bytes, config_bytes: bytes) -> str:
+    """Reproduce Forge MANIFEST.json verify_command output (Q1 closure 2026-04-24)."""
+    safetensors_sha = hashlib.sha256(safetensors_bytes).hexdigest()
+    config_sha = hashlib.sha256(config_bytes).hexdigest()
+    lines = [
+        f"{safetensors_sha}  adapter_model.safetensors\n",
+        f"{config_sha}  adapter_config.json\n",
+    ]
+    lines.sort()
+    return hashlib.sha256("".join(lines).encode("ascii")).hexdigest()
+
+
 def _write_fake_adapter(adapter_dir: Path) -> tuple[bytes, bytes]:
     """Materialize a tiny valid adapter dir. Returns the (safetensors, config) bytes."""
     adapter_dir.mkdir(parents=True, exist_ok=True)
@@ -120,7 +132,7 @@ def test_pin_voice_sha_in_yaml_matches_compute_adapter_sha(
     assert rc == 0
 
     # Manually compute reference SHA.
-    expected = hashlib.sha256(safetensors_bytes + config_bytes).hexdigest()
+    expected = _forge_digest(safetensors_bytes, config_bytes)
     # Sanity check against our production helper.
     assert compute_adapter_sha(adapter_dir) == expected
 
@@ -150,7 +162,7 @@ def test_pin_voice_emits_role_voice_pin_event(
     ])
     assert rc == 0
 
-    expected_sha = hashlib.sha256(safetensors_bytes + config_bytes).hexdigest()
+    expected_sha = _forge_digest(safetensors_bytes, config_bytes)
 
     assert events_path.exists(), "events.jsonl must be created"
     lines = [

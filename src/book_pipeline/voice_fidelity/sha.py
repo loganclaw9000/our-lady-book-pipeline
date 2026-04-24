@@ -5,15 +5,19 @@ MUST refuse to boot if the weights it loads do not match the SHA recorded in
 config/voice_pin.yaml. Both sides of that comparison use compute_adapter_sha()
 from this module so there is EXACTLY ONE algorithm.
 
-Algorithm (load-bearing — two machines must reproduce the same digest):
-  1. SHA256 accumulator.
-  2. Stream adapter_model.safetensors in 1 MiB chunks into the accumulator.
-  3. Stream adapter_config.json in 1 MiB chunks into the accumulator.
+Algorithm (load-bearing — must match Forge's MANIFEST.json verify_command):
+  1. Compute sha256(adapter_model.safetensors), sha256(adapter_config.json).
+  2. Sort the resulting hex lines alphabetically.
+  3. SHA256 of those sorted lines (as emitted by `sha256sum FILES | sort`).
   4. hexdigest() — 64 lowercase hex chars.
 
-File order is fixed (safetensors first, then config). Do not sort, do not glob,
-do not include tokenizer files. The fixed order is the reason two independent
-callers (pin-voice CLI + Phase 3 vLLM boot handshake) reproduce the same digest.
+This is bit-equivalent to the shell pipeline:
+  cd <adapter_dir> && sha256sum adapter_model.safetensors adapter_config.json | sort | sha256sum
+
+Forge's MANIFEST.json `verify_command` field encodes the same shell pipeline,
+so the digest published by Forge at merge time and recomputed by this module
+at vLLM boot must match byte-for-byte. 2026-04-24 Q1 closure: prior algorithm
+was sha256(bytes||bytes) which silently diverged from Forge's manifest_digest.
 
 This module lives in the kernel and MUST NOT carry Our Lady of
 Champion-specific logic. Import-linter contract 1 (pyproject.toml) guards
@@ -29,6 +33,18 @@ from book_pipeline.config.voice_pin import VoicePinData
 _CHUNK = 1024 * 1024  # 1 MiB
 _SAFETENSORS = "adapter_model.safetensors"
 _CONFIG = "adapter_config.json"
+
+
+def _sha256_file(path: Path) -> str:
+    """Stream a single file through sha256, return 64-char hex."""
+    h = hashlib.sha256()
+    with path.open("rb") as fh:
+        while True:
+            buf = fh.read(_CHUNK)
+            if not buf:
+                break
+            h.update(buf)
+    return h.hexdigest()
 
 
 class VoicePinMismatch(Exception):
@@ -54,7 +70,13 @@ class VoicePinMismatch(Exception):
 
 
 def compute_adapter_sha(adapter_dir: Path) -> str:
-    """Return the 64-char hex SHA256 over (safetensors || config.json).
+    """Return Forge-compatible manifest digest = sha256(`sha256sum FILES | sort`).
+
+    Algorithm (must match Forge MANIFEST.json verify_command output):
+      1. sha256(adapter_model.safetensors), sha256(adapter_config.json) per-file.
+      2. Format each as ``"<hex>  <basename>\\n"`` (two spaces — `sha256sum` style).
+      3. Sort lines alphabetically.
+      4. sha256 of the sorted concatenation.
 
     Args:
         adapter_dir: Path to the LoRA adapter directory. Must contain
@@ -62,8 +84,8 @@ def compute_adapter_sha(adapter_dir: Path) -> str:
             top level (not in checkpoint-*/ subdirs).
 
     Returns:
-        64 lowercase hex chars. Stable across processes and machines given the
-        same two files.
+        64 lowercase hex chars. Reproducible by any caller running
+        ``cd <adapter_dir> && sha256sum adapter_model.safetensors adapter_config.json | sort | sha256sum``.
 
     Raises:
         FileNotFoundError: if either required file is missing.
@@ -75,15 +97,13 @@ def compute_adapter_sha(adapter_dir: Path) -> str:
         raise FileNotFoundError(f"missing {safetensors}")
     if not config.exists():
         raise FileNotFoundError(f"missing {config}")
-    h = hashlib.sha256()
-    for f in (safetensors, config):
-        with f.open("rb") as fh:
-            while True:
-                buf = fh.read(_CHUNK)
-                if not buf:
-                    break
-                h.update(buf)
-    return h.hexdigest()
+
+    lines = [
+        f"{_sha256_file(safetensors)}  {_SAFETENSORS}\n",
+        f"{_sha256_file(config)}  {_CONFIG}\n",
+    ]
+    lines.sort()
+    return hashlib.sha256("".join(lines).encode("ascii")).hexdigest()
 
 
 def verify_pin(pin: VoicePinData, *, strict: bool = True) -> str:

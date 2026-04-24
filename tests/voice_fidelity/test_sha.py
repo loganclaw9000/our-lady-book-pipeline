@@ -52,16 +52,29 @@ def _make_pin(
     )
 
 
-def test_compute_adapter_sha_matches_manual_concat_reference(tmp_path: Path) -> None:
-    """Test 1: The SHA algorithm is SHA256 over (safetensors_bytes || config_bytes).
-    Two independent machines must reproduce the same digest — the test proves the
-    algorithm is byte-exact, not just 'something deterministic'.
+def _expected_forge_digest(safetensors_bytes: bytes, config_bytes: bytes) -> str:
+    """Reproduce Forge MANIFEST.json verify_command output:
+    sha256(`sha256sum adapter_model.safetensors adapter_config.json | sort | sha256sum`)
+    """
+    safetensors_sha = hashlib.sha256(safetensors_bytes).hexdigest()
+    config_sha = hashlib.sha256(config_bytes).hexdigest()
+    lines = [
+        f"{safetensors_sha}  {_SAFETENSORS_NAME}\n",
+        f"{config_sha}  {_CONFIG_NAME}\n",
+    ]
+    lines.sort()
+    return hashlib.sha256("".join(lines).encode("ascii")).hexdigest()
+
+
+def test_compute_adapter_sha_matches_forge_manifest_algo(tmp_path: Path) -> None:
+    """Test 1: SHA algorithm matches Forge MANIFEST.json verify_command output —
+    sha256 of `sha256sum FILES | sort` (Q1 closure 2026-04-24).
     """
     safetensors_bytes = b"S" * 8
     config_bytes = b"{}"
     _write_fake_adapter(tmp_path, safetensors_bytes=safetensors_bytes, config_bytes=config_bytes)
 
-    expected = hashlib.sha256(safetensors_bytes + config_bytes).hexdigest()
+    expected = _expected_forge_digest(safetensors_bytes, config_bytes)
     actual = compute_adapter_sha(tmp_path)
 
     assert actual == expected
@@ -103,7 +116,7 @@ def test_verify_pin_returns_sha_silently_on_match(tmp_path: Path) -> None:
     safetensors_bytes = b"abcd" * 4
     config_bytes = b'{"peft_type":"LORA"}'
     _write_fake_adapter(tmp_path, safetensors_bytes=safetensors_bytes, config_bytes=config_bytes)
-    expected_sha = hashlib.sha256(safetensors_bytes + config_bytes).hexdigest()
+    expected_sha = _expected_forge_digest(safetensors_bytes, config_bytes)
 
     pin = _make_pin(checkpoint_path=str(tmp_path), checkpoint_sha=expected_sha)
     # Should NOT raise; returns the computed SHA (equal to pin.checkpoint_sha).
@@ -117,7 +130,7 @@ def test_verify_pin_raises_on_mismatch_strict(tmp_path: Path) -> None:
     wrong_sha = "0" * 64
     pin = _make_pin(checkpoint_path=str(tmp_path), checkpoint_sha=wrong_sha)
 
-    actual_sha = hashlib.sha256(b"real" + b"{}").hexdigest()
+    actual_sha = _expected_forge_digest(b"real", b"{}")
 
     with pytest.raises(VoicePinMismatch) as excinfo:
         verify_pin(pin, strict=True)
@@ -139,7 +152,7 @@ def test_verify_pin_returns_actual_on_mismatch_non_strict(tmp_path: Path) -> Non
     wrong_sha = "f" * 64
     pin = _make_pin(checkpoint_path=str(tmp_path), checkpoint_sha=wrong_sha)
 
-    actual_sha = hashlib.sha256(b"xyz" + b"[]").hexdigest()
+    actual_sha = _expected_forge_digest(b"xyz", b"[]")
     result = verify_pin(pin, strict=False)
     assert result == actual_sha
     assert result != wrong_sha

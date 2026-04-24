@@ -15,6 +15,7 @@ checkpoint.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -28,26 +29,51 @@ def _run_cli(args: list[str]) -> int:
     return main(["vllm-bootstrap", *args])
 
 
-def _write_real_pin_yaml(yaml_path: Path) -> None:
+def _write_real_pin_yaml(yaml_path: Path) -> str:
+    """Write a real pin yaml pointing at a tmp adapter dir alongside it.
+
+    Returns the on-disk adapter dir path (a sibling under yaml_path's parent
+    parent). Computes Forge-compatible SHA over fake adapter files so that
+    dry-run SHA verify (Plan 05 Forge handoff dry_run_gate_v1.1) passes.
+    """
     yaml_path.parent.mkdir(parents=True, exist_ok=True)
+    # Sibling dir so adapter lives inside tmp_path (not a real /home/admin path).
+    adapter_dir = yaml_path.parent.parent / "fake_adapter"
+    adapter_dir.mkdir(parents=True, exist_ok=True)
+    safetensors_bytes = b"S" * 64
+    config_bytes = b'{"peft_type":"LORA"}'
+    (adapter_dir / "adapter_model.safetensors").write_bytes(safetensors_bytes)
+    (adapter_dir / "adapter_config.json").write_bytes(config_bytes)
+    sha_safe = hashlib.sha256(safetensors_bytes).hexdigest()
+    sha_cfg = hashlib.sha256(config_bytes).hexdigest()
+    lines = [
+        f"{sha_safe}  adapter_model.safetensors\n",
+        f"{sha_cfg}  adapter_config.json\n",
+    ]
+    lines.sort()
+    forge_digest = hashlib.sha256("".join(lines).encode("ascii")).hexdigest()
+
     yaml_path.write_text(
         yaml.safe_dump(
             {
                 "voice_pin": {
                     "source_repo": "paul-thinkpiece-pipeline",
                     "source_commit_sha": "c571bb7b",
-                    "ft_run_id": "v6_qwen3_32b",
-                    "checkpoint_path": "/home/admin/finetuning/output/paul-v6-qwen3-32b-lora",
-                    "checkpoint_sha": "3f0ac5e2290dab633a19b6fb7a37d75f59d4961497e7957947b6428e4dc9d094",
-                    "base_model": "Qwen/Qwen3-32B",
-                    "trained_on_date": "2026-04-14",
-                    "pinned_on_date": "2026-04-22",
+                    "ft_run_id": "v6_qwen35_27b",
+                    "checkpoint_path": str(adapter_dir),
+                    "checkpoint_sha": forge_digest,
+                    "base_model": "Qwen/Qwen3.5-27B",
+                    "trained_on_date": "2026-04-22",
+                    "pinned_on_date": "2026-04-24",
                     "pinned_reason": "test",
                     "vllm_serve_config": {
-                        "port": 8002,
-                        "max_model_len": 8192,
+                        "port": 8003,
+                        "max_model_len": 4096,
                         "dtype": "bfloat16",
                         "tensor_parallel_size": 1,
+                        "quantization": "bitsandbytes",
+                        "gpu_memory_utilization": 0.55,
+                        "safety_ceiling_max_gpu_util": 0.60,
                     },
                 }
             },
@@ -55,6 +81,7 @@ def _write_real_pin_yaml(yaml_path: Path) -> None:
         ),
         encoding="utf-8",
     )
+    return str(adapter_dir)
 
 
 def _write_placeholder_pin_yaml(yaml_path: Path) -> None:
@@ -112,8 +139,8 @@ def test_vllm_bootstrap_dry_run_prints_unit(
     assert rc == 0
     out = capsys.readouterr().out
     assert "--enable-lora" in out
-    assert "--lora-modules paul-voice=/home/admin/finetuning/output/paul-v6-qwen3-32b-lora" in out
-    assert "--port 8002" in out
+    assert "--lora-modules paul-voice=" in out  # adapter path varies w/ tmp_path
+    assert "--port 8003" in out
 
     # Nothing written to ~/.config/systemd/user when --dry-run.
     systemd_user = tmp_path / ".config" / "systemd" / "user" / "vllm-paul-voice.service"
@@ -181,4 +208,4 @@ def test_vllm_bootstrap_writes_unit_when_not_dry_run(
     assert unit_path.exists()
     body = unit_path.read_text(encoding="utf-8")
     assert "--enable-lora" in body
-    assert "--port 8002" in body
+    assert "--port 8003" in body

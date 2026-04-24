@@ -12,7 +12,10 @@ Type=simple
 Environment=PYTHONUNBUFFERED=1
 Environment=VLLM_USE_V1=0
 Environment=HF_HUB_DISABLE_XET=1
-EnvironmentFile=-{{ environment_file }}
+# EnvironmentFile= dropped per Forge inspection 2026-04-24 — the only file
+# available is /home/admin/finetuning/cu130_env.sh which is shell-script
+# format (export FOO=BAR), unparseable by systemd's KEY=VALUE expectation.
+# Inline Environment= directives above cover the critical vLLM env vars.
 ExecStartPre=/bin/sh -c 'nvidia-smi > /dev/null 2>&1 || exit 1'
 ExecStart={{ venv_python }} -m vllm.entrypoints.openai.api_server \
     --model {{ base_model }} \
