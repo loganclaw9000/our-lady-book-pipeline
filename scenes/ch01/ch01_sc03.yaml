@@ -1,0 +1,33 @@
+# Hand-authored Scene 3 stub — third panel of Ch 1 Block 1 Beat 1 triptych.
+# Source-of-truth: outline Ch 1 Block 1 Beat 1 — "Life as usual (multiplied
+# by three)". Sc01 = Andrés (Havana). Sc02 = Malintzin (Potonchán).
+# Sc03 = Itzcoatl, a young scribe-priest at the Templo Mayor in Tenochtitlan.
+# Name-share with the historical Aztec emperor (1428-40) is intentional;
+# this is a younger man living in the SHADOW of that lineage, reading the
+# omens that have been gathering over Tenochtitlan since 1517.
+chapter: 1
+scene_index: 3
+beat_function: "life as usual — Itzcoatl, a young scribe-priest at the Templo Mayor, performing dawn observations of Venus and recording omens; Tenochtitlan goes about its routine while the calmecac astronomers exchange uneasy glances over what the sky is doing"
+pov: "Itzcoatl (a young scribe-priest, not the emperor)"
+date_iso: "1519-03-13"
+location: "Tenochtitlan — Templo Mayor precinct, the calmecac (priestly school) at dawn"
+word_target: 800
+scene_type: "prose"
+
+# Voice continuity notes:
+# - Same triptych-day morning. Three POVs across the empire's edges
+#   converging toward each other without yet knowing it.
+# - Mexica metaphysics surfaces here: omens, Venus observations, the
+#   already-circulating prophecies of disturbance. Treat as serious
+#   knowledge-system the character believes in, not as exotic decoration.
+# - Period-coherent Nahuatl markers OK (Tonatiuh, Citlalpol/Venus,
+#   Tezcatlipoca, calmecac, Templo Mayor) but no glossary-style explanations.
+# - The Spaniards do NOT appear in this scene. Itzcoatl reads omens about
+#   "men from the east" obliquely; he does not yet connect them to ships.
+
+# Constraints carried from outline + 04-CONTEXT decisions:
+# - Frontmatter B-3 invariant (voice_pin_sha == checkpoint_sha) ON COMMIT
+# - Critic axes ≥60: historical, metaphysics, entity, arc, donts
+# - Metaphysics axis particularly load-bearing on this POV — critic should
+#   reject any cartoonification or "primitive" framing of Mexica beliefs.
+# - Postprocess strips em-dashes pre-commit (Forge contract v1.0.0)

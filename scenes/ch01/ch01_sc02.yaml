@@ -1,0 +1,29 @@
+# Hand-authored Scene 2 stub — second panel of Ch 1 Block 1 Beat 1 triptych.
+# Source-of-truth: outline Ch 1 Block 1 Beat 1 — "Life as usual (multiplied
+# by three)". The triptych is Itzcoatl / Malintzin / Andrés. Sc01 covered
+# Andrés; sc02 = Malintzin (Mexican slave-translator, baptized Marina,
+# later Doña Marina). Beat function = "life as usual" — daily routine
+# under Tabascan ownership BEFORE her transfer to the Spaniards as part of
+# the Cortés gift exchange (March 1519).
+chapter: 1
+scene_index: 2
+beat_function: "life as usual — Malintzin (the slave-girl who will become Doña Marina) at her daily work in Potonchán under Tabascan ownership; the morning before the Spaniards arrive at the river-mouth"
+pov: "Malintzin (the woman who has not yet been baptized Marina)"
+date_iso: "1519-03-13"
+location: "Potonchán, Tabasco — the slave compound at dawn, beside the Grijalva river"
+word_target: 800
+scene_type: "prose"
+
+# Voice continuity notes:
+# - Same restraint discipline as sc01 (no expository dump on her future role).
+# - Period-coherent Nahuatl/Maya markers acceptable but DO NOT lean on them.
+# - She speaks Nahuatl natively + Chontal Maya (acquired in Tabasco). Both
+#   languages are present in her interior even though scene is third-person
+#   close. No Spanish — she has not heard Spanish yet.
+# - Foreshadowing the European arrival is fine but oblique. She does NOT
+#   know what is coming.
+
+# Constraints carried from outline + 04-CONTEXT decisions:
+# - Frontmatter B-3 invariant (voice_pin_sha == checkpoint_sha) ON COMMIT
+# - Critic axes ≥60: historical, metaphysics, entity, arc, donts
+# - Postprocess strips em-dashes pre-commit (Forge contract v1.0.0)
