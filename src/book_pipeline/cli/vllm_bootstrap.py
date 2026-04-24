@@ -57,7 +57,7 @@ from book_pipeline.voice_fidelity.sha import VoicePinMismatch
 
 DEFAULT_TEMPLATE_PATH = "config/systemd/vllm-paul-voice.service.j2"
 DEFAULT_UNIT_NAME = "vllm-paul-voice.service"
-DEFAULT_VENV_PYTHON = "/home/admin/finetuning/venv_cu130/bin/python"
+DEFAULT_VENV_PYTHON = "/usr/bin/python3"  # vllm 0.17.0 lives in system python, NOT venv_cu130 (incident 2026-04-24)
 DEFAULT_ENVIRONMENT_FILE = "/home/admin/finetuning/cu130.env"
 DEFAULT_GPU_MEMORY_UTILIZATION = 0.85
 TBD_PLACEHOLDER = "TBD-phase3"
