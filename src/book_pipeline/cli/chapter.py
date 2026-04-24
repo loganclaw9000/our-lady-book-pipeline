@@ -69,6 +69,24 @@ from book_pipeline.llm_clients import build_llm_client  # noqa: E402
 from book_pipeline.rag import BgeM3Embedder, build_retrievers_from_config  # noqa: E402
 from book_pipeline.rag.reranker import BgeReranker  # noqa: E402
 
+
+class _EncoderShim:
+    """CLI-side adapter: gives BgeM3Embedder an `.encode(text)` method without
+    touching the kernel embedder or rag/reindex.py. The DAG step-3 reindex
+    helper expects `embedder.encode(text) -> ndarray`; BgeM3Embedder exposes
+    `embed_texts(list[str]) -> ndarray`. Adapter wraps the call.
+    """
+
+    def __init__(self, inner: BgeM3Embedder) -> None:
+        self._inner = inner
+
+    def encode(self, text: str):  # type: ignore[no-untyped-def]
+        return self._inner.embed_texts([text])[0]
+
+    def embed_texts(self, texts: list[str]):  # type: ignore[no-untyped-def]
+        return self._inner.embed_texts(texts)
+
+
 # --------------------------------------------------------------------------- #
 # Argparse wiring                                                              #
 # --------------------------------------------------------------------------- #
@@ -268,7 +286,7 @@ def _build_dag_orchestrator(chapter_num: int) -> ChapterDagOrchestrator:
         retrospective_writer=retrospective_writer,
         bundler=bundler,
         retrievers=retrievers_list,
-        embedder=embedder,
+        embedder=_EncoderShim(embedder),
         event_logger=event_logger,
         repo_root=repo_root,
         canon_dir=repo_root / "canon",
