@@ -1,0 +1,383 @@
+{
+  "entities": [
+    {
+      "entity_name": "Andrés",
+      "last_seen_chapter": 4,
+      "state": {
+        "aliases": [
+          "Andrés de Mora"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state_summary": "Age confirmed twenty-three (resolves prior ch2 age of 26 vs ch3 report of 23 in favor of 23). At Veracruz signed Cortés's founding charter as a captain/pilot and understood, watching, that Cortés is a lawyer before a soldier and that he had signed onto a mutiny against Velázquez and the Audiencia with no way to take it back. Wept (the pilot's weeping, distinct from the engine's) as the nine ships burned. Marched four days inland to Cempoala, arriving morning of July 15; walked the last six miles on foot beside La Niña. In the white plaza of Cempoala stepped forward, made the sign of the cross to La Niña, and she knelt without him in the cockpit; afterwards re-entered the cockpit (one minute exactly) and her hum rose to the working register. Understood for the second time in eight weeks that he had signed onto something he could not unsign.",
+        "relationships": [
+          {
+            "to": "La Niña de Córdoba",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Flora",
+            "kind": "venerates"
+          },
+          {
+            "to": "Cortés",
+            "kind": "signatory_under"
+          },
+          {
+            "to": "Velázquez",
+            "kind": "mutineer_against"
+          }
+        ],
+        "confidence_score": 0.93
+      },
+      "evidence_spans": [
+        "He understands, with a clarity that will not leave him for the rest of the campaign, that Cortés is a lawyer before he is a soldier.",
+        "He was twenty-three. He was not a boy.",
+        "understood for the second time in eight weeks that he had signed onto something he could not unsign."
+      ],
+      "source_chapter_sha": "31d403b9272e7e9c6270730f1a69a6d9b545a69c"
+    },
+    {
+      "entity_name": "La Niña de Córdoba",
+      "last_seen_chapter": 4,
+      "state": {
+        "aliases": [
+          "La Niña"
+        ],
+        "entity_type": "object",
+        "first_mentioned_chapter": 1,
+        "current_state_summary": "Stood in her cradle on the sand at Veracruz, gilded breastplate polished, while nine Spanish ships burned. Watched the burning the way men watch; the binding to Andrés is described as not magic and not metaphor but a real conducted thing, a thrum like a struck bell that travels through bone, mediated by a small medal Andrés wears under his breastplate. Marched four days inland from the coast to Cempoala (arriving July 15), walking unloaded-ox pace, hum at the resting register. In the white-paved plaza of Cempoala she sank onto her right knee on the bare stone with no pilot in her cockpit, the weeping mask facing the ground, in response to Andrés making the sign of the cross to her at twelve paces from four Totonac engines; rose again when he re-entered the cockpit. Height now disclosed at roughly forty-five feet (vs Totonac engines' thirty).",
+        "relationships": [
+          {
+            "to": "Flora",
+            "kind": "enshrines"
+          },
+          {
+            "to": "Andrés",
+            "kind": "bound_to"
+          }
+        ],
+        "confidence_score": 0.93
+      },
+      "evidence_spans": [
+        "not magic, not metaphor, but a real conducted thing, a thrum like a struck bell that travels through bone",
+        "she, without him in her cockpit, without anyone in her cockpit, with only the weight of her own bones in their box and the morning light on her gilded breastplate, sank slowly onto her right knee.",
+        "they were smaller than *La Niña*, perhaps thirty feet to her forty-five"
+      ],
+      "source_chapter_sha": "31d403b9272e7e9c6270730f1a69a6d9b545a69c"
+    },
+    {
+      "entity_name": "Flora",
+      "last_seen_chapter": 4,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state_summary": "Hagiography expanded: Mozárabe girl-martyr of Córdoba, dead seven hundred years, lifted out of her shrine in Córdoba and carried across an ocean. Bones still in the small glass box at La Niña's sternum; hum present through ships-burning at Veracruz and rose to the working register inside La Niña at Cempoala. Andrés explicitly wonders whether Flora has ever wept inside her box, and suspects he is the wrong person to ask.",
+        "relationships": [
+          {
+            "to": "La Niña de Córdoba",
+            "kind": "enshrined_in"
+          },
+          {
+            "to": "Córdoba",
+            "kind": "originates_from"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "The bones inside the box are Flora's, a Mozárabe girl-martyr of Córdoba, dead seven hundred years",
+        "wonders whether Flora has ever wept inside her box. He does not know. He suspects he is the wrong person to ask."
+      ],
+      "source_chapter_sha": "31d403b9272e7e9c6270730f1a69a6d9b545a69c"
+    },
+    {
+      "entity_name": "Cortés",
+      "last_seen_chapter": 4,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state_summary": "On the beach later named Veracruz, founded a cabildo in a single morning: appointed regidores and an alcalde, had himself elected alcalde mayor, justicia mayor, and capitán general by free vote of the men, signed a founding charter in a half-raised tent, sealed it with the seal he had carried from Cuba for exactly this purpose (wax warmed in seawater over a brazier), and dispatched a clerk to copy the charter three times. Then ordered the nine ships burned, flagship Santa María de la Consolación first, to ensure no man thought a vessel was reserved for retreat. Marched inland four days to Cempoala (arriving July 15) with three hundred men and four iron giants, accepted the fat Totonac cacique's alliance — eight hundred warriors and twenty engine pilots — and, through the four-mouth translation chain, did the gracious-cacique smile Andrés has now seen three times. Disclosed as a lawyer before a soldier.",
+        "relationships": [
+          {
+            "to": "Velázquez",
+            "kind": "mutineer_against"
+          },
+          {
+            "to": "Veracruz",
+            "kind": "founder_of"
+          },
+          {
+            "to": "Fat Totonac cacique",
+            "kind": "ally_of"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "He says they are founding a city in a single morning, and that this is the way of Spain, to turn the world into paper first, to make the world belong to them by law, and then to make it belong to them by blood.",
+        "Cortés is a lawyer before he is a soldier.",
+        "He wants no man to think that there is a vessel on this beach reserved for officers, or for officers' kin, or for the wounded, or for retreat."
+      ],
+      "source_chapter_sha": "31d403b9272e7e9c6270730f1a69a6d9b545a69c"
+    },
+    {
+      "entity_name": "Veracruz",
+      "last_seen_chapter": 4,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 4,
+        "current_state_summary": "Beach city founded by Cortés in a single morning on the wet sand of the Mexican Gulf coast. A cabildo was constituted (regidores, alcalde, town hall and charter and seal), and Cortés had himself elected alcalde mayor, justicia mayor, and capitán general by free vote of the men. The founding charter was signed in a half-raised tent, sealed with Cortés's own seal (wax warmed in seawater over a brazier), and copied three times by a clerk. Immediately following the signing, all nine Spanish ships were burned on the beach to the waterline. The smoke became a single black column leaning inland, the tallest landmark for thirty miles in any direction, visible to Totonac scouts on the ridge and to Mexica couriers, with Moctezuma expected to hear within the week.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "founded_by"
+          },
+          {
+            "to": "Cempoala",
+            "kind": "departure_point_for_march_to"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "He says they will build a city here, and the city will be called **Veracruz**, and the city will belong to him.",
+        "He says they are founding a cabildo, that they will elect regidores and an *alcalde*",
+        "The smoke is one column now."
+      ],
+      "source_chapter_sha": "31d403b9272e7e9c6270730f1a69a6d9b545a69c"
+    },
+    {
+      "entity_name": "Santa María de la Consolación",
+      "last_seen_chapter": 4,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 4,
+        "current_state_summary": "Cortés's flagship, with his name carved into her sternpost; the ship that had carried him from Havana. Beached half-submerged on the sand at Veracruz with the surf lapping her lower ribs at low tide. Set on fire first by Cortés's order — last to catch but first lit — to ensure no man thought any vessel was reserved for retreat. Gave up her mainmast across her own deck with a sound like a door slamming in an empty house. Burned to the waterline.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "flagship_of"
+          },
+          {
+            "to": "Veracruz",
+            "kind": "burned_at"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "The galleons sit half-submerged on the sand. The surf has already begun to lap at the lower ribs of the *Santa María de la Consolación*.",
+        "she is the one with Cortés's name carved into her sternpost",
+        "the *Santa María de la Consolación*, last to catch and first lit, gives up her mainmast."
+      ],
+      "source_chapter_sha": "31d403b9272e7e9c6270730f1a69a6d9b545a69c"
+    },
+    {
+      "entity_name": "Burning of the ships",
+      "last_seen_chapter": 4,
+      "state": {
+        "aliases": [
+          "scuttling at Veracruz"
+        ],
+        "entity_type": "event",
+        "first_mentioned_chapter": 4,
+        "current_state_summary": "Cortés's deliberate destruction of all nine Spanish ships on the beach at Veracruz immediately after the founding-charter was signed and sealed. Order of burning: Santa María de la Consolación (flagship, lit first), Trinidad, San Lázaro, Santa María de la Victoria, San Pablo, San Jerónimo, San Juan de Letrán, San Bartolomé, San Nicolás, Santa Cruz. Santa Cruz broke her keel and went sideways into the surf; San Pablo took longest because her hull was newest and timbers wettest, glowing red through her gunports for an hour after the others were blackened ribs. Wind off the dunes bent the smoke inland over the men, the tent, and the Reliquary cradles; the nine columns braided into one column visible thirty miles inland. The Reliquaries (including Santiago del Paso, the second-class engines, and the third-class engines) did not burn. Anchors Andrés's understanding that the men cannot return.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "ordered_by"
+          },
+          {
+            "to": "Veracruz",
+            "kind": "occurred_at"
+          }
+        ],
+        "confidence_score": 0.92
+      },
+      "evidence_spans": [
+        "The *Trinidad* burns. The *San Lázaro* burns. The *Santa María de la Victoria* burns. The *San Pablo* burns. The *San Jerónimo* burns. The *San Juan de Letrán* burns. The *San Bartolomé* burns. The *San Nicolás* burns. The *Santa Cruz* burns.",
+        "Nine ships. Nine hulls, one by one, to the waterline.",
+        "the *Santiago del Paso* does not burn, and the second-class engines do not burn, and the third-class engines do not burn."
+      ],
+      "source_chapter_sha": "31d403b9272e7e9c6270730f1a69a6d9b545a69c"
+    },
+    {
+      "entity_name": "Velázquez",
+      "last_seen_chapter": 4,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 4,
+        "current_state_summary": "Governor (of Cuba, implied) under whose authority Cortés sailed from Havana. By signing the Veracruz founding charter and accepting Cortés's election as capitán general, Andrés has signed onto a mutiny against him — and against the Audiencia and, if it comes to that, the Crown.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "governor_of"
+          },
+          {
+            "to": "Andrés",
+            "kind": "mutinied_against_by"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "he has signed onto a mutiny against his governor.",
+        "a war that is not against the Mexica alone, but against Velázquez and the Audiencia and, if it comes to that, the Crown."
+      ],
+      "source_chapter_sha": "31d403b9272e7e9c6270730f1a69a6d9b545a69c"
+    },
+    {
+      "entity_name": "Cempoala",
+      "last_seen_chapter": 4,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 3,
+        "current_state_summary": "Totonac inland city reached by the Spanish column on the morning of July 15 after four days inland from the coast through scrub and maize on packed earth swept clean by unseen watchers in the cane. Outer wall lime-washed white (fresh lime), gates open, plaza paved in flat stones lined with low pyramids that are also white-washed, repainted seasonally. The fat cacique received Cortés in the plaza, carried in on a litter set down without ceremony in the dust. Through a four-mouth translation chain (Bernardo–Malintzin–Totonac woman–Totonac man) the cacique offered alliance — eight hundred warriors and twenty engine pilots — citing twenty years of Mexica tribute (boys for the pyramids, girls for the priests' houses, cotton for warriors' quilted armor). Cortés accepted. Site of the first encounter between La Niña de Córdoba and four Totonac wood-and-cane engines.",
+        "relationships": [
+          {
+            "to": "Fat Totonac cacique",
+            "kind": "ruled_by"
+          },
+          {
+            "to": "Mexica",
+            "kind": "tributary_to_until_now"
+          },
+          {
+            "to": "Spanish column",
+            "kind": "ally_of"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "The march arrived at Cempoala on the morning of July 15.",
+        "Cempoala's outer wall was lime-washed white and the lime was fresh.",
+        "Twenty years of tribute. The Mexica come every year and they take the boys for the pyramids and the girls for the houses of the priests and the cotton for the warriors' quilted armor."
+      ],
+      "source_chapter_sha": "31d403b9272e7e9c6270730f1a69a6d9b545a69c"
+    },
+    {
+      "entity_name": "Fat Totonac cacique",
+      "last_seen_chapter": 4,
+      "state": {
+        "aliases": [
+          "the fat cacique"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 4,
+        "current_state_summary": "Ruler of Cempoala. Carried into the plaza on a litter by four men of his household, the litter set down in the dust without ceremony; once standing, a head shorter than Cortés and had to crane his neck to look up at him. Welcomed Cortés to a city he says is no longer the Mexica's. Offered alliance through the four-mouth translation chain: eight hundred warriors and twenty engine pilots, fewer than he would like to give because the Mexica took the others over twenty years of tribute. Concluding line: 'He says he hopes you will not regret accepting it as much as he hopes he will not regret offering it.' Surprised when La Niña de Córdoba knelt unmanned in the plaza; he had been expecting a smaller, boy-sized Spanish pilot.",
+        "relationships": [
+          {
+            "to": "Cempoala",
+            "kind": "ruler_of"
+          },
+          {
+            "to": "Cortés",
+            "kind": "ally_to"
+          },
+          {
+            "to": "Mexica",
+            "kind": "former_tributary_to"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "The fat cacique was waiting in the plaza.",
+        "He says he hopes you will not regret accepting it as much as he hopes he will not regret offering it.",
+        "He says he will give you eight hundred warriors. He says he will give you twenty engine pilots."
+      ],
+      "source_chapter_sha": "31d403b9272e7e9c6270730f1a69a6d9b545a69c"
+    },
+    {
+      "entity_name": "Totonac engines",
+      "last_seen_chapter": 4,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 4,
+        "current_state_summary": "Four Totonac war-engines that entered Cempoala's plaza from the east side. Each ~30 feet at the shoulder (vs La Niña's ~45). Built mostly of wood and lashed cane, with plates of beaten copper at the joints and chest. Each wears a feathered headdress running the length of its spine, green-and-red feathers as long as a man's arm; jade set into the eye-sockets of animal-faced masks (jaguar, long-beaked bird, serpent, frog). Their hum is at a different harmonic than La Niña's — Andrés feels it in his sternum and concludes whatever powers them is not bone, or is bone but not of any martyr he has ever heard named. Pilots walked beside them in quilted cotton with narrow black bands painted across the eyes; two were Andrés's father's age. At the salute they raised their right (weapon) arms, palm forward, fingers spread. They stopped at twelve paces from La Niña.",
+        "relationships": [
+          {
+            "to": "Fat Totonac cacique",
+            "kind": "fielded_by"
+          },
+          {
+            "to": "La Niña de Córdoba",
+            "kind": "saluted_across_from"
+          }
+        ],
+        "confidence_score": 0.92
+      },
+      "evidence_spans": [
+        "There were four of them. They came in from the east side of the plaza, walking, and they were smaller than *La Niña*, perhaps thirty feet to her forty-five, and they were not iron.",
+        "Wood and lashed cane, with plates of beaten copper at the joints and at the chest. Each one wore a feathered headdress that ran the length of its spine",
+        "their hum was wrong. Not louder than *La Niña*'s, not lower, just *off*, at a different interval, a different harmonic"
+      ],
+      "source_chapter_sha": "31d403b9272e7e9c6270730f1a69a6d9b545a69c"
+    },
+    {
+      "entity_name": "Bernardo",
+      "last_seen_chapter": 4,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 3,
+        "current_state_summary": "At Cempoala on July 15 stood three paces behind Cortés, hands folded inside his robe sleeves, mouth moving silently — rehearsing not words but the act of waiting through four mouths for one sentence. Spanish-end translator of the longest chain Andrés has ever seen (Bernardo–Malintzin–Totonac woman–Totonac man), handling Latin and Castilian. After La Niña's unmanned kneel he said in Latin 'oratio' and then almost-too-soft in Castilian 'not the same word' — explicitly distinguishing Christian prayer from the Totonac salute.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "translator_for"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "translator_chain_partner"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Bernardo at the Spanish end with the Latin and the Castilian both.",
+        "He was rehearsing the act of waiting through four mouths for one sentence.",
+        "Bernardo, behind him, said in Latin, very softly, *oratio.* Then in Castilian, almost too soft to hear: *not the same word.*"
+      ],
+      "source_chapter_sha": "31d403b9272e7e9c6270730f1a69a6d9b545a69c"
+    },
+    {
+      "entity_name": "Malintzin",
+      "last_seen_chapter": 4,
+      "state": {
+        "aliases": [
+          "Marina"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state_summary": "At Cempoala on July 15 forms one node of the four-mouth translation chain (Bernardo–Malintzin–Totonac woman–Totonac man), translating Nahuatl to/from a Totonac woman whose name Andrés does not know. Aguilar is no longer in the chain at this junction; the chain now runs through Bernardo (Latin/Castilian) at the Spanish end and a Totonac dyad at the local end.",
+        "relationships": [
+          {
+            "to": "Bernardo",
+            "kind": "translator_chain_partner"
+          },
+          {
+            "to": "Cortés",
+            "kind": "translator_for"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "Malintzin to a Totonac woman whose name Andrés did not know to a Totonac man in a feathered cape and back again, Bernardo at the Spanish end with the Latin and the Castilian both."
+      ],
+      "source_chapter_sha": "31d403b9272e7e9c6270730f1a69a6d9b545a69c"
+    }
+  ],
+  "chapter_num": 4,
+  "extraction_timestamp": "2026-04-25T09:36:40.445949Z"
+}
