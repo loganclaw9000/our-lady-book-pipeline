@@ -633,6 +633,60 @@ class ChapterDagOrchestrator:
                 )
                 _persist(record, state_path)
                 return record
+
+            # Audit 2026-04-25: when chapter critic returns issues without
+            # specific scene refs (`location` and `evidence` cite no
+            # `ch{NN}_sc{II}`), the prior path went straight to CHAPTER_FAIL
+            # with no recovery. Now: if any mid/high severity exists, treat
+            # as chapter-wide kick — distribute ALL issues across ALL committed
+            # scenes so each gets a chance to regen against the critique.
+            actionable = [
+                i for i in critic_resp.issues
+                if i.severity in ("mid", "high")
+            ]
+            if actionable:
+                all_scenes = set(record.scene_ids)
+                if all_scenes:
+                    issues_per_scene_all: dict[str, list[dict[str, Any]]] = {
+                        sid: [
+                            {
+                                "axis": i.axis,
+                                "severity": i.severity,
+                                "location": i.location or "(chapter-wide)",
+                                "claim": i.claim,
+                                "evidence": i.evidence,
+                            }
+                            for i in actionable
+                        ]
+                        for sid in all_scenes
+                    }
+                    kick_implicated_scenes(
+                        implicated=all_scenes,
+                        state_dir=self.scene_buffer_dir,
+                        drafts_dir=self.commit_dir,
+                        event_logger=self.event_logger,
+                        chapter_num=chapter_num,
+                        issue_refs=[
+                            f"{i.axis}:{i.severity}" for i in actionable
+                        ] + ["non_specific_chapter_wide"],
+                        issues_per_scene=issues_per_scene_all,
+                    )
+                    record = transition(
+                        record,
+                        ChapterState.CHAPTER_FAIL_SCENE_KICKED,
+                        note="scene_kick (chapter-wide)",
+                    )
+                    record = record.model_copy(
+                        update={
+                            "blockers": [
+                                *record.blockers,
+                                "chapter_critic_scene_kick_chapter_wide",
+                            ]
+                        }
+                    )
+                    _persist(record, state_path)
+                    return record
+
             record = transition(
                 record,
                 ChapterState.CHAPTER_FAIL,
