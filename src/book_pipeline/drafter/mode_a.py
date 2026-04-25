@@ -307,6 +307,11 @@ class ModeADrafter:
         # 6-7: call vLLM. On VllmUnavailable → error Event + ModeADrafterBlocked.
         t0_ns = time.monotonic_ns()
         try:
+            # min_tokens floor: word_target * 1.4 (≈ tokens per word for Paul's
+            # prose style). Caps at max_tokens-128 so we don't conflict with the
+            # upper bound. Forces V6 to keep generating past ~300-400 token
+            # natural stop point when the stub wants 1000+ words.
+            min_tokens = max(128, min(int(word_target * 1.4), max_tokens - 128))
             completion = self.vllm_client.chat_completion(
                 messages=messages,
                 model="paul-voice",
@@ -314,6 +319,7 @@ class ModeADrafter:
                 top_p=profile.top_p,
                 max_tokens=max_tokens,
                 repetition_penalty=profile.repetition_penalty,
+                min_tokens=min_tokens,
             )
         except VllmUnavailable as exc:
             self._emit_error_event(

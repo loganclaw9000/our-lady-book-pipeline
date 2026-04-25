@@ -336,25 +336,89 @@ def _run(args: argparse.Namespace) -> int:
     if expected is None:
         expected = _lookup_scene_count(chapter_num)
 
-    # Run the DAG.
-    try:
-        record = orchestrator.run(
-            chapter_num, expected_scene_count=expected
-        )
-    except ChapterGateError as exc:
+    # Run the DAG with scene-kick auto-recovery (2026-04-25). Up to 3
+    # cycles: each time chapter critic kicks specific scenes, re-run
+    # `book-pipeline draft` for those scenes (which loads kick_issues.json
+    # written by dag.py and feeds them into the first regen attempt) and
+    # retry the chapter DAG. Halt on DAG_COMPLETE or CHAPTER_FAIL (no
+    # implicated scenes — that's a non-recoverable critic verdict).
+    import subprocess as _subprocess
+    import sys as _sys
+
+    max_kick_cycles = 3
+    cycle = 0
+    while True:
+        cycle += 1
+        try:
+            record = orchestrator.run(
+                chapter_num, expected_scene_count=expected
+            )
+        except ChapterGateError as exc:
+            print(
+                f"Error: chapter gate failed: {exc.reason} "
+                f"(expected={exc.expected}, actual={exc.actual}, "
+                f"missing={exc.missing})",
+                file=sys.stderr,
+            )
+            return 2
+        except Exception as exc:
+            logger.exception("chapter DAG failed unexpectedly")
+            print(
+                f"Error: chapter DAG failed unexpectedly: {exc}",
+                file=sys.stderr,
+            )
+            return 2
+
+        if record.state != ChapterState.CHAPTER_FAIL_SCENE_KICKED:
+            break
+        if cycle >= max_kick_cycles:
+            print(
+                f"Warning: chapter {chapter_num} scene-kick recovery "
+                f"exhausted {max_kick_cycles} cycles; surfacing "
+                f"CHAPTER_FAIL_SCENE_KICKED.",
+                file=sys.stderr,
+            )
+            break
+
+        # Find scenes that scene_kick reset to PENDING — those need redo.
+        kicked_now: list[str] = []
+        scene_buf = Path("drafts/scene_buffer") / f"ch{chapter_num:02d}"
+        if scene_buf.is_dir():
+            import json as _json
+            for state_file in sorted(scene_buf.glob("ch*_sc*.state.json")):
+                try:
+                    sd = _json.loads(state_file.read_text(encoding="utf-8"))
+                except Exception:
+                    continue
+                if sd.get("state") == "pending":
+                    kicked_now.append(state_file.stem.replace(".state", ""))
+        if not kicked_now:
+            print(
+                f"Warning: chapter {chapter_num} marked SCENE_KICKED but no "
+                "PENDING scenes found; surfacing.",
+                file=sys.stderr,
+            )
+            break
+
         print(
-            f"Error: chapter gate failed: {exc.reason} "
-            f"(expected={exc.expected}, actual={exc.actual}, missing={exc.missing})",
+            f"[chapter] scene-kick cycle {cycle}/{max_kick_cycles}: "
+            f"redrafting {kicked_now} with chapter-critic feedback...",
             file=sys.stderr,
         )
-        return 2
-    except Exception as exc:
-        logger.exception("chapter DAG failed unexpectedly")
-        print(
-            f"Error: chapter DAG failed unexpectedly: {exc}",
-            file=sys.stderr,
-        )
-        return 2
+        for sid in kicked_now:
+            r = _subprocess.run(
+                [_sys.executable, "-m", "book_pipeline", "draft", sid,
+                 "--max-regen", "3"],
+                cwd=Path.cwd(),
+            )
+            if r.returncode != 0:
+                print(
+                    f"Warning: scene-kick redraft of {sid} returned "
+                    f"rc={r.returncode}; chapter DAG will likely re-fail "
+                    "at gate.",
+                    file=sys.stderr,
+                )
+        # Loop continues — re-run orchestrator on next iteration.
 
     # Summary print.
     _print_summary(record, chapter_num)
@@ -364,6 +428,10 @@ def _run(args: argparse.Namespace) -> int:
         ChapterState.DAG_COMPLETE: 0,
         ChapterState.CHAPTER_FAIL: 3,
         ChapterState.DAG_BLOCKED: 4,
+        # Scene-kick recovery happens in the chapter loop above when
+        # auto_retry_scene_kick is enabled (default) — this exit only
+        # surfaces if recovery exhausted its budget.
+        ChapterState.CHAPTER_FAIL_SCENE_KICKED: 6,
     }
     rc = terminal_map.get(record.state, 5)
     if rc == 5:

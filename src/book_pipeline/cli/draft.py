@@ -146,6 +146,35 @@ def _add_parser(
 # --------------------------------------------------------------------------- #
 
 
+def _load_prior_scenes(chapter: int, scene_index: int, commit_dir: Path) -> list[str]:
+    """Load committed scene markdown bodies for sc01..sc(N-1) of chapter.
+
+    Audit 2026-04-25: ch02 chapter critic flagged cross-scene contradictions
+    (monstrance location drift, vomit location drift, repeated kill beat) —
+    drafter generated each scene with no awareness of prior scenes. Wiring
+    prior_scenes into DraftRequest gives the drafter committed prior text so
+    each subsequent scene can advance state coherently.
+
+    Strips YAML frontmatter from each scene's .md file before returning.
+    Returns empty list for scene_index <= 1.
+    """
+    if scene_index <= 1:
+        return []
+    out: list[str] = []
+    for prev_idx in range(1, scene_index):
+        scene_md = commit_dir / f"ch{chapter:02d}" / f"ch{chapter:02d}_sc{prev_idx:02d}.md"
+        if not scene_md.is_file():
+            continue
+        text = scene_md.read_text(encoding="utf-8")
+        if text.startswith("---"):
+            parts = text.split("---", 2)
+            if len(parts) >= 3:
+                text = parts[2].lstrip()
+        if text.strip():
+            out.append(text)
+    return out
+
+
 def _parse_scene_id(scene_id: str) -> tuple[int, int]:
     """Parse a scene_id like 'ch01_sc01' into (chapter, scene_index).
 
@@ -704,13 +733,117 @@ def run_draft_loop(
     # deterministic).
     attempt_severities: list[dict[str, str]] = []
 
+    # Audit 2026-04-25: load prior committed scenes from same chapter so the
+    # drafter sees what already happened (engine state, monstrance location,
+    # vomit location, completed kills). Empty for sc01.
+    prior_scenes_loaded = _load_prior_scenes(chapter, scene_request.scene_index, commit_dir)
+
+    # Scene-kick recovery (2026-04-25): if chapter critic kicked this scene,
+    # load the persisted issues + the latest archived rev as prior_draft, and
+    # start the loop at attempt=2 going straight to regenerator. This bakes
+    # chapter-critic feedback into the first regen — fixes the prior bypass
+    # where kicked scenes regenerated from scratch with no chapter context.
+    import json as _json
+    from book_pipeline.interfaces.types import CriticIssue as _CriticIssue
+    kick_issues_path = state_dir / f"ch{chapter:02d}" / f"{scene_id}.kick_issues.json"
+    kick_issues_loaded: list[Any] = []
+    kick_prior_draft: Any = None
+    if kick_issues_path.is_file():
+        try:
+            payload = _json.loads(kick_issues_path.read_text(encoding="utf-8"))
+            for raw in payload.get("issues", []):
+                kick_issues_loaded.append(
+                    _CriticIssue(
+                        axis=raw.get("axis", "entity"),
+                        severity=raw.get("severity", "mid"),
+                        location=raw.get("location", ""),
+                        claim=raw.get("claim", ""),
+                        evidence=raw.get("evidence", ""),
+                    )
+                )
+            archive_dir = commit_dir / f"ch{chapter:02d}" / "archive"
+            if archive_dir.is_dir():
+                revs = sorted(archive_dir.glob(f"{scene_id}_rev*.md"))
+                if revs:
+                    from book_pipeline.interfaces.types import DraftResponse as _DR
+                    archived_text = revs[-1].read_text(encoding="utf-8")
+                    if archived_text.startswith("---"):
+                        parts = archived_text.split("---", 2)
+                        if len(parts) >= 3:
+                            archived_text = parts[2].lstrip()
+                    from book_pipeline.observability.hashing import (
+                        hash_text as _hash_text,
+                    )
+                    kick_prior_draft = _DR(
+                        scene_text=archived_text,
+                        mode="A",
+                        model_id="paul-voice",
+                        voice_pin_sha=getattr(
+                            composition_root, "voice_pin_sha",
+                            "83095d9371f26f7979c85b1ba47f05dd21cd1f677023c98c891b0fab11c72ca1",
+                        ),
+                        tokens_in=0,
+                        tokens_out=len(archived_text.split()),
+                        latency_ms=0,
+                        warnings=[],
+                        output_sha=_hash_text(archived_text),
+                    )
+            logger.info(
+                "scene-kick recovery: loaded %d issues + archive rev for %s",
+                len(kick_issues_loaded), scene_id,
+            )
+        except Exception:
+            logger.exception(
+                "scene-kick recovery: failed to load kick_issues for %s; "
+                "falling through to fresh draft", scene_id,
+            )
+            kick_issues_loaded = []
+            kick_prior_draft = None
+
     for attempt in range(1, max_regen + 2):  # 1..R+1
         # --- DRAFTING / REGENERATING → DRAFTED_A (via exception on failure) ---
         try:
-            if attempt == 1:
+            if attempt == 1 and kick_prior_draft is not None and kick_issues_loaded:
+                # Scene-kick recovery: skip fresh draft, go straight to regen
+                # with the archived prior version + chapter-critic issues so
+                # the model rewrites against feedback instead of producing
+                # the same content that got kicked.
+                logger.info(
+                    "scene-kick recovery: regen attempt 1 with %d kick-issues",
+                    len(kick_issues_loaded),
+                )
+                regen_request = RegenRequest(
+                    prior_draft=kick_prior_draft,
+                    context_pack=pack,
+                    issues=kick_issues_loaded,
+                    attempt_number=1,
+                    max_attempts=max_regen + 1,
+                )
+                try:
+                    draft = composition_root.regenerator.regenerate(regen_request)
+                except (RegenWordCountDrift, RegeneratorUnavailable) as e:
+                    logger.warning(
+                        "scene-kick regen attempt 1 failed (%s); falling back to fresh drafter",
+                        type(e).__name__,
+                    )
+                    draft_request = DraftRequest(
+                        context_pack=pack,
+                        prior_scenes=prior_scenes_loaded,
+                        generation_config={"attempt_number": 1},
+                    )
+                    draft = composition_root.drafter.draft(draft_request)
+                # Consume kick_issues — successful or not — so subsequent
+                # critic-fail regens use scene-critic issues going forward.
+                try:
+                    kick_issues_path.unlink(missing_ok=True)
+                except Exception:
+                    pass
+                kick_issues_loaded = []
+                kick_prior_draft = None
+            elif attempt == 1:
                 draft_request = DraftRequest(
                     context_pack=pack,
-                    prior_scenes=[],
+                    prior_scenes=prior_scenes_loaded,
                     generation_config={"attempt_number": 1},
                 )
                 draft = composition_root.drafter.draft(draft_request)

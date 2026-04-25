@@ -586,6 +586,29 @@ class ChapterDagOrchestrator:
                 issue_refs = [
                     f"{i.axis}:{i.severity}" for i in critic_resp.issues
                 ]
+                # Map each implicated scene to its filtered issue list so
+                # cli/draft.py can inject chapter-critic feedback into the
+                # first RegenRequest. Wired 2026-04-25.
+                import re as _re
+                _SCENE_REF = _re.compile(r"\bch(\d+)_sc(\d+)\b")
+                issues_per_scene: dict[str, list[dict[str, Any]]] = {}
+                for issue in critic_resp.issues:
+                    refs = _SCENE_REF.findall(issue.location or "")
+                    if not refs and issue.evidence:
+                        refs = _SCENE_REF.findall(issue.evidence)
+                    for ch_str, sc_str in refs:
+                        sid = f"ch{int(ch_str):02d}_sc{int(sc_str):02d}"
+                        if sid not in implicated:
+                            continue
+                        issues_per_scene.setdefault(sid, []).append(
+                            {
+                                "axis": issue.axis,
+                                "severity": issue.severity,
+                                "location": issue.location,
+                                "claim": issue.claim,
+                                "evidence": issue.evidence,
+                            }
+                        )
                 kick_implicated_scenes(
                     implicated=implicated,
                     state_dir=self.scene_buffer_dir,
@@ -593,6 +616,7 @@ class ChapterDagOrchestrator:
                     event_logger=self.event_logger,
                     chapter_num=chapter_num,
                     issue_refs=issue_refs,
+                    issues_per_scene=issues_per_scene,
                 )
                 record = transition(
                     record,

@@ -155,6 +155,7 @@ def kick_implicated_scenes(
     event_logger: EventLogger | None,
     chapter_num: int,
     issue_refs: list[str],
+    issues_per_scene: dict[str, list[dict[str, Any]]] | None = None,
 ) -> None:
     """Reset implicated scenes to PENDING; archive their md; emit one Event.
 
@@ -166,7 +167,16 @@ def kick_implicated_scenes(
         chapter_num: authoritative chapter number (defensive int-cast).
         issue_refs: list of issue identifiers for the Event trail (axis:severity
             or free-text descriptors; not semantically load-bearing).
+        issues_per_scene: optional. When provided, the per-scene CriticIssue
+            list (serialized as plain dicts with axis/severity/location/claim/
+            evidence keys) is written to
+            ``state_dir/ch{NN}/{scene_id}.kick_issues.json``. The CLI draft
+            loop reads this on next run and injects the issues into the FIRST
+            RegenRequest so attempt 2 sees chapter-critic feedback. Added
+            2026-04-25 to actually wire the scene-kick recovery loop.
     """
+    import json
+
     ch = int(chapter_num)
     kicked_actual: list[str] = []
     ch_drafts = drafts_dir / f"ch{ch:02d}"
@@ -197,6 +207,26 @@ def kick_implicated_scenes(
             f"scene_kick from ch{ch}_fail",
         )
         _persist_scene_state(record, state_path)
+
+        # Persist chapter-critic feedback for this scene so cli/draft.py can
+        # bake it into the next regen request.
+        if issues_per_scene is not None and scene_id in issues_per_scene:
+            kick_issues_path = (
+                state_dir / f"ch{ch:02d}" / f"{scene_id}.kick_issues.json"
+            )
+            kick_issues_path.parent.mkdir(parents=True, exist_ok=True)
+            kick_issues_path.write_text(
+                json.dumps(
+                    {
+                        "kicked_at": _now_iso(),
+                        "chapter_num": ch,
+                        "issues": issues_per_scene[scene_id],
+                    },
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+
         kicked_actual.append(scene_id)
 
     if event_logger is not None and kicked_actual:

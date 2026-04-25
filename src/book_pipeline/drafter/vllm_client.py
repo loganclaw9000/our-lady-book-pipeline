@@ -49,7 +49,7 @@ from book_pipeline.interfaces.types import Event
 from book_pipeline.observability.hashing import event_id, hash_text
 from book_pipeline.voice_fidelity.sha import VoicePinMismatch, compute_adapter_sha
 
-_DEFAULT_TIMEOUT_S = 300.0  # 5min - bumped 60->300 for V6 27B bnb-quant ~5tok/s on Spark (incident 2026-04-24)
+_DEFAULT_TIMEOUT_S = 900.0  # 15min - bumped 300->900 for 2048-token output at ~5.5 tok/s on 27B bnb (sc01 timeout 2026-04-25)
 _DEFAULT_LORA_MODULE_NAME = "paul-voice"
 
 
@@ -179,12 +179,18 @@ class VllmClient:
         max_tokens: int,
         repetition_penalty: float | None = None,
         stop: list[str] | None = None,
+        min_tokens: int | None = None,
     ) -> dict[str, Any]:
         """POST {base_url}/chat/completions (OpenAI-compatible schema).
 
-        vLLM-specific sampling params (repetition_penalty) live under
-        ``extra_body`` per vLLM's OpenAI server convention. ``stop`` sits at
-        the top level when provided.
+        vLLM-specific sampling params (repetition_penalty, min_tokens) live
+        under ``extra_body`` per vLLM's OpenAI server convention. ``stop`` sits
+        at the top level when provided.
+
+        ``min_tokens`` (added 2026-04-25) forces vLLM to suppress EOS until
+        the requested minimum token count is reached. Used to fight the V6
+        paul-voice tendency to wrap scenes early at ~300-400 tokens when the
+        scene stub asks for ~1000 words.
         """
         body: dict[str, Any] = {
             "model": model,
@@ -195,8 +201,19 @@ class VllmClient:
         }
         if stop is not None:
             body["stop"] = stop
+        # vLLM 0.17 OpenAI server accepts min_tokens at TOP LEVEL of the
+        # chat-completions body (not OpenAI-standard but a documented vLLM
+        # extension). Smoke-tested 2026-04-25 — top-level form honored.
+        if min_tokens is not None:
+            body["min_tokens"] = min_tokens
+        extra_body: dict[str, Any] = {}
         if repetition_penalty is not None:
-            body["extra_body"] = {"repetition_penalty": repetition_penalty}
+            extra_body["repetition_penalty"] = repetition_penalty
+        if min_tokens is not None:
+            # Also include via extra_body for clients that prefer that path.
+            extra_body["min_tokens"] = min_tokens
+        if extra_body:
+            body["extra_body"] = extra_body
         try:
             response = self._http_post("/chat/completions", body)
         except (
@@ -207,7 +224,19 @@ class VllmClient:
             raise VllmUnavailable(
                 f"vLLM chat_completion unreachable at {self.base_url}: {exc}"
             ) from exc
-        response.raise_for_status()
+        if response.status_code >= 400:
+            # Audit 2026-04-25: surface vLLM error body in the exception message
+            # so callers can diagnose context-overflow / prompt-format issues
+            # instead of staring at a bare HTTPStatusError.
+            try:
+                err_body = response.text[:1000]
+            except Exception:
+                err_body = "(error body unavailable)"
+            raise httpx.HTTPStatusError(
+                f"vLLM /v1/chat/completions {response.status_code}: {err_body}",
+                request=response.request,
+                response=response,
+            )
         out = response.json()
         if not isinstance(out, dict):
             raise VllmHandshakeError(
