@@ -363,7 +363,14 @@ class ChapterCritic:
 
     def _build_chapter_user_prompt(self, request: CriticRequest) -> str:
         """Format the uncached user message: full chapter_text + retrievals
-        summary + context_pack_fingerprint + surfaced conflicts if any."""
+        (with hit TEXT, not just metadata) + context_pack_fingerprint +
+        surfaced conflicts if any.
+
+        Per pipeline audit 2026-04-24: each top-5 hit per axis carries its
+        actual text snippet (capped at 500 chars) so the chapter critic can
+        verify against concrete corpus content — engine specs, donts,
+        named-entity continuity — instead of grading on chunk_id metadata.
+        """
         pack = request.context_pack
         parts: list[str] = []
         parts.append(
@@ -372,17 +379,31 @@ class ChapterCritic:
         )
         parts.append(f"ContextPack fingerprint: {pack.fingerprint}\n")
         parts.append(
-            "Retrieval summary (source_path + chunk_id + score):\n"
+            "Retrieval evidence (axis → top-5 hits with text). USE this "
+            "evidence: cite chunk_ids in your issues; flag the chapter if "
+            "it omits clearly-relevant lore (e.g., a metaphysics hit names "
+            "an engine class but the chapter never engages with engine "
+            "context):\n"
         )
         for name, result in pack.retrievals.items():
             parts.append(
-                f"  [{name}] {len(result.hits)} hits, {result.bytes_used} bytes:"
+                f"\n[{name}] {len(result.hits)} hits, {result.bytes_used} bytes"
             )
-            for hit in result.hits[:5]:
+            if not result.hits:
                 parts.append(
-                    f"    - chunk_id={hit.chunk_id} score={hit.score:.3f} "
+                    "  (no hits — this axis has no corpus evidence; "
+                    "do NOT auto-pass on absence)"
+                )
+                continue
+            for hit in result.hits[:5]:
+                snippet = " ".join(hit.text.split())
+                if len(snippet) > 500:
+                    snippet = snippet[:500] + "..."
+                parts.append(
+                    f"  - chunk_id={hit.chunk_id} score={hit.score:.3f} "
                     f"src={hit.source_path}"
                 )
+                parts.append(f"    text: {snippet}")
         if pack.conflicts:
             parts.append("\nSurfaced cross-retriever conflicts:")
             for c in pack.conflicts:
@@ -427,13 +448,17 @@ class ChapterCritic:
     ) -> tuple[list[str], bool]:
         """Fill missing axes, enforce >=60 + no-high-severity threshold,
         enforce overall_pass invariant, override rubric_version."""
+        # Per audit 2026-04-24: omitted axes fill pass=False (was True).
+        # A chapter-critic that fails to score a required axis cannot
+        # license the chapter to ship — surface the protocol violation.
         filled_axes: list[str] = []
         for axis in sorted(CHAPTER_REQUIRED_AXES):
             if axis not in parsed.pass_per_axis:
-                parsed.pass_per_axis[axis] = True
+                parsed.pass_per_axis[axis] = False
                 filled_axes.append(axis)
                 logger.warning(
-                    "chapter-critic omitted axis=%s; filled pass=True (ch=%d)",
+                    "chapter-critic omitted axis=%s; filling pass=False (ch=%d) — "
+                    "critic protocol violation, chapter will not advance",
                     axis,
                     chapter_num,
                 )
@@ -450,7 +475,12 @@ class ChapterCritic:
                     max_sev[issue.axis] = s
 
         # Apply >=60 threshold AND no-high-severity rule per axis.
+        # Audit 2026-04-24: filled axes (critic protocol violation) MUST stay
+        # pass=False even if score-fill cleared the threshold — the chapter
+        # cannot advance on a critic that never actually scored the axis.
         for axis in CHAPTER_REQUIRED_AXES:
+            if axis in filled_axes:
+                continue  # preserve pass=False from fill loop
             score = parsed.scores_per_axis.get(axis, 0.0)
             axis_pass = (
                 score >= _CHAPTER_PASS_THRESHOLD_0to100

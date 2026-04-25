@@ -33,6 +33,7 @@ Exit codes:
 from __future__ import annotations
 
 import argparse
+import logging
 import os
 import re
 import sys
@@ -42,6 +43,8 @@ from pathlib import Path
 from typing import Any
 
 import yaml
+
+logger = logging.getLogger(__name__)
 
 from book_pipeline.cli.main import register_subcommand
 from book_pipeline.interfaces.scene_state_machine import transition
@@ -625,6 +628,50 @@ def run_draft_loop(
     pack = composition_root.bundler.bundle(scene_request, composition_root.retrievers)
     record = transition(record, SceneState.RAG_READY, "bundler returned pack")
     _persist(record, state_path)
+
+    # --- Audit 2026-04-24: empty-pack preflight gate. ---
+    # Prior pipeline runs against unpopulated indexes silently produced
+    # ContextPacks with 0 hits across multiple axes. Drafter + critic
+    # tolerated empty retrieval and shipped hallucinated scenes. Now we
+    # block before the first LLM call: every required axis must return
+    # >=1 hit AND total pack bytes must clear a minimum.
+    _MIN_PACK_BYTES = 1000
+    _REQUIRED_AXES_FOR_DRAFT = (
+        "historical",
+        "metaphysics",
+        "entity_state",
+        "arc_position",
+        "negative_constraint",
+    )
+    empty_axes: list[str] = []
+    for axis_name in _REQUIRED_AXES_FOR_DRAFT:
+        result = pack.retrievals.get(axis_name)
+        if result is None or len(result.hits) == 0:
+            empty_axes.append(axis_name)
+    if empty_axes or pack.total_bytes < _MIN_PACK_BYTES:
+        diagnostic = (
+            f"empty_axes={empty_axes} total_bytes={pack.total_bytes} "
+            f"min_required={_MIN_PACK_BYTES}"
+        )
+        record = transition(
+            record, SceneState.HARD_BLOCKED, f"empty_pack_preflight: {diagnostic}"
+        )
+        record.blockers.append(f"empty_pack_preflight: {diagnostic}")
+        _persist(record, state_path)
+        if event_logger is not None:
+            try:
+                event_logger.emit(
+                    {
+                        "event_type": "empty_pack_preflight_block",
+                        "scene_id": scene_id,
+                        "empty_axes": empty_axes,
+                        "total_bytes": pack.total_bytes,
+                        "fingerprint": pack.fingerprint,
+                    }
+                )
+            except Exception:
+                logger.exception("event_logger.emit failed on preflight block")
+        return 3
 
     # --- Plan 05-02 D-09 step (a): preflag check BEFORE first drafter call. ---
     from book_pipeline.drafter.preflag import is_preflagged

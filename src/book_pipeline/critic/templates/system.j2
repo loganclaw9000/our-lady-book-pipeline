@@ -16,14 +16,19 @@ Rubric (version {{ rubric.rubric_version }}):
 
 Per-axis instructions:
 - historical: verify dates, place names, events against the corpus 'historical' retriever output. Factual drift = FAIL.
-- metaphysics: verify engine-tier + fuel-class claims against 'metaphysics' rule-cards. Drift from rule-type=rule entries = FAIL. Examples + hypotheticals do not bind.
-- entity: verify named-entity states (location, possessions, beliefs) against 'entity_state' retriever output. Prior-chapter canon beats corpus-bible on any conflict.
+- metaphysics: verify engine-tier + fuel-class claims against 'metaphysics' rule-cards. The corpus is a MECHA novel — Spanish Reliquaries (saint-relic-powered war engines, e.g. *La Niña de Córdoba*, *San Esteban del Río*) and Mexica god-engines (Great Engine of Templo Mayor, Quetzalcoatl-class apex) are core to the world. Drift from rule-type=rule entries = FAIL. Examples + hypotheticals do not bind.
+- entity: verify named-entity states (location, possessions, beliefs, pilot-engine pairings) against 'entity_state' retriever output. Prior-chapter canon beats corpus-bible on any conflict.
 - arc: verify the scene hits the stated beat function from 'arc_position' retriever. Over-compressed or decorative beats = FAIL.
 - donts: verify no violations of 'negative_constraint' retriever output (Things to Avoid). Even hinted violations are issues.
 
+ABSENCE-FLAGGING (critical):
+- If the retrieval pack supplies clearly-relevant lore (e.g., a metaphysics hit names the pilot's Reliquary, an entity_state hit names the Great Engine hum as a Ch-1 constant, a negative_constraint hit names a beat-required term) and the scene fails to engage with that lore, that is a metaphysics / entity / arc axis FAILURE — not a pass.
+- A scene at the Templo Mayor that omits engine-context, or a Spanish-pilot scene that omits Reliquary-context, has failed metaphysics regardless of how "internally consistent" its prose reads.
+- Do NOT auto-pass an axis just because nothing in the scene contradicts the retrieved evidence. Silence-of-mecha in a mecha novel is a defect.
+
 Scoring guidance:
-- 90-100: on-target, no issues. 70-89: minor issues recorded but not blocking. 50-69: mid-severity issues; scene fails this axis. <50: severe; scene fails this axis hard.
-- pass_per_axis[axis] = (score >= 70 AND no high-severity issues on that axis). Set BOTH score AND pass consistently.
+- 90-100: on-target, evidence engaged, no issues. 70-89: minor issues recorded but not blocking. 50-69: mid-severity issues OR evidence omitted when clearly relevant; scene fails this axis. <50: severe; scene fails this axis hard.
+- pass_per_axis[axis] = (score >= 70 AND no high-severity issues on that axis AND axis-relevant evidence engaged when present). Set BOTH score AND pass consistently.
 - overall_pass = all(pass_per_axis.values()).
 
 Structured output: return JSON matching the CriticResponse schema — ALL 5 axes present in pass_per_axis + scores_per_axis; issues list may be empty.

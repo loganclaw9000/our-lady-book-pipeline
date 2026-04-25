@@ -492,8 +492,11 @@ def test_K_tenacity_exhaustion_fast(
 
 
 def test_missing_axis_is_filled(tmp_path, make_chapter_critic) -> None:
-    """Response omitting an axis → post-process fills with pass=True, score=60.0
-    (chapter default matches 3/5 threshold so filled axis default-passes)."""
+    """Response omitting an axis → post-process fills with pass=False
+    (per audit 2026-04-24: critic protocol violation must surface as a
+    blocker; chapter cannot advance on an axis the critic never scored).
+    Score-fill at 60.0 retained for telemetry; pass stays False even
+    though the threshold step would otherwise flip it."""
     partial = make_canonical_critic_response(
         include_all_axes=False, rubric_version="chapter.v1"
     )
@@ -505,8 +508,9 @@ def test_missing_axis_is_filled(tmp_path, make_chapter_critic) -> None:
         audit_dir=tmp_path / "critic_audit",
     )
     response = critic.review(_make_chapter_request())
-    assert response.pass_per_axis["metaphysics"] is True
+    assert response.pass_per_axis["metaphysics"] is False
     assert response.scores_per_axis["metaphysics"] == 60.0
+    assert response.overall_pass is False  # cascades from per-axis False
 
     ev = next(e for e in logger.events if e.role == "chapter_critic")
     assert ev.extra.get("filled_axes") == ["metaphysics"]

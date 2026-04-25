@@ -132,7 +132,10 @@ def test_B_happy_path_writes_audit_and_emits_critic_event(tmp_path, make_critic)
 
 def test_C_missing_axis_is_filled_with_default(tmp_path, make_critic) -> None:
     """Test C: response missing 'metaphysics' → post-process fills with
-    pass=True, score=75.0; Event.extra['filled_axes']==['metaphysics']."""
+    pass=False (per audit 2026-04-24: critic protocol violation must
+    surface as a blocker, not auto-pass), score=75.0;
+    Event.extra['filled_axes']==['metaphysics'].
+    """
     partial = make_canonical_critic_response(include_all_axes=False)
     fake_client = FakeAnthropicClient(parsed_response=partial)
     logger = FakeEventLogger()
@@ -143,8 +146,9 @@ def test_C_missing_axis_is_filled_with_default(tmp_path, make_critic) -> None:
     )
     response = critic.review(make_critic_request())
 
-    assert response.pass_per_axis["metaphysics"] is True
+    assert response.pass_per_axis["metaphysics"] is False
     assert response.scores_per_axis["metaphysics"] == 75.0
+    assert response.overall_pass is False  # cascades from per-axis False
 
     ev = next(e for e in logger.events if e.role == "critic")
     assert ev.extra.get("filled_axes") == ["metaphysics"]

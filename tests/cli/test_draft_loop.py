@@ -233,24 +233,37 @@ def scene_request() -> SceneRequest:
 
 @pytest.fixture
 def context_pack(scene_request: SceneRequest) -> ContextPack:
+    """Test pack with one dummy hit per axis to clear the empty-pack
+    preflight gate added 2026-04-24. Production preflight requires
+    each axis to have >=1 hit AND total_bytes >= 1000."""
+    from book_pipeline.interfaces.types import RetrievalHit
+
+    axes = (
+        "historical",
+        "metaphysics",
+        "entity_state",
+        "arc_position",
+        "negative_constraint",
+    )
+    dummy_text = "test corpus hit " * 30  # ~480 chars per hit, 5 axes => ~2.4KB
+    retrievals = {}
+    for axis in axes:
+        hit = RetrievalHit(
+            text=dummy_text,
+            source_path=f"~/test/{axis}.md",
+            chunk_id=f"test_{axis}_001",
+            score=0.9,
+        )
+        retrievals[axis] = RetrievalResult(
+            retriever_name=axis,
+            hits=[hit],
+            bytes_used=len(dummy_text),
+            query_fingerprint="fp_" + axis,
+        )
     return ContextPack(
         scene_request=scene_request,
-        retrievals={
-            axis: RetrievalResult(
-                retriever_name=axis,
-                hits=[],
-                bytes_used=0,
-                query_fingerprint="fp_" + axis,
-            )
-            for axis in (
-                "historical",
-                "metaphysics",
-                "entity_state",
-                "arc_position",
-                "negative_constraint",
-            )
-        },
-        total_bytes=0,
+        retrievals=retrievals,
+        total_bytes=len(dummy_text) * len(axes),
         assembly_strategy="round_robin",
         fingerprint="ctxpack_fp_ch01_sc01",
         ingestion_run_id="ing_test_001",

@@ -25,10 +25,15 @@ Scoring guidance (stricter than scene critic):
 
 Per-axis CHAPTER-scale instructions:
 - historical: verify cross-scene historical coherence. Individual scenes may each pass, but the chapter fails if dates, places, or events contradict across scenes (e.g., character in two cities the same morning, event dated differently in two scenes).
-- metaphysics: verify cross-scene rule-card consistency. No mid-chapter engine-tier drift. If sc01 treats the storm-engine as Tier II and sc03 treats it as Tier IV without a visible escalation beat, that's a chapter-level metaphysics fail.
-- entity: verify character state continuity across scenes. Locations, possessions, beliefs, relationships must advance coherently at chapter scale. Silent location jumps between scenes without a travel beat = FAIL.
+- metaphysics: verify cross-scene rule-card consistency. The corpus is a MECHA novel — Spanish Reliquaries (saint-relic-powered, e.g. *La Niña de Córdoba*, *San Esteban del Río*) and Mexica god-engines (Great Engine of Templo Mayor, Quetzalcoatl-class apex) are core. No mid-chapter engine-tier drift. If sc01 treats the storm-engine as Tier II and sc03 treats it as Tier IV without a visible escalation beat, that's a chapter-level metaphysics fail.
+- entity: verify character state continuity across scenes. Locations, possessions, beliefs, relationships, pilot-engine pairings must advance coherently at chapter scale. Silent location jumps between scenes without a travel beat = FAIL.
 - arc: verify the chapter hits its outline arc position as a unit. Beat pacing balanced across scenes; no dead scenes (scenes that add nothing to chapter arc). Over-compressed climaxes = FAIL. Decorative scenes = FAIL.
 - donts: verify no Things-to-Avoid violations detectable at chapter scale — thematic creep that's subtle inside one scene but cumulative across three (e.g., steady unwarranted mysticism drift).
+
+ABSENCE-FLAGGING (critical):
+- If the retrieval pack supplies clearly-relevant lore (engine specs, pilot-engine pairings, Great Engine hum as a Ch-1 constant per outline) and the chapter fails to engage with that lore, that is a metaphysics / entity / arc axis FAILURE — not a pass.
+- A Templo Mayor chapter that omits engine-context, or a Spanish-pilot chapter that omits Reliquary-context, has failed metaphysics regardless of how internally consistent its prose reads.
+- Do NOT auto-pass an axis just because nothing in the chapter contradicts the retrieved evidence. Silence-of-mecha in a mecha novel is a defect.
 
 Structured output: return JSON matching the CriticResponse schema — ALL 5 axes present in pass_per_axis + scores_per_axis (as 0..100 floats); issues list may be empty. Set overall_pass consistently with the per-axis booleans.
 

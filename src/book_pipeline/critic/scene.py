@@ -324,21 +324,44 @@ class SceneCritic:
     # ------------------------------------------------------------------ #
 
     def _build_user_prompt(self, request: CriticRequest) -> str:
-        """Format the uncached user message: scene_text + retrievals summary
-        + context_pack_fingerprint + any surfaced conflicts."""
+        """Format the uncached user message: scene_text + retrievals (with
+        hit TEXT, not just metadata) + context_pack_fingerprint + conflicts.
+
+        Per pipeline audit 2026-04-24: prior implementation sent only
+        chunk_id + score + source_path, leaving the critic blind to corpus
+        content. Now each top-5 hit per axis carries its actual text snippet
+        (capped at 500 chars per hit) so the critic can verify the scene
+        against concrete lore — e.g. mecha specs from engineering.md, donts
+        from known-liberties.md, named-entity continuity from pantheon.md.
+        """
         pack = request.context_pack
         parts: list[str] = []
         parts.append(f"Scene text (evaluate against the 5-axis rubric):\n{request.scene_text}\n")
         parts.append(f"ContextPack fingerprint: {pack.fingerprint}\n")
         parts.append(
-            "Retrieval summary (source_path + chunk_id + score):\n"
+            "Retrieval evidence (axis → top-5 hits with text). "
+            "USE this evidence: cite chunk_ids in your issues; flag the scene "
+            "if it omits clearly-relevant lore (e.g., a metaphysics hit names "
+            "an engine class but the scene fails to surface engine context):\n"
         )
         for name, result in pack.retrievals.items():
-            parts.append(f"  [{name}] {len(result.hits)} hits, {result.bytes_used} bytes:")
-            for hit in result.hits[:5]:
+            parts.append(
+                f"\n[{name}] {len(result.hits)} hits, {result.bytes_used} bytes"
+            )
+            if not result.hits:
                 parts.append(
-                    f"    - chunk_id={hit.chunk_id} score={hit.score:.3f} src={hit.source_path}"
+                    "  (no hits — this axis has no corpus evidence; "
+                    "do NOT auto-pass on absence)"
                 )
+                continue
+            for hit in result.hits[:5]:
+                snippet = " ".join(hit.text.split())  # collapse whitespace
+                if len(snippet) > 500:
+                    snippet = snippet[:500] + "..."
+                parts.append(
+                    f"  - chunk_id={hit.chunk_id} score={hit.score:.3f} src={hit.source_path}"
+                )
+                parts.append(f"    text: {snippet}")
         if pack.conflicts:
             parts.append("\nSurfaced cross-retriever conflicts:")
             for c in pack.conflicts:
@@ -379,13 +402,26 @@ class SceneCritic:
 
     def _post_process(self, parsed: CriticResponse) -> tuple[list[str], bool]:
         """Fill missing axes + enforce overall_pass invariant + override
-        rubric_version. Returns (filled_axes, invariant_fixed)."""
+        rubric_version. Returns (filled_axes, invariant_fixed).
+
+        Per pipeline audit 2026-04-24: omitted axes now fill pass=False
+        (was pass=True). A critic that fails to score a required axis is
+        not licensing the scene to advance — it is a critic protocol
+        violation that must be surfaced as a blocker, not papered over.
+        Score fill at _FILLED_AXIS_SCORE (75) retained only as a
+        placeholder for downstream telemetry; pass=False forces
+        overall_pass=False and routes the scene to regen.
+        """
         filled_axes: list[str] = []
         for axis in sorted(REQUIRED_AXES):
             if axis not in parsed.pass_per_axis:
-                parsed.pass_per_axis[axis] = True
+                parsed.pass_per_axis[axis] = False
                 filled_axes.append(axis)
-                logger.warning("critic-response omitted axis=%s; filled pass=True", axis)
+                logger.warning(
+                    "critic-response omitted axis=%s; filling pass=False "
+                    "(scene will be routed to regen — critic protocol violation)",
+                    axis,
+                )
             if axis not in parsed.scores_per_axis:
                 parsed.scores_per_axis[axis] = _FILLED_AXIS_SCORE
 
