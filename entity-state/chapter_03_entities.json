@@ -1,0 +1,393 @@
+{
+  "entities": [
+    {
+      "entity_name": "Malintzin",
+      "last_seen_chapter": 3,
+      "state": {
+        "aliases": [
+          "Marina"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Age 17, walked seventh in a line of twenty women handed from the Mayan compound to the Spanish camp at first light after Centla — her fifth handover, then a sixth begun the same morning. Baptized 'Marina' by a Franciscan and given to Spanish captain Portocarrero. On the third day of the march to Cempoala she stepped from the line and translated Nahuatl<->Maya for a Mexica trade party, revealing the Nahuatl her father had taught her; she now forms one half of a translator chain with Aguilar (her Maya to his Spanish), and intends within ten to twelve weeks to learn enough Spanish to cut Aguilar out. Has acquired four Spanish words: agua, fuego, no, aquí. Met Andrés de Mora at dawn but did not smile.",
+        "relationships": [
+          {
+            "to": "Portocarrero",
+            "kind": "given_to_as_concubine"
+          },
+          {
+            "to": "Aguilar",
+            "kind": "translation_partner"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "observed_by"
+          },
+          {
+            "to": "Andrés",
+            "kind": "introduced_to"
+          },
+          {
+            "to": "Citlal",
+            "kind": "fellow_handed_over_with"
+          },
+          {
+            "to": "Cortés",
+            "kind": "translator_for"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "Malintzin walked seventh. She was small for seventeen",
+        "She had been given to a captain named Portocarrero.",
+        "A priest spoke water over her head and a name onto her tongue, Marina"
+      ],
+      "source_chapter_sha": "7ddbc2ebae658e7025b0805564274d4592d2718c"
+    },
+    {
+      "entity_name": "Andrés",
+      "last_seen_chapter": 3,
+      "state": {
+        "aliases": [
+          "Andrés de Mora"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Full name disclosed: Andrés de Mora, of Córdoba. Reported (by Malintzin's later recall) as twenty-three — note discrepancy with prior ch2 age of 26. On the third-day camp on the march to Cempoala he knelt before La Niña de Córdoba in her cradle and prayed; the engine inclined her shoulders six to eight inches and tilted her head as if listening, and the cradle-timbers groaned. Walked stiffly with shoulders burned from the prior day. Approached Malintzin at dawn, bowed twice (awkwardly), gave his name, his city, and the saint's name Flora, and used the Latin word oratio with hand-signs to explain the kneeling. Returned to his cockpit (one minute to enter) and the engine rose and the column moved.",
+        "relationships": [
+          {
+            "to": "La Niña de Córdoba",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Flora",
+            "kind": "saint_relic_pilot_of"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "introduced_to"
+          },
+          {
+            "to": "Aguilar",
+            "kind": "asked_directions_from"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "He said his name, Andrés de Mora, and a city she could not place, Córdoba, and then a saint's name, Flora",
+        "He was younger than she had expected, twenty-three, she would later be told",
+        "He knelt on both knees. He bowed his head. His lips moved."
+      ],
+      "source_chapter_sha": "7ddbc2ebae658e7025b0805564274d4592d2718c"
+    },
+    {
+      "entity_name": "La Niña de Córdoba",
+      "last_seen_chapter": 3,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 1,
+        "current_state": "Standing in cradles of cut timber at the Spanish camp the morning of the women's handover; gilded breastplate polished with rag-marks visible, weeping-woman mask on the face. Steam (not smoke) rose from her as she cooled from prior day's work. A bright drop of water/oil ran from the corner of the mask's eye and was wiped away by an apron-wearing attendant. On the third-day march toward Cempoala she was kneeling on one knee, head bent toward the sand, while Andrés prayed beside her in his cradle; she inclined her shoulders six to eight inches and tilted her head as if listening, then rose when Andrés re-entered the cockpit. One of four iron giants in the column.",
+        "relationships": [
+          {
+            "to": "Andrés",
+            "kind": "piloted_by"
+          },
+          {
+            "to": "Flora",
+            "kind": "enshrines_relics_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "The largest of them, the gilded one with the weeping mask, was not entirely cold.",
+        "His was on one knee, the other knee folded, the great gilded head bent forward as if listening to something said into the sand.",
+        "the great gilded shoulders inclined forward six inches, eight, and the head tilted as if listening, and the cradle-timbers groaned"
+      ],
+      "source_chapter_sha": "7ddbc2ebae658e7025b0805564274d4592d2718c"
+    },
+    {
+      "entity_name": "Flora",
+      "last_seen_chapter": 3,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Spoken aloud for the first time by Andrés in the chapter — he gave her name to Malintzin at dawn as part of his introduction (his name, his city Córdoba, then the saint's name Flora). Her relics remain enshrined in La Niña de Córdoba's small glass box, which Malintzin observes on his chest plate; Malintzin suspects 'the bones inside the small glass box did not' bend when the gilding bent in prayer.",
+        "relationships": [
+          {
+            "to": "La Niña de Córdoba",
+            "kind": "relics_animate"
+          },
+          {
+            "to": "Andrés",
+            "kind": "saint_named_by"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "and then a saint's name, Flora, and then he ran out of words she could be expected to know",
+        "the one whose plate was gilded yellow and whose chest carried a small glass box",
+        "The gilding bent. The bones inside the small glass box, she suspected, did not."
+      ],
+      "source_chapter_sha": "7ddbc2ebae658e7025b0805564274d4592d2718c"
+    },
+    {
+      "entity_name": "Citlal",
+      "last_seen_chapter": 3,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Walked third in line of the twenty women handed across the fence at first light from the Mayan compound to the Spanish camp the morning after Centla. Said to Malintzin at dusk before the handover, 'if it is me, tell Rabbit it was me.' In the event both she and Malintzin were taken; Rabbit (the boy) was not. Did not flinch at the smell of the Spanish camp.",
+        "relationships": [
+          {
+            "to": "Rabbit",
+            "kind": "aunt_of"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "fellow_handed_over_with"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Citlal walked third in line.",
+        "Citlal had said, at dusk, *if it is me, tell Rabbit it was me.* It was both of them.",
+        "Citlal, ahead of her, did not flinch either."
+      ],
+      "source_chapter_sha": "7ddbc2ebae658e7025b0805564274d4592d2718c"
+    },
+    {
+      "entity_name": "Rabbit",
+      "last_seen_chapter": 3,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Not among the twenty women handed to the Spanish camp at first light; boys were not part of the trade. Will be kept by whoever now holds the compound after the handover, and 'he would learn a different word for the woman who had been his aunt' (Citlal).",
+        "relationships": [
+          {
+            "to": "Citlal",
+            "kind": "nephew_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "The boy was not among the twenty. Boys were not part of this trade.",
+        "He would be kept by whoever was keeping the compound now, and he would learn a different word for the woman who had been his aunt."
+      ],
+      "source_chapter_sha": "7ddbc2ebae658e7025b0805564274d4592d2718c"
+    },
+    {
+      "entity_name": "Cortés",
+      "last_seen_chapter": 3,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Commands the Spanish camp post-Centla; received twenty women as part of the settlement. Marching with three hundred men plus four iron giants up the coast toward Cempoala. On the third day his column met a Mexica trade party; Cortés decided the parley had failed and the column would walk around them, until Malintzin stepped from the line and translated Nahuatl through Aguilar's Maya. Released his hand from his scabbard's expectation when the chain held.",
+        "relationships": [
+          {
+            "to": "Aguilar",
+            "kind": "translator"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "translator"
+          },
+          {
+            "to": "Portocarrero",
+            "kind": "captain_under"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "She watched Cortés's face decide that the parley had failed and that the column would have to walk around them.",
+        "twenty women given as part of the settlement after Centla",
+        "a column of three hundred men plus four iron giants pressing it deeper with every step"
+      ],
+      "source_chapter_sha": "7ddbc2ebae658e7025b0805564274d4592d2718c"
+    },
+    {
+      "entity_name": "Battle of Centla",
+      "last_seen_chapter": 3,
+      "state": {
+        "aliases": [],
+        "entity_type": "event",
+        "first_mentioned_chapter": 2,
+        "current_state": "Concluded with a settlement that included the surrender of twenty women from the local Mayan compounds to the Spanish camp at first light the morning after the engagement. Settlement-women included Malintzin (seventh in line) and Citlal (third).",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "settlement_tribute_included"
+          },
+          {
+            "to": "Citlal",
+            "kind": "settlement_tribute_included"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "twenty women given as part of the settlement after Centla"
+      ],
+      "source_chapter_sha": "7ddbc2ebae658e7025b0805564274d4592d2718c"
+    },
+    {
+      "entity_name": "Portocarrero",
+      "last_seen_chapter": 3,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 3,
+        "current_state": "Spanish captain under Cortés. Received Malintzin (baptized Marina) as a gift after Centla; the giving took less than a minute, ended by his hand turning her elbow toward him. On the third day of the march to Cempoala, after Malintzin demonstrated Nahuatl and joined the translator chain, Portocarrero's hand released her elbow 'as if she had become, in that minute, an object he was no longer entitled to hold so casually.'",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "given_concubine"
+          },
+          {
+            "to": "Cortés",
+            "kind": "captain_under"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "She had been given to a captain named Portocarrero.",
+        "Malintzin felt the captain Portocarrero's hand release her elbow as if she had become, in that minute, an object he was no longer entitled to hold so casually"
+      ],
+      "source_chapter_sha": "7ddbc2ebae658e7025b0805564274d4592d2718c"
+    },
+    {
+      "entity_name": "Aguilar",
+      "last_seen_chapter": 3,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 3,
+        "current_state": "Thin, sun-burned (not born under it), Spanish-cut robe with Maya sandals. Spaniard who has lived eight years among the Maya; speaks soft, mission-trained Maya with too-clean consonants and a sailor's vocabulary. At the Spanish camp the morning of the handover he asked the twenty women, first in coast tongue then in Mayan, whether any had come from the high country. On the third day of the march toward Cempoala his Maya proved useless against a Mexica trade party, and Malintzin stepped in to translate Nahuatl<->Maya, with Aguilar relaying her Maya into Spanish for Cortés. Heard Malintzin give her name and turned toward her at speed across the cleared square, recognizing the Nahuatl shape of the name.",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "translation_partner"
+          },
+          {
+            "to": "Cortés",
+            "kind": "translator_for"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "Aguilar, the Spaniard who had lived eight years among the Maya, stepped forward to speak with them and discovered that his Maya was useless.",
+        "He had a soft Mayan, mission-trained, the consonants too clean.",
+        "His robe was Spanish-cut but his sandals were Maya."
+      ],
+      "source_chapter_sha": "7ddbc2ebae658e7025b0805564274d4592d2718c"
+    },
+    {
+      "entity_name": "Bernardo",
+      "last_seen_chapter": 3,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 3,
+        "current_state": "Small, not young Franciscan in a brown habit too heavy for the coast. Came to Malintzin's tent on the night after the trade-party parley, spoke first Latin then Spanish (neither understood), then stopped and only looked at her, nodded once or twice, and went away — he had come not to give orders but to look. His name (Bernardo) is something Malintzin only learned later.",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "observed"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "He was small, not young, a Franciscan in a brown habit too heavy for the coast",
+        "He had not come to give her orders. He had come to look at her.",
+        "His name was Bernardo."
+      ],
+      "source_chapter_sha": "7ddbc2ebae658e7025b0805564274d4592d2718c"
+    },
+    {
+      "entity_name": "Cempoala",
+      "last_seen_chapter": 3,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 3,
+        "current_state": "Inland city, the Spanish column's destination after Centla. The track to it is not a road — sand, then crushed shell, then sand again — and a column of three hundred men plus four iron giants is pressing it deeper. Malintzin estimates she will reach Cempoala (or whatever city follows) before she has cut Aguilar out of the translator chain.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "destination_of_march"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "The track to Cempoala was not a road.",
+        "by the time the column reached Cempoala or whatever city came after it"
+      ],
+      "source_chapter_sha": "7ddbc2ebae658e7025b0805564274d4592d2718c"
+    },
+    {
+      "entity_name": "Tenochtitlan",
+      "last_seen_chapter": 3,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 3,
+        "current_state": "City of the Mexica speaker (tlatoani, i.e. Moctezuma), reported by a Mexica trade-party leader on the third day of the march to lie 'twenty days inland by foot' from the coast track. Disclosed to the Spanish through the Malintzin–Aguilar translation chain.",
+        "relationships": [
+          {
+            "to": "Moctezuma",
+            "kind": "seat_of_speaker"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "He says his lord is the speaker of Tenochtitlan and that the city lies twenty days inland by foot."
+      ],
+      "source_chapter_sha": "7ddbc2ebae658e7025b0805564274d4592d2718c"
+    },
+    {
+      "entity_name": "Mexica trade party",
+      "last_seen_chapter": 3,
+      "state": {
+        "aliases": [],
+        "entity_type": "event",
+        "first_mentioned_chapter": 3,
+        "current_state": "On the third day of the Spanish march toward Cempoala, a Mexica trade party came down from the highlands to look at the strangers and decide whether the strangers were gods. Met the column on the track, Nahuatl-speaking. Their leader's hand began to settle on the obsidian club at his belt while waiting for an answer. Through Malintzin's intervention the parley succeeded; the leader confirmed his lord was the speaker of Tenochtitlan, twenty days inland. After the parley they continued on their way.",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "first_translated_for"
+          },
+          {
+            "to": "Tenochtitlan",
+            "kind": "envoys_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "the Spaniards met a Mexica trade party on the track",
+        "The party had come down from the highlands to look at the strangers and decide whether the strangers were gods.",
+        "She watched the Mexica leader's hand begin to settle on the obsidian club at his belt"
+      ],
+      "source_chapter_sha": "7ddbc2ebae658e7025b0805564274d4592d2718c"
+    }
+  ],
+  "chapter_num": 3,
+  "extraction_timestamp": "2026-04-25T08:45:08.919930Z"
+}
