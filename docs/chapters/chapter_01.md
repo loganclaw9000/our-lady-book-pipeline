@@ -6,80 +6,74 @@ assembled_from_scenes:
 - ch01_sc03
 chapter_critic_pass: true
 voice_fidelity_aggregate: null
-word_count: 2816
+word_count: 2482
 thesis_events: []
 voice_pin_shas:
 - 83095d9371f26f7979c85b1ba47f05dd21cd1f677023c98c891b0fab11c72ca1
 ---
 
 <!-- scene: ch01_sc01 -->
-Andrés de Mora knelt alone in the Chapel of Havana. The walls were lined with saints who had never seen an ocean, their glass eyes dull, their wooden hands clasped against chests the woodcarvers of Seville had given them two generations back. Two candles burned on the altar, slow in the windless air, and between them hung a painted panel of Our Lady of Antigua, the Virgin whose image in the cathedral at Seville watched over every man who sailed for the Indies. A sailor had donated the copy; a sailor had probably paid for the candles. She gazed down on him with eyes that held a thousand years of patience, and none of it, he felt, for him.
+The hum.
 
-He prayed, and hoped, and wished.
+Always the hum.
 
-He hoped never to see her again, not this copy, not the original in Seville, not any of her. He wished for a small life, far from the wars and the politics that had unmade his name in Castile. He prayed, to the God of his mother, to Christ, to the Virgin herself, that mercy was a thing that still moved in the world, and that it might find him on the water before the water found him.
+A vibration that wasn't sound, a pressure in the air like the note before a glass cracks.
 
-He had not taken communion since he was fourteen. Five years of excommunication, lifted by a letter from a bishop who had never met him, in exchange for a place on a fleet that needed soldiers more than it needed clean consciences. He was here for absolution and for the viaticum, the bread a man takes before a journey from which he may not return.
+Andrés knelt at the Chapel of Havana's altar, palms flat on the flagstones, forehead to the stone beside them. The dead slept beneath. Two candles burned beside a painted copy of Our Lady of Antigua, donated by a sailor whose name he would never know. His breath moved in and out, and with each breath the hum rose or fell, a living thing in the walls, the roof, the bones of the chapel itself.
 
-The priest was a young man with soft hands, and the smile of someone who had not yet understood where he was standing. He spoke quietly, as if afraid to wake the dead who slept beneath the flagstones. He asked for Andrés's sins and Andrés gave them, the killing he had done at fifteen, the killing he had done at seventeen, the woman in Córdoba, the theft from his uncle's strongbox, the long winters of doubt. The priest absolved him. He placed the host on Andrés's tongue and gave him the cup, and told him he was forgiven.
+The priest's hand was warm on his shoulder. Five years since his last communion. The letter from a bishop he had never met, lifting his excommunication in exchange for a berth on Cortés's fleet, was folded twice in his doublet. The host went into his mouth and he did not cross himself.
 
-Andrés left the chapel and did not cross himself at the threshold.
+Not because he was not a Christian. Not because he was not a boy of the Faith.
 
-The plaza was loud with departure. Men rolling barrels across the stones. A horse being winched aboard in a canvas sling, screaming. At the wharf the Santa Bárbara rode at her lines, low with stores, her sails still furled against the yards. She was one of eleven hulls Cortés had gathered for the crossing to Yucatán, and to Andrés she looked less like a ship than a narrow wooden box set afloat with a cross nailed to the mast.
+Because the hum.
 
-He climbed the gangway and stepped onto the deck.
+*You don't cross yourself in the presence of a saint.*
 
-In the galley he found the cook, a Genoese with one eye, stirring a pot that smelled of old onion and salt pork, and he sat down on the bench because his legs had begun to shake and he did not want anyone above to see it.
+His mother's voice, from a thousand years ago, when he was five and she had brought him to the reliquary for the first time, to the great silver-and-gold engine with its painted eyes and its gilded arms and its monstrance the size of a church window.
 
-"You the new second?" the cook asked, without looking up.
+He had been terrified. Eight years inside the cockpit and he was terrified still. He had only learned to be terrified in the proper way. Not with shaking limbs, not with the screaming of a child, but with the quiet, the stillness, the steady breath that made the hum come to you and not you to it.
 
-"Yes."
+The priest stepped away. The viaticum was done. The dead under the flagstones were not asked.
 
-"Eat."
+Andrés stood, and the hum went with him. He walked out past the Seville-carved saints on the chapel walls, into the dusk on the harbor mole. The hum went with him.
 
-A wooden bowl was put in front of him. He could not taste what was in it. He moved the spoon to look like a man eating, and then he set it down.
+*La Niña de Córdoba* stood in her cradle on the quay outside, fifty feet of gilded plate in the failing light. Second-class. A knightship, the captains called it. A Reliquary. Her monstrance glowed soft, the soft light of something preserved in crystal, a finger, a tooth, a small rib, all that was left of a girl killed in 850 by men who had asked her to recant and been refused.
 
-The cook watched him with the one eye.
+His machine.
 
-"First crossing?"
+He did not speak the name. No one in the expedition did. There were saints of the Faith whose names you did not say aloud.
 
-"Yes."
+*Flora.*
 
-"You took the sacrament."
+*Child of Córdoba.*
 
-"Yes."
+*Little Flower.*
 
-The cook nodded once, as though a question had been answered, and went back to his pot. For a long moment there was only the slap of water against the hull and the shouts of the mate on the deck above.
+*Child-Martyr of the Mozarabes.*
 
-"My mother," Andrés said, and then did not know how to finish the sentence.
+The names. The hum. The light.
 
-"She in Castile?"
+He had been ten when the Order of Santiago took him, sixteen when he first put his hands on the controls, twenty-three when he killed his first Moor at the wall of a village outside Granada. He would be twenty-eight when he died, he thought, or twenty-nine, if the hum did not take him sooner. If the hum did not take him sooner, then perhaps he would go to Heaven, and she would be there, and he would not have to pilot her anymore, and the hum would stop.
 
-"Córdoba."
+He did not think this often. The Order said it was wrong, to think of Heaven, to think of reward, to think of anything but the Faith and the service of God and the Emperor. He thought it sometimes, when he was very tired, when the hum was very loud, when he had been in the cockpit three days and could not sleep because the hum would not stop.
 
-"Write her tonight. While we're still tied to the stone. The last boat goes ashore at dusk and takes the letters."
+He walked the length of the mole. The men of the *Santa Bárbara* watched him pass, and they did not speak. The captains watched him pass, and they did not speak. Even the slaves at the loading-cradle watched him pass, and they did not speak.
 
-"I wrote her already. Before I came down to the chapel."
+He was the pilot. He was the saint. He was the machine. He was the hum.
 
-"Write her again."
+He stopped at the rail at the far end of the mole and looked out at the dark Atlantic. The fleet rode at anchor. The morning tide would carry them all west. He had written his mother that afternoon, the second letter in two days; the last dusk boat ashore would take it. Four months, perhaps five, and she would read in Córdoba that her son had sailed.
 
-Andrés looked at the man. The cook did not look back. He was paring a turnip with a knife worn thin from forty years of paring turnips, and he was not being kind, and he was not being cruel, he was telling Andrés the rule of the thing, the way a man tells another man where the latrine is.
+We are going to the Americas, he thought. We are going to convert the Americas. We are going to kill everyone who will not be converted. We are going to bring the Faith.
 
-"What do I say?"
+He did not think this often, either. The Order said it was wrong, to think of conquest, to think of glory, to think of anything but the Faith and the service of God and the Emperor. But the Atlantic was very dark, and tomorrow he would not be the man who had lived in Córdoba any longer, and he wanted, just once, to think it plainly.
 
-"That you took the sacrament. That's what a mother wants. The rest she already knows."
+The hum rose. La Niña, behind him in her cradle, knew his back was turned. The vibration moved through the planks of the mole into the soles of his boots, into the bones of his wrists.
 
-Andrés stood. He did not thank the cook; the cook had not done him a kindness. He went back to his sea-chest in the stern and he wrote the letter, short and in a hand that did not shake because he willed it not to, and when the last boat pushed off at dusk he watched the oarsman carry his folded page across the harbor toward a town he had lived in for eleven weeks and had formed no feeling for, toward a road that ran to a port that ran to an ocean that ran to a house in Córdoba where his mother would, in four months or five, open a square of paper and read that her son had taken the bread.
+*Come*, the hum said, without saying. *Come, come, come.*
 
-He stayed on deck after the boat was gone.
+He did not cross himself.
 
-The town lamps came on one by one along the harbor, small and yellow and meaning nothing. Somewhere a bell rang for compline and then stopped, as though the ringer had lost his nerve halfway through. Andrés thought of the Virgin in the chapel, and of the thousand years in her eyes, and understood, without drama, the way a man understands he has stepped on a nail, that he had already left home. The ship had not moved. The tide had not turned. He had simply, in the chapel, in the galley, on the deck, stopped being the person who had lived in Córdoba. What would sail tomorrow was someone else, wearing his name.
-
-He did not cry. A soldier does not cry; he had been told this as a boy, and he had believed it, and it turned out to be true in the smallest and most useless way.
-
-Above him the yards creaked. Below him the hull answered. The saints in the chapel were still in the chapel, and would be there tomorrow, and the day after, and the year after, and he would not.
-
-The Santa Bárbara sailed on the morning tide, in company with ten other hulls, for the coast of Yucatán.
+He turned from the rail and walked back along the mole toward the cradle, toward the gilded plate and the painted eyes and the small bones in their crystal, and the hum walked with him, because the hum had nowhere else to go.
 
 
 ---
@@ -159,79 +153,51 @@ Citlal nodded once and did not thank her. Thanking, Malintzin was beginning to u
 ---
 
 <!-- scene: ch01_sc03 -->
-Itzcoatl woke to the dawn drum and the chanting of the older pupils across the hall. He sat up on the mat and stretched, felt the reed-crush beneath his palms, tasted copal smoke thin in the cold air.
+The Great Engine hummed beneath the audience floor, a low constant liturgy in stone, the twin shrines of Huitzilopochtli and Tlaloc thrumming through my heels where I stood honor guard at the eastern wall. Three hours past dawn. The tlatoani had not eaten.
 
-The dream stayed. A pool of obsidian, the kind polished for scrying. His own face in it, and then the face was not his. The mouth kept moving after he stopped speaking. He had watched it a long time before waking, too afraid to look away, too afraid to keep looking. When he rubbed his eyes clear, his fingers came away smelling faintly of smoke, real smoke, not the remembered kind, as if something in the dream had carried across into the waking air.
+Moctezuma sat cross-legged on his mat, turquoise diadem set straight on his brow but his face worn under it. He looked as a man looks who has slept four hours across two nights. He looked at the floor more often than at the speakers.
 
-He pulled his robe from the wall peg and went into the hall. The mats were already being folded. Tlacaelle saw him first.
+I was sixteen. I had been a scribe-priest of the calmecac for two years and had stood guard at six audiences, and I had never seen him like this.
 
-"You stirred all night."
+The first message was from the eastern coast. A runner, dust-stained, kneeling. Pale strangers had landed again, not the small party of last year that had probed the Maya shore and gone, but more of them, their houses-on-the-water anchored at the river the Chontal call Tabasco. Beards. Iron. Animals taller than men. The runner gave numbers and the numbers were larger than last year's.
 
-"I dreamed."
+Moctezuma did not interrupt. When the runner was done he asked one question. *How many ships.* Eleven, the runner said. The tlatoani closed his eyes for the length of a breath and opened them again.
 
-"Of what?"
+The second matter was the priests. Quauhtli, eldest astronomer of my own calmecac, his turquoise ear-spool catching the brazier-light, stepped forward with Tlacaelle and two older students. They had been reading the sky since before dawn. Quauhtli set the report at the tlatoani's mat in the formal voice.
 
-Itzcoatl's face heated. Dreams were close things. But he was not one to refuse a friend. "A black mirror. My face in it. The face kept speaking after I had fallen silent."
+Venus had not risen at her proper hour. The morning star had broken step by three fingers north of yesterday's mark on the floor-map of the heavens. Tlahuizcalpantecuhtli was walking early. The sun, Quauhtli said carefully, rose as it should, Huitzilopochtli kept his order. But Venus did not. This was not the tlatoani's sign. This was the Feathered Serpent's.
 
-Tlacaelle went very still. Then: "That is Tezcatlipoca's mirror. You should tell the master before the sun climbs."
+The chamber went very still. Beneath the floor the Engine's hum did not change, and the not-changing of it was its own answer. The dormant Quetzalcoatl engines at Cholula and at Tula had slept for generations. No living person had seen one walk. The question on the mat, whether to send priests across the Sierra Nevada to confirm the seals, now had a date attached to it.
 
-"A dream is only a dream."
+Moctezuma asked when Venus would set. Three fingers westward of Chapultepec, Quauhtli said, before sunset. We would not sleep for three nights.
 
-"A dream that shows the Smoking Mirror is not only a dream." Tlacaelle's voice had dropped. "Come. They are reading the sky."
+The tlatoani looked tired in a new way then.
 
-They crossed to the main hall. The older students and two of the tlenamacac priests were crouched over the floor-map of the heavens, painted in lime and charcoal on stucco. Itzcoatl recognized Quauhtli, the eldest astronomer, by his turquoise ear-spool. The men were arguing quietly. Tlacaelle slipped in beside them.
+He ordered priests to Cholula. He ordered priests to Tula. He ordered the runner fed and held. He dismissed the audience with a gesture so small I almost missed it from the wall.
 
-"Itzcoatl, look. Venus has risen already." Quauhtli pointed at the chalked mark near the eastern glyph. "Before the morning star's proper hour. She will cross the zenith near nepantla tonatiuh, then bend westward three fingers before the sun slips behind Chapultepec."
+I followed Quauhtli out into the corridor. The Engine's hum thinned in the stone as we walked away from the central shrine, the way a held note thins when a singer turns his head. Quauhtli did not look at me until we reached the threshold of the precinct.
 
-"Is it an omen?"
+"You did not speak," he said.
 
-"It is a rising out of its season." Quauhtli did not look up. "Tlahuizcalpantecuhtli walks early. When the Lord-of-the-Dawn walks early, he is hunting."
+"You told me to hold it until the sun was at its height."
 
-Tlacaelle, softer: "It is the morning-face of Feathered Serpent."
+"And the sun is not yet at its height."
 
-"Huitzilopochtli's sun rises as it should," Quauhtli said. "It is the morning star that has broken step. That is not the tlatoani's sign. That is the Feathered Serpent's sign, and the Feathered Serpent has business older than Tenochtitlan."
+"No."
 
-Itzcoatl thought of the black mirror and did not speak.
+I had dreamed it three nights running. An obsidian scrying pool. My own face in the black water, speaking. The tongue was not Nahuatl and not any tongue I had been taught, and I had answered in it after I had already fallen silent in my own throat, which is how I knew it was a dream and not a memory. I had woken smelling real smoke. Quauhtli had heard the dream once and ordered me to keep it from every ear, including my father's, until the sun stood at nepantla tonatiuh.
 
-Quauhtli straightened and looked at him a long moment, the look the old astronomers gave when they had already counted something and were waiting for you to catch up. "You dreamed last night," he said. Not a question.
+"After noon," he said. "Then you will tell the tlatoani. Not before."
 
-"Yes, Lord."
+"He looked tired."
 
-"Hold the dream. Do not tell it in the corridors. Bring it to me after the sun has reached its height." He turned to Tlacaelle. "Take him to the north windows. Mark the angle. Compare it against the ten days before. Quickly, I want the shadow fixed before the runners come from Tezcoco."
+"He is tired. The tiredness is not the reason you wait."
 
-"Runners from Tezcoco?"
+We passed the corridor window that looks west across the precinct. The Templo Mayor stood against the morning, the steps bone-white at this hour, the twin shrines small at the summit against a sky still pink at its edges. For one breath, and I marked the breath, because Quauhtli had taught me to mark such breaths, I felt that the stones could be taken down.
 
-"Word moves already. The Lord of Two Houses sent word before dawn. If the sky is speaking in two cities, it is speaking."
+I did not say it. I had been ordered to hold a dream. I held the thought with it.
 
-They went to the north wall. Tlacaelle set a younger boy to hold the torch, and they marked the shadow where it fell on the angled glyph. Itzcoatl wrote the figures onto a strip of maguey paper: the angle, the day-sign, his name beneath. His hand was steady. He was surprised it was steady.
+"Go," Quauhtli said. "Eat. Return at noon."
 
-"Three fingers north of yesterday's," Tlacaelle said.
-
-"That is very far."
-
-"Yes."
-
-They did not speak again until the sun cleared the wall and the shadow vanished into the stucco. Tlacaelle sat back on his heels. His face had lost color and he had not noticed.
-
-"Itzcoatl." He did not look at him. "The dream. The mirror-face spoke. What did the speaking sound like?"
-
-Itzcoatl had not thought of it as sound. He tried to remember. Not Nahuatl. Not Otomí, not the tongues he had heard at market. Something with the shape of words but no inside to them.
-
-"Not a language I know."
-
-Tlacaelle nodded once as if a figure had balanced. "Say that to Quauhtli. Exactly that."
-
-A bell rang for the morning meal. Below, the younger pupils were already at the bowls, Itzcoatl could hear the wooden spoons. He was not hungry. The corridor smelled of boiled amaranth and copal and the faint iron of the lime they had used on the star-map.
-
-At the door Tlacaelle stopped him.
-
-"Do not fast today. Whatever Quauhtli tells you."
-
-"Why?"
-
-"Because if he tells you to fast, it means he believes the dream. And I do not want to see what your face looks like when a priest believes your dream."
-
-Itzcoatl went down the corridor alone. The stone was cold under his sandals. He thought of the mirror and the mouth moving without him, and of Venus walking early above the city, and of the Lord-of-the-Dawn hunting. He passed a window open to the plaza and saw, for the length of one breath, the Templo Mayor against the pink sky, the twin shrines, Huitzilopochtli and Tlaloc, the steps bone-white with dawn, and felt, clearly and for the first time in his life, that the stones could be taken down.
-
-He did not know where the thought had come from. He put his hand against the wall to steady himself, and the wall was warm, and he kept walking.
+I went.
 
