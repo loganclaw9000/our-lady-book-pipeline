@@ -1,0 +1,325 @@
+{
+  "entities": [
+    {
+      "entity_name": "Andrés",
+      "last_seen_chapter": 2,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Age 26 confirmed. At dawn on March 25 fought at Centla in La Niña de Córdoba. Killed his first Maya pilot (a ~30-year-old woman) by driving the halberd-spike through the jaguar-rosette into the heart-chamber; was sick into the brass basin afterward. Saint's hum went quiet, not absent, after the kill. In the second engagement he chose deliberately not to strike the heart-chamber, instead disabling a Maya engine through the back of the right knee. Took three binds total over a 90-minute battle, halberd-haft bent. Thought, against Order doctrine, 'she was somebody's. So was I.' Has now killed twice in one morning and the child has not spoken either way.",
+        "relationships": [
+          {
+            "to": "La Niña de Córdoba",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Flora",
+            "kind": "venerates"
+          },
+          {
+            "to": "Cortés",
+            "kind": "serves_under"
+          },
+          {
+            "to": "Order of Santiago",
+            "kind": "trained_by"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "He was twenty-six now, and the Order had told him, gently and without superstition, that pilots did not often see thirty.",
+        "she was somebody's.",
+        "So he killed the knee instead."
+      ],
+      "source_chapter_sha": "475b4707104332e57b5f8a8583cfb083d8fbe381"
+    },
+    {
+      "entity_name": "La Niña de Córdoba",
+      "last_seen_chapter": 2,
+      "state": {
+        "aliases": [
+          "La Niña"
+        ],
+        "entity_type": "object",
+        "first_mentioned_chapter": 1,
+        "current_state": "Crossed from Havana to Centla. Sixty tons of gilded saint, fifty feet at the shoulder. Fought the Battle of Centla on March 25, taking three binds against Maya jaguar-engines on the salt-flat. Killed one Maya engine through the heart-chamber and disabled a second through the back of the right knee. Halberd-haft bent a hand's-breadth above the head, to be straightened or replaced. Stands in mud to her shins at battle's end, walking back to the Spanish camp.",
+        "relationships": [
+          {
+            "to": "Andrés",
+            "kind": "piloted_by"
+          },
+          {
+            "to": "Flora",
+            "kind": "enshrines_relics_of"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "The salt-flat at Centla took the weight of *La Niña de Córdoba* and gave back nothing",
+        "the bend in the haft was a hand's-breadth deflection above the head",
+        "*La Niña* stood in mud to her shins and did not lean."
+      ],
+      "source_chapter_sha": "475b4707104332e57b5f8a8583cfb083d8fbe381"
+    },
+    {
+      "entity_name": "Flora",
+      "last_seen_chapter": 2,
+      "state": {
+        "aliases": [
+          "the child",
+          "the saint"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Saint enshrined in La Niña de Córdoba's monstrance. Hagiography clarified: born in 837, refused to recant, killed at thirteen by men who asked once and then asked again. Manifests in the cockpit as a hum at Andrés's sternum — 'a pressure and a cleanness,' a girl's voice but never words. After Andrés killed the first Maya pilot at Centla the hum went quiet (not absent) — 'the way a room is quiet after a child has stopped crying.' The hum returned for the second engagement as pressure, not voice. Andrés was told at investiture the child would speak when the killing was wrong AND when the killing was right; she has not spoken at either of his Centla kills.",
+        "relationships": [
+          {
+            "to": "La Niña de Córdoba",
+            "kind": "animates"
+          },
+          {
+            "to": "Andrés",
+            "kind": "venerated_by"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "born in 837, refused to recant, killed at thirteen by men who asked once and then asked again",
+        "The hum at his sternum had gone quiet.",
+        "He had been told, at his investiture, that the child would speak when the killing was wrong. He had also been told that the child would speak when the killing was right."
+      ],
+      "source_chapter_sha": "475b4707104332e57b5f8a8583cfb083d8fbe381"
+    },
+    {
+      "entity_name": "Cortés",
+      "last_seen_chapter": 2,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Commands the Spanish line at the Battle of Centla on March 25. Issues the forward order over the speaking-horn from his flagship San Cristóbal del Viento, two hundred yards down the line from La Niña de Córdoba: 'Adorators. In the name of God and the Emperor. Forward.'",
+        "relationships": [
+          {
+            "to": "San Cristóbal del Viento",
+            "kind": "commands_from"
+          },
+          {
+            "to": "Andrés",
+            "kind": "commander_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Cortés's voice came over the speaking-horn from *San Cristóbal del Viento*, two hundred yards down the line.",
+        "*Adorators. In the name of God and the Emperor. Forward.*"
+      ],
+      "source_chapter_sha": "475b4707104332e57b5f8a8583cfb083d8fbe381"
+    },
+    {
+      "entity_name": "Centla",
+      "last_seen_chapter": 2,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 2,
+        "current_state": "Coastal salt-flat with a Maya town inland behind a palm-line, smoke from cookfires visible from the beach. Site of the first Spanish-Maya engine engagement on the morning of March 25. Mud the color of old blood; tide goes out forty yards before the dry line at dawn, two hundred paces by mid-morning. The salt-flat works against the Spanish (taller, narrower-footed engines) more than the Maya (lower, broader-footed).",
+        "relationships": [
+          {
+            "to": "Battle of Centla",
+            "kind": "site_of"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "Dawn at Centla.",
+        "The salt-flat at Centla took the weight of *La Niña de Córdoba* and gave back nothing",
+        "the smoke of cookfires further inland where the Maya town stood"
+      ],
+      "source_chapter_sha": "475b4707104332e57b5f8a8583cfb083d8fbe381"
+    },
+    {
+      "entity_name": "San Cristóbal del Viento",
+      "last_seen_chapter": 2,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 2,
+        "current_state": "Spanish knightship/Reliquary mecha. Cortés's flagship at the Battle of Centla, stationed two hundred yards down the line from La Niña de Córdoba. Equipped with a speaking-horn for line-of-battle orders. Came in over Andrés's shoulder mid-battle to finish off a Maya engine he had cracked.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "piloted_or_commanded_by"
+          },
+          {
+            "to": "Battle of Centla",
+            "kind": "fought_at"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "Cortés's voice came over the speaking-horn from *San Cristóbal del Viento*, two hundred yards down the line.",
+        "another Spanish engine, *San Cristóbal del Viento*, came in over Andrés's shoulder and finished it"
+      ],
+      "source_chapter_sha": "475b4707104332e57b5f8a8583cfb083d8fbe381"
+    },
+    {
+      "entity_name": "Nuestra Señora del Campeón",
+      "last_seen_chapter": 2,
+      "state": {
+        "aliases": [
+          "Campeón"
+        ],
+        "entity_type": "object",
+        "first_mentioned_chapter": 2,
+        "current_state": "Second-class Spanish Reliquary mecha at the Battle of Centla. Carried a war-pick (rather than the standard halberd) because its pilot Alonso has small hands and prefers a shorter haft. Moved in formation two paces back and two paces wide of La Niña de Córdoba. Its pilot kept a timepiece on his belt by which the 90-minute battle duration and the fifth-hour withdrawal were later measured.",
+        "relationships": [
+          {
+            "to": "Alonso",
+            "kind": "piloted_by"
+          },
+          {
+            "to": "La Niña de Córdoba",
+            "kind": "fought_in_formation_with"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "the second-class *Nuestra Señora del Campeón* moved in formation at his elbow, two paces back and two paces wide, carrying a war-pick rather than a halberd because its pilot, Alonso, had small hands and preferred a shorter haft",
+        "The battle ran for ninety minutes by the timepiece *Campeón*'s pilot kept on his belt"
+      ],
+      "source_chapter_sha": "475b4707104332e57b5f8a8583cfb083d8fbe381"
+    },
+    {
+      "entity_name": "Alonso",
+      "last_seen_chapter": 2,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 2,
+        "current_state": "Spanish pilot of the second-class Reliquary Nuestra Señora del Campeón at the Battle of Centla. Has small hands; carries a war-pick instead of a halberd. Kept a belt timepiece used to mark the battle's duration (90 minutes) and the Maya withdrawal at the fifth hour.",
+        "relationships": [
+          {
+            "to": "Nuestra Señora del Campeón",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Andrés",
+            "kind": "fought_in_formation_with"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "its pilot, Alonso, had small hands and preferred a shorter haft"
+      ],
+      "source_chapter_sha": "475b4707104332e57b5f8a8583cfb083d8fbe381"
+    },
+    {
+      "entity_name": "Santiago del Paso",
+      "last_seen_chapter": 2,
+      "state": {
+        "aliases": [
+          "Santiago"
+        ],
+        "entity_type": "object",
+        "first_mentioned_chapter": 2,
+        "current_state": "Spanish Reliquary mecha on the far right of the line at the Battle of Centla. Took the first impact: drove its lance into a Maya engine's shoulder; the lance bound, the two staggered together for three steps before the Maya pilot drove a stone-bladed mace into Santiago's hip-joint. Lance came free with a wet crack. Damage status (post-blow to hip-joint) unspecified.",
+        "relationships": [
+          {
+            "to": "Battle of Centla",
+            "kind": "fought_at"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "*Santiago del Paso* on the far right took a Maya engine in the shoulder with its lance and the lance bound, went in clean and would not come out",
+        "the Maya pilot drove a stone-bladed mace into Santiago's hip-joint"
+      ],
+      "source_chapter_sha": "475b4707104332e57b5f8a8583cfb083d8fbe381"
+    },
+    {
+      "entity_name": "San Millán",
+      "last_seen_chapter": 2,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 2,
+        "current_state": "Third-class Spanish infantry Reliquary, ~30 feet at the shoulder, at the Battle of Centla. One of eleven or twelve such engines moving in a loose wedge behind the second-class line.",
+        "relationships": [
+          {
+            "to": "Battle of Centla",
+            "kind": "fought_at"
+          }
+        ],
+        "confidence_score": 0.8
+      },
+      "evidence_spans": [
+        "Behind them came the third-class infantry, eleven, twelve engines of perhaps thirty feet each, *San Millán* and *San Isidoro* and others Andrés could not pick out by their plating from this angle."
+      ],
+      "source_chapter_sha": "475b4707104332e57b5f8a8583cfb083d8fbe381"
+    },
+    {
+      "entity_name": "San Isidoro",
+      "last_seen_chapter": 2,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 2,
+        "current_state": "Third-class Spanish infantry Reliquary, ~30 feet at the shoulder, at the Battle of Centla. One of eleven or twelve such engines moving in a loose wedge behind the second-class line.",
+        "relationships": [
+          {
+            "to": "Battle of Centla",
+            "kind": "fought_at"
+          }
+        ],
+        "confidence_score": 0.8
+      },
+      "evidence_spans": [
+        "*San Millán* and *San Isidoro* and others Andrés could not pick out by their plating from this angle"
+      ],
+      "source_chapter_sha": "475b4707104332e57b5f8a8583cfb083d8fbe381"
+    },
+    {
+      "entity_name": "Battle of Centla",
+      "last_seen_chapter": 2,
+      "state": {
+        "aliases": [],
+        "entity_type": "event",
+        "first_mentioned_chapter": 2,
+        "current_state": "Engagement on the morning of March 25 between Cortés's Spanish Reliquary line (La Niña de Córdoba, Nuestra Señora del Campeón, San Cristóbal del Viento, Santiago del Paso, eleven or twelve third-class infantry incl. San Millán/San Isidoro) and six squat, jaguar-plated Maya engines (~35 ft, bone-pale plate, sealed stone vessel in the belly in lieu of a monstrance). Began at dawn at the high-tide line; ran ~90 minutes by Campeón's pilot's timepiece. Outcome at sun-high: two Maya engines broken, one disabled and its pilot captured (taken without resistance or expression), three Maya engines withdrawing in good order toward the palm-line in a covered staggered retreat (smallest carrying the disabled engine's pilot on its back), one Maya engine unaccounted-for on the left flank. Spanish damage: Santiago del Paso's hip-joint struck; La Niña's halberd-haft bent.",
+        "relationships": [
+          {
+            "to": "Centla",
+            "kind": "occurred_at"
+          },
+          {
+            "to": "Cortés",
+            "kind": "commanded_by"
+          },
+          {
+            "to": "Andrés",
+            "kind": "fought_by"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "The battle ran for ninety minutes by the timepiece *Campeón*'s pilot kept on his belt",
+        "three of the Maya engines were withdrawing in good order toward the palm-line at the flat's far edge, walking backward in a staggered line",
+        "its pilot stepped down out of its belly into Spanish hands without resistance and without expression"
+      ],
+      "source_chapter_sha": "475b4707104332e57b5f8a8583cfb083d8fbe381"
+    }
+  ],
+  "chapter_num": 2,
+  "extraction_timestamp": "2026-04-25T07:59:28.137268Z"
+}
