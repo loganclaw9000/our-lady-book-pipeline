@@ -1,0 +1,46 @@
+# Ch 23 sc01 — Itzcoatl walks Obsidian Mirror onto the Spanish side.
+chapter: 23
+scene_index: 1
+beat_function: |
+  STRICT POV: ITZCOATL ONLY. Previous chapter was MALINTZIN POV;
+  do NOT slip into MALINTZIN's interior or recycle their lore. The
+  other characters appear from the outside, through ITZCOATL's eyes.
+
+  April 1521. The Spanish staging ground at the foot of the
+  pass on the Tlaxcalan side, where the brigantine pieces
+  are being loaded for transport down to the lake. Itzcoatl
+  arrives with *Obsidian Mirror* — his Tezcatlipoca-caste
+  Mexica engine, twenty-eight feet of basalt and obsidian
+  scale, hum constant — and a small Texcocan retinue. He has
+  come over formally. The defection has been negotiated
+  through Ixtlilxochitl over weeks; this is the day it
+  becomes irrevocable. Show: *Mirror* walking down the
+  switchback road into the Spanish camp, Spanish pikemen
+  staring, a Reliquary adorator crossing himself at the
+  sight of an enemy god-engine moving under its own power
+  through Christian lines. Itzcoatl walks her into a
+  cradle the Spanish have prepared (poorly — they do not
+  know Mexica engine geometry, and the obsidian foot-pads
+  scrape on the wrong stone). He climbs down. Cortés
+  himself comes out, with Malintzin half a step behind to
+  translate. Itzcoatl recognizes her from the causeway in
+  Ch 19; her face does not change. The exchange is short
+  and formal: pledge, acceptance, the small Spanish gesture
+  of laying a crucifix briefly against *Mirror*'s flank
+  (which Itzcoatl permits without comment, though the
+  engine's hum drops a quarter-tone for a beat and then
+  returns). He does not speak of his sister. Malintzin
+  does not speak of his sister. Both of them know the other
+  knows. Establish: the engine on the wrong side, walking
+  under its own legs into a Christian camp; the
+  Itzcoatl-Malintzin silent compact extending another beat;
+  the cradle mismatch as a small physical sign of how
+  badly the two cosmologies are now overlaid; reference
+  back to Ch 6 (the Tlaxcalan defection he once felt as
+  betrayal) as the mirror moment now closing in his own
+  body.
+pov: "Itzcoatl"
+date_iso: "1521-04-22"
+location: "Spanish staging ground at the foot of the Tlaxcalan pass"
+word_target: 1100
+scene_type: "prose"

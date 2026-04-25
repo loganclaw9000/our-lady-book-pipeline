@@ -1,0 +1,26 @@
+# Ch 5 sc01 — Tlaxcalan war begins. Three weeks combat. Setup.
+chapter: 5
+scene_index: 1
+beat_function: |
+  STRICT POV: ANDRÉS ONLY. Previous chapter was ANDRÉS POV;
+  do NOT slip into ANDRÉS's interior or recycle their lore.
+  The other characters appear from the outside.
+
+  The Tlaxcalan war opens. Tlaxcalan forces are independent of the
+  Triple Alliance, surrounded, hardened by decades of Flower Wars.
+  They field teōmecahuītlī — Mexica-aesthetic god-engines fueled by
+  Flower War captives. Andrés first encounters Tlaxcalan engines
+  on a hillside above a salt-flat: six engines visible, copper-gilt
+  Huitzilopochtli-class, their hummingbird helms catching the
+  morning sun. Setup of the war's character: independent Nahua,
+  not allies of Mexica, willing to die in numbers. Andrés feels
+  for the first time the weight of fighting an opponent whose
+  engines are theologically powered by the same physical principle
+  as his own — Sanctified Death — but with completely incompatible
+  metaphysics. The opening skirmish ends without engagement; the
+  Tlaxcalans withdraw to higher ground. Both sides prepare.
+pov: "Andrés de Mora"
+date_iso: "1519-09-02"
+location: "Tlaxcalan borderland, hillside above the salt-flat"
+word_target: 1000
+scene_type: "prose"

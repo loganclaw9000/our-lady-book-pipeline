@@ -1,0 +1,30 @@
+# Hand-authored Scene 2 stub for Chapter 2 — combat + first kill.
+# Outline beat: La Niña drives halberd through Maya engine's heart-chamber.
+# Maya pilot is a woman. Andrés does not yet know her name; he will
+# learn it in Ch 5 ("Action") when he keeps her copper identification disc.
+chapter: 2
+scene_index: 2
+beat_function: |
+  THE BROADER BATTLE. sc01 already executed Andrés's first kill (the
+  woman in the jaguar engine, halberd through heart-chamber, the hum
+  going quiet). Do NOT re-narrate that kill. This scene is the ROOM
+  AROUND that one event — the other five Maya engines still on the
+  field, the two other second-class Reliquaries (*San Cristóbal del
+  Viento*, *Espíritu Santo de la Aurora*) closing with their own
+  Maya counterparts, the dozen third-class spreading on the wings,
+  Tlaxcalan auxiliaries pressing the flank. Andrés walks La Niña
+  forward into a second jaguar-engine — combat-bind, joint-lock, the
+  drag of low-tide mud — but does NOT kill it cleanly; he disables a
+  knee, withdraws to bind another. The battle is broad, messy, runs
+  about ninety minutes, ends with three Maya engines standing and
+  withdrawing into the palm-line, two destroyed, one captured. La
+  Niña's halberd is bent. Andrés's monstrance is quiet but holding.
+  Show: scale, the way Spanish formation works against squat Maya
+  engines, the surviving Maya pilots' withdrawal disciplined and
+  unbroken. NO repeat of sc01's kill. The first kill is sc01's; the
+  battle's larger shape is sc02's.
+pov: "Andrés de Mora"
+date_iso: "1519-03-25"
+location: "Centla, Tabasco — the salt-flat, mid-morning"
+word_target: 1200
+scene_type: "prose"

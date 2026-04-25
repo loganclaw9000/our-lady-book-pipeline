@@ -1,0 +1,47 @@
+# Ch 17 sc01 — Midnight on the causeway. The flight begins.
+chapter: 17
+scene_index: 1
+beat_function: |
+  STRICT POV: ANDRÉS ONLY. Previous chapter was ITZCOATL POV;
+  do NOT slip into ITZCOATL's interior or recycle their lore. The
+  other characters appear from the outside, through ANDRÉS's eyes.
+
+  Midnight, June 30 into July 1, 1520. The Spanish are fleeing
+  Tenochtitlan along the Tlacopan causeway, the shortest of the
+  three causeways out of the city, the one Cortés has chosen
+  because it is least heavily defended at this hour. They are
+  weighed down by looted gold — the personal hoards of the
+  rank-and-file, taken in the past hours from the Spanish quarters
+  of Axayacatl's palace; melted down, sewn into clothing, stuffed
+  into satchels, distributed across the cavalry's saddlebags.
+  Cortés has ordered each man to take what he can carry. The
+  greedy ones have taken too much. Andrés is in *La Niña de
+  Córdoba*'s cockpit, walking her in the long single-file column
+  along the causeway — pilot eighth in the engine line, eight
+  Reliquaries forward of him plus three Tlaxcalan teōmecahuītlī
+  trailing behind, the rest of the corps already across or
+  scattered. Show: the rain (a cold Mexica summer rain, not
+  torrential, persistent), the dark, the distance between torches
+  carried by the foot soldiers below, the Mexica canoes already
+  moving in the lake on either side of the causeway, the first
+  arrows. Establish the operational picture cleanly so the
+  collapse in scene 2 is legible: causeway gaps cut at intervals
+  by the Mexica during the past two days, plank bridges to be
+  carried forward and laid by an engineering detail and then
+  lifted again behind, only the first two gaps so far successfully
+  bridged by the time the column has begun to extend. Show the
+  hum-discipline of the Reliquary line — the engines walking
+  their saint-fueled gait, monstrances cool in the rain, La Niña's
+  hum tight against Andrés's spine through the harness, the bones
+  of Flora of Córdoba inside her monstrance the dry warm thing in
+  a wet world. Establish: the gold-weight as moral fact, not
+  decoration; the engines that will be lost named and pictured
+  before they go down; Andrés's relative position in the column
+  (so the reader can track his survival path against the engines
+  ahead of him); the Mexica canoe-and-arrow harassment as the
+  pressure that is going to escalate.
+pov: "Andrés de Mora"
+date_iso: "1520-06-30"
+location: "Tlacopan causeway, Lake Texcoco, midnight in cold rain"
+word_target: 1500
+scene_type: "prose"

@@ -7,10 +7,24 @@
 # omens that have been gathering over Tenochtitlan since 1517.
 chapter: 1
 scene_index: 3
-beat_function: "life as usual — Itzcoatl, a young scribe-priest at the Templo Mayor, performing dawn observations of Venus and recording omens; Tenochtitlan goes about its routine while the calmecac astronomers exchange uneasy glances over what the sky is doing"
+beat_function: |
+  Life as usual (Mexica edge of the triangle). Itzcoatl, a young
+  scribe-priest at the Templo Mayor, performs dawn observations of
+  Venus and records omens. The Great Engine of the Templo Mayor — the
+  apex god-engine that is the city's heartbeat — hums constantly
+  underneath every action of this scene. The hum is not a metaphor; it
+  is a felt vibration through stone, bone, and breath. The calmecac
+  astronomers exchange uneasy glances over what the sky is doing, but
+  the Engine's pitch is what older priests pretend not to hear shifting.
+  Establish: the Great Engine as the foundational fact of Tenochtitlan
+  (Ch 1 introduces it as a constant; later chapters track its pitch
+  changes as the empire fractures), Itzcoatl as a Mexica engine-aware
+  scribe (not yet a pilot), and the everyday metaphysics of ixiptla
+  (living-fuel) infrastructure as a serious knowledge-system the
+  Mexica believe in — never exotic decoration.
 pov: "Itzcoatl (a young scribe-priest, not the emperor)"
 date_iso: "1519-03-13"
-location: "Tenochtitlan — Templo Mayor precinct, the calmecac (priestly school) at dawn"
+location: "Tenochtitlan — Templo Mayor precinct, the calmecac (priestly school) at dawn; Great Engine humming below the floor stones"
 word_target: 800
 scene_type: "prose"
 

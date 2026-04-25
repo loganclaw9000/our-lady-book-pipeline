@@ -1,0 +1,24 @@
+# Ch 12 sc01 — Itzcoatl returns to Texcoco.
+chapter: 12
+scene_index: 1
+beat_function: |
+  STRICT POV: ITZCOATL ONLY. Previous chapter was MALINTZIN POV;
+  do NOT slip into MALINTZIN's interior or recycle their lore.
+  The other characters appear from the outside.
+
+  December 1519. Itzcoatl travels home to Texcoco for a ritual
+  obligation. *Obsidian Mirror* is left in Tenochtitlan; he travels
+  by canoe + foot. The road home. The fields. Show his provincial
+  Texcocan attachment, the way the lake looks different from this
+  shore, the family compound where he was raised. His mother (a
+  priestess of Tezcatlipoca) tells him at dinner that the
+  Quetzalcoatl seals at Cholula and Tula have cracked further
+  since the massacre, and that the tlamatinime are arguing openly
+  about whether the gods have withdrawn. She does not say what she
+  thinks. She asks after Xochitl, his elder sister, married into a
+  Mexica house in Tenochtitlan.
+pov: "Itzcoatl"
+date_iso: "1519-12-20"
+location: "Texcoco, family compound at dinner"
+word_target: 1000
+scene_type: "prose"

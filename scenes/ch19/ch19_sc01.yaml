@@ -1,0 +1,51 @@
+# Ch 19 sc01 — Tlaxcala. The new Reliquary that resents him.
+chapter: 19
+scene_index: 1
+beat_function: |
+  STRICT POV: ANDRÉS ONLY. Previous chapter was ITZCOATL POV;
+  do NOT slip into ITZCOATL's interior or recycle their lore. The
+  other characters appear from the outside, through ANDRÉS's eyes.
+
+  Late autumn 1520 into early winter, in Tlaxcala. Months of
+  rebuilding. The Spanish have been quartered in Tlaxcala under
+  treaty since the retreat. The brigantines that will be carried
+  in pieces to the lakeshore for the eventual siege of Tenochtitlan
+  are being constructed in Tlaxcalan workshops; show one such
+  workshop briefly — adzed timbers, Tlaxcalan and Spanish
+  carpenters working alongside, the smell of cut pine. Andrés has
+  been given a replacement Reliquary: *San Esteban del Río*, a
+  refitted second-class brought up from Veracruz on Cortés's
+  orders, powered by the arm bone of a Castilian martyr of the
+  Reconquista (a knight of the Order of Calatrava killed in
+  Granada in 1481 — a man, an adult, a soldier; not a child like
+  Flora). Show the engagement ritual when Andrés first sits in the
+  cockpit: the adorator-priest who brought *San Esteban* up the
+  road performs the introduction-rite, naming Andrés to the saint
+  and the saint to Andrés. The hum is wrong against Andrés's
+  spine. *San Esteban*'s pitch is a third lower than La Niña's
+  was, his cadence more military, his presence in the cockpit
+  abrasive in a way that is not malice but is also not welcome.
+  The saint is not his. The engine resents him; or the saint
+  resents him; or Andrés resents the substitution and is reading
+  the hum through that resentment — he cannot tell. He walks
+  *San Esteban* through three calibration patterns under the
+  adorator's eye, gets the gait stable, dismounts. He says
+  nothing about the wrong hum. The adorator can hear it too. Show
+  the Tlaxcalan teōmachtiani Matlalcueitl in the workshop yard
+  during this scene — convalescing from a wound (not the one she
+  took at Otumba; another, taken in a skirmish since), watching
+  the Spanish refit with the kind of unsentimental professional
+  interest of a pilot evaluating an ally's equipment. Andrés and
+  she do not speak. They have not been introduced. He notices her
+  watching. Establish: *San Esteban* by name, by saint-source, by
+  pitch — so the reader feels Andrés inside an ill-fitting moral
+  apparatus for the rest of the act; Matlalcueitl alive and in
+  Tlaxcala, available as a character-reservoir for later
+  chapters; the brigantines in slow construction (so the reader
+  knows the siege of Tenochtitlan is being machined into existence
+  in the background of this calm).
+pov: "Andrés de Mora"
+date_iso: "1520-11-15"
+location: "Tlaxcala, Spanish-Tlaxcalan engine workshop yard"
+word_target: 1100
+scene_type: "prose"

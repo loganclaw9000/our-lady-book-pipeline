@@ -1,0 +1,24 @@
+# Ch 4 sc01 — Veracruz founded as legal fiction.
+chapter: 4
+scene_index: 1
+beat_function: |
+  STRICT POV: ANDRÉS ONLY. Previous chapter was MALINTZIN POV;
+  do NOT slip into MALINTZIN's interior or recycle their lore.
+  The other characters appear from the outside.
+
+  Cortés founds Veracruz to escape Velázquez's authority. Andrés
+  signs the founding papers along with the other captains. Show:
+  Cortés as a lawyer first, soldier second; the bureaucratic
+  language of the founding (the cabildo invented in a single
+  morning, town magistrates appointed before there is a town);
+  Andrés watching the move and understanding, slowly, that he has
+  signed onto a mutiny against his governor. La Niña stands in the
+  cradle outside the tent through the signing; her hum reaches
+  Andrés through canvas. He does not know what to make of the
+  fact that signing this paper changes nothing about how she
+  feels.
+pov: "Andrés de Mora"
+date_iso: "1519-04-22"
+location: "Veracruz, beach + cabildo tent"
+word_target: 1000
+scene_type: "prose"

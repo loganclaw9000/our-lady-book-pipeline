@@ -1,0 +1,24 @@
+# Ch 3 sc03 — first conversation with Andrés. Outline says: "He is
+# polite. She is unreadable. She notices that his engine kneels when
+# he prays."
+chapter: 3
+scene_index: 3
+beat_function: |
+  First exchange between Malintzin and Andrés de Mora. Late afternoon
+  on the coast road, the column moving north toward Cempoala. Andrés
+  is courteous in the way Spanish gentlemen are courteous to enslaved
+  women they have not yet learned not to see. He asks her, through
+  Aguilar, about the Totonac language. She answers briefly. La Niña
+  de Córdoba is walking ten paces behind him on the column; the
+  Reliquary kneels for him three times during the conversation, in
+  response to micro-prayers Andrés mouths between sentences. Malintzin
+  registers the kneels. She does not register them aloud. Establish:
+  her cataloguing intelligence (she is filing every Spaniard, every
+  Reliquary, every social weight), Andrés's ignorance of her, and a
+  first contact between two characters who will spend the entire book
+  not quite trusting each other and not quite refusing to.
+pov: "Malintzin"
+date_iso: "1519-04-15"
+location: "Coast road, between Tabasco and Cempoala"
+word_target: 900
+scene_type: "prose"

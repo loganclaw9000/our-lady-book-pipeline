@@ -1,0 +1,51 @@
+# Ch 26 sc01 — Dawn; the ritual being prepared in the Templo Mayor plaza.
+chapter: 26
+scene_index: 1
+beat_function: |
+  STRICT POV: ANDRÉS ONLY. Previous chapter was ANDRÉS POV;
+  do NOT slip into ANDRÉS's interior or recycle their lore. The
+  other characters appear from the outside, through ANDRÉS's eyes.
+
+  Dawn, August 13, 1521. The Templo Mayor plaza, or what
+  is left of it — rubble where the lower platforms have
+  been shelled, the Great Engine of the Templo Mayor
+  still in her cradle at the pyramid's base, hum at
+  half-state, dark-eyed, immense. The Spanish have
+  cleared the plaza approaches in the night. *San
+  Esteban del Río* stands in the open at the far end
+  — Andrés in her cockpit, hatch open, face visible to
+  the men below. A circle of witnesses has been formed,
+  not concealed: Cortés and his captains, Ixtlilxochitl
+  and the Texcocan nobles, a knot of Tlaxcalan war
+  chiefs, Itzcoatl in *Obsidian Mirror*'s cradle to
+  one side (he has chosen to be present), Malintzin
+  standing where Bernardo can see her and where she
+  can see Bernardo, three Franciscan brothers, the
+  *San Esteban* adorators with the monstrance bracket
+  open and a clean linen cloth laid out on a stone
+  block at her feet. Bernardo arrives walking, alone,
+  in his ordinary brown habit, the Franciscan cord
+  knotted at his waist. He has already had his last
+  confession heard by the senior Franciscan. He carries
+  nothing else. The morning light is the thin gold of
+  high-altitude dawn. The Great Engine's hum and *San
+  Esteban*'s hum and *Obsidian Mirror*'s hum interfere
+  in the air over the plaza in a pattern the witnesses
+  feel against their breastbones. Show: the
+  preparation as ritual, not improvisation — the
+  monstrance bracket open, the linen cloth laid, the
+  brazier with charcoal already lit beside the stone,
+  the small set of bone-chisels the senior adorator
+  has unwrapped and arranged. Establish: the Ch 2
+  mirror beginning to close (Andrés killed a stranger
+  in his first chapter; he is about to kill a friend
+  in this one); the public, witnessed, ritualized
+  nature of what is about to happen, which is the
+  precondition of the theology working at all; the
+  three engine-hums interfering as the
+  soundscape-signature of the chapter.
+pov: "Andrés de Mora"
+date_iso: "1521-08-13"
+location: "Templo Mayor plaza, dawn"
+word_target: 1500
+scene_type: "prose"

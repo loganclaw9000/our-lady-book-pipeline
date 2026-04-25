@@ -1,0 +1,21 @@
+# Ch 6 sc02 — News of Tlaxcala flip + council debate.
+chapter: 6
+scene_index: 2
+beat_function: |
+  Mid-drill, runners arrive with news: Tlaxcala has not just allied
+  with the Spanish — it has sent its teōmachtiani to march beside
+  Spanish Reliquaries. Mexica engines fighting for foreigners
+  against Nahua. Itzcoatl, junior in the formation, hears the news
+  pass mouth-to-mouth from priest to priest. The Great Engine's hum
+  shifts — register up, pitch slightly tighter — for the first time
+  in his life. He notices and pretends not to notice. Older priests
+  notice and pretend not to notice. Show: the silent ripple through
+  the drill, the way every pilot in formation is now fully alert
+  without breaking discipline. The drill ends with no orders given.
+  Engines walked back into their cradles in formation. Itzcoatl's
+  hands are shaking when he climbs out of the cockpit.
+pov: "Itzcoatl"
+date_iso: "1519-10-08"
+location: "Tenochtitlan, Templo Mayor plaza"
+word_target: 900
+scene_type: "prose"

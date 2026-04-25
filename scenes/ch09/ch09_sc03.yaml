@@ -1,0 +1,24 @@
+# Ch 9 sc03 — Spanish enter the city. Itzcoatl's incomprehension.
+chapter: 9
+scene_index: 3
+beat_function: |
+  STRICT POV: ITZCOATL ONLY. No Spanish-pilot interior. The
+  Spanish are seen as foreign; Itzcoatl does not enter their heads.
+
+  The Spanish enter Tenochtitlan. Moctezuma personally escorts
+  Cortés to the palace of Axayacatl. Itzcoatl stands in formation
+  as the Spanish column passes, Reliquaries dwarfed by Mexica
+  buildings. He does not understand why Moctezuma chose invitation
+  over destruction. He returns to his cradle that evening and sits
+  in *Obsidian Mirror* in the dark, hum running low, replaying
+  the day. Show: the felt-immensity of the city through Itzcoatl's
+  POV (his provincial unfamiliarity), the political incoherence he
+  cannot resolve, the moment everything pivots from Mexica strength
+  to Mexica restraint becoming Mexica vulnerability. End on his
+  hand on the cockpit console, *Obsidian Mirror*'s mirror-shield
+  showing him a face he does not entirely recognize.
+pov: "Itzcoatl"
+date_iso: "1519-11-08"
+location: "Tenochtitlan, palace of Axayacatl + Mexica engine cradle"
+word_target: 1000
+scene_type: "prose"

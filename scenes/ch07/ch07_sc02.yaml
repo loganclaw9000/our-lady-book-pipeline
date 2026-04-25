@@ -1,0 +1,24 @@
+# Ch 7 sc02 — Malintzin reports to Cortés. Becomes intelligence asset.
+chapter: 7
+scene_index: 2
+beat_function: |
+  That evening at camp Malintzin asks Aguilar to bring her to
+  Cortés. Through the chain (Nahuatl→Maya→Spanish) she relays the
+  warning. Cortés listens. He does not thank her. He asks how she
+  knew. She says: a market woman. He asks: can the woman be
+  retrieved for verification. Malintzin says: she will not come,
+  and bringing her would tell the Cholulans that someone in the
+  Spanish camp speaks Nahuatl. Cortés nods once. From that moment
+  she is, definitively, an intelligence asset, though she does not
+  yet have the Spanish word for it. She walks back to her tent
+  past La Niña standing in her cradle. La Niña kneels, briefly, in
+  response to a prayer Andrés is making fifteen yards away. The
+  kneeling registers in Malintzin's chest in a way she does not
+  examine. Establish: her intelligence role beginning, her cataloging
+  of the engines' devotional behaviors, the start of moral weight
+  she will carry across the rest of the book.
+pov: "Malintzin"
+date_iso: "1519-10-23"
+location: "Spanish camp, road to Cholula, dusk"
+word_target: 1000
+scene_type: "prose"

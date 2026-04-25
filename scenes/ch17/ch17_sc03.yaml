@@ -1,0 +1,45 @@
+# Ch 17 sc03 — Dawn. Cortés under the tree. The walk past.
+chapter: 17
+scene_index: 3
+beat_function: |
+  Dawn, July 1, 1520. The survivors gather in a field of stunted
+  ahuehuete trees outside the Tlacopan-side bank, beyond bow-shot
+  from the lake. Andrés is on foot. Bootless. Soaked. The cold of
+  the rain is in him in a way that will not leave for two days.
+  He is one of the Reliquary pilots who has lost his engine in
+  the lake; there are only four of those who survived the
+  causeway, the rest are dead in the water with their saints. He
+  walks past the Spanish lines as they form up. The reported
+  Cortés is sitting under one of the trees. Spanish chronicles
+  will record that he wept under the tree at dawn. Whether he
+  wept is unclear — Andrés sees a man sitting with his back
+  against a tree, his head down, his hands open on his knees —
+  but the posture is the posture of someone who has lost
+  something he had not estimated correctly the value of, until
+  the price came due. Andrés walks past him. Andrés does not
+  speak to him. Cortés does not speak to Andrés. Andrés does not
+  know, in this moment, whether Cortés has earned his weeping. He
+  knows that he himself has not earned anything in particular,
+  and that whatever he believed about the saint at his back has
+  to be reassembled from the bottom up and may not reassemble.
+  He sits down twenty yards beyond the tree, in the wet grass, and
+  takes stock — Bernardo somewhere in the survivor column behind
+  him, alive (he will learn this within the hour), Bernardo's
+  three seconds still attached to him; Malintzin somewhere in the
+  column too, alive (he will learn this); the engines that are
+  gone listed in his head by name, by saint, by where they went
+  down. Two-thirds of the Spanish force has died on the causeway.
+  The Reliquary corps is gutted. He is a pilot without a saint.
+  He sits in the wet grass and does not pray. He does not know
+  yet what he is. Establish: the Reliquary corps loss as
+  numerical fact (count the engines lost vs surviving by name, so
+  Ch 19's refit roster reads against this number); the silence
+  between Andrés and Cortés (so Ch 19's continued silence reads
+  as a stretched line, not a beat); Andrés's not-praying as the
+  end of his certainty (his moral arc from "starts certain" to
+  "ends silent" has its hinge here, in wet grass at dawn).
+pov: "Andrés de Mora"
+date_iso: "1520-07-01"
+location: "Field of ahuehuete trees on the Tlacopan side of Lake Texcoco, dawn"
+word_target: 1100
+scene_type: "prose"

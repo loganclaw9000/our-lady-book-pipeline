@@ -1,0 +1,42 @@
+# Ch 15 sc01 — Toxcatl. The festival before the killing.
+chapter: 15
+scene_index: 1
+beat_function: |
+  STRICT POV: ITZCOATL ONLY. Previous chapter was MALINTZIN POV;
+  do NOT slip into MALINTZIN's interior or recycle their lore. The
+  other characters appear from the outside, through ITZCOATL's eyes.
+
+  May 20, 1520. The festival of Toxcatl in the great courtyard of
+  the Templo Mayor. Itzcoatl is on his feast day — unarmed,
+  unarmored, in formal nobleman's dress. *Obsidian Mirror* sits
+  cradled in the engine compound a quarter mile away, dormant,
+  attended only by its adorator-priests; Itzcoatl is forbidden
+  from approaching it during a feast he is observing. Show the
+  ritual texture in detail: the dancers in concentric rings,
+  the singers, the drum the size of a small house, the four
+  ixiptla — young men chosen a year ago to live as the god, to
+  be honored, to be sacrificed at the festival's end — moving
+  among the crowd in flower-crowns. Itzcoatl watches one of them
+  pass close: a boy of nineteen, calm, hollow-eyed, ready for
+  what is coming because he has been ready for a year. The
+  Great Engine of the Templo Mayor hums at its baseline pitch
+  above the courtyard, fed continuously by the standing
+  pipeline of bone-dust from the Flower War captives. The hum
+  is the bass note under the entire festival. Spanish soldiers
+  from Alvarado's garrison are visible at the courtyard's
+  perimeter, more than yesterday, more than the festival's
+  protocol allows. Itzcoatl notes this. He cannot leave to go to
+  Mirror without breaking ritual. He files the count of armed
+  Spaniards. He stays. Establish: the ixiptla as people, named or
+  near-named, so the reader feels the killing in scene 2 land on
+  human bodies; the fuel pipeline relationship between the
+  Flower War sacrifice apparatus and the Great Engine's hum, so
+  the change in pitch in scene 2 is comprehensible as
+  mechanical-spiritual fact; Alvarado's garrison numbers
+  out-of-protocol; Itzcoatl unarmed and a quarter-mile from
+  his engine.
+pov: "Itzcoatl"
+date_iso: "1520-05-20"
+location: "Tenochtitlan, great courtyard of the Templo Mayor, late morning"
+word_target: 1200
+scene_type: "prose"

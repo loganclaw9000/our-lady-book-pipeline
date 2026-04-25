@@ -1,0 +1,33 @@
+# Hand-authored Scene 3 stub for Chapter 2 — aftermath in cockpit.
+# Outline beat: "He vomits inside his cockpit afterward. The martyred
+# child in his monstrance is quiet in a way he cannot place."
+chapter: 2
+scene_index: 3
+beat_function: |
+  POST-KILL ONLY. The kill happened in sc02. Do NOT re-narrate the
+  combat or the halberd strike — sc02 owns it. This scene begins
+  in the silence immediately after, with the Maya engine already
+  down at La Niña's feet and the salt-flat going quiet. Andrés
+  stands La Niña over the kill. He vomits inside the cockpit. The
+  vomit goes onto the inside of the faceplate; he turns his head
+  and breathes shallowly to avoid inhaling it. He notices, then,
+  that Flora's monstrance has gone quiet in a way he has never
+  heard it — hum still there, texture changed. He does not have
+  language for this yet; later (Ch 6, Ch 13) he will theorize.
+  The other Spanish pilots are cheering on a frequency-channel he
+  has muted. Show in long detail: the cockpit interior post-kill
+  (vomit, sweat, beeswax, the small icon of Flora dampened with
+  spit and bile), the texture-change in the hum (low quarter-tone
+  shift, the way it sets up against his sternum differently), the
+  reverse boot ritual — seven seals opening — La Niña kneeling and
+  going dark next to the Maya wreckage. He climbs out of the
+  cockpit and walks back to the beach. Other men's voices reach
+  him as if from a great distance. Final line: him reaching the
+  surf and not stopping. NO new combat in this scene. NO halberd
+  swing. The fight is over. Lean into the silence. Word target
+  ~1000-1100. Take all the room.
+pov: "Andrés de Mora"
+date_iso: "1519-03-25"
+location: "Centla, Tabasco — battlefield, late morning"
+word_target: 1000
+scene_type: "prose"

@@ -1,0 +1,38 @@
+# Ch 16 sc03 — The rumor of the priest who named the dead.
+chapter: 16
+scene_index: 3
+beat_function: |
+  The night before Noche Triste, or the night before that — the
+  short window between Moctezuma's death and the Spanish flight.
+  Itzcoatl is at the engine compound; Mirror has been stood up,
+  fueled, and walked through full pre-combat rites for the first
+  time in this campaign. He is sitting in the cockpit between
+  rites, helmet off, drinking water, when a Mexica noblewoman who
+  escaped the palace during a moment of Spanish confusion is
+  brought through the compound to give her account to the engine-
+  pilots. She tells, among many other things, of a Spanish priest
+  inside the palace who tried to stop Alvarado during the
+  massacre. Threatened with death by Alvarado himself. Did not
+  back down. She tells how the priest then went to the chapel and
+  prayed aloud, in Nahuatl, naming the dead — starting with the
+  four ixiptla, whose names she also gives. She does not know the
+  priest's name. Itzcoatl does not know it either. (The reader
+  knows: it is Bernardo.) The rumor does nothing to Itzcoatl's
+  loyalty. The Spanish, as a people, are still the people who
+  killed his brother-in-law in the courtyard and broke the Great
+  Engine's hum. But the rumor lodges. He has, until tonight, been
+  unable to picture an individual Spaniard as a person. The
+  priest who named the ixiptla is the first Spaniard he can
+  picture as a person. He files the picture. He does not look at
+  it again that night. Mirror is ready. The order from Cuitláhuac
+  is hours away. Establish: Bernardo crosses from the Spanish to
+  the Nahua imagination here, unnamed, planted as a node that
+  will reactivate in Ch 19 when Itzcoatl meets Bernardo in
+  Tlaxcala and recognizes him by his own quiet voice; Mirror is
+  pre-combat ready for the first time; the calm before the
+  Spanish flight.
+pov: "Itzcoatl"
+date_iso: "1520-06-30"
+location: "Tenochtitlan, engine compound at night"
+word_target: 1100
+scene_type: "prose"

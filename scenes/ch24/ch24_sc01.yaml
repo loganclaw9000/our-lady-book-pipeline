@@ -1,0 +1,42 @@
+# Ch 24 sc01 — The siege routine; the camp settles.
+chapter: 24
+scene_index: 1
+beat_function: |
+  STRICT POV: MALINTZIN ONLY. Previous chapter was ITZCOATL POV;
+  do NOT slip into ITZCOATL's interior or recycle their lore. The
+  other characters appear from the outside, through MALINTZIN's eyes.
+
+  Late May 1521. The Spanish camp at the edge of Lake
+  Texcoco. The siege proper is under way: aqueducts cut
+  (the Chapultepec line broken in the first week),
+  causeways blockaded, brigantines on the lake patrolling
+  in pairs, Tenochtitlan burning block by block as the
+  ring tightens. Inside the city, starvation has begun;
+  outside, the Spanish and allied camps have settled into
+  the routine of destruction — meals at fixed hours,
+  duty rosters, engine cradles inspected every dawn,
+  laundry on lines between the tents. Show Malintzin
+  moving through this: heavily pregnant now (seventh
+  month), still translating daily for Cortés and the
+  Tlaxcalan and Texcocan captains, sleeping in a small
+  walled annex of the command tent with two Nahua women
+  she has chosen herself. Show what she sees: the
+  brigantines coming back from a patrol with smoke in
+  their rigging; *San Esteban del Río* in cradle being
+  refitted with a new monstrance bracket (the old one
+  cracked at Otumba, never properly fixed); a line of
+  Tlaxcalan porters carrying lake-fish for the camp's
+  supper; in the distance, across the water, the hum of
+  the half-awake Great Engine of the Templo Mayor
+  rising and falling like a slow lung. She cannot see
+  it from here. She can hear it. Establish: the
+  texture of late-siege life; the Great Engine as
+  audible presence on the soundscape; the fact that
+  the conquest has become a routine, which is its own
+  horror; the camp as the venue for the Bernardo
+  conversations to follow.
+pov: "Malintzin"
+date_iso: "1521-05-28"
+location: "Spanish siege camp at the edge of Lake Texcoco"
+word_target: 1000
+scene_type: "prose"

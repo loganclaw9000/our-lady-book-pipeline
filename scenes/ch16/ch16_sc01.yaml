@@ -1,0 +1,41 @@
+# Ch 16 sc01 — Cortés returns. The city at war with him.
+chapter: 16
+scene_index: 1
+beat_function: |
+  STRICT POV: ITZCOATL ONLY. Previous chapter was ITZCOATL POV;
+  do NOT slip into ITZCOATL's interior or recycle their lore. The
+  other characters appear from the outside, through ITZCOATL's eyes.
+
+  Late June 1520. Cortés has returned from the coast with the
+  enlarged force — his original column plus most of Narváez's
+  absorbed nine hundred, plus their engines, including the bought
+  Reliquaries. He has marched into Tenochtitlan along the Iztapalapa
+  causeway through a city that has been at war with the Spanish
+  garrison for five weeks. The streets are quiet for him, briefly,
+  in the way a city goes quiet when it is calculating. Itzcoatl is
+  in *Obsidian Mirror*'s cradle inside the engine compound,
+  watching the column re-enter the palace district through the
+  cradle's open faceplate. He counts the engines: twelve Spanish
+  Reliquaries returning, more than left. He counts the pilots
+  visible in their cockpits. He notes that Cortés has arrived
+  back into a trap of his own making — the entire city is now
+  inside the killing radius of an engine fight he can no longer
+  avoid — and that Cortés appears not to know it yet. Three weeks
+  ago Itzcoatl's mourning rites for his brother-in-law were
+  performed in his sister Xochitl's house; Xochitl was composed,
+  her eight-year-old son's scar from the Templo Mayor stone-strike
+  still bandaged, her younger child held to her chest. Itzcoatl
+  carries that compounded grief into the cockpit and sits with
+  it under the wounded pitch of the Great Engine, which has not
+  recovered. Establish: the new force arithmetic (Spanish back to
+  twelve Reliquaries plus cavalry, Mexica to a wounded Great
+  Engine plus Mirror plus three Huitzilopochtli engines, no apex
+  god-engine on either side at full strength); Itzcoatl's
+  compounded grief now carried in cockpit and combat-loaded for
+  the rest of the act; the ambient sense that something the
+  Spanish do not yet understand is closing on them.
+pov: "Itzcoatl"
+date_iso: "1520-06-25"
+location: "Tenochtitlan, engine compound overlooking the Iztapalapa causeway and the palace district"
+word_target: 1100
+scene_type: "prose"

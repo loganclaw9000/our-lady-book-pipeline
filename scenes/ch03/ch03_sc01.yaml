@@ -1,0 +1,26 @@
+# Ch 3 — Fallout. Malintzin's POV. Triptych split:
+# sc01 = handover; sc02 = first weeks of translation chain; sc03 = first
+# conversation with Andrés.
+chapter: 3
+scene_index: 1
+beat_function: |
+  STRICT POV: MALINTZIN ONLY. Previous chapter was ANDRÉS POV;
+  do NOT slip into ANDRÉS's interior or recycle their lore.
+  The other characters appear from the outside.
+
+  The handover. Twenty enslaved women given to the Spanish as part of
+  the settlement after Centla. Malintzin among them. She has been
+  handed off four times in her life; this is the fifth. The Spanish
+  do not yet know who she is — she is one of twenty. The compound
+  fence opens; she walks across with the others. Show: the smell of
+  the Spanish camp (horse, gunpowder, men who have not bathed in a
+  month), the strange tall iron of the Reliquaries cooling in their
+  cradles at the edge of the camp, the women's silence, her own
+  silence. She is seventeen. She speaks Nahuatl, Chontal Maya, and
+  understands more of the Spanish than she will let on for two more
+  weeks. She thinks: *whatever this is, I have been here before.*
+pov: "Malintzin (not yet baptized Marina)"
+date_iso: "1519-03-26"
+location: "Spanish camp, Tabasco coast"
+word_target: 900
+scene_type: "prose"

@@ -10,9 +10,20 @@
 # re-split the triptych into three scene records at ingestion time.
 chapter: 1
 scene_index: 1
-beat_function: "first contact — opening voyage tension; Andrés receives final communion in Havana before boarding La Niña de Córdoba"
+beat_function: |
+  Life as usual (Spanish edge of the triangle). Andrés de Mora — a young
+  pilot of the Order of Santiago — receives final communion in Havana
+  the morning his expedition embarks. La Niña de Córdoba, his second-
+  class Reliquary mecha (50 ft, gilded plate, animated by the bones of
+  Flora of Córdoba — a martyred child whose name no one in the
+  expedition speaks aloud), waits in its cradle on the harbor mole. The
+  engine's hum is constant in the background of this scene, as it has
+  been every morning of his pilot's life. Establish: Andrés as pilot,
+  the Reliquary as a real machine and a real saint, the relic-fueling
+  rite as ordinary Spanish Catholic infrastructure, the moral weight
+  Andrés has not yet learned to feel.
 pov: "Andrés de Mora"
 date_iso: "1519-02-18"
-location: "Chapel of Havana, Cuba — harbor departure"
+location: "Chapel of Havana, Cuba — harbor mole; La Niña de Córdoba in its cradle outside"
 word_target: 1000
 scene_type: "prose"

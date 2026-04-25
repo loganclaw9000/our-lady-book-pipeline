@@ -1,0 +1,39 @@
+# Ch 15 sc02 — The massacre. The hum changes pitch.
+chapter: 15
+scene_index: 2
+beat_function: |
+  Midday. Pedro de Alvarado gives the order. The Spanish at the
+  perimeter close the courtyard exits and begin killing. Itzcoatl
+  is on the temple steps, three tiers up from the killing floor.
+  He sees it from above. Show the killing in compressed,
+  structural detail rather than blow-by-blow — the rings of
+  dancers collapsing inward, the four ixiptla cut down inside
+  their flower-crowns, a jaguar-warrior (not yet identified to
+  the reader as Xochitl's husband) stepping into the path of a
+  Spanish blade meant for his younger cousin and going down. The
+  cousin survives. Thousands die in the courtyard inside an hour.
+  Itzcoatl is unarmed; he cannot reach Mirror; he cannot fight
+  inside the courtyard without dying for nothing. He moves down
+  the back of the temple stairs and out toward the engine
+  compound. While he is moving, the Great Engine's hum changes
+  pitch. The change is not subtle. The bass note that has been
+  the city's foundation since before Itzcoatl was born goes
+  jagged, then thin, then drops a full interval and stays there.
+  Every pilot in Tenochtitlan, every priest, every adorator, every
+  citizen with an ear trained to hear the engines — they all
+  feel it at the same instant, like the stone of the city
+  shifting an inch underfoot. The Great Engine's fuel pipeline
+  has just been severed: the ixiptla, the Flower War captives held
+  for the next sacrifice cycle, the priests at the bone-dust
+  furnace — all of them are dead or dying in the courtyard above.
+  The fuel is cut. The hum will not return to baseline in
+  Itzcoatl's lifetime. Establish: the wounded hum of the apex
+  Mexica engine as audible-from-everywhere fact for the rest of
+  the book; the seed of Xochitl's husband's death (Itzcoatl does
+  not yet know it is him); Itzcoatl moving toward Mirror with
+  every step under the new, wrong pitch.
+pov: "Itzcoatl"
+date_iso: "1520-05-20"
+location: "Tenochtitlan, temple steps and back stairs of the Templo Mayor, midday"
+word_target: 1400
+scene_type: "prose"

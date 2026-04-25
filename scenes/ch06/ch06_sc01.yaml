@@ -1,0 +1,29 @@
+# Ch 6 sc01 — Itzcoatl first appears in his engine. Readiness drill.
+chapter: 6
+scene_index: 1
+beat_function: |
+  STRICT POV: ITZCOATL ONLY. Previous chapter was ANDRÉS POV;
+  do NOT slip into ANDRÉS's interior or recycle their lore.
+  The other characters appear from the outside.
+
+  Itzcoatl pilots his own engine, *Obsidian Mirror*, for the first
+  time on-page during a readiness drill at the Great Engine's feet.
+  *Obsidian Mirror* is a Tezcatlipoca-class teōmecahuītlī — black
+  obsidian-gilt, scrying-mirror shield, ocelot-motif pauldrons, scale
+  ~55ft, fueled by Flower-War captive bones renewed annually. Itzcoatl
+  is a calmecac graduate, a provincial — his uncle is the engine's
+  warrant-holder, and the family seat is not in Tenochtitlan; he is
+  in the city for the drill cycle. The drill is routine: thirty
+  engines in formation under the Templo Mayor, the Great Engine
+  humming above them all, calmecac priests intoning the maintenance
+  liturgy. Establish: Itzcoatl as engine-pilot (different POV than
+  ch01's scribe-priest framing — he has graduated calmecac into the
+  engine corps; he was a young scribe in Ch 1 but has since taken
+  warrior-vows), the engine's interior (cockpit smells of copal +
+  obsidian-flake), the way Mexica engines kneel UPWARD toward the
+  Great Engine when its pitch shifts, the formal drill procedure.
+pov: "Itzcoatl"
+date_iso: "1519-10-08"
+location: "Tenochtitlan, Templo Mayor plaza, drill formation"
+word_target: 1100
+scene_type: "prose"

@@ -1,0 +1,38 @@
+# Ch 14 sc01 — The night battle at Cempoala. Aftermath as Malintzin sees it.
+chapter: 14
+scene_index: 1
+beat_function: |
+  STRICT POV: MALINTZIN ONLY. Previous chapter was ANDRÉS POV;
+  do NOT slip into ANDRÉS's interior or recycle their lore.
+  The other characters appear from the outside.
+
+  Late May 1520, the night Cortés overruns Narváez at Cempoala.
+  Malintzin's POV. She is not in the line of fire — she is in the
+  Totonac chieftain's compound at the edge of the temple precinct,
+  where the wounded will be brought. She hears the engines from
+  the dark: La Niña's hum, the hums of three other Reliquaries,
+  the sudden discordant pitch when a Narváez engine takes a
+  staggering hit and goes down on one knee in the rain. The fight
+  is over in under an hour. By dawn Cortés has won. Narváez has
+  lost an eye to a pike. Most of his captains have already been
+  bribed; the rank-and-file surrenders cleanly. Nine hundred men
+  absorbed into Cortés's column overnight. Malintzin walks through
+  the courtyard at first light. She sees: men with the new orders
+  already in their mouths, Cortés in conversation with his new
+  captains, the bought pilots being introduced. One of the
+  newcomers — a man named Francisco de Eguía, a black servant or
+  freedman in some accounts, name passes through her hearing
+  without registering — is already feverish, sweating in the cool
+  morning. She does not look at him twice. No one does. He
+  carries smallpox in his blood. He does not yet know. Establish
+  for Ch 20: the unnamed carrier passes through this scene
+  unmarked, the way history's hinges look like nothing on the
+  morning they swing. Establish: Malintzin's role in the
+  bribery — her translation work over the previous three weeks
+  was the apparatus that bought Narváez's men. She knows this.
+  She has not yet stopped to look at it.
+pov: "Malintzin"
+date_iso: "1520-05-29"
+location: "Cempoala, Totonac compound at the edge of the temple precinct, dawn"
+word_target: 1100
+scene_type: "prose"

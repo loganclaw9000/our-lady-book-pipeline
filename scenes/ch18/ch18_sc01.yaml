@@ -1,0 +1,44 @@
+# Ch 18 sc01 — Plains of Otumba. Mirror against Sun-at-Noon.
+chapter: 18
+scene_index: 1
+beat_function: |
+  STRICT POV: ITZCOATL ONLY. Previous chapter was ANDRÉS POV;
+  do NOT slip into ANDRÉS's interior or recycle their lore. The
+  other characters appear from the outside, through ITZCOATL's eyes.
+
+  July 7, 1520. A week after Noche Triste. The retreating Spanish
+  and their Tlaxcalan allies are caught in open country on the
+  plains of Otumba by a Mexica force fielded to finish them. The
+  Mexica have brought a minor first-class Huitzilopochtli engine
+  out of one of the secondary precincts — *Sun-at-Noon*, a hundred-
+  foot solar giant in burnished copper plate, fueled by the bones
+  of three generations of Flower War captives, normally fielded
+  only for high-state ceremonies. Itzcoatl is in the cockpit of
+  *Obsidian Mirror*, third-class Tezcatlipoca-caste, half the
+  height of *Sun-at-Noon* and a quarter of its mass. He is on
+  the supporting line, not the main engagement — Mirror's role at
+  this battle is to harass the Spanish flanks while *Sun-at-Noon*
+  performs the main breaking. Itzcoatl can see *Sun-at-Noon*'s
+  silhouette across two miles of plain through Mirror's
+  mirror-stack viewer (the third-class Tezcatlipoca rigs use a
+  polished obsidian mirror array in place of a Spanish-style
+  glass faceplate; the visual feed is darker, sharper, slightly
+  doubled in the periphery). Show the operational picture: the
+  Spanish are battered, unarmored, most of their Reliquaries
+  lost or destroyed at the causeway, no horses, men on foot in
+  the open at midday. They should lose. They should lose badly
+  inside the next hour. *Sun-at-Noon* takes its first strides
+  forward into the engagement. The plain shakes. Itzcoatl walks
+  Mirror parallel to the engagement line, on the right flank,
+  watching, awaiting the order to close. Establish: the
+  asymmetry of force as it reads from inside the winning side's
+  cockpit; *Sun-at-Noon*'s scale and fuel-source named so the
+  reader feels what is about to be killed; Itzcoatl's tactical
+  position on the flank (so he is the right witness to what
+  happens next, close enough to see the heart-chamber strike);
+  Mirror's mirror-stack viewer as a recurring perceptual frame.
+pov: "Itzcoatl"
+date_iso: "1520-07-07"
+location: "Plains of Otumba, Mexica engine line on the right flank, late morning"
+word_target: 1200
+scene_type: "prose"

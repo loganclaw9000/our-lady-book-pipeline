@@ -1,0 +1,21 @@
+# Ch 11 sc03 — Bernardo learning Nahuatl from Malintzin.
+chapter: 11
+scene_index: 3
+beat_function: |
+  Two afternoons a week, Fray Bernardo de Mendoza sits with
+  Malintzin in the palace gardens learning Nahuatl. He carries a
+  notebook. He asks about names and verbs. He asks what *teotl*
+  means; she gives him the answer (god, sacred, force) and watches
+  him write it down. He asks what it means when Mexica say "the
+  sun eats hearts." She tells him plainly. He does not flinch. He
+  does not ask to be reassured. He asks to understand. Malintzin
+  files this about him. She has not been asked questions like
+  these by any Spaniard. Bernardo's Franciscan cord rests on his
+  knee; she notices its hum (third-class, minor potency, tuned to
+  Francis's vow of poverty) and does not comment. Establish: the
+  friendship that will become Bernardo's death-witness in Ch 26.
+pov: "Malintzin"
+date_iso: "1519-12-15"
+location: "Tenochtitlan, palace gardens at afternoon"
+word_target: 1000
+scene_type: "prose"

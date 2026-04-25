@@ -1,0 +1,23 @@
+# Ch 4 sc02 — ship-scuttling + Bernardo introduced.
+chapter: 4
+scene_index: 2
+beat_function: |
+  The scuttling. Cortés orders nine hulls burned to the waterline
+  to remove retreat. Andrés watches from the dunes. Introduce
+  Fray Bernardo de Mendoza, Franciscan, thirty-eight, scholar,
+  conscripted against his preference. Bernardo says mass before
+  the burning. He carries a third-class relic — a fragment of the
+  rope worn by Francis of Assisi — knotted at his waist; it has
+  minor potency, used for calming horses and blessing the dying.
+  Bernardo prays for the men. Andrés notices that he does not
+  pray for the fire. The Reliquaries stand in their cradles
+  upwind, La Niña among them; their hums register the burning the
+  way a horse registers a stable fire across a valley — heightened,
+  uneasy, but not panicked. Establish: Bernardo as moral anchor,
+  the Francis cord as a Chekhov's relic for Ch 26 climax, the
+  ships' fire as visual + theological commitment.
+pov: "Andrés de Mora"
+date_iso: "1519-07-10"
+location: "Veracruz, beach at dusk; nine burning hulls in the bay"
+word_target: 1100
+scene_type: "prose"

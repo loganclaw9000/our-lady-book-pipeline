@@ -1,0 +1,37 @@
+# Ch 20 sc03 — She tells Andrés. He is sick for three days.
+chapter: 20
+scene_index: 3
+beat_function: |
+  That night, or the next. Malintzin finds Andrés in *San Esteban
+  del Río*'s cradle — he has taken to sleeping in the cockpit
+  some nights since the engine began to resent him. She climbs
+  the inspection ladder. She tells him both accounts in order:
+  first what Bernardo said, then what the dying priest said,
+  then what the two accounts mean when set beside each other.
+  She says it once, completely, without softening, in his second
+  language because Spanish is the one in which the Inquisition
+  account makes the most sense. She does not raise her voice.
+  Andrés does not interrupt. When she finishes he asks her,
+  twice, to confirm specific phrases — *the consent is what the
+  seal eats*; *the bone is the housing*; *the willingness of the
+  martyr*. She confirms each. He nods. He climbs down out of the
+  cradle. He vomits behind it. He goes to his quarters and does
+  not come out for three days; Bernardo brings him broth and
+  asks no questions. On the third morning Andrés finds Malintzin
+  by the brigantine slip and asks: *what do you intend to do?*
+  She says: *I intend to keep translating.* He does not
+  understand why. She does not explain. In parallel — implied,
+  not shown on stage in this scene — Itzcoatl in the Spanish
+  camp has had the same conversation with a Texcocan tlamatini
+  who came over with him; the knowers are speaking openly now
+  because the plague is killing them and secrecy is no longer
+  worth preserving. Establish: the revelation has landed inside
+  the Spanish pilot whose engine is most directly implicated;
+  Malintzin's commitment in Ch 22 is now under construction;
+  the line *I intend to keep translating* is the seed of her
+  Ch 22 *power within* and must echo there.
+pov: "Malintzin"
+date_iso: "1521-03-22"
+location: "Tlaxcala, San Esteban del Río's cradle; later the brigantine slip"
+word_target: 1100
+scene_type: "prose"

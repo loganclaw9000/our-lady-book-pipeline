@@ -1,0 +1,39 @@
+# Ch 20 sc01 — Bernardo's exhausted confession about the Inquisition.
+chapter: 20
+scene_index: 1
+beat_function: |
+  STRICT POV: MALINTZIN ONLY. Previous chapter was ANDRÉS POV;
+  do NOT slip into ANDRÉS's interior or recycle their lore. The
+  other characters appear from the outside, through MALINTZIN's eyes.
+
+  Spring 1521. Tlaxcala. Late evening in the friars' lodging
+  attached to the Spanish workshops where the brigantines are
+  being assembled. Fray Bernardo and Malintzin have been working
+  on Nahuatl/Latin parallel passages for hours. Bernardo is
+  tired in a way she has not seen before — not road-tired but
+  the tiredness of a man who has stopped guarding what he says.
+  He tells her, almost in passing while explaining a Latin verb
+  for *to render*, what an Inquisition auto-da-fé actually
+  produces: not just the sanctifying death of a heretic but a
+  bone the Church keeps, a relic that *works*, a relic that
+  feeds a Reliquary's monstrance. He says this the way a man
+  describes plumbing. He has known it all his life. He has
+  never said it aloud to a non-Christian. Show: Malintzin's
+  face not changing; her hands going still on the parchment;
+  the small shift in how she now hears every Latin word he has
+  ever taught her. She does not ask follow-up questions. She
+  files the account beside something else she has been
+  carrying. Bernardo, hearing himself, tries to walk it back
+  with theology — the willingness of the martyr, the consent
+  of the bone — and trails off. He says good night. He goes
+  to his cell. He cannot sleep. Establish: the first of the
+  two accounts she will set side by side; Bernardo's
+  unguarded state as the precondition for the climax in Ch 26;
+  the fact that the Spanish relic-engine is fueled by the same
+  category of death as the Mexica god-engine, said aloud for
+  the first time in the book.
+pov: "Malintzin"
+date_iso: "1521-03-14"
+location: "Tlaxcala, Franciscan lodging attached to the brigantine workshops"
+word_target: 1100
+scene_type: "prose"

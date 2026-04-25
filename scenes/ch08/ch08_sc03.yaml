@@ -1,0 +1,26 @@
+# Ch 8 sc03 — The Quetzalcoatl engine turns its head. Plot Twist 1.
+chapter: 8
+scene_index: 3
+beat_function: |
+  Mid-massacre, the dormant Quetzalcoatl engine in the temple
+  precinct stirs. It does not wake. It does not stand. It TURNS
+  ITS HEAD. The motion is geological, slow, immense. The head
+  rotates perhaps fifteen degrees, eyes still closed, lids the
+  size of cathedral doors. Every pilot in the courtyard sees it.
+  Every Cholulan still alive sees it. The killing pauses. For
+  about a count of ten Hail Marys, no one moves. Then the
+  Quetzalcoatl engine settles back into rest, lids un-stirred.
+  The killing resumes, but more slowly, and ends inside three
+  minutes — Andrés's Reliquary kills its last that day with
+  hands he can no longer feel. After: Cortés does not speak for
+  a day. Andrés does not sleep that night. The scale of what he
+  saw — an apex god-engine, sealed for generations, partially
+  awakening in response to Spanish atrocity — breaks something in
+  his theology. He spends the rest of the book trying to rebuild
+  it. Establish: the apex visually, the theological fracture,
+  the silence after.
+pov: "Andrés de Mora"
+date_iso: "1519-10-30"
+location: "Cholula, temple courtyard + Spanish quarters that night"
+word_target: 1200
+scene_type: "prose"

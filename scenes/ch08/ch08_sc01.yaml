@@ -1,0 +1,28 @@
+# Ch 8 sc01 — Pre-empt. The summons to the temple courtyard.
+chapter: 8
+scene_index: 1
+beat_function: |
+  STRICT POV: ANDRÉS ONLY. Previous chapter was MALINTZIN POV;
+  do NOT slip into MALINTZIN's interior or recycle their lore.
+  The other characters appear from the outside.
+
+  Cholula. The Spanish pre-empt the planned ambush. Cholulan nobility
+  are summoned to the temple courtyard at dawn. Andrés stands in La
+  Niña's cradle inside the courtyard wall — four Reliquaries active,
+  including La Niña. Tlaxcalan teōmecahuītlī wait outside the wall
+  in second-rank. Show the order being given. Cortés speaks through
+  Aguilar through Malintzin. The Cholulan nobility arrive unarmed,
+  expecting parley. The trap is closing. Andrés stands inside the
+  cockpit, helmet off, looking through the open faceplate at the
+  noblemen filing into the courtyard. He has not been told what is
+  going to happen, but he has been told to be ready. Establish: the
+  texture of imminent atrocity (men in feathered cloaks crossing the
+  threshold; Spaniards behind every column; Tlaxcalans visible
+  through the gate beyond), Andrés's premonition, the dormant
+  Quetzalcoatl engine visible in the temple precinct — colossal,
+  asleep, never seen by Spanish eyes before.
+pov: "Andrés de Mora"
+date_iso: "1519-10-30"
+location: "Cholula, temple courtyard at dawn"
+word_target: 1100
+scene_type: "prose"

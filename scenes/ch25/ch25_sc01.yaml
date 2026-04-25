@@ -1,0 +1,44 @@
+# Ch 25 sc01 — Inside the burning city; house-to-house with San Esteban.
+chapter: 25
+scene_index: 1
+beat_function: |
+  STRICT POV: ANDRÉS ONLY. Previous chapter was MALINTZIN POV;
+  do NOT slip into MALINTZIN's interior or recycle their lore. The
+  other characters appear from the outside, through ANDRÉS's eyes.
+
+  Early August 1521. The Spanish are inside Tenochtitlan
+  proper — house-to-house fighting in the southern wards,
+  Tlaxcalan warriors clearing rooftops with javelins and
+  fire, Reliquaries walking down canals turned causeways
+  by the rubble of the buildings the brigantines have
+  shelled. Andrés is in *San Esteban del Río*'s cockpit.
+  The engine still resents him — the Castilian arm-bone
+  of the Reconquista martyr in her monstrance has never
+  warmed to a pilot from the Mora line — but they have
+  reached an arrangement: he asks for the minimum, she
+  delivers the minimum, no one dies extra. Show the
+  texture: a city he first walked into peacefully in Ch
+  10 (the *new world* chapter), now a ruin under his
+  engine's feet, the smell of burning amaranth from a
+  granary they passed twenty minutes ago, the bodies the
+  column steps over without comment, a Mexica eagle
+  warrior who breaks cover and runs at *San Esteban*
+  with an obsidian-edged macuahuitl that splinters on
+  her greave; Andrés strikes once, by reflex, and the
+  warrior is gone. He does not vomit. He does not log
+  the kill. He notes that he no longer logs them. Establish:
+  the moral attrition that has made Bernardo's offer in
+  Ch 26 thinkable; the engine-pilot relationship as a
+  working compromise rather than a bond; the city as
+  the inverse of the Ch 1/Ch 10 city the reader was
+  shown; reference *Santiago del Paso*, the expedition's
+  minor first-class Reliquary, fallen two days ago, its
+  pilot killed and its relic seized by a Mexica warrior
+  — the loss of a Reliquary is the structural reason
+  the Spanish line is now thin enough that the
+  Bernardo plan starts to seem necessary.
+pov: "Andrés de Mora"
+date_iso: "1521-08-09"
+location: "Tenochtitlan, southern ward; San Esteban del Río in motion through ruined streets"
+word_target: 1100
+scene_type: "prose"

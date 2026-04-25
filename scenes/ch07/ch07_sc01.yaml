@@ -1,0 +1,26 @@
+# Ch 7 sc01 — Approach to Cholula. Old woman's warning.
+chapter: 7
+scene_index: 1
+beat_function: |
+  STRICT POV: MALINTZIN ONLY. Previous chapter was ITZCOATL POV;
+  do NOT slip into ITZCOATL's interior or recycle their lore.
+  The other characters appear from the outside.
+
+  The expedition is on the road to Cholula, late October 1519.
+  Malintzin walks in the column, second-rank behind the captains.
+  An old Cholulan woman approaches the column at a market crossing,
+  speaks Nahuatl to her, and — believing Malintzin a fellow Nahua
+  on her way to a Cholulan nobleman who has marked her — warns her
+  in low voice: do not enter the city. The Cholulans are preparing
+  an ambush in coordination with Mexica priests. Malintzin keeps
+  her face neutral. She thanks the woman in Nahuatl. She files the
+  information. Establish: the old woman's mistake (assumes Malintzin
+  is Nahua moving as a free woman; cannot read her enslaved-asset
+  status), the texture of the road (mud, dust, the engines walking
+  in single file because the road narrows), the moral weight that
+  is about to fall on Malintzin alone.
+pov: "Malintzin"
+date_iso: "1519-10-23"
+location: "Road to Cholula, market crossing at midday"
+word_target: 1000
+scene_type: "prose"

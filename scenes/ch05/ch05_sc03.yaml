@@ -1,0 +1,25 @@
+# Ch 5 sc03 — aftermath, Tlaxcala flips.
+chapter: 5
+scene_index: 3
+beat_function: |
+  The Tlaxcalan council folds three weeks after Andrés's kill.
+  The defeated Tlaxcalan polity offers alliance against the
+  Mexica, citing decades of Flower War predation. Andrés is in
+  the parley tent. He watches Cortés accept the alliance with
+  the same expression he wore signing the Veracruz papers —
+  legalistic, calm, completely opaque. Tlaxcalan pilots are
+  formally seconded to the expedition. Their engines now stand
+  in cradles beside Spanish Reliquaries. Show: La Niña and a
+  surviving eagle-warrior engine in adjacent cradles overnight,
+  their hums interfering, neither pilot sleeping well. The
+  copper disc Andrés took is in his coat pocket. He has not
+  shown it to anyone. He thinks about its previous owner without
+  knowing her name. Establish: alliance is real, Tlaxcalan
+  pilots will fight beside the Spanish for the rest of the book,
+  Andrés has the disc as a private debt that he will not
+  reconcile until Ch 19.
+pov: "Andrés de Mora"
+date_iso: "1519-09-25"
+location: "Tlaxcala, parley tent + cradle yard at night"
+word_target: 1000
+scene_type: "prose"

@@ -1,0 +1,25 @@
+# Ch 6 sc03 — Moctezuma's council, Quetzalcoatl seals overheard.
+chapter: 6
+scene_index: 3
+beat_function: |
+  Moctezuma calls a council that evening. Itzcoatl is brought in as
+  honor-guard rear-rank — engine-pilot rank earns a wall position
+  but not a voice. The debate: attack the Spanish on the march, or
+  invite them into the city to assess. Itzcoatl sits silent. He
+  overhears two priests near the third pillar mention the
+  Quetzalcoatl seals at Cholula and Tula — the dormant apex
+  god-engines sealed generations ago. The fact that the seals have
+  come up at all is itself the news. Moctezuma chooses to invite,
+  not attack. The room dissolves. Itzcoatl walks home along the
+  causeway with the Great Engine's new pitch in his bones. He thinks
+  about his uncle, his clan, the cousin who went over the wall last
+  spring and has not been heard from. He does not yet know that his
+  cousin will be the one to defect to the Spanish in Ch 23.
+  Establish: the political fracture beginning under the metaphysical
+  fracture, Itzcoatl's provincial-outsider status inside Tenochtitlan,
+  the seals as Chekhov's apex.
+pov: "Itzcoatl"
+date_iso: "1519-10-08"
+location: "Tenochtitlan, Moctezuma's audience hall + causeway home"
+word_target: 1100
+scene_type: "prose"

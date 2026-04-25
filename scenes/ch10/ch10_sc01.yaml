@@ -1,0 +1,24 @@
+# Ch 10 sc01 — Spanish quartered in Axayacatl's palace.
+chapter: 10
+scene_index: 1
+beat_function: |
+  STRICT POV: ANDRÉS ONLY. Previous chapter was ITZCOATL POV;
+  do NOT slip into ITZCOATL's interior or recycle their lore.
+  The other characters appear from the outside.
+
+  Spanish quartered in the palace of Axayacatl. Andrés walks
+  through it slowly. Show: high stuccoed walls, courtyards with
+  fountains, the smell of copal everywhere. The Reliquaries are
+  housed in an outer courtyard, their cradles improvised from
+  Mexica rebar. La Niña stands beside *Santiago del Paso* (Spanish
+  apex first-class, finger-bone of a lesser Reconquista saint,
+  scale ~210ft, the expedition's strategic deterrent). Andrés
+  has never stood next to *Santiago del Paso* before. He is awed
+  by it — and then ashamed of being awed, because what *Santiago
+  del Paso* would not survive a minute against — the Great Engine
+  of the Templo Mayor — looms over the palace wall in plain sight.
+pov: "Andrés de Mora"
+date_iso: "1519-11-09"
+location: "Tenochtitlan, palace of Axayacatl, outer courtyard"
+word_target: 1000
+scene_type: "prose"

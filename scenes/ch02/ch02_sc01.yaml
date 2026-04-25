@@ -1,0 +1,34 @@
+# Hand-authored Scene 1 stub for Chapter 2 — Inciting Incident.
+# Source-of-truth: outline Ch 2 Block 1 Beat 2 — "Battle of Centla".
+# Triptych split: sc01 = pre-engagement (assembly + sighting),
+# sc02 = combat + kill, sc03 = aftermath in cockpit.
+chapter: 2
+scene_index: 1
+beat_function: |
+  STRICT POV: ANDRÉS ONLY. Previous chapter was TRIPTYCH POV;
+  do NOT slip into TRIPTYCH's interior or recycle their lore.
+  The other characters appear from the outside.
+
+  PRE-BATTLE ONLY. This scene ends BEFORE any engagement. Andrés
+  awake at first light on the Centla landing beach, the Maya enemy
+  not yet visible. He performs the formal boot litany on La Niña de
+  Córdoba — Flora's *vita*, the bones in the monstrance, the warming
+  hum climbing from sub-audible to felt-in-bone over forty Hail
+  Marys. The Spanish formation around him: two other second-class
+  Reliquaries (give them named pilots — not Andrés's friends, but
+  men he knows), a dozen third-class engines, Tlaxcalan auxiliaries
+  setting up on the wing. Show the cockpit interior in tactile
+  detail — the lacquered wood of the prayer ledge, the small icon
+  of Flora pressed against his thigh, the smell of beeswax from
+  the monstrance casing, the exact sequence of seven seals that
+  must close to bring the engine combat-warm. End on the moment
+  the Maya scouts return: their report, not the engagement. Final
+  line: Andrés hearing the report, ordering La Niña forward, the
+  hum shifting register one more time. NO kills, no halberd swing,
+  no enemy engine destroyed in this scene. That is sc02's job.
+  Word target ~1000-1100. Lean into procedural thickness.
+pov: "Andrés de Mora"
+date_iso: "1519-03-25"
+location: "Centla, Tabasco coast — Spanish landing-beach at dawn"
+word_target: 1000
+scene_type: "prose"

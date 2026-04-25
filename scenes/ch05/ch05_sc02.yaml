@@ -1,0 +1,23 @@
+# Ch 5 sc02 — first engine-on-engine duel.
+chapter: 5
+scene_index: 2
+beat_function: |
+  Andrés's first engine-on-engine duel against a veteran
+  Tlaxcalan teōmachtiani — a cousin of Xicotencatl the Younger,
+  decorated, wearing the eagle-warrior insignia on her engine's
+  shoulder plates. Show the combat in full mecha-procedural
+  detail: closing maneuvers, the Tlaxcalan macuahuitl-style
+  greatsword vs La Niña's halberd, joint-locks, the way both
+  pilots time strikes against the rhythm of the other's relic
+  hum. Andrés wins by inches. The Tlaxcalan pilot dies in her
+  cockpit; her engine falls like a chopped tree. Andrés climbs
+  out of La Niña and walks across the field to the wreck. He
+  reaches into the cockpit and pries the copper identification
+  disc off her armor. He puts it in his pocket. He does not yet
+  know why. (Ch 19 will close the disc's arc when he gives it
+  back to her sister.)
+pov: "Andrés de Mora"
+date_iso: "1519-09-15"
+location: "Tlaxcalan borderland, salt-flat at midday"
+word_target: 1300
+scene_type: "prose"

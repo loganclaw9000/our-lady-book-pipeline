@@ -1,0 +1,39 @@
+# Ch 16 sc02 — Moctezuma on the rooftop. The death the book will not resolve.
+chapter: 16
+scene_index: 2
+beat_function: |
+  Late June 1520. Cortés brings Moctezuma — still a Spanish hostage,
+  emaciated by months in confinement, dressed in his ceremonial
+  finery for the appearance — to the rooftop of Axayacatl's palace
+  to address the crowd in the plaza below and order them to
+  disperse. Itzcoatl is in the plaza on foot, not in Mirror.
+  Mirror is back at the cradle; an engine in the plaza right now
+  would precipitate the war he is still waiting for the new
+  tlatoani to authorize. He is in the front rank of the crowd,
+  perhaps thirty yards from the palace wall, looking up. Show
+  Moctezuma small on the rooftop, flanked by Spanish guards in
+  helmets, beginning to speak. The crowd's response is not what
+  he expected. Stones come up from the back of the plaza first,
+  then from everywhere. Moctezuma is struck. He goes down on the
+  rooftop. The Spanish guards drag him back from the parapet.
+  Itzcoatl sees the strike clearly: a stone, thrown from the
+  crowd. He sees what he sees. He does not know what he saw.
+  Spanish chronicles will say the wound was light and that a
+  Spanish blade finished him in the room below. Mexica chronicles
+  will say his own people stoned him to death. The book does not
+  resolve the ambiguity. Itzcoatl carries the unresolved thing.
+  Within the next two days Moctezuma is dead in the palace, by
+  one cause or another or both. His brother Cuitláhuac — already
+  on a war footing, already the de facto military leader of the
+  resistance — is elevated as tlatoani. The order Itzcoatl has
+  been waiting for will come within the week. Establish: the
+  unresolved death as a load-bearing ambiguity (do not let the
+  prose tip toward either chronicle's version); the elevation of
+  Cuitláhuac as the trigger that authorizes engine combat in the
+  city; the moment of Itzcoatl's vision — what he saw and what he
+  cannot decide that he saw — as a memory that will return.
+pov: "Itzcoatl"
+date_iso: "1520-06-29"
+location: "Tenochtitlan, plaza below the rooftop of Axayacatl's palace"
+word_target: 1200
+scene_type: "prose"

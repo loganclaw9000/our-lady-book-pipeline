@@ -1,0 +1,39 @@
+# Ch 21 sc01 — Smallpox in the valley; Itzcoatl's mother dies in his arms.
+chapter: 21
+scene_index: 1
+beat_function: |
+  STRICT POV: ITZCOATL ONLY. Previous chapter was MALINTZIN POV;
+  do NOT slip into MALINTZIN's interior or recycle their lore. The
+  other characters appear from the outside, through ITZCOATL's eyes.
+
+  Late 1520, overlapping the Tlaxcalan rebuild that Andrés is
+  inside in Ch 19-20. Smallpox in Texcoco. The disease is in
+  the family compound where Itzcoatl was raised (the same
+  compound from Ch 12). His mother, the priestess of
+  Tezcatlipoca, has been ill for nine days. Itzcoatl is home
+  on a brief leave from Tenochtitlan; *Obsidian Mirror* sits
+  in its cradle on the lake shore at Texcoco, hum low,
+  attended by an apprentice. Show the household: the courtyards
+  half-staffed because servants are dead or have fled, the
+  smell, the smoke from the braziers the Mexica physicians
+  keep burning, the way the disease pits a face the son
+  has known his whole life. His mother dies in his arms in
+  the late afternoon. Her last words are in the ceremonial
+  register of Nahuatl he has not heard spoken aloud since he
+  was small — the high priestly idiom, archaic, dense with
+  Tezcatlipoca formulae. He understands maybe two sentences
+  in three. The third sentence, the last one, he loses
+  entirely, and he will never know what she asked him to do.
+  Cuitláhuac, the new tlatoani, dies on the same day in
+  Tenochtitlan; a runner reaches the compound at dusk.
+  Establish: Itzcoatl's mother as the second-to-last living
+  thing tying him to the Texcoco he was loyal to; the
+  failed last sentence as the wound he will carry into Ch
+  23's defection; the disease as a thing the Spanish brought
+  but did not aim — the moral gradient on the catastrophe
+  he is now inside.
+pov: "Itzcoatl"
+date_iso: "1520-12-04"
+location: "Texcoco, family compound at the lake shore"
+word_target: 1100
+scene_type: "prose"

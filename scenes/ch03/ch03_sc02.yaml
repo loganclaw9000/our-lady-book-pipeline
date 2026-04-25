@@ -1,0 +1,24 @@
+# Ch 3 sc02 — translation chain established.
+chapter: 3
+scene_index: 2
+beat_function: |
+  Translation. Within days of the handover the expedition realizes
+  Malintzin speaks Nahuatl as well as Maya. Gerónimo de Aguilar, a
+  Spaniard who lived eight years among the Maya as a wreck-survivor,
+  completes the chain: Nahuatl to Maya (Malintzin) to Spanish
+  (Aguilar). She is summoned to interpret a tribute message from a
+  Totonac envoy. The first time she translates, her Nahuatl is too
+  fast for Aguilar's Maya; she slows it. He flags her. Cortés notices.
+  Show: the mechanism of the chain (three voices, two languages
+  between any two of them), Aguilar's cracked Maya, her face
+  unreadable, the inside of the captain's tent (a folding table, a
+  bowl of biscuit, a sword leaning in a corner), the smell of horses
+  outside. End on her noticing — through the open tent flap — a
+  Reliquary kneeling in its cradle while its pilot prays beside it,
+  and her recognizing that the engine has knelt deliberately, with
+  intent, in response to the prayer. She files this.
+pov: "Malintzin"
+date_iso: "1519-03-30"
+location: "Cortés's tent, Spanish camp on the Tabasco coast"
+word_target: 1100
+scene_type: "prose"

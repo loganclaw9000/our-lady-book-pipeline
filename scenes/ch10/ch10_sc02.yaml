@@ -1,0 +1,19 @@
+# Ch 10 sc02 — Tlatelolco market.
+chapter: 10
+scene_index: 2
+beat_function: |
+  Andrés walks the great market at Tlatelolco. Establish scale:
+  cleaner than Seville, twice as large. Three-stall vendors of
+  feathers, jade, obsidian, dried fish, cocoa, fabric, jewelry
+  beyond his Spanish vocabulary. He is escorted by two Tlaxcalan
+  warriors and a Mexica protocol officer. He buys nothing. He is
+  recording. He realizes he has lost the conviction he came with —
+  that he was going to convert a continent. The continent that he
+  is walking through has more cities than Castile and a market
+  every Spanish town would envy. He thinks of Flora's *vita* and
+  cannot remember which courtyard she played in.
+pov: "Andrés de Mora"
+date_iso: "1519-11-15"
+location: "Tlatelolco market, Tenochtitlan"
+word_target: 1000
+scene_type: "prose"

@@ -1,0 +1,21 @@
+# Ch 10 sc03 — The Great Engine seen for the first time.
+chapter: 10
+scene_index: 3
+beat_function: |
+  Sunset. Andrés walks alone (a small Spanish escort discreet
+  behind him) along the canal east of the Templo Mayor precinct.
+  The Great Engine rises above the temple complex, mostly
+  obscured by the temple-twin shrines, but its shoulder-plates
+  catch the dying sun. He stands long enough that a pair of
+  Mexica priests note him without acknowledging. He has seen
+  Reliquaries his whole pilot life. He has heard the Great
+  Engine's hum since he stepped onto the causeway. But he has
+  not, until now, seen its scale. *Santiago del Paso* could not
+  scratch its ankle plate. He returns to the palace. He does not
+  sleep that night. He prays to Flora. He gets no answer.
+  Establish: the apex visually + the inverted power expectation.
+pov: "Andrés de Mora"
+date_iso: "1519-11-22"
+location: "Tenochtitlan, canal east of the Templo Mayor at sunset"
+word_target: 1000
+scene_type: "prose"

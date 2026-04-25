@@ -1,0 +1,23 @@
+# Ch 8 sc02 — The massacre.
+chapter: 8
+scene_index: 2
+beat_function: |
+  The signal is given. The gates close. The Spanish open fire on
+  the Cholulan nobility. Andrés's Reliquary engages — four engines
+  active in the courtyard, killing unarmed men. He has never killed
+  unarmed people before. Show the kill in tactile, technical detail
+  — La Niña's halberd against unarmored bodies — and the way the
+  monstrance hum changes again, this time worse than the first kill
+  in Ch 2: not quiet, but jagged. Two Cholulan engines try to
+  intervene. They are quickly destroyed. The slaughter goes on for
+  about twenty minutes. Thousands die in the courtyard. Andrés
+  kills, mechanically, without volition. He does not vomit this
+  time. He notices that he does not vomit and that, too, registers
+  somewhere he does not yet have language for. Establish: the moral
+  break, the mecha-procedural detail of asymmetric engagement, the
+  texture of an atrocity from inside a cockpit.
+pov: "Andrés de Mora"
+date_iso: "1519-10-30"
+location: "Cholula, temple courtyard"
+word_target: 1300
+scene_type: "prose"

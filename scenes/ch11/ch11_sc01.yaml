@@ -1,0 +1,24 @@
+# Ch 11 sc01 — Strange weeks. Spanish/Mexica feast + treasury looting.
+chapter: 11
+scene_index: 1
+beat_function: |
+  STRICT POV: MALINTZIN ONLY. Previous chapter was ANDRÉS POV;
+  do NOT slip into ANDRÉS's interior or recycle their lore.
+  The other characters appear from the outside.
+
+  Late November. The strange weeks. A formal Mexica feast in the
+  palace of Axayacatl. Spanish and Mexica nobility seated at
+  parallel tables, Malintzin between them — translating, observing.
+  Cortés receives a tribute of jade, gold, feathers. Moctezuma
+  watches him receive it with an expression Malintzin cannot read.
+  Show: the food (turkey, cocoa, chiles), the conversation (formal,
+  tonal, Mexica-ceremonial), the Spanish soldiers' barely-contained
+  greed. Malintzin notices Cortés making private signals to one of
+  his captains about the weight of the gold. She translates none of
+  this. She files the moment Cortés first betrays acquisitiveness
+  to a Mexica audience without realizing he has done it.
+pov: "Malintzin"
+date_iso: "1519-11-28"
+location: "Tenochtitlan, palace of Axayacatl, formal hall"
+word_target: 1000
+scene_type: "prose"

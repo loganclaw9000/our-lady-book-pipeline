@@ -1,0 +1,36 @@
+# Ch 13 sc01 — News of Narváez. The garrison split.
+chapter: 13
+scene_index: 1
+beat_function: |
+  STRICT POV: ANDRÉS ONLY. Previous chapter was ITZCOATL POV;
+  do NOT slip into ITZCOATL's interior or recycle their lore.
+  The other characters appear from the outside.
+
+  Late April 1520. News reaches Tenochtitlan: Pánfilo de Narváez has
+  landed at Veracruz with nine hundred men, eighteen Reliquaries,
+  cavalry, sent by Governor Velázquez of Cuba with orders to arrest
+  Cortés for insubordination. The number — nine hundred — is larger
+  than Cortés's current effective force. Andrés is in the Spanish
+  quarters in Axayacatl's palace when the courier arrives, mud to
+  the knees, the seal broken. Show the room: Cortés reading the
+  letter twice, a long silence, then the decisions cascading out of
+  him in flat sentences. He will ride to the coast. He will take
+  most of the engines. Alvarado will hold Tenochtitlan with eighty
+  men and four Reliquaries — a skeleton garrison inside a city of
+  two hundred thousand. Andrés rides with Cortés. *La Niña de
+  Córdoba* is checked over by her adorator-mechanics that afternoon;
+  the bones in her monstrance reseated, the gilding around her
+  cracked left pauldron re-pinned. Establish: the gamble Cortés is
+  about to take, Alvarado as a known quantity (vain, cruel, needs
+  to be liked by his men, exactly the wrong man for a holding
+  command), the felt smallness of the leaving force compared to
+  what's coming, Andrés's first private flicker that this is not a
+  reasonable plan. He does not articulate the flicker. He stamps
+  it down. Establish for Ch 17: the Reliquary corps as it stands
+  before Noche Triste — name the ones leaving with Cortés vs the
+  four staying with Alvarado, so the loss in Ch 17 lands.
+pov: "Andrés de Mora"
+date_iso: "1520-04-28"
+location: "Tenochtitlan, Axayacatl's palace — Spanish quarters and engine cradles"
+word_target: 1100
+scene_type: "prose"

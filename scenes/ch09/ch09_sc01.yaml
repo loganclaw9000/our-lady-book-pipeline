@@ -1,0 +1,36 @@
+# Ch 9 sc01 — The causeway. Spanish approach Tenochtitlan.
+chapter: 9
+scene_index: 1
+beat_function: |
+  STRICT POV: ITZCOATL ONLY. This chapter pivots from Andrés's POV
+  (ch04, ch05, ch08) back to Itzcoatl's. The Spanish characters
+  (Andrés, Cortés, Bernardo) are seen FROM THE OUTSIDE — through
+  Itzcoatl's Mexica eyes, through *Obsidian Mirror*'s scrying-mirror
+  shield, with the cultural distance and uncertainty that implies.
+  DO NOT slip into Andrés's interior. DO NOT include Spanish-pilot
+  liturgy, Flora references, or Reliquary-internal mechanics — those
+  are the OTHER POV's lore. Itzcoatl knows Spanish engines exist as
+  *teōmecahuītlī of a foreign tradition*; he does not know their
+  saint-relic theology except as rumor.
+
+  November 8, 1519. The causeway from Iztapalapa to Tenochtitlan.
+  Itzcoatl piloting *Obsidian Mirror* (Tezcatlipoca-class, ~55ft,
+  obsidian-gilt, scrying-mirror shield), drill-rank with forty other
+  Mexica engines flanking the causeway approach. The Spanish column
+  files in: their second-class Reliquaries (named to Itzcoatl by
+  Mexica intelligence as *La Niña de Córdoba* and three sister
+  engines, plus the apex first-class *Santiago del Paso*), twelve
+  third-class engines, Tlaxcalan teōmecahuītlī as auxiliaries
+  (Itzcoatl recognizes these as kin and feels the betrayal anew).
+  Outnumbered roughly fifty-to-one by Mexica engines visible from
+  the causeway. Establish: Itzcoatl's INTERIOR (Mexica engine-pilot,
+  young, junior in formation, provincial Texcocan), the scale of
+  Tenochtitlan as he sees it (familiar, not exotic), the Great
+  Engine's hum changing register as the Spanish column passes
+  beneath the lake's mirror, the unbearable mathematics of a
+  formation that could end the expedition in ten minutes.
+pov: "Itzcoatl"
+date_iso: "1519-11-08"
+location: "Causeway from Iztapalapa to Tenochtitlan, mid-morning"
+word_target: 1100
+scene_type: "prose"
