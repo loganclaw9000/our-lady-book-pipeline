@@ -214,7 +214,7 @@ Plans:
 
 Plans:
 - [x] 07-01-PLAN.md — physics package skeleton + SceneMetadata Pydantic schema + PovLock storage + config/pov_locks.yaml + import-linter contract + REQUIREMENTS.md PHYSICS-01..13 [PHYSICS-01, PHYSICS-02, PHYSICS-03]
-- [ ] 07-02-PLAN.md — ContinuityBibleRetriever (6th axis) + canonical_quantities corpus_ingest + config/canonical_quantities_seed.yaml hand-seeded canaries + bundler 7-event invariant [PHYSICS-04]
+- [x] 07-02-PLAN.md — ContinuityBibleRetriever (6th axis) + canonical_quantities corpus_ingest + config/canonical_quantities_seed.yaml hand-seeded canaries + bundler 7-event invariant [PHYSICS-04]
 - [ ] 07-03-PLAN.md — physics/canon_bible.py + 5 pre-flight gate files + run_pre_flight composer + drafter ModeA pre-flight wiring + Jinja2 canonical-stamp + fenced beat directive [PHYSICS-05, PHYSICS-06]
 - [ ] 07-04-PLAN.md — physics/stub_leak.py + physics/repetition_loop.py + critic 5→13 axis extension + rubric.yaml v2 + motivation hard-stop in _post_process [PHYSICS-07, PHYSICS-08, PHYSICS-09, PHYSICS-13]
 - [ ] 07-05-PLAN.md — physics/scene_buffer.py SceneEmbeddingCache + cosine helpers + chapter_assembler/concat.py quote normalizer + critic pre-LLM short-circuit hooks + CLI composition + ch15 sc02 smoke + ch01-04 zero-FP smoke [PHYSICS-10, PHYSICS-11, PHYSICS-12]
