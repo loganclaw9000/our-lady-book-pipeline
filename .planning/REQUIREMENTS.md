@@ -94,9 +94,9 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 **: `stub_leak` axis is regex pre-check that short-circuits to FAIL before LLM critic call. Pattern set in `physics/stub_leak.py`.
 - [x] **PHYSICS-09
 **: `repetition_loop` axis: n-gram repetition + line-level dup detection runs pre-critic. Threshold tunable in `config/mode_thresholds.yaml`.
-- [ ] **PHYSICS-10**: `scene_buffer_similarity` axis: BGE-M3 cosine ≥0.80 vs prior committed scenes' embeddings. Embedding cache lives at `.planning/intel/scene_embeddings.sqlite`.
-- [ ] **PHYSICS-11**: Quote-corruption `., ` defensive normalizer in `chapter_assembler/concat.py` (D-18 PHYSICS-11).
-- [ ] **PHYSICS-12**: ch15+ first-flight smoke: ch15 sc02 resume passes all 13 axes (or scene-kicks recover deterministically). ch01-04 read-only smoke: engine flags zero false positives on the 4 frozen-baseline chapters.
+- [x] **PHYSICS-10**: `scene_buffer_similarity` axis: BGE-M3 cosine ≥0.80 vs prior committed scenes' embeddings. Embedding cache lives at `.planning/intel/scene_embeddings.sqlite`.
+- [x] **PHYSICS-11**: Quote-corruption `., ` defensive normalizer in `chapter_assembler/concat.py` (D-18 PHYSICS-11).
+- [x] **PHYSICS-12**: ch15+ first-flight smoke: ch15 sc02 resume passes all 13 axes (or scene-kicks recover deterministically). ch01-04 read-only smoke: engine flags zero false positives on the 4 frozen-baseline chapters.
 - [x] **PHYSICS-13
 **: `motivation_fidelity` FAIL is hard-stop (overall_pass=False unconditionally) per D-02 load-bearing semantics.
 
