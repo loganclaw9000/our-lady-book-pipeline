@@ -84,8 +84,10 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 - [x] **PHYSICS-02**: `pov_lock` artifact (`config/pov_locks.yaml`) loads + validates against scene `perspective` at drafter pre-flight. Override path: stub frontmatter `pov_lock_override: <rationale>`.
 - [x] **PHYSICS-03**: `book_pipeline.physics` kernel package landed: `schema.py`, `canon_bible.py`, `gates/__init__.py`, `gates/{pov_lock,motivation,ownership,treatment,quantity}.py`, `locks.py`. import-linter contract extended in BOTH source_modules and forbidden_modules. DraftRequest extended with `scene_metadata: SceneMetadata | None = None` additive nullable field (W-1 contract).
 - [x] **PHYSICS-04**: CB-01 retriever (`book_pipeline.rag.retrievers.continuity_bible.ContinuityBibleRetriever`) lands as 6th retriever. Lance schema rule_type `'canonical_quantity'`. Bundler emits 7 events per call (was 6). Conflict_detector gains `named_quantity_drift` dimension (deferred to Plan 07-04 critic axes). Existing 5 retrievers untouched.
-- [ ] **PHYSICS-05**: Drafter pre-flight composition: pov_lock + motivation + ownership + treatment + quantity gates run BEFORE any vLLM call. Each gate emits one `role='physics_gate'` Event (pass+fail). Pattern matches existing `drafter.memorization_gate` + `drafter.preflag`.
-- [ ] **PHYSICS-06**: Drafter prompt template extended: D-23 verbatim canonical-quantity stamp at top-of-prompt; D-13 ownership anchor block fenced (e.g., `<beat>...</beat>`) so directive can't smear into prose.
+- [x] **PHYSICS-05
+**: Drafter pre-flight composition: pov_lock + motivation + ownership + treatment + quantity gates run BEFORE any vLLM call. Each gate emits one `role='physics_gate'` Event (pass+fail). Pattern matches existing `drafter.memorization_gate` + `drafter.preflag`.
+- [x] **PHYSICS-06
+**: Drafter prompt template extended: D-23 verbatim canonical-quantity stamp at top-of-prompt; D-13 ownership anchor block fenced (e.g., `<beat>...</beat>`) so directive can't smear into prose.
 - [ ] **PHYSICS-07**: Critic prompt + structured-output schema extends from 5 → 13 axes (D-26). Token cost analyzed and within Anthropic 1h prompt-cache budget.
 - [ ] **PHYSICS-08**: `stub_leak` axis is regex pre-check that short-circuits to FAIL before LLM critic call. Pattern set in `physics/stub_leak.py`.
 - [ ] **PHYSICS-09**: `repetition_loop` axis: n-gram repetition + line-level dup detection runs pre-critic. Threshold tunable in `config/mode_thresholds.yaml`.
