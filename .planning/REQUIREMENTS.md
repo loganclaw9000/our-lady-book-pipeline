@@ -78,6 +78,22 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 - [ ] **FIRST-01**: Pipeline autonomously produces a complete first draft of *Our Lady of Champion* (27 chapters) committed to `canon/` with ≥ 3 closed theses yielding transferable artifacts (config recommendation / architectural lesson / known failure mode / corpus-curation implication).
 - [ ] **FIRST-02**: Final digest at milestone completion includes: production summary (word count, chapter pacing, mode-A/mode-B distribution, regen distribution, total cost), testbed summary (closed theses with artifacts, open theses snapshot), and transfer-ready notes for pipeline #2 (blog).
 
+### Narrative Physics Engine (Phase 7)
+
+- [ ] **PHYSICS-01**: Pydantic `SceneMetadata` model implements all D-03 mandatory fields + D-13 ownership fields + D-04 staging fields. Strict validation (`extra="forbid"`); enforced via `pydantic.ValidationError` at stub load time.
+- [ ] **PHYSICS-02**: `pov_lock` artifact (`config/pov_locks.yaml`) loads + validates against scene `perspective` at drafter pre-flight. Override path: stub frontmatter `pov_lock_override: <rationale>`.
+- [ ] **PHYSICS-03**: `book_pipeline.physics` kernel package landed: `schema.py`, `canon_bible.py`, `gates/__init__.py`, `gates/{pov_lock,motivation,ownership,treatment,quantity}.py`, `locks.py`. import-linter contract extended in BOTH source_modules and forbidden_modules. DraftRequest extended with `scene_metadata: SceneMetadata | None = None` additive nullable field (W-1 contract).
+- [ ] **PHYSICS-04**: CB-01 retriever (`book_pipeline.rag.retrievers.continuity_bible.ContinuityBibleRetriever`) lands as 6th retriever. Lance schema rule_type `'canonical_quantity'`. Bundler emits 7 events per call (was 6). Conflict_detector gains `named_quantity_drift` dimension. Existing 5 retrievers untouched.
+- [ ] **PHYSICS-05**: Drafter pre-flight composition: pov_lock + motivation + ownership + treatment + quantity gates run BEFORE any vLLM call. Each gate emits one `role='physics_gate'` Event (pass+fail). Pattern matches existing `drafter.memorization_gate` + `drafter.preflag`.
+- [ ] **PHYSICS-06**: Drafter prompt template extended: D-23 verbatim canonical-quantity stamp at top-of-prompt; D-13 ownership anchor block fenced (e.g., `<beat>...</beat>`) so directive can't smear into prose.
+- [ ] **PHYSICS-07**: Critic prompt + structured-output schema extends from 5 → 13 axes (D-26). Token cost analyzed and within Anthropic 1h prompt-cache budget.
+- [ ] **PHYSICS-08**: `stub_leak` axis is regex pre-check that short-circuits to FAIL before LLM critic call. Pattern set in `physics/stub_leak.py`.
+- [ ] **PHYSICS-09**: `repetition_loop` axis: n-gram repetition + line-level dup detection runs pre-critic. Threshold tunable in `config/mode_thresholds.yaml`.
+- [ ] **PHYSICS-10**: `scene_buffer_similarity` axis: BGE-M3 cosine ≥0.80 vs prior committed scenes' embeddings. Embedding cache lives at `.planning/intel/scene_embeddings.sqlite`.
+- [ ] **PHYSICS-11**: Quote-corruption `., ` defensive normalizer in `chapter_assembler/concat.py` (D-18 PHYSICS-11).
+- [ ] **PHYSICS-12**: ch15+ first-flight smoke: ch15 sc02 resume passes all 13 axes (or scene-kicks recover deterministically). ch01-04 read-only smoke: engine flags zero false positives on the 4 frozen-baseline chapters.
+- [ ] **PHYSICS-13**: `motivation_fidelity` FAIL is hard-stop (overall_pass=False unconditionally) per D-02 load-bearing semantics.
+
 ## v2 Requirements
 
 Deferred to a later milestone.

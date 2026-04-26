@@ -69,6 +69,8 @@ root_packages = ["book_pipeline"]
 # Phase 3 plan 01 added: drafter, critic, regenerator, voice_fidelity
 # Phase 3 gap-closure (2026-04-21) added: llm_clients
 # Phase 4 plan 01 added: chapter_assembler, entity_extractor, retrospective, ablation
+# Phase 5 plan 03 added: "book_pipeline.alerts"
+# Phase 7 plan 01 added: "book_pipeline.physics"
 # Phase 5 will add: "book_pipeline.orchestration"
 name = "Kernel packages MUST NOT import from book_specifics"
 type = "forbidden"
@@ -95,6 +97,8 @@ source_modules = [
     "book_pipeline.ablation",
     # Phase 5 plan 03 added: alerts (TelegramAlerter + CooldownCache + taxonomy).
     "book_pipeline.alerts",
+    # Phase 7 plan 01 added: physics (SceneMetadata + gates + locks + canon_bible).
+    "book_pipeline.physics",
 ]
 forbidden_modules = [
     "book_pipeline.book_specifics",
@@ -164,6 +168,8 @@ ignore_imports = [
 # Phase 2 plan 02 added: "book_pipeline.corpus_ingest" in forbidden_modules.
 # Phase 3 plan 01 added: drafter, critic, regenerator, voice_fidelity
 # Phase 4 plan 01 added: chapter_assembler, entity_extractor, retrospective, ablation
+# Phase 5 plan 03 added: "book_pipeline.alerts"
+# Phase 7 plan 01 added: "book_pipeline.physics"
 # Phase 5 will add: "book_pipeline.orchestration"
 name = "Interfaces MUST NOT import from concrete kernel implementations"
 type = "forbidden"
@@ -187,5 +193,7 @@ forbidden_modules = [
     "book_pipeline.ablation",
     # Phase 5 plan 03 added: alerts (TelegramAlerter + CooldownCache + taxonomy).
     "book_pipeline.alerts",
+    # Phase 7 plan 01 added: physics (SceneMetadata + gates + locks + canon_bible).
+    "book_pipeline.physics",
 ]
 ignore_imports = []
