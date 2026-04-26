@@ -15,7 +15,7 @@
 - [~] **Phase 4: Chapter Assembly + Post-Commit DAG** - ChapterAssembler, chapter-level Critic (fresh RAG pack), atomic canon commit, EntityExtractor with SHA-linked cards, RetrospectiveWriter with lint. (3/6 — 04-01 kernel skeletons + ChapterStateMachine; 04-02 ConcatAssembler + ChapterCritic; 04-03 OpusEntityExtractor + OpusRetrospectiveWriter)
 - [ ] **Phase 5: Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration** - Mode-B Drafter (Opus), full R-cap regen with cost gate, oscillation detector, Mode-B preflags, hard-block Telegram alerts, nightly openclaw cron.
 - [ ] **Phase 6: Testbed Plane + Production Hardening + First Draft** - Thesis registry + matcher, ablation harness, cross-family critic, weekly digest, metrics ledger ingester, 27-chapter production run with >=3 closed theses.
-- [ ] **Phase 7: Narrative Physics Engine** - Codified storytelling atomics + 13-axis critic + drafter pre-flight gates + canon-bible continuity layer (CB-01 6th retriever) + scene-buffer dedup + ch15+ forward-only enforcement.
+- [x] **Phase 7: Narrative Physics Engine** - Codified storytelling atomics + 13-axis critic + drafter pre-flight gates + canon-bible continuity layer (CB-01 6th retriever) + scene-buffer dedup + ch15+ forward-only enforcement. (5/5 plans + gsd-verifier PASS after 2026-04-26 gap closure)
 
 ---
 
@@ -217,7 +217,7 @@ Plans:
 - [x] 07-02-PLAN.md — ContinuityBibleRetriever (6th axis) + canonical_quantities corpus_ingest + config/canonical_quantities_seed.yaml hand-seeded canaries + bundler 7-event invariant [PHYSICS-04]
 - [x] 07-03-PLAN.md — physics/canon_bible.py + 5 pre-flight gate files + run_pre_flight composer + drafter ModeA pre-flight wiring + Jinja2 canonical-stamp + fenced beat directive [PHYSICS-05, PHYSICS-06]
 - [x] 07-04-PLAN.md — physics/stub_leak.py + physics/repetition_loop.py + critic 5→13 axis extension + rubric.yaml v2 + motivation hard-stop in _post_process [PHYSICS-07, PHYSICS-08, PHYSICS-09, PHYSICS-13]
-- [ ] 07-05-PLAN.md — physics/scene_buffer.py SceneEmbeddingCache + cosine helpers + chapter_assembler/concat.py quote normalizer + critic pre-LLM short-circuit hooks + CLI composition + ch15 sc02 smoke + ch01-04 zero-FP smoke [PHYSICS-10, PHYSICS-11, PHYSICS-12]
+- [x] 07-05-PLAN.md — physics/scene_buffer.py SceneEmbeddingCache + cosine helpers + chapter_assembler/concat.py quote normalizer + critic pre-LLM short-circuit hooks + CLI composition + ch15 sc02 smoke + ch01-04 zero-FP smoke [PHYSICS-10, PHYSICS-11, PHYSICS-12]
 **UI hint**: no
 
 **Parallelization**: Wave 1 (07-01 schema) is foundational — every later plan imports from physics.schema/locks/gates.base. Wave 2 (07-02 CB-01) is independent of Wave 3 plans. Wave 3 splits into two parallel plans: 07-03 (drafter-side: gates + prompt extension; depends on 07-01 schema + 07-02 CB-01 for the canon_bible reader) and 07-04 (critic-side: 13-axis schema + stub_leak/repetition_loop pre-LLM detectors + motivation hard-stop; depends only on 07-01 schema). Wave 4 (07-05) is the integration point — depends on everything; lands the scene-buffer cosine + CLI composition root + the phase-acceptance integration smokes.
@@ -234,7 +234,7 @@ Plans:
 | 4. Chapter Assembly + Post-Commit DAG | 0/6 | Planned    | - |
 | 5. Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration | 0/TBD | Not started | - |
 | 6. Testbed Plane + Production Hardening + First Draft | 0/TBD | Not started | - |
-| 7. Narrative Physics Engine | 4/5 | In Progress | - |
+| 7. Narrative Physics Engine | 5/5 | Complete (verifier PASS after 2026-04-26 gap closure) | 2026-04-26 |
 
 ---
 
