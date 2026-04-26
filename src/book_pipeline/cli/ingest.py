@@ -172,6 +172,27 @@ def _run(args: argparse.Namespace) -> int:
     else:
         arc_note = None
 
+    # Plan 07-02 (PHYSICS-04 / D-22): write canonical quantities to the
+    # 'continuity_bible' LanceDB table on every non-skipped ingest. This is
+    # the operator-truth seed (5 D-15 manuscript canaries hand-written into
+    # config/canonical_quantities_seed.yaml per OQ-05 (c) RESOLVED 2026-04-25).
+    # Idempotent: chunk_id is deterministic from CanonicalQuantity.id which
+    # is regex-validated to ^[a-z0-9_]+$ (T-07-03 mitigation).
+    canonical_count: int | None = None
+    if not report.skipped:
+        from book_pipeline.corpus_ingest.canonical_quantities import (
+            ingest_canonical_quantities,
+        )
+
+        canonical_seed_path = Path("config/canonical_quantities_seed.yaml")
+        if canonical_seed_path.is_file():
+            canonical_count = ingest_canonical_quantities(
+                db_path=indexes_dir,
+                seed_yaml_path=canonical_seed_path,
+                embedder=embedder,
+                ingestion_run_id=report.ingestion_run_id,
+            )
+
     if args.json:
         print(report.model_dump_json(indent=2))
     else:
@@ -193,6 +214,11 @@ def _run(args: argparse.Namespace) -> int:
             )
         if arc_note is not None:
             print(f"  {arc_note}")
+        if canonical_count is not None:
+            print(
+                f"  ingested {canonical_count} canonical quantities from "
+                "config/canonical_quantities_seed.yaml"
+            )
     return 0
 
 

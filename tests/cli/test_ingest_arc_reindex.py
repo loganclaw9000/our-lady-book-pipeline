@@ -56,6 +56,15 @@ def test_cli_ingest_calls_arc_reindex_with_correct_kwargs(
         def __init__(self, **kwargs: Any) -> None:
             recorded["embedder_kwargs"] = kwargs
 
+        def embed_texts(self, texts: list[str]) -> Any:
+            # Plan 07-02: cli/ingest.py invokes ingest_canonical_quantities
+            # which calls embed_texts on the same shared embedder. Return a
+            # numpy array shaped (len(texts), 1024) so the canonical
+            # quantities ingest path completes without touching real BGE-M3.
+            import numpy as np
+
+            return np.zeros((len(texts), 1024), dtype=np.float32)
+
     class _FakeReranker:
         def __init__(self, **kwargs: Any) -> None:
             recorded["reranker_kwargs"] = kwargs

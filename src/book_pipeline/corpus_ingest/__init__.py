@@ -16,12 +16,20 @@ that cross-boundary import is documented in pyproject.toml's ignore_imports
 for contract 1.
 """
 
+from book_pipeline.corpus_ingest.canonical_quantities import (
+    CanonicalQuantity,
+    ingest_canonical_quantities,
+    load_canonical_quantities_seed,
+)
 from book_pipeline.corpus_ingest.ingester import CorpusIngester, IngestionReport
 from book_pipeline.corpus_ingest.router import AXIS_NAMES, route_file_to_axis
 
 __all__ = [
     "AXIS_NAMES",
+    "CanonicalQuantity",
     "CorpusIngester",
     "IngestionReport",
+    "ingest_canonical_quantities",
+    "load_canonical_quantities_seed",
     "route_file_to_axis",
 ]

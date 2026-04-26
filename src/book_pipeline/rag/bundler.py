@@ -1,13 +1,20 @@
-"""ContextPackBundlerImpl — orchestrates 5 typed retrievers; THE event-emission site.
+"""ContextPackBundlerImpl — orchestrates the typed retrievers; THE event-emission site.
 
 Per the frozen Retriever Protocol docstring: "EventLogger is NOT directly called
 here; retriever events are emitted by the ContextPackBundler that orchestrates
-all 5 retrievers." This module is that bundler.
+all retrievers." This module is that bundler.
+
+Plan 02 lands 5 typed retrievers (historical, metaphysics, entity_state,
+arc_position, negative_constraint); Plan 07-02 adds a 6th (continuity_bible /
+CB-01). The bundle() loop body is generic — it iterates whatever list of
+retrievers the composition root passes in; the per-call event-count invariant
+is "1 event per retriever + 1 bundler event" (so 6 events for the 5-retriever
+call shape, 7 events for the 6-retriever call shape).
 
 Per bundle() call:
   1. For each retriever: time the call; invoke retrieve(request); emit ONE
      role="retriever" Event carrying retriever metadata.
-  2. After all 5 retrievals: run detect_conflicts (W-1: pass injected entity_list).
+  2. After all retrievals: run detect_conflicts (W-1: pass injected entity_list).
   3. Run enforce_budget to shrink the retrievals under the 40KB hard cap.
   4. Assemble ContextPack; if conflicts present, persist to
      drafts/retrieval_conflicts/<scene_id>.json for Phase 3 critic consumption.
@@ -190,7 +197,14 @@ class ContextPackBundlerImpl:
     def bundle(
         self, request: SceneRequest, retrievers: list[Retriever]
     ) -> ContextPack:
-        """Run all retrievers; detect conflicts; enforce budget; emit 6 events; return pack.
+        """Run all retrievers; detect conflicts; enforce budget; emit 7 events; return pack.
+
+        Plan 07-02 raises the per-call event-count invariant from 6 → 7
+        events: 6 retriever events (one per retriever — the 5 frozen Phase-2
+        axes plus the new continuity_bible / CB-01 retriever) + 1 bundler
+        event = 7 total. Pre-Plan-07-02 callers that pass 5 retrievers still
+        emit 6 events (5 retriever + 1 bundler) — the invariant is "1 event
+        per retriever + 1 bundler event"; the loop body is unchanged.
 
         Returns a ContextPack with optional `conflicts` + `ingestion_run_id` fields
         (new in Plan 02-05; additive under Phase 1 freeze).

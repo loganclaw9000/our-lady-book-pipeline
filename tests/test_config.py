@@ -145,13 +145,19 @@ def test_rag_retrievers_has_5_required_names() -> None:
     from book_pipeline.config.rag_retrievers import RagRetrieversConfig
 
     cfg = RagRetrieversConfig()
-    assert set(cfg.retrievers.keys()) == {
+    # The 5 frozen retriever names MUST always be present (Plan 02 contract).
+    # Plan 07-02 adds 'continuity_bible' as an OPTIONAL 6th retriever
+    # (PHYSICS-04 / D-22); the assertion is "superset of the 5 required names".
+    required = {
         "historical",
         "metaphysics",
         "entity_state",
         "arc_position",
         "negative_constraint",
     }
+    assert required <= set(cfg.retrievers.keys()), (
+        f"missing required retrievers: {required - set(cfg.retrievers.keys())}"
+    )
     assert cfg.bundler.max_bytes == 40960
 
 
