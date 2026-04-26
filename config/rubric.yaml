@@ -1,13 +1,27 @@
-# rubric.yaml — 5-axis critic rubric for scene + chapter critics.
+# rubric.yaml — 13-axis critic rubric for the scene critic
+# (chapter critic stays on the original 5; see chapter_axes below).
 #
-# The 5 axes (exact names, never renamed without bumping rubric_version):
-#   historical, metaphysics, entity, arc, donts
+# Plan 07-04 (PHYSICS-07): bumped from 5 to 13 axes; rubric_version v1 -> v2.
+# Ledger queries that aggregate critic Events across the v1 -> v2 boundary
+# MUST filter by rubric_version (v1 events have only the original 5 keys).
+#
+# Axis families:
+#   * Original 5 (CRIT-01): historical, metaphysics, entity, arc, donts.
+#   * Phase 7 LLM-judged (D-26): pov_fidelity, motivation_fidelity,
+#     treatment_fidelity, content_ownership, named_quantity_drift,
+#     scene_buffer_similarity. Live in templates/system.j2 rubric block.
+#   * Phase 7 pre-LLM deterministic short-circuits: stub_leak (D-27 hard
+#     reject), repetition_loop (D-19). Filled by physics scans BEFORE the
+#     Anthropic call; intentionally absent from the LLM rubric prompt
+#     (anti-pattern — see 07-PATTERNS.md).
 #
 # severity_thresholds map per-axis normalized score → severity bucket used by
 # the regenerator to decide which issues to fix first. weight is the axis's
-# contribution to the overall pass/fail gate (arc is slightly discounted
-# because beat-function alignment is harder to score precisely at scene level).
-rubric_version: "v1"
+# contribution to the overall pass/fail gate.
+#
+# motivation_fidelity is LOAD-BEARING per D-02: critic post-process forces
+# overall_pass=False on any motivation_fidelity FAIL, regardless of weight.
+rubric_version: "v2"
 axes:
   historical:
     description: "Facts, dates, places consistent with corpus historical bible."
@@ -44,6 +58,64 @@ axes:
       mid: 0.6
       high: 0.8
     weight: 1.0
+  # ----- Phase 7 atomics — LLM-judged (Plan 07-04 PHYSICS-07 / D-26) -----
+  pov_fidelity:
+    description: "Declared perspective vs produced. If perspective is 1st_person/3rd_close/3rd_limited/3rd_external, prose MUST NOT render the interior thought, sensation, or unspoken intent of any character OTHER than the declared focal character. Cite the location and the breaching prose on FAIL."
+    severity_thresholds:
+      low: 0.85
+      mid: 0.65
+      high: 0.40
+    weight: 1.0
+  motivation_fidelity:
+    description: "Each on_screen character's declared motivation must be served, frustrated, transformed, or pivoted on by the scene's events, dialogue, and interior. Drift, evaporation, or vestigial-label motivation = FAIL. (D-02 hard-stop: any FAIL forces overall_pass=False.)"
+    severity_thresholds:
+      low: 0.90
+      mid: 0.70
+      high: 0.50
+    weight: 2.0
+  treatment_fidelity:
+    description: "Tonal register (treatment enum) matches the per-treatment rubric: dramatic, mournful, comedic, light, propulsive, contemplative, ominous, liturgical, reportorial, intimate. Mismatch (e.g., mournful drafted as light) = FAIL."
+    severity_thresholds:
+      low: 0.85
+      mid: 0.65
+      high: 0.40
+    weight: 1.0
+  content_ownership:
+    description: "Scene N must NOT recap beats declared as scene M's owns / do_not_renarrate. Reference (one acknowledging sentence) = OK; recap (re-rendering sensory texture/dialogue/interior) = FAIL. Pay close attention to scene-buffer overlap."
+    severity_thresholds:
+      low: 0.85
+      mid: 0.60
+      high: 0.30
+    weight: 1.5
+  named_quantity_drift:
+    description: "Named quantities (character age, ship dimensions, location dates, named-entity sizes) produced in prose MUST match canonical CB-01 values stamped at top-of-prompt. Even one drift = mid; multiple drifts = high."
+    severity_thresholds:
+      low: 1.0
+      mid: 0.85
+      high: 0.50
+    weight: 1.5
+  scene_buffer_similarity:
+    description: "BGE-M3 cosine vs prior committed scenes. >=0.80 cosine = recap → FAIL. Plan 07-05 wires the cosine input; this axis name is reserved here so the schema fills cleanly."
+    severity_thresholds:
+      low: 1.0
+      mid: 0.85
+      high: 0.50
+    weight: 1.5
+  # ----- Phase 7 atomics — pre-LLM deterministic (Plan 07-04 PHYSICS-08/09) ----
+  stub_leak:
+    description: "Stub vocabulary (Establish:, Resolve:, Set up:, etc.) leaked into prose. PRE-LLM regex short-circuit — this axis is filled by deterministic scan, not by LLM judgment."
+    severity_thresholds:
+      low: 1.0
+      mid: 1.0
+      high: 0.50
+    weight: 2.0
+  repetition_loop:
+    description: "Degenerate trigram repetition or identical-line repetition. PRE-LLM detector with treatment-conditional thresholds (LITURGICAL raised). This axis is filled by deterministic scan, not by LLM judgment."
+    severity_thresholds:
+      low: 1.0
+      mid: 1.0
+      high: 0.50
+    weight: 1.5
 
 # ---------------------------------------------------------------------------
 # Chapter-level rubric (Plan 04-02, CRIT-02). Additive under Phase 1 freeze.

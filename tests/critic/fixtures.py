@@ -23,39 +23,67 @@ def make_canonical_critic_response(
     *,
     overall_pass: bool = True,
     include_all_axes: bool = True,
-    rubric_version: str = "v1",
+    rubric_version: str = "v2",
     model_id: str = "claude-opus-4-7",
 ) -> CriticResponse:
-    """Return a canonical CriticResponse for tests."""
+    """Return a canonical CriticResponse for tests.
+
+    Plan 07-04 update: rubric_version default bumped from 'v1' to 'v2' and
+    pass_per_axis emits all 13 axes (5 original + 6 LLM-judged physics +
+    2 pre-LLM short-circuits) when ``include_all_axes=True``. The chapter
+    critic rubric stays 5-axis (chapter_rubric_version='chapter.v1') —
+    test_chapter_critic.py callers pass ``rubric_version='chapter.v1'``
+    explicitly, so the 13-axis fill below is harmless to them: chapter
+    critic post-process iterates ``CHAPTER_REQUIRED_AXES`` (still 5) and
+    ignores keys outside its set.
+    """
+    # 13-axis canonical pass set (Plan 07-04 PHYSICS-07).
+    canonical_axes_pass: dict[str, bool] = {
+        # Original 5.
+        "historical": overall_pass,
+        "metaphysics": True,
+        "entity": True,
+        "arc": True,
+        "donts": True,
+        # Phase 7 LLM-judged.
+        "pov_fidelity": True,
+        "motivation_fidelity": True,
+        "treatment_fidelity": True,
+        "content_ownership": True,
+        "named_quantity_drift": True,
+        "scene_buffer_similarity": True,
+        # Phase 7 pre-LLM (filled deterministically; default to pass for tests).
+        "stub_leak": True,
+        "repetition_loop": True,
+    }
+    canonical_axes_scores: dict[str, float] = {
+        "historical": 92.0 if overall_pass else 45.0,
+        "metaphysics": 88.0,
+        "entity": 90.0,
+        "arc": 89.0,
+        "donts": 94.0,
+        "pov_fidelity": 90.0,
+        "motivation_fidelity": 92.0,
+        "treatment_fidelity": 88.0,
+        "content_ownership": 91.0,
+        "named_quantity_drift": 95.0,
+        "scene_buffer_similarity": 88.0,
+        "stub_leak": 100.0,
+        "repetition_loop": 100.0,
+    }
+
     if include_all_axes:
-        pass_per_axis = {
-            "historical": overall_pass,
-            "metaphysics": True,
-            "entity": True,
-            "arc": True,
-            "donts": True,
-        }
-        scores_per_axis = {
-            "historical": 92.0 if overall_pass else 45.0,
-            "metaphysics": 88.0,
-            "entity": 90.0,
-            "arc": 89.0,
-            "donts": 94.0,
-        }
+        pass_per_axis = dict(canonical_axes_pass)
+        scores_per_axis = dict(canonical_axes_scores)
     else:
-        # Omit 'metaphysics' to exercise the fill-in path.
-        pass_per_axis = {
-            "historical": True,
-            "entity": True,
-            "arc": True,
-            "donts": True,
-        }
-        scores_per_axis = {
-            "historical": 92.0,
-            "entity": 90.0,
-            "arc": 89.0,
-            "donts": 94.0,
-        }
+        # Omit 'metaphysics' to exercise the fill-in path. All other axes
+        # still emitted (Plan 07-04: existing test_C asserts only the
+        # filled_axes==['metaphysics'] case, so we keep the 8 new axes
+        # populated to avoid spurious fill events on the same call).
+        pass_per_axis = dict(canonical_axes_pass)
+        scores_per_axis = dict(canonical_axes_scores)
+        pass_per_axis.pop("metaphysics", None)
+        scores_per_axis.pop("metaphysics", None)
 
     issues: list[CriticIssue] = []
     if not overall_pass:

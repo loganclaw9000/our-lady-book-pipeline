@@ -83,11 +83,14 @@ def test_rubric_rejects_wrong_axes(tmp_path: Path, monkeypatch: pytest.MonkeyPat
 
 def test_rubric_accepts_valid_5_axes(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """Sanity counterpart — confirms monkeypatch.chdir actually loads the tmp
-    file (not the real repo config) by making a valid 5-axis rubric at
+    file (not the real repo config) by making a valid 13-axis rubric at
     tmp_path and asserting it loads.
 
-    Plan 04-02 added `chapter_rubric_version` + `chapter_axes` to the YAML
-    shape; the fixture writes both to match the new RubricConfig requirement.
+    Plan 04-02 added `chapter_rubric_version` + `chapter_axes` to the YAML.
+    Plan 07-04 (PHYSICS-07) bumped the scene rubric from 5 to 13 axes; the
+    fixture writes all 13 to match the new RubricConfig requirement. The
+    test name is preserved for git-blame stability — "5 axes" is now
+    historical (chapter rubric still has 5).
     """
     from book_pipeline.config.rubric import RubricConfig
 
@@ -106,14 +109,27 @@ def test_rubric_accepts_valid_5_axes(tmp_path: Path, monkeypatch: pytest.MonkeyP
         "    score_threshold_0to5: 3\n"
         "    weight: 1.0\n"
     )
+    scene_axes = (
+        "historical",
+        "metaphysics",
+        "entity",
+        "arc",
+        "donts",
+        # Phase 7 atomics — 6 LLM-judged + 2 pre-LLM short-circuits.
+        "pov_fidelity",
+        "motivation_fidelity",
+        "treatment_fidelity",
+        "content_ownership",
+        "named_quantity_drift",
+        "scene_buffer_similarity",
+        "stub_leak",
+        "repetition_loop",
+    )
+    scene_axes_yaml = "".join(f"  {axis}:\n{axis_block}" for axis in scene_axes)
     good.write_text(
-        "rubric_version: v1\n"
+        "rubric_version: v2\n"
         "axes:\n"
-        f"  historical:\n{axis_block}"
-        f"  metaphysics:\n{axis_block}"
-        f"  entity:\n{axis_block}"
-        f"  arc:\n{axis_block}"
-        f"  donts:\n{axis_block}"
+        f"{scene_axes_yaml}"
         "chapter_rubric_version: chapter.v1\n"
         "chapter_axes:\n"
         f"  historical:\n{chapter_axis_block}"
@@ -124,16 +140,44 @@ def test_rubric_accepts_valid_5_axes(tmp_path: Path, monkeypatch: pytest.MonkeyP
     )
     monkeypatch.chdir(tmp_path)
     cfg = RubricConfig()
-    assert set(cfg.axes.keys()) == {"historical", "metaphysics", "entity", "arc", "donts"}
+    assert set(cfg.axes.keys()) == set(scene_axes)
+    assert len(cfg.axes) == 13
     assert cfg.chapter_rubric.rubric_version == "chapter.v1"
 
 
 def test_rubric_real_config_has_5_axes() -> None:
+    """Plan 07-04: real config now has 13 scene axes; chapter rubric retains 5.
+
+    Test name preserved for git-blame stability.
+    """
     from book_pipeline.config.rubric import RubricConfig
 
     cfg = RubricConfig()
-    assert set(cfg.axes.keys()) == {"historical", "metaphysics", "entity", "arc", "donts"}
-    assert cfg.rubric_version == "v1"
+    expected_scene_axes = {
+        "historical",
+        "metaphysics",
+        "entity",
+        "arc",
+        "donts",
+        "pov_fidelity",
+        "motivation_fidelity",
+        "treatment_fidelity",
+        "content_ownership",
+        "named_quantity_drift",
+        "scene_buffer_similarity",
+        "stub_leak",
+        "repetition_loop",
+    }
+    assert set(cfg.axes.keys()) == expected_scene_axes
+    assert cfg.rubric_version == "v2"
+    # Chapter rubric still 5-axis.
+    assert set(cfg.chapter_rubric.axes.keys()) == {
+        "historical",
+        "metaphysics",
+        "entity",
+        "arc",
+        "donts",
+    }
 
 
 # ---------------------------------------------------------------------------

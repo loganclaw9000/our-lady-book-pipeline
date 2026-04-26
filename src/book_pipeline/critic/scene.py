@@ -35,9 +35,45 @@ from book_pipeline.observability.hashing import hash_text
 logger = logging.getLogger(__name__)
 
 
-# Canonical 5-axis ordering for the system prompt template. Matches
-# REQUIRED_AXES in book_pipeline.config.rubric.
-AXES_ORDERED: tuple[str, ...] = ("historical", "metaphysics", "entity", "arc", "donts")
+# Canonical 13-axis ordering for the system prompt template. Matches
+# REQUIRED_AXES in book_pipeline.config.rubric. Order is load-bearing per
+# Pitfall 9: schema field order = prompt rubric order.
+AXES_ORDERED: tuple[str, ...] = (
+    # Original 5 (CRIT-01).
+    "historical",
+    "metaphysics",
+    "entity",
+    "arc",
+    "donts",
+    # Phase 7 LLM-judged physics axes (Plan 07-04 PHYSICS-07 / D-26).
+    "pov_fidelity",
+    "motivation_fidelity",
+    "treatment_fidelity",
+    "content_ownership",
+    "named_quantity_drift",
+    "scene_buffer_similarity",
+    # Phase 7 pre-LLM deterministic short-circuits (Plan 07-04 PHYSICS-08/09).
+    # Filled by physics scans BEFORE the Anthropic call; intentionally absent
+    # from the LLM rubric block in templates/system.j2.
+    "stub_leak",
+    "repetition_loop",
+)
+
+# Phase 7 Plan 04: axes that the Anthropic LLM may NOT score (deterministic
+# pre-LLM short-circuits owned by physics/stub_leak.py and
+# physics/repetition_loop.py). Plan 07-05 wires the call sites that fill
+# these from physics scans before the Anthropic request.
+PHYSICS_DETERMINISTIC_AXES: frozenset[str] = frozenset({"stub_leak", "repetition_loop"})
+
+# Phase 7 Plan 04: LLM-judged physics axes; filled by Anthropic response.
+PHYSICS_LLM_JUDGED_AXES: tuple[str, ...] = (
+    "pov_fidelity",
+    "motivation_fidelity",
+    "treatment_fidelity",
+    "content_ownership",
+    "named_quantity_drift",
+    "scene_buffer_similarity",
+)
 
 # Default audit dir — overridable via SceneCritic(audit_dir=...).
 DEFAULT_AUDIT_DIR = Path("runs/critic_audit")
@@ -434,6 +470,20 @@ class SceneCritic:
                 expected_overall,
             )
             parsed.overall_pass = expected_overall
+
+        # Phase 7 Plan 04 PHYSICS-13: motivation_fidelity is the load-bearing
+        # axis (D-02). A FAIL on this axis forces overall_pass=False
+        # UNCONDITIONALLY, regardless of other axes. This is a hard-stop, not
+        # a severity-weighted vote. The check is BELOW the existing
+        # all-axes-AND invariant fix-up so that even if a future change
+        # relaxes the AND, the hard-stop persists.
+        if parsed.pass_per_axis.get("motivation_fidelity") is False:
+            if parsed.overall_pass:
+                logger.warning(
+                    "motivation_fidelity FAIL forces overall_pass=False (D-02 load-bearing)"
+                )
+                invariant_fixed = True
+            parsed.overall_pass = False
 
         # Always override rubric_version to the critic's source-of-truth.
         if parsed.rubric_version != self.rubric.rubric_version:

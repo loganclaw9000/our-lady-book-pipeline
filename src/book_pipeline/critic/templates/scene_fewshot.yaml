@@ -96,5 +96,104 @@ good:
     issues: []
     overall_pass: true
     model_id: "claude-opus-4-7"
-    rubric_version: "v1"
+    rubric_version: "v2"
     output_sha: "<runtime-computed>"
+
+# ---------------------------------------------------------------------------
+# Phase 7 Plan 04 (PHYSICS-07) — per-axis subjective few-shots.
+#
+# Pitfall 2 + Warning #3 budget: <=8 NEW entries TOTAL across these 4
+# subjective axes. The other 4 Phase-7 axes get NO few-shots:
+#   * stub_leak / repetition_loop are pre-LLM deterministic — never reach LLM.
+#   * named_quantity_drift / scene_buffer_similarity are programmatic
+#     (compare-to-canonical / cosine) — examples don't add ground truth.
+# Test 9 (test_scene_13axis.py::test_9_scene_fewshot_yaml_phase7_budget_within_8)
+# enforces the cap.
+#
+# Each axis bucket carries `bad` (one breach) + `good` (one clean) entry.
+# Total: 4 axes * 2 entries = 8.
+# ---------------------------------------------------------------------------
+axes:
+  pov_fidelity:
+    bad:
+      - description: "POV breach — Andrés-focal scene renders Itzcoatl's interior."
+        scene_text: |
+          Andrés crossed the plaza at dawn, his palms damp inside his gauntlets.
+          The Mexica man waiting on the temple steps did not move. Itzcoatl
+          watched him come and felt the cold knot of recognition: this was
+          the Spaniard who would carry his bones. He chose the words he would
+          not say. Andrés stopped three paces short and waited.
+        breach: "Andrés is the declared focal character but the prose renders Itzcoatl's interior thought ('felt the cold knot', 'chose the words he would not say')."
+        verdict: "pov_fidelity FAIL — high severity. Cite the second sentence as the breach."
+    good:
+      - description: "POV intact — Andrés-focal stays outside Itzcoatl's interior."
+        scene_text: |
+          Andrés crossed the plaza at dawn, his palms damp inside his gauntlets.
+          The Mexica man waiting on the temple steps did not move. His face
+          showed nothing. Andrés stopped three paces short and waited for the
+          first word.
+        verdict: "pov_fidelity PASS — Itzcoatl's affect is rendered externally only ('did not move', 'face showed nothing')."
+
+  content_ownership:
+    bad:
+      - description: "Recap — sc02 re-renders sc01's owned arrival beat."
+        scene_text: |
+          The morning Cortés had ridden into Cempoala, the dust had risen waist-high,
+          the cacique's banners had bowed, and the boy in the cotton tunic had darted
+          from the doorway. Now Tapia stood in the plaza recalling each detail —
+          the slow tilt of the banner, the sweat on the cacique's collar, the
+          horse-shy. He drew the next breath of the new day.
+        breach: "sc01 owns ch15_sc01_arrival; this passage re-renders sensory texture (dust waist-high, banner tilt, sweat) instead of referencing it in one acknowledging sentence."
+        verdict: "content_ownership FAIL — recap of owned-elsewhere material."
+    good:
+      - description: "Reference — one acknowledging sentence, no recap."
+        scene_text: |
+          A day after the arrival, Tapia stood in the plaza. The dust had
+          settled. He drew the next breath of the new day and walked toward
+          the temple stair.
+        verdict: "content_ownership PASS — one-line callback ('A day after the arrival') without re-rendering."
+
+  treatment_fidelity:
+    bad:
+      - description: "Treatment mismatch — declared mournful, drafted as light."
+        scene_text: |
+          The mass for Bernardo went well. Padre Olmedo cracked a small joke
+          about the wine being too sweet, and the men laughed easily. Andrés
+          smiled at the back of the chapel. Outside, the morning was bright,
+          the bells were cheerful, and someone whistled a marching tune as
+          the procession formed.
+        declared_treatment: "mournful"
+        breach: "Diction is comedic/light (cracked a joke, men laughed, bright morning, cheerful bells, whistled tune) but the scene's declared treatment is mournful — a funeral mass."
+        verdict: "treatment_fidelity FAIL — register mismatch."
+    good:
+      - description: "Treatment match — mournful diction in a funeral scene."
+        scene_text: |
+          The mass for Bernardo proceeded slowly. Padre Olmedo's voice was
+          thin in the chapel air. The men did not look at one another.
+          Andrés stood at the back, his hands folded, and the bells rang
+          once, low, when the body was named.
+        declared_treatment: "mournful"
+        verdict: "treatment_fidelity PASS — diction (slowly, thin, did not look, low) matches mournful register."
+
+  motivation_fidelity:
+    bad:
+      - description: "Motivation drift — declared 'warn Xochitl' but scene serves a different aim."
+        scene_text: |
+          Andrés walked the rampart at dusk. He thought about the count's
+          last words to him, and about the ship he had not boarded, and
+          about whether his mother in Córdoba had kept the second letter.
+          He did not see Xochitl pass below him in the courtyard. He did
+          not call out. The dusk thickened.
+        declared_motivation: "warn Xochitl about the count's intent"
+        breach: "Declared motivation is to warn Xochitl. The scene gives Andrés a different active mind (memory, regret) and Xochitl passes unnoticed — the motivation is vestigial-label only."
+        verdict: "motivation_fidelity FAIL — D-02 hard-stop: overall_pass forced to False."
+    good:
+      - description: "Motivation centered — declared aim drives the scene's events."
+        scene_text: |
+          Andrés walked the rampart at dusk and watched the courtyard below
+          for Xochitl's red shawl. When she crossed the well he raised one
+          hand — not enough to draw a guard's eye, only enough to catch her
+          step. She slowed. He spoke the count's name across the distance
+          between them, twice, and saw the recognition reach her face.
+        declared_motivation: "warn Xochitl about the count's intent"
+        verdict: "motivation_fidelity PASS — Andrés's actions (watching for shawl, hand-signal, naming the count) directly serve the declared aim."

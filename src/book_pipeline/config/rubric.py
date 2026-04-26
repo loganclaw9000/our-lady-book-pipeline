@@ -19,9 +19,35 @@ from pydantic_settings import (
 
 from book_pipeline.config.sources import YamlConfigSettingsSource
 
-REQUIRED_AXES: frozenset[str] = frozenset({"historical", "metaphysics", "entity", "arc", "donts"})
-# Plan 04-02 (CRIT-02): chapter critic enforces the same 5-axis set. Named
-# separately so future evolution of scene vs chapter axes remains decoupled.
+# Phase 7 Plan 04 PHYSICS-07: extend from 5 to 13 axes. The 5 originals
+# (historical / metaphysics / entity / arc / donts) stay; 6 new LLM-judged
+# axes ride on the existing single-call structured-output path
+# (pov_fidelity / motivation_fidelity / treatment_fidelity / content_ownership
+#  / named_quantity_drift / scene_buffer_similarity); 2 deterministic pre-LLM
+# short-circuits (stub_leak / repetition_loop) are filled by physics scans
+# BEFORE the Anthropic call (D-27 hard reject + D-19 degenerate-loop).
+#
+# Display order is owned by AXES_ORDERED in book_pipeline.critic.scene.
+REQUIRED_AXES: frozenset[str] = frozenset({
+    "historical",
+    "metaphysics",
+    "entity",
+    "arc",
+    "donts",
+    # Phase 7 atomics — D-26:
+    "pov_fidelity",
+    "motivation_fidelity",
+    "treatment_fidelity",
+    "content_ownership",
+    "named_quantity_drift",
+    "scene_buffer_similarity",
+    # Phase 7 atomics — pre-LLM deterministic short-circuits (Plan 07-04):
+    "stub_leak",
+    "repetition_loop",
+})
+# Plan 04-02 (CRIT-02): chapter critic enforces the original 5-axis set
+# only. Named separately so future evolution of scene vs chapter axes
+# remains decoupled. Phase 7 atomics are scene-grain only.
 CHAPTER_REQUIRED_AXES: frozenset[str] = frozenset(
     {"historical", "metaphysics", "entity", "arc", "donts"}
 )
