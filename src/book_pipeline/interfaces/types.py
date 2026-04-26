@@ -20,6 +20,7 @@ existing field is renamed/removed; these are additive only.
 
 from __future__ import annotations
 
+import contextlib
 from enum import Enum
 from typing import TYPE_CHECKING
 
@@ -446,10 +447,8 @@ __all__ = [
 # is already exempted via pyproject.toml ignore_imports edge; calling the helper
 # from this module-tail does NOT add a new edge (the helper body is the only
 # place the physics import happens).
-try:
+# Physics package not installed alongside interfaces -> suppress and leave
+# DraftRequest in forward-ref state; callers that need scene_metadata
+# wiring will need to import book_pipeline.physics explicitly.
+with contextlib.suppress(ImportError):
     _rebuild_for_physics_forward_ref()
-except ImportError:
-    # Physics package not installed alongside interfaces. Leave DraftRequest
-    # in forward-ref state; callers that need scene_metadata wiring will
-    # need to import book_pipeline.physics explicitly.
-    pass
