@@ -28,6 +28,12 @@ bundler:
   assembly_strategy: "round_robin"
   enforce_cap: true
   emit_conflicts_to: "drafts/retrieval_conflicts/"
+  # Plan 07-02 (PHYSICS-04 / D-22): per-axis byte cap for the 6th retriever
+  # (continuity_bible / CB-01). 8KB keeps canonical-quantity hits from
+  # crowding the 40KB total bundler budget while leaving room for the
+  # canonical-stamp values to inject at the top of the drafter prompt (D-23).
+  per_axis_byte_caps:
+    continuity_bible: 8192
 retrievers:
   historical:
     index_path: "indexes/historical/"
@@ -56,3 +62,15 @@ retrievers:
     source_files:
       - "~/Source/our-lady-of-champion/known-liberties.md"
     chunk_strategy: "topic_tag"
+  # Plan 07-02 (PHYSICS-04 / D-22): 6th retriever lane. Source is
+  # config/canonical_quantities_seed.yaml (operator-truth hand-seed per OQ-05
+  # (c) RESOLVED 2026-04-25) — NOT a corpus markdown file. The chunk_strategy
+  # is "structured_yaml" because each YAML entry maps 1:1 to a LanceDB row;
+  # no markdown chunking is performed. CorpusIngester does NOT read from this
+  # entry — the dedicated ingest_canonical_quantities() function in
+  # book_pipeline.corpus_ingest.canonical_quantities owns the write path.
+  continuity_bible:
+    index_path: "indexes/continuity_bible/"
+    source_files:
+      - "config/canonical_quantities_seed.yaml"
+    chunk_strategy: "structured_yaml"

@@ -47,8 +47,18 @@ with _contextlib.suppress(ImportError):  # Plan 02-04 not yet executed
         "book_pipeline.rag.retrievers.arc_position"
     ).ArcPositionRetriever
 
+# Plan 07-02: 6th retriever (CB-01 / continuity_bible) — same import-guarded
+# fallback pattern. Once this plan lands the symbol resolves to the real class;
+# pre-Plan-07-02 callers that probed the attribute saw None.
+ContinuityBibleRetriever: _Any = None
+with _contextlib.suppress(ImportError):  # Plan 07-02 not yet executed
+    ContinuityBibleRetriever = _importlib.import_module(
+        "book_pipeline.rag.retrievers.continuity_bible"
+    ).ContinuityBibleRetriever
+
 __all__ = [
     "ArcPositionRetriever",
+    "ContinuityBibleRetriever",
     "EntityStateRetriever",
     "HistoricalRetriever",
     "LanceDBRetrieverBase",
