@@ -25,6 +25,7 @@ from book_pipeline.physics.gates import (
     run_pre_flight,
 )
 from book_pipeline.physics.locks import PovLock, load_pov_locks
+from book_pipeline.physics.repetition_loop import RepetitionHit, scan_repetition_loop
 from book_pipeline.physics.schema import (
     BeatTag,
     CharacterPresence,
@@ -35,6 +36,11 @@ from book_pipeline.physics.schema import (
     Treatment,
     ValueCharge,
 )
+from book_pipeline.physics.stub_leak import (
+    STUB_LEAK_PATTERNS,
+    StubLeakHit,
+    scan_stub_leak,
+)
 
 # Resolve DraftRequest.scene_metadata forward-ref now that SceneMetadata is
 # importable. Done at first physics import so any caller that has imported
@@ -44,6 +50,7 @@ _rebuild_for_physics_forward_ref()
 del _rebuild_for_physics_forward_ref  # internal only
 
 __all__ = [
+    "STUB_LEAK_PATTERNS",
     "BeatTag",
     "CanonBibleView",
     "CanonicalQuantityRow",
@@ -53,12 +60,16 @@ __all__ = [
     "GateResult",
     "Perspective",
     "PovLock",
+    "RepetitionHit",
     "SceneMetadata",
     "Staging",
+    "StubLeakHit",
     "Treatment",
     "ValueCharge",
     "build_canon_bible_view",
     "emit_gate_event",
     "load_pov_locks",
     "run_pre_flight",
+    "scan_repetition_loop",
+    "scan_stub_leak",
 ]

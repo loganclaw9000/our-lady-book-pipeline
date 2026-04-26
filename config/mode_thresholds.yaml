@@ -72,3 +72,14 @@ critic_backend:
 regen:
   r_cap_mode_a: 3
   spend_cap_usd_per_scene: 0.75
+# Phase 7 Plan 04 (PHYSICS-09): repetition_loop treatment-conditional thresholds.
+# Pitfall 10: LITURGICAL treatment (chant, prayer, ritual) raises threshold;
+# default treatment uses tighter thresholds. Identical-line counts are the
+# MAX allowed — >=count+1 distinct identical lines = FAIL.
+physics_repetition:
+  default:
+    trigram_repetition_rate_max: 0.15
+    identical_line_count_max: 2  # >=3 identical lines fails
+  liturgical_treatment:
+    trigram_repetition_rate_max: 0.40
+    identical_line_count_max: 5  # >=6 identical lines fails

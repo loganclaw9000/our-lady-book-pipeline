@@ -17,7 +17,6 @@ from book_pipeline.physics import scan_repetition_loop
 from book_pipeline.physics.repetition_loop import RepetitionHit
 from book_pipeline.physics.schema import Treatment
 
-
 # ch10 sc02-style canary (D-19 — degenerate-loop manuscript evidence).
 CH10_SC02_CANARY = (
     "He did not sleep.\n"
@@ -95,22 +94,22 @@ def test_10_threshold_dict_overrides_honored() -> None:
 
 
 def test_11_healthy_scene_passes() -> None:
-    """Test 11: healthy 1000-word scene returns [] (false-positive guard)."""
-    sentences = [
-        "Andrés knelt at the altar in the chapel of Havana.",
-        "The hum rose around him, a vibration in the bones of the building.",
-        "Two candles burned beside the painted Lady of Antigua.",
-        "His mother had brought him to the reliquary when he was five.",
-        "The priest stepped away after the host went into his mouth.",
-        "Outside on the mole, La Niña stood in her cradle, fifty feet of plate.",
-        "The fleet rode at anchor; the morning tide would carry them west.",
-        "He had written his mother that afternoon; the dusk boat would take it.",
-        "The men of the Santa Bárbara watched him pass and they did not speak.",
-        "He stopped at the rail at the far end of the mole and looked west.",
-    ]
-    # Fifty distinct sentences mixed up — ~1000 words, healthy variety.
-    base = " ".join(sentences * 5)
-    hits = scan_repetition_loop(base)
+    """Test 11: healthy varied scene returns [] (false-positive guard).
+
+    Pulls the opening of canon/chapter_01.md (committed prose, varied
+    sentence shapes) — exactly the kind of scene that must NOT fire the
+    detector. If this test fails, the detector is too sensitive.
+    """
+    canon_path = Path("canon/chapter_01.md")
+    if not canon_path.exists():
+        pytest.skip("canon/chapter_01.md not committed")
+    body = canon_path.read_text(encoding="utf-8")
+    # Strip frontmatter (between first two `---` markers) so we don't pick up
+    # the YAML structure. Use first 3000 chars of prose for a substantial
+    # but quick test.
+    prose = body.split("---", 2)[-1] if body.startswith("---") else body
+    prose_sample = prose[:3000]
+    hits = scan_repetition_loop(prose_sample)
     assert hits == [], f"healthy varied prose should pass, got: {hits}"
 
 

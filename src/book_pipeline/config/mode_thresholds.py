@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 from pydantic_settings import (
     BaseSettings,
     PydanticBaseSettingsSource,
@@ -129,6 +129,35 @@ class RegenConfig(BaseModel):
     spend_cap_usd_per_scene: float = Field(default=0.75, gt=0.0)
 
 
+class PhysicsRepetitionThresholds(BaseModel):
+    """One threshold profile for repetition_loop (default OR liturgical).
+
+    Plan 07-04 PHYSICS-09 + Pitfall 10. ``identical_line_count_max`` is the
+    MAX permitted number of distinct identical lines — ``>=N+1`` fails.
+    """
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    trigram_repetition_rate_max: float = Field(default=0.15, ge=0.0, le=1.0)
+    identical_line_count_max: int = Field(default=2, ge=0)
+
+
+class PhysicsRepetitionConfig(BaseModel):
+    """physics_repetition section: default + liturgical_treatment thresholds."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    default: PhysicsRepetitionThresholds = Field(
+        default_factory=PhysicsRepetitionThresholds
+    )
+    liturgical_treatment: PhysicsRepetitionThresholds = Field(
+        default_factory=lambda: PhysicsRepetitionThresholds(
+            trigram_repetition_rate_max=0.40,
+            identical_line_count_max=5,
+        )
+    )
+
+
 class CriticBackendConfig(BaseModel):
     """Which backend SceneCritic + SceneLocalRegenerator use for Opus calls.
 
@@ -173,6 +202,12 @@ class ModeThresholdsConfig(BaseSettings):
     # means legacy mode_thresholds.yaml files without a `regen:` block still
     # validate (getting 3 / $0.75 defaults).
     regen: RegenConfig = Field(default_factory=RegenConfig)
+    # Plan 07-04 PHYSICS-09: repetition_loop treatment-conditional thresholds.
+    # default_factory means legacy mode_thresholds.yaml files without a
+    # `physics_repetition:` block still validate (getting Pitfall 10 defaults).
+    physics_repetition: PhysicsRepetitionConfig = Field(
+        default_factory=PhysicsRepetitionConfig
+    )
 
     model_config = SettingsConfigDict(
         yaml_file="config/mode_thresholds.yaml",

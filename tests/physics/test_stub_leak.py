@@ -23,7 +23,6 @@ import pytest
 from book_pipeline.physics import STUB_LEAK_PATTERNS, scan_stub_leak
 from book_pipeline.physics.stub_leak import _PATTERN_DIRECTIVE
 
-
 # Canary fixture — literal stub leak from drafts/ch11/ch11_sc03.md line 119
 # (D-17 + the failure-evidence anchor for PHYSICS-08).
 CH11_SC03_CANARY = (
