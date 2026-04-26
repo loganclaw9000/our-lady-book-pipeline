@@ -34,9 +34,8 @@ from book_pipeline.observability.hashing import event_id as compute_event_id
 from book_pipeline.observability.hashing import hash_text
 
 # Phase 7 Plan 05: pre-LLM short-circuit hooks (PHYSICS-08 / PHYSICS-09) +
-# scene-buffer cosine override input (PHYSICS-10 / D-28). Imports kept local
-# to this module — kernel discipline preserved (physics has no
-# book_specifics imports).
+# scene-buffer cosine override input (PHYSICS-10 / D-28). The physics
+# package is a clean kernel module with no domain-coupled imports.
 from book_pipeline.physics import (
     Treatment,
     max_cosine,

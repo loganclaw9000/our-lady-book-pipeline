@@ -44,6 +44,12 @@ from typing import Any
 
 import yaml
 
+# Phase 7 Plan 05: physics deps for ch15+ generation. Importing
+# book_pipeline.physics also triggers DraftRequest + CriticRequest forward-
+# ref resolution for scene_metadata (BLOCKER #5: load-bearing wiring point).
+from book_pipeline.physics import SceneEmbeddingCache
+from book_pipeline.physics.schema import SceneMetadata
+
 logger = logging.getLogger(__name__)
 
 from book_pipeline.cli.main import register_subcommand
@@ -97,6 +103,13 @@ class CompositionRoot:
     # TELEGRAM_BOT_TOKEN set).
     mode_b_drafter: Any | None = None
     telegram_alerter: Any | None = None
+    # Phase 7 Plan 05 additions — physics deps for ch15+ generation.
+    # scene_metadata: Phase 7 v2 SceneMetadata (BLOCKER #5 wiring point).
+    #   None for pre-Phase-7 stubs (ch01-04 path stays unchanged).
+    # scene_buffer_cache: SceneEmbeddingCache against
+    #   .planning/intel/scene_embeddings.sqlite (D-28 PHYSICS-10).
+    scene_metadata: SceneMetadata | None = None
+    scene_buffer_cache: Any | None = None
 
 
 # --------------------------------------------------------------------------- #
@@ -212,6 +225,64 @@ def _load_scene_request(yaml_path: Path) -> SceneRequest:
         beat_function=str(data["beat_function"]),
         preceding_scene_summary=data.get("preceding_scene_summary"),
     )
+
+
+def _load_scene_metadata(yaml_path: Path) -> SceneMetadata | None:
+    """Load Phase 7 v2 SceneMetadata from the stub YAML if present.
+
+    Phase 7 Plan 01 introduced the v2 SceneMetadata schema. Hand-authored
+    stubs may include a top-level ``scene_metadata:`` block (or the v2
+    fields inline alongside SceneRequest fields). Returns None when the
+    stub does not carry v2 metadata — preserves backward compat for the
+    pre-Phase-7 stubs (ch01-04 etc.).
+
+    BLOCKER #5: this is the SINGLE load site for SceneMetadata. The
+    resulting object flows directly through DraftRequest.scene_metadata +
+    CriticRequest.scene_metadata — no side-channel closure.
+    """
+    data = yaml.safe_load(yaml_path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        return None
+    # Two valid shapes:
+    #   1) nested: scene_metadata: {chapter:..., scene_index:..., ...}
+    #   2) inline: every required v2 field present at the top level
+    payload: dict[str, Any] | None = None
+    if "scene_metadata" in data and isinstance(data["scene_metadata"], dict):
+        payload = data["scene_metadata"]
+    elif "contents" in data and "characters_present" in data:
+        payload = data
+    if payload is None:
+        return None
+    try:
+        return SceneMetadata.model_validate(payload)
+    except Exception:
+        logger.exception(
+            "scene_metadata in %s failed validation; "
+            "proceeding without (pre-Phase-7 path)",
+            yaml_path,
+        )
+        return None
+
+
+def _list_prior_committed_scene_ids(chapter: int, scene_index: int) -> list[str]:
+    """Return list of committed scene_ids strictly prior to (chapter, scene_index).
+
+    Used to seed CriticRequest.prior_scene_ids for the scene-buffer cosine
+    cosine compare. Pulls from drafts/ch{NN}/ch{NN}_sc{II}.md filenames.
+    """
+    out: list[str] = []
+    for ch in range(1, chapter + 1):
+        ch_dir = Path(f"drafts/ch{ch:02d}")
+        if not ch_dir.is_dir():
+            continue
+        for path in sorted(ch_dir.glob(f"ch{ch:02d}_sc*.md")):
+            m = re.match(rf"ch{ch:02d}_sc(\d+)\.md", path.name)
+            if m is None:
+                continue
+            sc_idx = int(m.group(1))
+            if ch < chapter or (ch == chapter and sc_idx < scene_index):
+                out.append(f"ch{ch:02d}_sc{sc_idx:02d}")
+    return out
 
 
 # --------------------------------------------------------------------------- #
@@ -456,6 +527,9 @@ def _run_mode_b_attempt(
     record: SceneStateRecord,
     alerter: Any = None,
     event_logger: Any = None,
+    # Phase 7 Plan 05 — physics wiring (BLOCKER #5).
+    scene_metadata_for_request: Any | None = None,
+    prior_ids_for_request: list[str] | None = None,
 ) -> int:
     """Run one Mode-B draft attempt; on success critic-gate; else HARD_BLOCK.
 
@@ -488,12 +562,17 @@ def _run_mode_b_attempt(
         return 3
 
     # Critic-gate the Mode-B draft.
+    # Phase 7 Plan 05 (BLOCKER #5): scene_metadata + prior_scene_ids piggy-
+    # back through the CriticRequest so the critic's pre-LLM hooks +
+    # scene-buffer cosine compare have everything they need.
     critic_req = CriticRequest(
         scene_text=b_draft.scene_text,
         context_pack=pack,
         rubric_id="scene.v1",
         rubric_version=getattr(rubric, "rubric_version", "v1"),
         chapter_context={"attempt_number": 1, "mode": "B"},
+        scene_metadata=scene_metadata_for_request,
+        prior_scene_ids=prior_ids_for_request or [],
     )
     try:
         b_critic_resp = critic.review(critic_req)
@@ -639,6 +718,16 @@ def run_draft_loop(
     rubric = composition_root.rubric
     ingestion_run_id = getattr(composition_root, "ingestion_run_id", None)
     event_logger = getattr(composition_root, "event_logger", None)
+    # Phase 7 Plan 05 (BLOCKER #5): physics wiring read directly from
+    # composition_root. NO closure dict, NO global mutable state. The
+    # scene_metadata field is the load-bearing wiring point — it flows
+    # untouched through every CriticRequest constructed below.
+    physics_scene_metadata: Any = getattr(
+        composition_root, "scene_metadata", None
+    )
+    physics_prior_ids: list[str] = _list_prior_committed_scene_ids(
+        chapter, scene_request.scene_index
+    )
 
     # Plan 05-02 composition-root additions (optional; default-safe for
     # existing Phase 3 callers that don't supply them).
@@ -722,6 +811,8 @@ def run_draft_loop(
             record=record,
             alerter=getattr(composition_root, "alerter", None),
             event_logger=event_logger,
+            scene_metadata_for_request=physics_scene_metadata,
+            prior_ids_for_request=physics_prior_ids,
         )
 
     prior_draft: Any = None
@@ -899,12 +990,22 @@ def run_draft_loop(
 
         # --- DRAFTED_A → CRITIC_PASS or CRITIC_FAIL ---
         try:
+            # Phase 7 Plan 05 (BLOCKER #5): scene_metadata is the load-bearing
+            # field — read directly from CompositionRoot (NO closure dict, NO
+            # global mutable state). prior_scene_ids gives the scene-buffer
+            # cosine compare its lookup keys.
             critic_req = CriticRequest(
                 scene_text=draft.scene_text,
                 context_pack=pack,
                 rubric_id="scene.v1",
                 rubric_version=getattr(rubric, "rubric_version", "v1"),
                 chapter_context={"attempt_number": attempt},
+                scene_metadata=getattr(
+                    composition_root, "scene_metadata", None
+                ),
+                prior_scene_ids=_list_prior_committed_scene_ids(
+                    chapter, scene_request.scene_index
+                ),
             )
             critic_resp = composition_root.critic.review(critic_req)
         except SceneCriticError as e:
@@ -1022,6 +1123,8 @@ def run_draft_loop(
                     record=record,
                     alerter=getattr(composition_root, "alerter", None),
                     event_logger=event_logger,
+                    scene_metadata_for_request=physics_scene_metadata,
+                    prior_ids_for_request=physics_prior_ids,
                 )
 
         # --- Plan 05-02 D-09 step (d): R-cap exhausted. ---
@@ -1051,6 +1154,8 @@ def run_draft_loop(
                     record=record,
                     alerter=getattr(composition_root, "alerter", None),
                     event_logger=event_logger,
+                    scene_metadata_for_request=physics_scene_metadata,
+                    prior_ids_for_request=physics_prior_ids,
                 )
             # Legacy Phase 3 path (no Mode-B wired) — preserve HARD_BLOCKED.
             record = transition(
@@ -1125,6 +1230,10 @@ def _build_composition_root(
 
     # --- Scene request ---
     scene_request = _load_scene_request(scene_yaml_path)
+    # Phase 7 Plan 05 (BLOCKER #5): SceneMetadata is the load-bearing wiring
+    # point — read from the same stub yaml the SceneRequest came from.
+    # ``None`` for pre-Phase-7 stubs (ch01-04 path).
+    scene_metadata = _load_scene_metadata(scene_yaml_path)
 
     # --- Book-domain composition seams (ADR-004 / Plan 02-06 precedent) ---
     from book_pipeline.book_specifics.corpus_paths import OUTLINE
@@ -1216,11 +1325,35 @@ def _build_composition_root(
     critic_client = build_llm_client(critic_backend_cfg)
     regen_client = build_llm_client(critic_backend_cfg)
 
+    # Phase 7 Plan 05 (PHYSICS-10 / D-28): scene-buffer cosine cache.
+    # Production cache file lives at .planning/intel/scene_embeddings.sqlite;
+    # it grows by one row per (scene_id, bge_m3_revision_sha) and naturally
+    # invalidates when the embedder revision SHA bumps (Pitfall 7).
+    scene_buffer_cache = SceneEmbeddingCache(
+        db_path=Path(".planning/intel/scene_embeddings.sqlite"),
+        embedder=embedder,
+    )
+
+    # Repetition-loop thresholds — pulled from mode_thresholds.yaml so a
+    # Pitfall-10 retune lands without a code change.
+    repetition_thresholds = {
+        "default": mode_thresholds_cfg.physics_repetition.default.model_dump(),
+        "liturgical_treatment": (
+            mode_thresholds_cfg.physics_repetition.liturgical_treatment.model_dump()
+        ),
+    }
+
     critic = SceneCritic(
         anthropic_client=critic_client,
         event_logger=event_logger,
         rubric=rubric_cfg,
         model_id=critic_backend_cfg.model,
+        scene_buffer_cache=scene_buffer_cache,
+        scene_buffer_threshold=(
+            mode_thresholds_cfg.physics_dedup.scene_buffer_similarity_threshold
+        ),
+        repetition_thresholds=repetition_thresholds,
+        enable_pre_llm_short_circuits=True,
     )
 
     # --- Regenerator (Plan 03-06) ---
@@ -1258,6 +1391,8 @@ def _build_composition_root(
         event_logger=event_logger,
         mode_b_drafter=mode_b_drafter,
         telegram_alerter=telegram_alerter,
+        scene_metadata=scene_metadata,
+        scene_buffer_cache=scene_buffer_cache,
     )
 
 
