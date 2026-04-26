@@ -13,7 +13,17 @@ repetition_loop.py, scene_buffer.py).
 """
 
 from book_pipeline.interfaces.types import _rebuild_for_physics_forward_ref
-from book_pipeline.physics.gates import GateError, GateResult, emit_gate_event
+from book_pipeline.physics.canon_bible import (
+    CanonBibleView,
+    CanonicalQuantityRow,
+    build_canon_bible_view,
+)
+from book_pipeline.physics.gates import (
+    GateError,
+    GateResult,
+    emit_gate_event,
+    run_pre_flight,
+)
 from book_pipeline.physics.locks import PovLock, load_pov_locks
 from book_pipeline.physics.schema import (
     BeatTag,
@@ -35,6 +45,8 @@ del _rebuild_for_physics_forward_ref  # internal only
 
 __all__ = [
     "BeatTag",
+    "CanonBibleView",
+    "CanonicalQuantityRow",
     "CharacterPresence",
     "Contents",
     "GateError",
@@ -45,6 +57,8 @@ __all__ = [
     "Staging",
     "Treatment",
     "ValueCharge",
+    "build_canon_bible_view",
     "emit_gate_event",
     "load_pov_locks",
+    "run_pre_flight",
 ]

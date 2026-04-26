@@ -12,14 +12,21 @@ from book_pipeline.physics.canon_bible import CanonBibleView, CanonicalQuantityR
 from book_pipeline.physics.gates import GateError, run_pre_flight
 from book_pipeline.physics.gates import (
     motivation as motivation_gate,
+)
+from book_pipeline.physics.gates import (
     ownership as ownership_gate,
+)
+from book_pipeline.physics.gates import (
     pov_lock as pov_lock_gate,
+)
+from book_pipeline.physics.gates import (
     quantity as quantity_gate,
+)
+from book_pipeline.physics.gates import (
     treatment as treatment_gate,
 )
 from book_pipeline.physics.locks import PovLock
 from book_pipeline.physics.schema import Perspective, SceneMetadata
-
 
 # --- Helpers ---------------------------------------------------------------
 
@@ -202,15 +209,15 @@ def test_treatment_check_passes_when_enum_valid(valid_scene_payload: dict[str, A
 
 
 def test_quantity_check_passes_when_entity_resolves(valid_scene_payload: dict[str, Any]) -> None:
+    """All on-screen characters resolve to a CB-01 canonical row -> pass."""
     payload = dict(valid_scene_payload)
     payload["contents"] = dict(payload["contents"])
-    payload["contents"]["goal"] = "Andres reports the count's plan to Xochitl"
+    payload["contents"]["goal"] = "Andres surveys the count's troops at Cempoala"
     payload["characters_present"] = [
-        {"name": "Andres", "on_screen": True, "motivation": "warn Xochitl about the count"},
-        {"name": "Xochitl", "on_screen": True, "motivation": "decide whether to flee or stay"},
+        {"name": "Andres", "on_screen": True, "motivation": "warn the village about the count"},
     ]
     payload["staging"] = dict(payload["staging"])
-    payload["staging"]["on_screen"] = ["Andres", "Xochitl"]
+    payload["staging"]["on_screen"] = ["Andres"]
     stub = SceneMetadata.model_validate(payload)
     cb = _seeded_canon_bible()
     result = quantity_gate.check(stub, cb)
