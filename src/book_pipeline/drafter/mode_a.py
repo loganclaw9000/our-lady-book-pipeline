@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import re
 import time
+from collections.abc import Callable
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -55,6 +56,7 @@ from book_pipeline.drafter.vllm_client import VllmClient, VllmUnavailable
 from book_pipeline.interfaces.event_logger import EventLogger
 from book_pipeline.interfaces.types import DraftRequest, DraftResponse, Event
 from book_pipeline.observability.hashing import event_id, hash_text
+from book_pipeline.physics import GateError, GateResult
 from book_pipeline.voice_fidelity.scorer import score_voice_fidelity
 
 VOICE_DESCRIPTION = (
@@ -137,6 +139,25 @@ def _to_int(value: Any, *, default: int) -> int:
         return default
 
 
+# Phase 7 Plan 03: extend accepted-reasons set. The reason field is a free-form
+# str (not Literal/Enum) by historical Plan 03-04 contract; defense-in-depth
+# enforcement at runtime via this frozenset + validator below
+# (see <interfaces> in Plan 07-03 PLAN.md, BLOCKER #4 mitigation).
+_ACCEPTED_REASONS: frozenset[str] = frozenset(
+    {
+        "training_bleed",
+        "mode_a_unavailable",
+        "empty_completion",
+        "invalid_scene_type",
+        # Phase 7 Plan 03 additions (PHYSICS-05):
+        "physics_pre_flight_fail",
+        # Phase 7 Plan 04 reservation (critic axis, but the constant lives here so
+        # ModeADrafterBlocked can carry it on a future drafter-side surfacing path):
+        "pov_lock_violated",
+    }
+)
+
+
 class ModeADrafterBlocked(Exception):
     """Wraps every ModeADrafter failure mode for Plan 03-06 scene_state routing.
 
@@ -145,9 +166,21 @@ class ModeADrafterBlocked(Exception):
       - mode_a_unavailable
       - empty_completion
       - invalid_scene_type
+      - physics_pre_flight_fail   (Phase 7 Plan 03 PHYSICS-05)
+      - pov_lock_violated          (Phase 7 Plan 04 reservation; critic-axis side)
+
+    Runtime safety: ``__init__`` rejects any ``reason`` not in
+    ``_ACCEPTED_REASONS`` with a ``ValueError`` listing the accepted set. This
+    surfaces typos at the raise site instead of silently routing through with
+    an unknown reason that downstream handlers would misclassify.
     """
 
     def __init__(self, reason: str, **context: Any) -> None:
+        if reason not in _ACCEPTED_REASONS:
+            raise ValueError(
+                f"unknown ModeADrafterBlocked reason {reason!r}; "
+                f"expected one of {sorted(_ACCEPTED_REASONS)}"
+            )
         self.reason = reason
         self.context = context
         ctx_keys = ", ".join(sorted(context))
@@ -222,6 +255,12 @@ class ModeADrafter:
         sampling_profiles: SamplingProfiles,
         embedder_for_fidelity: Any | None = None,
         prompt_template_path: Path | None = None,
+        # Phase 7 Plan 03 additive-optional kwargs (PHYSICS-05 + PHYSICS-06).
+        # When None, drafter behaves identically to pre-Phase-7 (backward compat).
+        # When set, run BEFORE Jinja2 render + vLLM call (D-24 cheap-first).
+        physics_pre_flight: Callable[[DraftRequest], list[GateResult]] | None = None,
+        physics_canonical_stamp_factory: Callable[[DraftRequest], str] | None = None,
+        physics_beat_directive_factory: Callable[[DraftRequest], str] | None = None,
     ) -> None:
         self.vllm_client = vllm_client
         self.event_logger = event_logger
@@ -233,6 +272,10 @@ class ModeADrafter:
         self.prompt_template_path = (
             prompt_template_path if prompt_template_path is not None else _DEFAULT_TEMPLATE_PATH
         )
+        # Phase 7 physics composition seams — None preserves pre-Phase-7 flow.
+        self.physics_pre_flight = physics_pre_flight
+        self.physics_canonical_stamp_factory = physics_canonical_stamp_factory
+        self.physics_beat_directive_factory = physics_beat_directive_factory
 
         # Jinja2 env cached on self.
         if not self.prompt_template_path.exists():
@@ -284,6 +327,45 @@ class ModeADrafter:
             ) from exc
         profile = resolve_profile(self.sampling_profiles, scene_type)
 
+        # Phase 7 D-24: physics pre-flight gates (PHYSICS-05).
+        # Cheap, before any model call. ModeADrafterBlocked('physics_pre_flight_fail')
+        # on first high-severity FAIL — caller routes to scene-kick / re-stub.
+        if self.physics_pre_flight is not None:
+            try:
+                self.physics_pre_flight(request)
+            except GateError as gate_err:
+                failed_gate = getattr(gate_err, "failed_gate", "unknown")
+                results = getattr(gate_err, "results", [])
+                self._emit_error_event(
+                    reason="physics_pre_flight_fail",
+                    scene_id=scene_id,
+                    chapter=scene_request.chapter,
+                    pov=scene_request.pov,
+                    beat_function=scene_request.beat_function,
+                    scene_type=scene_type,
+                    attempt_number=attempt_number,
+                    failed_gate=failed_gate,
+                    gate_results=[r.model_dump() for r in results],
+                )
+                raise ModeADrafterBlocked(
+                    "physics_pre_flight_fail",
+                    scene_id=scene_id,
+                    attempt_number=attempt_number,
+                    failed_gate=failed_gate,
+                    gate_error=str(gate_err),
+                ) from gate_err
+
+        # Phase 7 D-23 + D-13: canonical stamp (top-of-prompt anchor) + fenced
+        # ownership/beat directive. Both are schema-derived stable strings
+        # (T-07-11 mitigation: only validated values cross the cached system
+        # template boundary; per-scene free-text never goes through Jinja2 here).
+        canonical_stamp = ""
+        if self.physics_canonical_stamp_factory is not None:
+            canonical_stamp = self.physics_canonical_stamp_factory(request) or ""
+        beat_directive = ""
+        if self.physics_beat_directive_factory is not None:
+            beat_directive = self.physics_beat_directive_factory(request) or ""
+
         # 3-5: render Jinja2, split on sentinels, assemble messages.
         word_target = _to_int(request.generation_config.get("word_target"), default=1000)
         rendered = self._template.render(
@@ -294,6 +376,8 @@ class ModeADrafter:
             prior_scenes=request.prior_scenes,
             word_target=word_target,
             scene_type=scene_type,
+            canonical_stamp=canonical_stamp,  # NEW (Plan 07-03 D-23)
+            beat_directive=beat_directive,    # NEW (Plan 07-03 D-13 anchor)
         )
         system_text, user_text = _split_on_sentinels(rendered)
         messages = [

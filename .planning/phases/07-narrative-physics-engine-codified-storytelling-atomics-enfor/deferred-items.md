@@ -22,6 +22,23 @@ follow-up plan or a docs(repo): chore commit to clean up.
 
 ## Plan 07-01 latent — `DraftRequest.model_rebuild()` not auto-triggered when only `interfaces.types` is imported
 
+**RESOLVED 2026-04-26 by Plan 07-03 (fix candidate 1).** `interfaces/types.py`
+now calls `_rebuild_for_physics_forward_ref()` opportunistically at module-tail
+in a `try/except ImportError: pass` block. Under normal install conditions
+both packages are present so the rebuild succeeds and DraftRequest is fully
+defined for any caller that imports `interfaces.types` alone. Previously-failing
+tests no longer surface `pydantic.errors.PydanticUserError: DraftRequest is not
+fully defined` (verified via `pytest tests/ -m "not slow"` — zero matches for
+"not fully defined"). Remaining test failures in `tests/drafter/test_mode_a.py`
+and elsewhere have DIFFERENT root causes (FakeVllmClient signature drift on
+`min_tokens`; SHA-mismatch in vllm_client tests; ChapterState semantic mismatch
+in dag tests) — these are pre-existing pre-Plan-07-03 issues out of SCOPE
+BOUNDARY for Plan 07-03's surface area. Original detail below.
+
+---
+
+## Plan 07-01 latent — DraftRequest model_rebuild (HISTORICAL — see RESOLVED above)
+
 Discovered 2026-04-26 during Plan 07-02 full-test-suite check. NOT introduced
 by Plan 07-02. Plan 07-01 added `DraftRequest.scene_metadata: SceneMetadata |
 None = None` as a forward-reference field; `_rebuild_for_physics_forward_ref()`

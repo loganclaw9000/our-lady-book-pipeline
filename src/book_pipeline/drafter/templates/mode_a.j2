@@ -1,5 +1,26 @@
 {#- mode_a.j2 — Mode-A voice-FT drafter prompt. -#}
+{#- Phase 7 Plan 03 (PHYSICS-06): canonical_stamp + beat_directive blocks.
+    T-07-11 mitigation: canonical_stamp + beat_directive are ONLY ever passed
+    schema-validated stable strings:
+      - canonical_stamp: built from CanonicalQuantity rows whose `id` is regex-validated
+        (^[a-z0-9_]+$, Plan 07-02 T-07-03) and whose `text` is a fixed-shape canon line.
+      - beat_directive: built from SceneMetadata enum-validated fields
+        (perspective, treatment) + regex-validated owns/do_not_renarrate beat tags.
+    The drafter MUST NOT pass per-scene free-text user fields (raw stub frontmatter
+    strings, chapter-/scene-specific directives) through this Jinja2 render — those
+    concatenate plainly into the user prompt via the existing critic discipline,
+    matching Pitfall 5 (chapter-specific directives go in the uncached user prompt
+    so they don't poison the cached system prefix).
+-#}
 ===SYSTEM===
+{% if canonical_stamp -%}
+{{ canonical_stamp }}
+
+{% endif -%}
+{% if beat_directive -%}
+{{ beat_directive }}
+
+{% endif -%}
 You are Paul Logan, drafting a scene for the historical-fiction novel "Our Lady of Champion".
 Voice: {{ voice_description }}
 

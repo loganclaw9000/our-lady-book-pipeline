@@ -422,3 +422,34 @@ __all__ = [
     "SceneStateRecord",
     "ThesisEvidence",
 ]
+
+
+# Phase 7 Plan 03: opportunistic forward-ref resolution.
+#
+# Plan 07-01 deferred DraftRequest.model_rebuild() to physics/__init__ to keep
+# the runtime interfaces module free of physics imports under import-linter
+# contract 2 (which already has a documented ignore_imports edge for this
+# coupling — see pyproject.toml). In practice many test paths construct
+# DraftRequest WITHOUT also importing book_pipeline.physics (logged at
+# .planning/phases/07-.../deferred-items.md as ~16 broken tests).
+#
+# Resolution: call the helper opportunistically here at module-tail. The
+# helper itself imports book_pipeline.physics.schema; if the physics package
+# is unavailable for any reason, the import fails silently and DraftRequest
+# remains in its forward-ref state (callers that need scene_metadata must
+# then explicitly import book_pipeline.physics, matching the original
+# Plan 07-01 contract). Under normal conditions both packages are present
+# in the same install, so the rebuild succeeds and DraftRequest is fully
+# defined for any caller that imports interfaces.types alone.
+#
+# import-linter coverage: the local import inside _rebuild_for_physics_forward_ref
+# is already exempted via pyproject.toml ignore_imports edge; calling the helper
+# from this module-tail does NOT add a new edge (the helper body is the only
+# place the physics import happens).
+try:
+    _rebuild_for_physics_forward_ref()
+except ImportError:
+    # Physics package not installed alongside interfaces. Leave DraftRequest
+    # in forward-ref state; callers that need scene_metadata wiring will
+    # need to import book_pipeline.physics explicitly.
+    pass
