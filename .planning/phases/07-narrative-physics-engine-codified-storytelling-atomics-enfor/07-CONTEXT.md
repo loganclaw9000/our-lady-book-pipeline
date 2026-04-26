@@ -168,6 +168,13 @@ Two reasonable resolutions:
 
 **OQ-04: NARRATIVE_PHYSICS.md as a permanent docs/ artifact?** Currently locked as a phase-research deliverable (D-20). Should the final synthesis live permanently in `docs/NARRATIVE_PHYSICS.md` (consulted by future plan + retrospective writers) or stay in `.planning/phases/07-.../07-NARRATIVE_PHYSICS.md` (phase-local)? Recommendation: copy to `docs/` on phase completion as the canonical narratology reference for future thesis registry.
 
+**OQ-05: Canonical-quantity seed source.** Surfaced by gsd-phase-researcher 2026-04-25. CB-01 retriever (D-22) needs initial canonical values for the 5 manuscript canaries (Andrés age, La Niña height, Santiago del Paso scale, Cholula date, Cempoala arrival). Three options:
+- **(a)** Operator hand-seeds `config/canonical_quantities_seed.yaml` with the 5 canaries before Plan 07-02 lands. Extraction agent fills the long tail post-ship.
+- **(b)** Pure extraction-agent: scan ch01-04 prose + lore-bible corpus, propose canonical values, operator approves a generated seed file.
+- **(c)** Hybrid (researcher recommendation): operator confirms the 5 canaries directly (low-effort, high-confidence); extraction agent generates the rest with operator-review gating before write to LanceDB.
+
+**Claude's recommendation: (c).** The 5 canaries are the failure-evidence anchors and need operator-truth; the long tail (every named entity / quantity in ~250KB lore corpus) is too much for hand-seed but tractable for an extraction agent with review.
+
 </open_questions>
 
 <canonical_refs>
