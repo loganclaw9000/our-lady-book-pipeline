@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 07-04-PLAN.md (13-axis critic + pre-LLM stub_leak + repetition_loop detectors; PHYSICS-07/08/09/13 done)
-last_updated: "2026-04-26T08:00:35.419Z"
+stopped_at: Completed 07-05-PLAN.md
+last_updated: "2026-04-26T08:36:09.899Z"
 progress:
   total_phases: 7
-  completed_phases: 5
+  completed_phases: 6
   total_plans: 35
-  completed_plans: 35
+  completed_plans: 36
   percent: 100
 ---
 
@@ -268,6 +268,7 @@ No prose-generation metrics yet — pipeline has not produced artifacts. First r
 | Phase 07 P01 | 10m 23s | 2 tasks | 13 files |
 | Phase 07 P03 | 32m 14s | 2 tasks | 9 files |
 | Phase 07 P04 | 1h 04m | 2 tasks | 11 files |
+| Phase 07 P05 | 1799 | 2 tasks | 13 files |
 
 ### Target metrics (will populate once pipeline runs)
 
@@ -421,7 +422,7 @@ None. Phase 3 readiness confirmed by Plan 02-06 Gate 5 end-to-end smoke.
 - **Date:** 2026-04-26
 - **Action:** Executed Plan 07-02 — ContinuityBibleRetriever 6th RAG axis (CB-01) + canonical_quantities corpus_ingest + bundler 7-event invariant (PHYSICS-04). 4 atomic TDD commits. Task 1 RED (`4602824`): tests/rag/test_continuity_bible_retriever.py with 5 fast unit tests + 3 slow integration tests skipped via _indexes_populated() helper. Task 1 GREEN (`e00b45d`): src/book_pipeline/rag/retrievers/continuity_bible.py (74 LOC LanceDBRetrieverBase subclass with name='continuity_bible' + _where_clause returning "rule_type = 'canonical_quantity'" defense in depth + _build_query_text surfacing POV+location+date+beat+chapter); registered in retrievers/__init__.py via import-guarded fallback (mirrors EntityStateRetriever pattern); config/rag_retrievers.yaml extended with continuity_bible retriever + bundler.per_axis_byte_caps.continuity_bible=8192; src/book_pipeline/config/rag_retrievers.py OPTIONAL_RETRIEVERS frozenset + BundlerConfig.per_axis_byte_caps additive section (Phase-1 freeze policy). Task 2 RED (`bb2a0ab`): tests/corpus_ingest/test_canonical_quantities.py with 26 tests including 11 T-07-03 adversarial id rejection (incl. SQL-injection candidate) + 9 T-07-03 round-trip safety + extra='forbid' guard; tests/rag/test_bundler_seven_events.py with 6-retriever → 7-events invariant; config/canonical_quantities_seed.yaml hand-seeded with 5 D-15 canaries (Andres age=23, La Nina=55ft, Santiago del Paso=210ft, Cholula=1519-10-18, Cempoala=1519-06-02) per OQ-05 (c) RESOLVED 2026-04-25. Task 2 GREEN (`cd530e8`): src/book_pipeline/corpus_ingest/canonical_quantities.py (203 LOC) with CanonicalQuantity Pydantic model (id regex-validated to ^[a-z0-9_]+$ via BOTH Field(pattern=...) AND defense-in-depth field_validator — T-07-03 mitigation visible in code) + load_canonical_quantities_seed (yaml.safe_load only — T-07-10) + ingest_canonical_quantities (deterministic chunk_id f'canonical:{q.id}', idempotent delete-before-insert, typed `except (RuntimeError, ValueError)` replacing bare except per checker fix); src/book_pipeline/cli/ingest.py invokes ingest_canonical_quantities after every non-skipped CorpusIngester run, emits log line 'ingested 5 canonical quantities from config/canonical_quantities_seed.yaml'; src/book_pipeline/rag/bundler.py docstrings updated 6→7 events; src/book_pipeline/corpus_ingest/__init__.py re-exports new symbols. Task 3 (no commit): real `uv run book-pipeline ingest --force` populates indexes/continuity_bible.lance with 5 rows; embed_model_revision=5617a9f61b028005a4858fdac845db406aefb181 (BGE-M3 SHA pinned); 3 slow integration tests pass (Cempoala / Cholula / Andres queries surface canonical-value rows via real BGE-M3 + reranker). 4 Rule-driven deviations: Rule 3 (LanceDB has no LanceError class — used `except (RuntimeError, ValueError)`); Rule 3 (RagRetrieversConfig validator rejected 6th retriever — added OPTIONAL_RETRIEVERS frozenset); Rule 1 (tests/cli/test_ingest_arc_reindex.py FakeEmbedder lacked embed_texts — added 5-line no-op); Rule 1 (tests/test_config.py over-strict equality — relaxed to required ⊆ keys). Out-of-scope: pre-existing DraftRequest model_rebuild failures from Plan 07-01 (verified at HEAD~3) logged to deferred-items.md with 3 fix candidates for Plan 07-03; affects ~16 tests in drafter/cli/integration/chapter_assembler. 36 new tests across 3 files (8 retriever fast+slow + 2 bundler 7-event + 26 canonical_quantities); Plan-07-02-scoped acceptance gate green: 33 fast pass + 3 slow pass + import-linter 2 contracts kept.
 - **Outcome:** 6 files created (continuity_bible.py + canonical_quantities.py + canonical_quantities_seed.yaml + 3 test files) + 9 files modified (rag/retrievers/__init__.py, corpus_ingest/__init__.py, cli/ingest.py, rag/bundler.py, config/rag_retrievers.py, config/rag_retrievers.yaml, tests/cli/test_ingest_arc_reindex.py, tests/test_config.py, deferred-items.md). 36 new non-slow + 3 new slow tests. LanceDB row count verified 5; all 5 canonical chunk_ids present (canonical:andres_age, canonical:la_nina_height, canonical:santiago_del_paso_scale, canonical:cholula_date, canonical:cempoala_arrival). T-07-03 adversarial test passes (`x'; DROP TABLE scene_embeddings; --` raises ValidationError at schema layer). PHYSICS-04 marked complete in REQUIREMENTS.md traceability. ROADMAP.md Phase 7 progress: 2/5 (Plan 07-02 checkbox marked).
-- **Stopped at:** Completed 07-04-PLAN.md (13-axis critic + pre-LLM stub_leak + repetition_loop detectors; PHYSICS-07/08/09/13 done)
+- **Stopped at:** Completed 07-05-PLAN.md
 
 ### Previous session
 
