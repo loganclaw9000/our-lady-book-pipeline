@@ -158,6 +158,23 @@ class PhysicsRepetitionConfig(BaseModel):
     )
 
 
+class PhysicsDedupConfig(BaseModel):
+    """physics_dedup section: scene-buffer cosine threshold (Plan 07-05 D-28).
+
+    ``scene_buffer_similarity_threshold`` = BGE-M3 cosine value at/above which
+    a candidate scene is flagged as a near-duplicate of a prior committed
+    scene; the SceneCritic deterministically overrides
+    ``pass_per_axis['scene_buffer_similarity']`` to ``False`` past this bound.
+    Default 0.80 per D-28; tunable per chapter or operator preference.
+    """
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    scene_buffer_similarity_threshold: float = Field(
+        default=0.80, ge=0.0, le=1.0
+    )
+
+
 class CriticBackendConfig(BaseModel):
     """Which backend SceneCritic + SceneLocalRegenerator use for Opus calls.
 
@@ -208,6 +225,10 @@ class ModeThresholdsConfig(BaseSettings):
     physics_repetition: PhysicsRepetitionConfig = Field(
         default_factory=PhysicsRepetitionConfig
     )
+    # Plan 07-05 PHYSICS-10 / D-28: scene-buffer cosine dedup threshold.
+    # default_factory means legacy mode_thresholds.yaml files without a
+    # `physics_dedup:` block still validate (getting D-28 default 0.80).
+    physics_dedup: PhysicsDedupConfig = Field(default_factory=PhysicsDedupConfig)
 
     model_config = SettingsConfigDict(
         yaml_file="config/mode_thresholds.yaml",

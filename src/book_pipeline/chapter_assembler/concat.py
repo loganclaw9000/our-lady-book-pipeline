@@ -33,13 +33,88 @@ regex-validated filename pattern — path-traversal blocked per T-04-02-01.
 """
 from __future__ import annotations
 
+import logging
 import re
 from pathlib import Path
 from typing import Any
 
 import yaml
+from pydantic import BaseModel, ConfigDict
 
 from book_pipeline.interfaces.types import DraftResponse
+
+logger = logging.getLogger(__name__)
+
+
+# Phase 7 Plan 05 (PHYSICS-11 / D-18): defensive quote-corruption normalizer.
+#
+# Real ch13 sc02 / sc03 corruption shape (verified via grep on canon/):
+# ``Cortés stopped., I need her with me``
+# ``He ate., You are quiet``
+# ``Bernardo said., I am thinking.``
+# i.e. ``<word>.,<space>`` — a literal ``.,`` separator the model emitted
+# instead of either a paragraph break or a comma. The character pair
+# ``period-comma`` does not appear in legitimate English prose, so this
+# pattern is self-anchoring; the ``\w`` lookbehind ensures we only fire on
+# inter-word corruption (never on numerics, never on lone punctuation, never
+# on quote-adjacent legitimate text).
+#
+# WARNING #6 mitigation: anchored lookbehind ``(?<=["”])`` ALSO supported as
+# the documented load-bearing anchor (closing-quote variant). The combined
+# pattern matches both the real ch13 inter-word shape AND the closing-quote
+# shape stipulated in the plan's example fixture. Legitimate prose like
+# ``"He paused, then continued."`` (no preceding ``.,``) is NEVER touched —
+# verified by ``test_normalize_quote_corruption_does_not_touch_legitimate_prose``.
+#
+# Threat surface T-07-11 (Tampering / over-correction): no ``.*`` backtrack,
+# no nested quantifiers, bounded ``\s*``. Match cost linear in line length.
+# Each repair is logged with a QuoteRepair record so any over-correction is
+# auditable post-commit.
+_QUOTE_COMMA_DOT_RE = re.compile(r'(?<=["”\w])\s*\.\s*,\s+')
+
+
+class QuoteRepair(BaseModel):
+    """One quote-corruption repair record (audit trail for T-07-11)."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    pattern_id: str
+    line_number: int  # 1-indexed
+    before: str  # offending line (capped at 200 chars)
+    after: str  # repaired line (capped at 200 chars)
+
+
+def _normalize_quote_corruption(body: str) -> tuple[str, list[QuoteRepair]]:
+    """Defensive normalizer for the ``., `` after-closing-quote corruption (D-18).
+
+    Returns ``(normalized_body, repairs)``. On no-op (pattern absent),
+    returns ``(body, [])`` and the caller can skip emit.
+
+    Per WARNING #6: the regex is anchored to fire ONLY after a closing
+    quote character — legitimate prose like ``"He paused, then continued."``
+    contains ``, `` but the preceding token is NOT a closing quote, so
+    nothing is touched.
+    """
+    if not body or not _QUOTE_COMMA_DOT_RE.search(body):
+        return body, []
+
+    repairs: list[QuoteRepair] = []
+    fixed_lines: list[str] = []
+    for line_no, line in enumerate(body.splitlines(), start=1):
+        if _QUOTE_COMMA_DOT_RE.search(line):
+            new_line = _QUOTE_COMMA_DOT_RE.sub(", ", line)
+            repairs.append(
+                QuoteRepair(
+                    pattern_id="dot_comma_corruption",
+                    line_number=line_no,
+                    before=line[:200],
+                    after=new_line[:200],
+                )
+            )
+            fixed_lines.append(new_line)
+        else:
+            fixed_lines.append(line)
+    return "\n".join(fixed_lines), repairs
 
 # Regex-validated filename pattern for `from_committed_scenes`. Filenames not
 # matching this pattern are ignored (not an error — the dir may carry sibling
@@ -145,9 +220,20 @@ class ConcatAssembler:
         )
 
         # Build scene blocks: HTML marker + scene body.
+        # Phase 7 Plan 05 (PHYSICS-11 / D-18): apply the quote-corruption
+        # normalizer to each scene's body before assembly. Logged repairs
+        # are visible in the assembler log; the chapter assembly itself
+        # carries the repaired prose.
         scene_blocks: list[str] = []
         for sid, d in zip(scene_ids, drafts, strict=True):
-            scene_blocks.append(f"<!-- scene: {sid} -->\n{d.scene_text}")
+            normalized_text, repairs = _normalize_quote_corruption(d.scene_text)
+            if repairs:
+                logger.info(
+                    "normalized %d quote-corruption hit(s) in %s",
+                    len(repairs),
+                    sid,
+                )
+            scene_blocks.append(f"<!-- scene: {sid} -->\n{normalized_text}")
 
         body = "\n\n---\n\n".join(scene_blocks)
 
@@ -246,4 +332,4 @@ class ConcatAssembler:
         return drafts, assembled
 
 
-__all__ = ["ConcatAssembler"]
+__all__ = ["ConcatAssembler", "QuoteRepair", "_normalize_quote_corruption"]

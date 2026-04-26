@@ -78,3 +78,17 @@ Plan 07-02-scoped acceptance gate (`uv run pytest
 tests/rag/test_continuity_bible_retriever.py
 tests/rag/test_bundler_seven_events.py
 tests/corpus_ingest/test_canonical_quantities.py -m "not slow" -x`) is green.
+
+## Plan 07-05 — Pre-existing ChapterState DAG-test failures
+
+Discovered 2026-04-26 during Plan 07-05 fast-test regression check. NOT
+introduced by Plan 07-05. Reproduces on `git stash` against current main:
+
+- `tests/chapter_assembler/test_dag.py::test_B_chapter_critic_fail_no_canon_commit`
+- `tests/chapter_assembler/test_dag.py::test_J_chapter_fail_all_non_specific_remains_chapter_fail`
+
+Both assert `state == CHAPTER_FAIL` but receive `CHAPTER_FAIL_SCENE_KICKED`
+— scene-kick state was added in Plan 05-02 LOOP-04 and the DAG tests were
+never updated to the new sub-state semantics. Out of scope for Plan 07-05;
+the Plan 07-05 acceptance gate (physics + chapter_assembler/quote_normalizer
++ critic pre-LLM short-circuits + scene_buffer integration) is green.

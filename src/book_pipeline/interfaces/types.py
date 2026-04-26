@@ -185,19 +185,45 @@ class CriticIssue(BaseModel):
 
 
 class CriticRequest(BaseModel):
-    """Input to a Critic (scene- or chapter-level)."""
+    """Input to a Critic (scene- or chapter-level).
+
+    Phase 7 Plan 05 added OPTIONAL ``scene_metadata`` + ``prior_scene_ids``
+    fields under the Phase 1 freeze policy (additions allowed; renames /
+    removals forbidden). ``scene_metadata`` is the load-bearing wiring point
+    for SceneCritic's pre-LLM physics hooks (BLOCKER #5: NO side-channel
+    closure — the critic reads ``request.scene_metadata`` directly to
+    resolve the scene's ``treatment`` for repetition-loop thresholding).
+    ``prior_scene_ids`` feeds the scene-buffer cosine cache lookup.
+    """
 
     scene_text: str
     context_pack: ContextPack
     rubric_id: str  # "scene.v1" | "chapter.v1" etc, resolved against rubric.yaml
     rubric_version: str  # plan 03 config loader populates this
     chapter_context: dict[str, object] | None = None  # used by chapter-level critic in Phase 4
+    # --- Plan 07-05 additions (additive under Phase 1 freeze) ---
+    scene_metadata: SceneMetadata | None = None
+    prior_scene_ids: list[str] = Field(default_factory=list)
 
 
 class CriticResponse(BaseModel):
-    """Critic output — per-axis pass/score + list of issues + overall pass."""
+    """Critic output — per-axis pass/score + list of issues + overall pass.
 
-    pass_per_axis: dict[str, bool]
+    Phase 7 Plan 05 (Warning #4): pass_per_axis values may be ``None`` to
+    denote 'not verified' — used when SceneCritic short-circuits BEFORE the
+    Anthropic call (e.g. stub_leak / repetition_loop pre-LLM hit). The
+    short-circuit explicitly marks ALL non-failed LLM axes as ``None``
+    instead of optimistically setting them ``True`` (which would pollute the
+    longitudinal critic-score ledger with phantom passes — downstream digest
+    queries should filter ``pass_per_axis[axis] is False`` for true failures
+    vs ``is None`` for not-yet-judged).
+
+    Backward compatibility: ``dict[str, bool | None]`` is a superset of
+    ``dict[str, bool]`` — existing CriticResponse instances with pure-bool
+    maps still validate.
+    """
+
+    pass_per_axis: dict[str, bool | None]
     scores_per_axis: dict[str, float]  # 0..100
     issues: list[CriticIssue]
     overall_pass: bool
@@ -384,7 +410,7 @@ class Event(BaseModel):
 
 
 def _rebuild_for_physics_forward_ref() -> None:
-    """Resolve SceneMetadata forward-reference on DraftRequest.
+    """Resolve SceneMetadata forward-reference on DraftRequest + CriticRequest.
 
     Called once by ``book_pipeline.physics.__init__`` AFTER
     ``schema.SceneMetadata`` is importable. This keeps the import-linter
@@ -392,14 +418,18 @@ def _rebuild_for_physics_forward_ref() -> None:
     references SceneMetadata only via a forward-string + this helper triggered
     from physics. Tests that import ``book_pipeline.physics`` get the rebuild
     for free; tests that import only ``interfaces.types`` and construct a
-    DraftRequest with a non-None ``scene_metadata`` must also import
-    ``book_pipeline.physics`` (or call this helper directly) so the forward-ref
-    resolves.
+    DraftRequest / CriticRequest with a non-None ``scene_metadata`` must also
+    import ``book_pipeline.physics`` (or call this helper directly) so the
+    forward-ref resolves.
+
+    Phase 7 Plan 05: CriticRequest also carries an optional ``scene_metadata``
+    forward-ref (BLOCKER #5 wiring point for the pre-LLM physics hooks).
     """
     # Local import — see module docstring + import-linter contract 2.
     from book_pipeline.physics.schema import SceneMetadata  # noqa: F401
 
     DraftRequest.model_rebuild()
+    CriticRequest.model_rebuild()
 
 
 __all__ = [

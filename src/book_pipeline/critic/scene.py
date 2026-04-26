@@ -25,12 +25,24 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 from book_pipeline.config.rubric import REQUIRED_AXES, RubricConfig
 from book_pipeline.critic.audit import write_audit_record
 from book_pipeline.interfaces.types import (
+    CriticIssue,
     CriticRequest,
     CriticResponse,
     Event,
 )
 from book_pipeline.observability.hashing import event_id as compute_event_id
 from book_pipeline.observability.hashing import hash_text
+
+# Phase 7 Plan 05: pre-LLM short-circuit hooks (PHYSICS-08 / PHYSICS-09) +
+# scene-buffer cosine override input (PHYSICS-10 / D-28). Imports kept local
+# to this module — kernel discipline preserved (physics has no
+# book_specifics imports).
+from book_pipeline.physics import (
+    Treatment,
+    max_cosine,
+    scan_repetition_loop,
+    scan_stub_leak,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -183,6 +195,11 @@ class SceneCritic:
         model_id: str = "claude-opus-4-7",
         max_tokens: int = 4096,
         temperature: float = 0.1,
+        # Phase 7 Plan 05 (PHYSICS-08/09/10) — opt-in physics hooks.
+        scene_buffer_cache: Any | None = None,
+        scene_buffer_threshold: float = 0.80,
+        repetition_thresholds: dict[str, Any] | None = None,
+        enable_pre_llm_short_circuits: bool = True,
     ) -> None:
         self.anthropic_client = anthropic_client
         self.event_logger = event_logger
@@ -191,6 +208,11 @@ class SceneCritic:
         self.model_id = model_id
         self.max_tokens = max_tokens
         self.temperature = temperature
+        # Phase 7 Plan 05 physics-hook config.
+        self.scene_buffer_cache = scene_buffer_cache
+        self.scene_buffer_threshold = float(scene_buffer_threshold)
+        self.repetition_thresholds = repetition_thresholds
+        self.enable_pre_llm_short_circuits = bool(enable_pre_llm_short_circuits)
 
         # Pre-render system prompt once — ensures identical text across
         # review() calls so Anthropic's ephemeral cache hits.
@@ -228,6 +250,85 @@ class SceneCritic:
                 request.rubric_version,
                 self.rubric.rubric_version,
             )
+
+        # Phase 7 Plan 05: pre-LLM deterministic short-circuits
+        # (PHYSICS-08 stub_leak / PHYSICS-09 repetition_loop). These run
+        # BEFORE the Anthropic call so a hit doesn't burn tokens. On hit,
+        # build a synthetic CriticResponse with the failed axis pass=False
+        # AND ALL OTHER LLM axes set to None (Warning #4 sentinel — phantom-
+        # True passes would pollute the longitudinal critic-score ledger).
+        # BLOCKER #5: read ``request.scene_metadata`` directly — no
+        # side-channel closure.
+        if self.enable_pre_llm_short_circuits:
+            stub_hits = scan_stub_leak(request.scene_text)
+            if stub_hits:
+                return self._build_pre_llm_short_circuit_response(
+                    scene_id=scene_id,
+                    failed_axis="stub_leak",
+                    severity="high",
+                    issues=[
+                        {
+                            "location": f"line {h.line_number}",
+                            "claim": "stub vocabulary in canon prose",
+                            "evidence": h.matched_text,
+                        }
+                        for h in stub_hits
+                    ],
+                )
+
+            treatment_enum: Treatment | None = None
+            if request.scene_metadata is not None:
+                treatment_enum = request.scene_metadata.treatment
+            repetition_hits = scan_repetition_loop(
+                request.scene_text,
+                treatment=treatment_enum,
+                thresholds=self.repetition_thresholds,
+            )
+            if repetition_hits:
+                return self._build_pre_llm_short_circuit_response(
+                    scene_id=scene_id,
+                    failed_axis="repetition_loop",
+                    severity="high",
+                    issues=[
+                        {
+                            "location": "scene-wide",
+                            "claim": h.hit_type,
+                            "evidence": h.detail,
+                        }
+                        for h in repetition_hits
+                    ],
+                )
+
+        # Phase 7 Plan 05 (PHYSICS-10 / D-28): scene-buffer cosine input —
+        # compute BEFORE the Anthropic call so the override below can run
+        # deterministically regardless of LLM output. Empty cache or no
+        # prior scenes ⇒ scene_buffer_max stays 0.0 (axis trivially passes).
+        scene_buffer_max: float = 0.0
+        prior_match_id: str | None = None
+        if (
+            self.scene_buffer_cache is not None
+            and request.prior_scene_ids
+        ):
+            try:
+                candidate_emb = self.scene_buffer_cache.get_or_compute(
+                    scene_id, request.scene_text
+                )
+                prior_embs = self.scene_buffer_cache.all_prior(
+                    list(request.prior_scene_ids)
+                )
+                if prior_embs:
+                    prior_match_id, scene_buffer_max = max_cosine(
+                        candidate_emb, prior_embs
+                    )
+            except Exception:
+                # Cache failures are non-fatal: log and treat as 0.0
+                # (scene-buffer axis defaults to pass). The critic still
+                # makes the Anthropic call against the LLM-judged axes.
+                logger.exception(
+                    "scene_buffer_cache lookup failed for %s; "
+                    "axis defaults to pass (cosine=0.0)",
+                    scene_id,
+                )
 
         user_prompt = self._build_user_prompt(request)
         user_prompt_sha = hash_text(user_prompt)
@@ -269,6 +370,38 @@ class SceneCritic:
         # Post-process: fill missing axes, enforce invariant, stamp rubric_version,
         # recompute output_sha.
         filled_axes, invariant_fixed = self._post_process(parsed)
+
+        # Phase 7 Plan 05 (PHYSICS-10 / D-28): deterministic override of the
+        # scene_buffer_similarity axis based on the cosine value computed
+        # pre-LLM. The LLM is instructed to score this axis but the threshold
+        # decision is owned by the deterministic cosine compare — avoid
+        # asking Opus to interpret floating-point cosines.
+        if self.scene_buffer_cache is not None:
+            buffer_pass = bool(scene_buffer_max < self.scene_buffer_threshold)
+            parsed.pass_per_axis["scene_buffer_similarity"] = buffer_pass
+            parsed.scores_per_axis["scene_buffer_similarity"] = float(
+                max(0.0, 1.0 - scene_buffer_max) * 100.0
+            )
+            if not buffer_pass:
+                parsed.overall_pass = False
+                # Surface the offending prior scene id as an issue so the
+                # regenerator has actionable context. Only added on FAIL.
+                parsed.issues.append(
+                    CriticIssue(
+                        axis="scene_buffer_similarity",
+                        severity="high",
+                        location="scene-wide",
+                        claim=(
+                            f"BGE-M3 cosine {scene_buffer_max:.3f} >= "
+                            f"threshold {self.scene_buffer_threshold:.2f}"
+                        ),
+                        evidence=(
+                            f"near-duplicate of prior scene {prior_match_id!r}"
+                            if prior_match_id is not None
+                            else "near-duplicate of a prior committed scene"
+                        ),
+                    )
+                )
 
         # Compute output_sha over the parsed model excluding output_sha itself.
         parsed.output_sha = hash_text(
@@ -496,6 +629,135 @@ class SceneCritic:
 
         # Preserve filled_axes sorted for deterministic Event.extra comparisons.
         return filled_axes, invariant_fixed
+
+    def _build_pre_llm_short_circuit_response(
+        self,
+        *,
+        scene_id: str,
+        failed_axis: str,
+        severity: str,
+        issues: list[dict[str, Any]],
+    ) -> CriticResponse:
+        """Build a synthetic CriticResponse for a pre-LLM short-circuit.
+
+        Phase 7 Plan 05 (Warning #4 mitigation): the axes the LLM never
+        evaluated are set to ``None`` (sentinel) — NOT ``True``. Downstream
+        digest queries should filter ``pass_per_axis[axis] is False`` for
+        true failures and ``is None`` for not-yet-judged.
+
+        Also emits a role='scene_critic' Event with
+        ``extra={pre_llm_short_circuit: True, unverified_axes: [...]}`` so
+        the longitudinal critic-score query can filter these explicitly.
+        """
+        pass_per_axis: dict[str, bool | None] = {}
+        scores_per_axis: dict[str, float] = {}
+        unverified: list[str] = []
+        for axis in AXES_ORDERED:
+            if axis == failed_axis:
+                pass_per_axis[axis] = False
+                scores_per_axis[axis] = 0.0
+            else:
+                # Sentinel None: this axis was NOT evaluated. Includes the
+                # OTHER deterministic axis (we only ran one detector to
+                # first-hit) plus all 11 LLM-judged axes (the Anthropic
+                # call was short-circuited).
+                pass_per_axis[axis] = None
+                scores_per_axis[axis] = 0.0
+                unverified.append(axis)
+
+        critic_issues = [
+            CriticIssue(
+                axis=failed_axis,
+                severity=severity,
+                location=str(iss.get("location", "")),
+                claim=str(iss.get("claim", "")),
+                evidence=str(iss.get("evidence", "")),
+            )
+            for iss in issues
+        ]
+
+        response = CriticResponse(
+            pass_per_axis=pass_per_axis,
+            scores_per_axis=scores_per_axis,
+            issues=critic_issues,
+            overall_pass=False,
+            model_id="pre_llm_short_circuit",
+            rubric_version=self.rubric.rubric_version,
+            output_sha=hash_text(
+                f"pre_llm_short_circuit:{scene_id}:{failed_axis}"
+            ),
+        )
+        # Recompute output_sha over the materialized model so downstream
+        # consumers see a stable fingerprint (matches the post-LLM path).
+        response.output_sha = hash_text(
+            response.model_dump_json(exclude={"output_sha"})
+        )
+
+        self._emit_pre_llm_short_circuit_event(
+            scene_id=scene_id,
+            failed_axis=failed_axis,
+            unverified_axes=unverified,
+            issue_count=len(critic_issues),
+        )
+        return response
+
+    def _emit_pre_llm_short_circuit_event(
+        self,
+        *,
+        scene_id: str,
+        failed_axis: str,
+        unverified_axes: list[str],
+        issue_count: int,
+    ) -> None:
+        """Emit role='scene_critic' Event for a pre-LLM short-circuit (Warning #4).
+
+        ``extra.pre_llm_short_circuit=True`` + ``extra.unverified_axes`` so
+        longitudinal queries can filter these out (or count them) instead
+        of treating None values as phantom passes.
+        """
+        if self.event_logger is None:
+            return
+        ts_iso = _now_iso()
+        prompt_h = hash_text(
+            f"pre_llm_short_circuit:{scene_id}:{failed_axis}"
+        )
+        eid = compute_event_id(
+            ts_iso,
+            "scene_critic",
+            f"critic.scene.review:{scene_id}",
+            prompt_h,
+        )
+        event = Event(
+            event_id=eid,
+            ts_iso=ts_iso,
+            role="scene_critic",
+            model="pre_llm_short_circuit",
+            prompt_hash=prompt_h,
+            input_tokens=0,
+            cached_tokens=0,
+            output_tokens=0,
+            latency_ms=0,
+            temperature=None,
+            top_p=None,
+            caller_context={
+                "module": "critic.scene",
+                "function": "review",
+                "scene_id": scene_id,
+            },
+            output_hash=hash_text(
+                f"pre_llm_short_circuit:{failed_axis}:{scene_id}"
+            ),
+            mode=None,
+            rubric_version=self.rubric.rubric_version,
+            checkpoint_sha=None,
+            extra={
+                "pre_llm_short_circuit": True,
+                "failed_axis": failed_axis,
+                "unverified_axes": unverified_axes,
+                "issue_count": issue_count,
+            },
+        )
+        self._emit(event)
 
     def _emit(self, event: Event) -> None:
         if self.event_logger is None:

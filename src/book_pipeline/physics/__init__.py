@@ -26,6 +26,11 @@ from book_pipeline.physics.gates import (
 )
 from book_pipeline.physics.locks import PovLock, load_pov_locks
 from book_pipeline.physics.repetition_loop import RepetitionHit, scan_repetition_loop
+from book_pipeline.physics.scene_buffer import (
+    SceneEmbeddingCache,
+    cosine_similarity_to_prior,
+    max_cosine,
+)
 from book_pipeline.physics.schema import (
     BeatTag,
     CharacterPresence,
@@ -61,14 +66,17 @@ __all__ = [
     "Perspective",
     "PovLock",
     "RepetitionHit",
+    "SceneEmbeddingCache",
     "SceneMetadata",
     "Staging",
     "StubLeakHit",
     "Treatment",
     "ValueCharge",
     "build_canon_bible_view",
+    "cosine_similarity_to_prior",
     "emit_gate_event",
     "load_pov_locks",
+    "max_cosine",
     "run_pre_flight",
     "scan_repetition_loop",
     "scan_stub_leak",

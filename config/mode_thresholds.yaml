@@ -83,3 +83,9 @@ physics_repetition:
   liturgical_treatment:
     trigram_repetition_rate_max: 0.40
     identical_line_count_max: 5  # >=6 identical lines fails
+# Phase 7 Plan 05 (PHYSICS-10 / D-28): scene-buffer dedup threshold.
+# BGE-M3 cosine similarity vs prior committed scenes' embeddings; ≥ this
+# threshold sets the scene_buffer_similarity axis to FAIL (deterministic
+# override applied AFTER the Anthropic call returns). Tunable.
+physics_dedup:
+  scene_buffer_similarity_threshold: 0.80
