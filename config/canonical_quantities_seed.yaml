@@ -1,0 +1,59 @@
+# config/canonical_quantities_seed.yaml — Hand-seeded canonical quantities (Plan 07-02 PHYSICS-04 / D-22).
+#
+# OQ-05 (c) RESOLVED 2026-04-25 (operator via discuss-phase + planner adoption):
+# hybrid hand-seed (5 canaries operator-confirmed) + extraction-agent for the
+# long tail (deferred to v1.1).
+#
+# These 5 values are the canonical truth as of phase planning. Any subsequent
+# canon update flows through a separate `canon update` workflow that re-ingests
+# + alerts on prose drift. DO NOT tune values inline in this file as a side
+# effect of follow-up plans — value changes go through `canon update`.
+#
+# Format consumed by book_pipeline.corpus_ingest.canonical_quantities.load_canonical_quantities_seed.
+# Each entry becomes ONE LanceDB row in the 'continuity_bible' table with
+# rule_type='canonical_quantity' (D-22 — additive non-column extension).
+#
+# CanonicalQuantity.id is regex-validated: `^[a-z0-9_]+$` (T-07-03 mitigation).
+# All ids below conform; see tests/corpus_ingest/test_canonical_quantities.py
+# for the adversarial-rejection test set.
+
+quantities:
+  - id: andres_age
+    name: "Andrés Olivares age"
+    canonical_value: "23"
+    units: "years"
+    chapter_scope: "ch01-ch14 (stable through Phase 6 manuscript)"
+    text: "Andrés Olivares: age 23 throughout the campaign window (ch01-ch14). Stub-drift cases (ch02:26, ch04:23, ch08:25) are bugs against this canon."
+    source: "operator-truth seed per D-15 + HANDOFF_2026-04-25.md continuity audit"
+
+  - id: la_nina_height
+    name: "La Niña ship apex deck height above waterline"
+    canonical_value: "55"
+    units: "feet"
+    chapter_scope: "ch01-ch14"
+    text: "La Niña: 55-foot apex deck height above waterline. Stub-drift cases (ch03:50ft, ch04:60ft, ch05:42ft) are bugs against this canon."
+    source: "operator-truth seed per D-15"
+
+  - id: santiago_del_paso_scale
+    name: "Santiago del Paso apex deterrent scale"
+    canonical_value: "210"
+    units: "feet (height)"
+    chapter_scope: "ch01-ch14"
+    text: "Santiago del Paso: 210-foot apex deterrent (single canonical scale; ~11 stories equivalent). Stub-drift cases (300ft) are bugs."
+    source: "operator-truth seed per D-15"
+
+  - id: cholula_date
+    name: "Cholula stir date"
+    canonical_value: "1519-10-18"
+    units: "ISO date"
+    chapter_scope: "ch04-ch07 (Cholula stir arc)"
+    text: "Cholula stir: October 18, 1519 (canonical). Stub-drift case (Oct 30) is a bug against this canon."
+    source: "operator-truth seed per D-15 + Spanish chronicler corpus cross-reference"
+
+  - id: cempoala_arrival
+    name: "Cempoala first arrival"
+    canonical_value: "1519-06-02"
+    units: "ISO date"
+    chapter_scope: "ch03 (sole arrival; ch04 is post-arrival, NOT a re-arrival)"
+    text: "Cempoala arrival: June 2, 1519 (sole canonical arrival, owned by ch03 sc02). ch04 sc02 is post-arrival residency, not a second arrival. The double-arrival bug class is prevented by do_not_renarrate: ['ch03_sc02_cempoala_arrival'] in ch04 stubs."
+    source: "operator-truth seed per D-15"
