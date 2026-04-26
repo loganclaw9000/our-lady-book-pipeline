@@ -3,10 +3,10 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-stopped_at: Completed 05-04-PLAN.md (Phase 5 COMPLETE)
-last_updated: "2026-04-23T21:16:05.483Z"
+stopped_at: Phase 7 context gathered (D-01..D-28 + OQ-01..04)
+last_updated: "2026-04-26T01:04:41.970Z"
 progress:
-  total_phases: 6
+  total_phases: 7
   completed_phases: 5
   total_plans: 30
   completed_plans: 31
@@ -215,6 +215,10 @@ No prose-generation metrics yet — pipeline has not produced artifacts. First r
 - **(04-03) Retrospective lint rule uses bounded-word regex (\\b anchors).** `\\b(historical|metaphysics|entity|arc|donts)\\b` — NOT unanchored — so "the entity" / "entity list" / "historical novel" match but "parentity" doesn't accidentally pass. Evidence-quote regex `"[^"]{20,}"` requires >=20 chars between quotes to exclude short quoted proper nouns from counting as artifacts. Chunk-id regex `\\bchunk_[0-9a-f]+\\b` blocks false-positives on prose like "chunk of dialogue" (no trailing hex).
 - **(04-03) Test fakes local per-module, NOT shared.** tests/entity_extractor/ uses its own FakeAnthropicClient that implements ONLY `.messages.parse` (for EntityExtractionResponse); tests/retrospective/ uses its own FakeAnthropicClient that implements ONLY `.messages.create` (text output). Alternative (extending tests/critic/fixtures.py to cover three parse/create shapes) was rejected: would drag entity_extractor + retrospective into a cross-subsystem import. Narrow duck-typed fakes that under-implement the surface match the Any-typed `anthropic_client` parameter on production classes.
 
+### Roadmap Evolution
+
+- **Phase 7 added (2026-04-25):** Narrative Physics Engine — codified storytelling atomics + enforced metadata schema + drafter/critic gates + canon-bible continuity layer + scene-buffer dedup + re-DAG migration of ch05-14. Triggered by post-V6 generation review revealing systemic failure modes (scene duplication across sc01→sc02→sc03, POV drift, age/scale continuity violations, stub-leak into canon, treatment/tone mismatch) that voice fidelity alone cannot fix. Voice is downstream of structural enforcement.
+
 ### Open todos
 
 - **Operator action (low-priority):** set OPENCLAW_GATEWAY_TOKEN in env and run `book-pipeline openclaw register-cron --ingest-only` (or apply `openclaw/cron_jobs.json` manually) to activate the nightly-ingest cron.
@@ -241,7 +245,7 @@ None. Phase 3 readiness confirmed by Plan 02-06 Gate 5 end-to-end smoke.
 - **Date:** 2026-04-23
 - **Action:** Executed Plan 04-02 — ConcatAssembler (deterministic chapter scene-join + frontmatter aggregation + `from_committed_scenes` classmethod reading `drafts/ch{NN}/*.md` with B-3 invariant enforcement) + ChapterCritic (second Critic Protocol impl: Opus 4.7 chapter-level reviewer with >=3/5 per-axis threshold that the LLM cannot override, FRESH ContextPack by caller contract for C-4 collusion prevention, CRIT-04 audit on every invocation including W-7 failure path, rubric_version='chapter.v1' stamped 3-ways, single role='chapter_critic' OBS-01 Event per call) + additive RubricConfig extension (ChapterAxisConfig + ChapterRubricConfig + required chapter_rubric field built from flat YAML keys via model_validator) + `config/rubric.yaml` chapter_rubric block + 2 templates (chapter_system.j2 + chapter_fewshot.yaml with bad-example cross-scene Malintzin location drift + good-example travel-bridge). 4 atomic TDD commits: Task 1 RED `3303a00` + Task 1 GREEN `32f1ba1` (ConcatAssembler ~237 LOC; 8 tests), Task 2 RED `6a04048` + Task 2 GREEN `d97f697` (ChapterCritic ~654 LOC + rubric.py + templates; 12 tests). 3 auto-fixed deviations: Rule 1 RUF002 multiplication-sign in test docstrings (replaced `×` → `x`); Rule 1 kernel-substring-guard false-positive on `"book_specifics"` in 2 docstrings (reworded to `"book-domain layer"`); Rule 2 tests/test_config.py fixture update for the new required `chapter_rubric` schema shape (additive — fixture now writes chapter_rubric_version + chapter_axes alongside scene keys).
 - **Outcome:** 6 files created (concat.py, chapter.py, chapter_system.j2, chapter_fewshot.yaml, test_concat.py, test_chapter_critic.py) + 5 modified (chapter_assembler/__init__.py, critic/__init__.py, config/rubric.py, config/rubric.yaml, tests/test_config.py). 20 new non-slow tests (8 ConcatAssembler + 12 ChapterCritic); full suite 460 passed (from 440 baseline; 0 regression). `bash scripts/lint_imports.sh` green: 2 contracts kept, ruff clean, mypy clean on 108 source files (was 107 after Plan 04-02 Task 1 — chapter.py adds 1). Commits: `3303a00` (Task 1 RED), `32f1ba1` (Task 1 GREEN), `6a04048` (Task 2 RED), `d97f697` (Task 2 GREEN).
-- **Stopped at:** Completed 05-04-PLAN.md (Phase 5 COMPLETE)
+- **Stopped at:** Phase 7 context gathered (D-01..D-28 + OQ-01..04)
 
 ### Next session
 
