@@ -21,8 +21,19 @@ existing field is renamed/removed; these are additive only.
 from __future__ import annotations
 
 from enum import Enum
+from typing import TYPE_CHECKING
 
 from pydantic import BaseModel, Field
+
+if TYPE_CHECKING:
+    # Phase 7 Plan 01: SceneMetadata is the new payload type for the optional
+    # DraftRequest.scene_metadata field. Imported under TYPE_CHECKING only so
+    # the runtime interfaces module never depends on the concrete physics
+    # kernel (preserves import-linter contract 2). The forward-string
+    # annotation below is resolved by ``_rebuild_for_physics_forward_ref``,
+    # called once from ``book_pipeline.physics.__init__`` at first physics
+    # import.
+    from book_pipeline.physics.schema import SceneMetadata
 
 
 # --- RAG / Scene types ---
@@ -107,7 +118,18 @@ class ContextPack(BaseModel):
 
 # --- Drafter types ---
 class DraftRequest(BaseModel):
-    """Input to a Drafter (Mode A or B)."""
+    """Input to a Drafter (Mode A or B).
+
+    Phase 7 Plan 01 added OPTIONAL ``scene_metadata`` field under the Phase 1
+    freeze policy (additions allowed; renames/removals forbidden). This field
+    is the LOAD-BEARING wiring point for the entire physics engine — Plan 07-03
+    drafter pre-flight + Plan 07-05 critic both consume
+    ``request.scene_metadata``. The annotation is a forward-string
+    (``"SceneMetadata | None"``) so the runtime interfaces module stays free of
+    concrete-physics imports; the forward-ref is resolved by
+    ``_rebuild_for_physics_forward_ref`` called from
+    ``book_pipeline.physics.__init__`` at first physics import.
+    """
 
     context_pack: ContextPack
     prior_scenes: list[str] = Field(default_factory=list)
@@ -115,6 +137,12 @@ class DraftRequest(BaseModel):
         default_factory=dict
     )  # temperature, top_p, repetition_penalty, max_tokens
     prompt_template_id: str = "default"
+    # --- OPTIONAL addition (Plan 07-01, additive under Phase 1 freeze) ------
+    # SceneMetadata Pydantic model lives in book_pipeline.physics.schema. We
+    # import via TYPE_CHECKING + string-form annotation to keep the runtime
+    # interfaces module free of physics-package imports (preserves the kernel
+    # boundary documented at top of file).
+    scene_metadata: SceneMetadata | None = None
 
 
 class DraftResponse(BaseModel):
@@ -352,6 +380,25 @@ class Event(BaseModel):
     rubric_version: str | None = None  # populated for critic events
     checkpoint_sha: str | None = None  # populated for Mode-A drafter events (V-3 pitfall)
     extra: dict[str, object] = Field(default_factory=dict)  # escape hatch for role-specific extras
+
+
+def _rebuild_for_physics_forward_ref() -> None:
+    """Resolve SceneMetadata forward-reference on DraftRequest.
+
+    Called once by ``book_pipeline.physics.__init__`` AFTER
+    ``schema.SceneMetadata`` is importable. This keeps the import-linter
+    contract clean: physics depends on interfaces (allowed), and interfaces
+    references SceneMetadata only via a forward-string + this helper triggered
+    from physics. Tests that import ``book_pipeline.physics`` get the rebuild
+    for free; tests that import only ``interfaces.types`` and construct a
+    DraftRequest with a non-None ``scene_metadata`` must also import
+    ``book_pipeline.physics`` (or call this helper directly) so the forward-ref
+    resolves.
+    """
+    # Local import — see module docstring + import-linter contract 2.
+    from book_pipeline.physics.schema import SceneMetadata  # noqa: F401
+
+    DraftRequest.model_rebuild()
 
 
 __all__ = [

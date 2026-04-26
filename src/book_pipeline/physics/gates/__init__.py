@@ -1,8 +1,9 @@
-"""Physics pre-flight gates (Plan 07-03 lands the per-gate files).
+"""Physics pre-flight gate base re-exports (Plan 07-01).
 
-Plan 07-01 Task 1 lands an empty package marker; Task 2 lands base.py + the
-GateError/GateResult/emit_gate_event re-exports. Plan 07-03 adds the per-gate
-files (pov_lock, motivation, ownership, treatment, quantity) and run_pre_flight.
+Plan 07-03 will land per-gate files (pov_lock, motivation, ownership, treatment,
+quantity) and the run_pre_flight composer.
 """
 
-__all__: list[str] = []
+from book_pipeline.physics.gates.base import GateError, GateResult, emit_gate_event
+
+__all__ = ["GateError", "GateResult", "emit_gate_event"]

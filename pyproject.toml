@@ -196,4 +196,16 @@ forbidden_modules = [
     # Phase 7 plan 01 added: physics (SceneMetadata + gates + locks + canon_bible).
     "book_pipeline.physics",
 ]
-ignore_imports = []
+# Phase 7 plan 01 documented exemption: DraftRequest.scene_metadata uses a
+# forward-string annotation to keep the runtime interfaces module free of
+# physics imports. The TYPE_CHECKING block + the lazy `_rebuild_for_physics_
+# forward_ref()` helper resolve the forward-ref at first physics import (called
+# from book_pipeline.physics.__init__). Both edges are static-AST-visible to
+# import-linter even though neither runs at module-load when interfaces is
+# imported alone — the TYPE_CHECKING block is dead code at runtime, and the
+# helper-body import is function-scoped (only executes when physics imports
+# interfaces, which is the inverse direction). These exemptions document the
+# narrow allowed coupling and are NOT a generic interfaces→physics escape.
+ignore_imports = [
+    "book_pipeline.interfaces.types -> book_pipeline.physics.schema",
+]

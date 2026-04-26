@@ -1,0 +1,12 @@
+# config/pov_locks.yaml — Per-character POV invariant locks (Plan 07-01 PHYSICS-02).
+#
+# D-16: Itzcoatl regression (1st in ch01 sc03 → 3rd from ch06+) is a bug.
+# D-21: Forward-only — lock activates at ch15. ch01-04 read-only baseline.
+#   ch05-14 historical artifacts (no retrofit).
+# OQ-01 (a) RESOLVED 2026-04-25: ch09 retry NOT gated (sits inside ch06-14
+#   historical block; surrounding-style 3rd-person continuity preserved).
+locks:
+  - character: itzcoatl
+    perspective: 1st_person
+    active_from_chapter: 15
+    rationale: "D-16: Itzcoatl declared 1st-person in ch01 sc03; ch06-14 regression is a known bug. D-21 forward-only: lock from ch15. OQ-01 (a) RESOLVED 2026-04-25: ch09 retry stays 3rd-person (surrounding-block continuity)."
