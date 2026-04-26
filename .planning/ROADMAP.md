@@ -213,7 +213,7 @@ Plans:
 **Plans**: 5 plans in 4 waves (Wave 1: 07-01 schema + locks + import-linter + REQUIREMENTS.md → Wave 2: 07-02 CB-01 retriever + canonical_quantity ingest + 7-event bundler invariant → Wave 3 parallel: 07-03 pre-flight gates + canon_bible + drafter prompt extension && 07-04 critic 13-axis + stub_leak + repetition_loop + motivation hard-stop → Wave 4: 07-05 scene-buffer cosine + quote normalizer + CLI composition + ch15 / ch01-04 integration smokes)
 
 Plans:
-- [ ] 07-01-PLAN.md — physics package skeleton + SceneMetadata Pydantic schema + PovLock storage + config/pov_locks.yaml + import-linter contract + REQUIREMENTS.md PHYSICS-01..13 [PHYSICS-01, PHYSICS-02, PHYSICS-03]
+- [x] 07-01-PLAN.md — physics package skeleton + SceneMetadata Pydantic schema + PovLock storage + config/pov_locks.yaml + import-linter contract + REQUIREMENTS.md PHYSICS-01..13 [PHYSICS-01, PHYSICS-02, PHYSICS-03]
 - [ ] 07-02-PLAN.md — ContinuityBibleRetriever (6th axis) + canonical_quantities corpus_ingest + config/canonical_quantities_seed.yaml hand-seeded canaries + bundler 7-event invariant [PHYSICS-04]
 - [ ] 07-03-PLAN.md — physics/canon_bible.py + 5 pre-flight gate files + run_pre_flight composer + drafter ModeA pre-flight wiring + Jinja2 canonical-stamp + fenced beat directive [PHYSICS-05, PHYSICS-06]
 - [ ] 07-04-PLAN.md — physics/stub_leak.py + physics/repetition_loop.py + critic 5→13 axis extension + rubric.yaml v2 + motivation hard-stop in _post_process [PHYSICS-07, PHYSICS-08, PHYSICS-09, PHYSICS-13]
@@ -234,7 +234,7 @@ Plans:
 | 4. Chapter Assembly + Post-Commit DAG | 0/6 | Planned    | - |
 | 5. Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration | 0/TBD | Not started | - |
 | 6. Testbed Plane + Production Hardening + First Draft | 0/TBD | Not started | - |
-| 7. Narrative Physics Engine | 0/5 | Planned (2026-04-25) | - |
+| 7. Narrative Physics Engine | 1/5 | In Progress | - |
 
 ---
 

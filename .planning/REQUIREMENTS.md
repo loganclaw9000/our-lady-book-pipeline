@@ -80,9 +80,12 @@ Requirements for the first full draft of *Our Lady of Champion* (27 chapters, ~8
 
 ### Narrative Physics Engine (Phase 7)
 
-- [ ] **PHYSICS-01**: Pydantic `SceneMetadata` model implements all D-03 mandatory fields + D-13 ownership fields + D-04 staging fields. Strict validation (`extra="forbid"`); enforced via `pydantic.ValidationError` at stub load time.
-- [ ] **PHYSICS-02**: `pov_lock` artifact (`config/pov_locks.yaml`) loads + validates against scene `perspective` at drafter pre-flight. Override path: stub frontmatter `pov_lock_override: <rationale>`.
-- [ ] **PHYSICS-03**: `book_pipeline.physics` kernel package landed: `schema.py`, `canon_bible.py`, `gates/__init__.py`, `gates/{pov_lock,motivation,ownership,treatment,quantity}.py`, `locks.py`. import-linter contract extended in BOTH source_modules and forbidden_modules. DraftRequest extended with `scene_metadata: SceneMetadata | None = None` additive nullable field (W-1 contract).
+- [x] **PHYSICS-01
+**: Pydantic `SceneMetadata` model implements all D-03 mandatory fields + D-13 ownership fields + D-04 staging fields. Strict validation (`extra="forbid"`); enforced via `pydantic.ValidationError` at stub load time.
+- [x] **PHYSICS-02
+**: `pov_lock` artifact (`config/pov_locks.yaml`) loads + validates against scene `perspective` at drafter pre-flight. Override path: stub frontmatter `pov_lock_override: <rationale>`.
+- [x] **PHYSICS-03
+**: `book_pipeline.physics` kernel package landed: `schema.py`, `canon_bible.py`, `gates/__init__.py`, `gates/{pov_lock,motivation,ownership,treatment,quantity}.py`, `locks.py`. import-linter contract extended in BOTH source_modules and forbidden_modules. DraftRequest extended with `scene_metadata: SceneMetadata | None = None` additive nullable field (W-1 contract).
 - [ ] **PHYSICS-04**: CB-01 retriever (`book_pipeline.rag.retrievers.continuity_bible.ContinuityBibleRetriever`) lands as 6th retriever. Lance schema rule_type `'canonical_quantity'`. Bundler emits 7 events per call (was 6). Conflict_detector gains `named_quantity_drift` dimension. Existing 5 retrievers untouched.
 - [ ] **PHYSICS-05**: Drafter pre-flight composition: pov_lock + motivation + ownership + treatment + quantity gates run BEFORE any vLLM call. Each gate emits one `role='physics_gate'` Event (pass+fail). Pattern matches existing `drafter.memorization_gate` + `drafter.preflag`.
 - [ ] **PHYSICS-06**: Drafter prompt template extended: D-23 verbatim canonical-quantity stamp at top-of-prompt; D-13 ownership anchor block fenced (e.g., `<beat>...</beat>`) so directive can't smear into prose.
