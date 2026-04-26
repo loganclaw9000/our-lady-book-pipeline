@@ -162,6 +162,8 @@ Two reasonable resolutions:
 
 **Claude's recommendation: (a)** — discontinuity inside a known-bad block (operator's own assessment: "~50% duplicate junk") is acceptable; ch15+ is the forward-correctness target. POV-lock for Itzcoatl activates at ch15 per D-21.
 
+**RESOLVED 2026-04-25 (operator via discuss-phase + planner adoption):** (a) — pov_lock activates ch15+; ch09 retry NOT gated. Encoded in `config/pov_locks.yaml` with `active_from_chapter: 15` and rationale citing OQ-01(a) + D-16/D-21. PovLock.applies_to(9) returns False (verified by Plan 07-01 test_locks.py Test 6).
+
 **OQ-02: Ch09 retry post-V7C.** Per HANDOFF_2026-04-25.md, ch09 hard-blocked because all 4 sc01 attempts critic-failed (POV breach). Stub now has `STRICT POV: ITZCOATL ONLY` prefix. Should ch09 retry happen **before** Phase 7 engine ships (under existing critic + new stub guard) or **as the first ch15+ flight** under the new engine? Recommendation: retry under existing pipeline (V7C arrives before Phase 7 ships); if retry succeeds, bank the chapter; engine doesn't need it as a canary.
 
 **OQ-03: ch15 sc02 resume.** ch15 sc01 committed; sc02 drafted-but-killed at V7C boundary, pre-critic. Per D-21, ch15 is the **first chapter under the engine**. Should sc02 resume use the existing pipeline (immediate, V7C-ready) or wait for engine to ship (slower, fully gated)? Recommendation: resume under existing pipeline immediately on V7C land — Phase 7 takes weeks, we don't block ch15-27 production on engine shipping. Engine ships, then ch16+ gets full gating.
@@ -174,6 +176,8 @@ Two reasonable resolutions:
 - **(c)** Hybrid (researcher recommendation): operator confirms the 5 canaries directly (low-effort, high-confidence); extraction agent generates the rest with operator-review gating before write to LanceDB.
 
 **Claude's recommendation: (c).** The 5 canaries are the failure-evidence anchors and need operator-truth; the long tail (every named entity / quantity in ~250KB lore corpus) is too much for hand-seed but tractable for an extraction agent with review.
+
+**RESOLVED 2026-04-25 (operator via discuss-phase + planner adoption):** (c) — hybrid hand-seed (5 canaries operator-confirmed via this plan revision) + extraction-agent for long tail (deferred to v1.1). The 5 canonical values land in `config/canonical_quantities_seed.yaml` as canonical truth as of phase planning; subsequent canon updates go through a separate `canon update` workflow that re-ingests and alerts on prose drift. Long-tail extraction agent is OUT-OF-SCOPE for Phase 7 acceptance.
 
 </open_questions>
 
@@ -258,9 +262,11 @@ treatment: dramatic | mournful | comedic | light | propulsive | contemplative | 
 - Cross-book physics (multi-novel canon) — single-book only for v1
 - ML-learned atomics (use only craft-literature-derived rules in v1; learned variants are a v2 thesis)
 - Real-time visualization of physics state during generation — telemetry only via events.jsonl
+- Long-tail canonical-quantity extraction agent (OQ-05 (c) tail) — deferred to v1.1 per RESOLVED 2026-04-25
 </deferred>
 
 ---
 
 *Phase: 07-narrative-physics-engine-codified-storytelling-atomics-enfor*
 *Context locked: 2026-04-25 from operator directive*
+*OQ-01 + OQ-05 RESOLVED: 2026-04-25 (operator via discuss-phase + planner adoption)*
