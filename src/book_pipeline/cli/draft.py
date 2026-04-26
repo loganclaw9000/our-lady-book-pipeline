@@ -47,7 +47,13 @@ import yaml
 # Phase 7 Plan 05: physics deps for ch15+ generation. Importing
 # book_pipeline.physics also triggers DraftRequest + CriticRequest forward-
 # ref resolution for scene_metadata (BLOCKER #5: load-bearing wiring point).
-from book_pipeline.physics import SceneEmbeddingCache
+from book_pipeline.physics import (
+    SceneEmbeddingCache,
+    build_canon_bible_view,
+    load_pov_locks,
+    run_pre_flight,
+)
+from book_pipeline.physics.gates.base import GateResult
 from book_pipeline.physics.schema import SceneMetadata
 
 logger = logging.getLogger(__name__)
@@ -921,6 +927,10 @@ def run_draft_loop(
                         context_pack=pack,
                         prior_scenes=prior_scenes_loaded,
                         generation_config={"attempt_number": 1},
+                        # Phase 7 verifier-2026-04-26 closure: scene_metadata
+                        # is the load-bearing wiring point for ModeADrafter's
+                        # physics_pre_flight + factories (D-24).
+                        scene_metadata=physics_scene_metadata,
                     )
                     draft = composition_root.drafter.draft(draft_request)
                 # Consume kick_issues — successful or not — so subsequent
@@ -936,6 +946,10 @@ def run_draft_loop(
                     context_pack=pack,
                     prior_scenes=prior_scenes_loaded,
                     generation_config={"attempt_number": 1},
+                    # Phase 7 verifier-2026-04-26 closure: scene_metadata is
+                    # the load-bearing wiring point for ModeADrafter's
+                    # physics_pre_flight + factories (D-24).
+                    scene_metadata=physics_scene_metadata,
                 )
                 draft = composition_root.drafter.draft(draft_request)
             else:
@@ -1202,6 +1216,76 @@ def run_dry_run(
 
 
 # --------------------------------------------------------------------------- #
+# Physics factory builder (Phase 7 verifier-2026-04-26 gap closure)            #
+# --------------------------------------------------------------------------- #
+
+
+def build_physics_factories(
+    *,
+    event_logger: Any | None,
+    pov_locks_yaml_path: Path | None = None,
+) -> dict[str, Any]:
+    """Build the 3 physics closures wired into ModeADrafter.
+
+    Returns a dict with keys ``physics_pre_flight``,
+    ``physics_canonical_stamp_factory``, ``physics_beat_directive_factory``
+    matching ModeADrafter's keyword-only physics ctor surface.
+
+    Extracted from the inline composition root so the integration test in
+    ``tests/integration/test_phase7_cli_drafter_wiring.py`` can exercise the
+    SAME closures production uses (D-24 production-grain enforcement —
+    verifier-2026-04-26 gap closure for Capability 5).
+
+    pov_locks loaded once; canon_bible derives per-bundle from each request's
+    context_pack at draft time (per-bundle local state, NO module-scope cache —
+    Pitfall 11). When request.scene_metadata is None (legacy ch01-04 stubs)
+    the closures degrade to no-op so the pre-Phase-7 path stays unchanged.
+    """
+    pov_locks = load_pov_locks(pov_locks_yaml_path)
+
+    def _physics_pre_flight(req: DraftRequest) -> list[GateResult]:
+        if req.scene_metadata is None:
+            return []
+        cb01 = req.context_pack.retrievals.get("continuity_bible")
+        canon_bible = build_canon_bible_view(
+            cb01_retrieval=cb01,
+            pov_locks=pov_locks,
+        )
+        return run_pre_flight(
+            req.scene_metadata,
+            pov_locks=pov_locks,
+            canon_bible=canon_bible,
+            event_logger=event_logger,
+        )
+
+    def _canonical_stamp_factory(req: DraftRequest) -> str:
+        if req.scene_metadata is None:
+            return ""
+        cb01 = req.context_pack.retrievals.get("continuity_bible")
+        canon_bible = build_canon_bible_view(
+            cb01_retrieval=cb01,
+            pov_locks=pov_locks,
+        )
+        return canon_bible.format_stamp()
+
+    def _beat_directive_factory(req: DraftRequest) -> str:
+        md = req.scene_metadata
+        if md is None:
+            return ""
+        owns = ", ".join(md.owns)
+        no_renarrate = ", ".join(md.do_not_renarrate)
+        return (
+            f"<beat>OWNS: {owns}. DO NOT renarrate: {no_renarrate}.</beat>"
+        )
+
+    return {
+        "physics_pre_flight": _physics_pre_flight,
+        "physics_canonical_stamp_factory": _canonical_stamp_factory,
+        "physics_beat_directive_factory": _beat_directive_factory,
+    }
+
+
+# --------------------------------------------------------------------------- #
 # _build_composition_root — production CLI composition                          #
 # --------------------------------------------------------------------------- #
 
@@ -1301,6 +1385,13 @@ def _build_composition_root(
             f"`book-pipeline vllm-bootstrap --start` first."
         )
 
+    # Phase 7 Plan 03 + verifier-2026-04-26 gap closure: wire the 3 physics
+    # factories (PHYSICS-05 + PHYSICS-06 production grain). Closures are built
+    # via build_physics_factories so the integration test in tests/integration/
+    # test_phase7_cli_drafter_wiring.py can exercise the SAME composition path
+    # production uses (D-24 production-grain enforcement).
+    physics_factories = build_physics_factories(event_logger=event_logger)
+
     drafter = ModeADrafter(
         vllm_client=vllm_client,
         event_logger=event_logger,
@@ -1309,6 +1400,13 @@ def _build_composition_root(
         memorization_gate=memorization_gate,
         sampling_profiles=mode_thresholds_cfg.sampling_profiles,
         embedder_for_fidelity=embedder,
+        physics_pre_flight=physics_factories["physics_pre_flight"],
+        physics_canonical_stamp_factory=physics_factories[
+            "physics_canonical_stamp_factory"
+        ],
+        physics_beat_directive_factory=physics_factories[
+            "physics_beat_directive_factory"
+        ],
     )
 
     # --- Critic (Plan 03-05) ---
