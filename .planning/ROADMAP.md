@@ -15,6 +15,7 @@
 - [~] **Phase 4: Chapter Assembly + Post-Commit DAG** - ChapterAssembler, chapter-level Critic (fresh RAG pack), atomic canon commit, EntityExtractor with SHA-linked cards, RetrospectiveWriter with lint. (3/6 — 04-01 kernel skeletons + ChapterStateMachine; 04-02 ConcatAssembler + ChapterCritic; 04-03 OpusEntityExtractor + OpusRetrospectiveWriter)
 - [ ] **Phase 5: Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration** - Mode-B Drafter (Opus), full R-cap regen with cost gate, oscillation detector, Mode-B preflags, hard-block Telegram alerts, nightly openclaw cron.
 - [ ] **Phase 6: Testbed Plane + Production Hardening + First Draft** - Thesis registry + matcher, ablation harness, cross-family critic, weekly digest, metrics ledger ingester, 27-chapter production run with >=3 closed theses.
+- [ ] **Phase 7: Narrative Physics Engine** - Codified storytelling atomics + 13-axis critic + drafter pre-flight gates + canon-bible continuity layer (CB-01 6th retriever) + scene-buffer dedup + ch15+ forward-only enforcement.
 
 ---
 
@@ -193,6 +194,36 @@ Plans:
 
 ---
 
+### Phase 7: Narrative Physics Engine — codified storytelling atomics + 13-axis critic + canon-bible continuity layer + scene-buffer dedup + ch15+ forward-only enforcement
+
+**Goal:** Build the Narrative Physics Engine — a metadata + rules + enforcement layer that codifies storytelling atomics so the pipeline can draft + validate scenes against narrative invariants (POV, motivation, treatment, content ownership, named-quantity continuity, stub-leak, repetition-loop, scene-buffer similarity) the way Unreal Engine validates physical motion against physics invariants. **Forward-only (D-21):** builds for ch15-27 + ch09 retry; ch01-14 historical artifacts NOT retrofit; ch01-04 read-only sanity baseline.
+
+**Requirements**: PHYSICS-01, PHYSICS-02, PHYSICS-03, PHYSICS-04, PHYSICS-05, PHYSICS-06, PHYSICS-07, PHYSICS-08, PHYSICS-09, PHYSICS-10, PHYSICS-11, PHYSICS-12, PHYSICS-13
+
+**Depends on:** Phase 5 (alerts kernel-package precedent + scene-kick recovery loop both reused); Phase 4 (chapter_assembler/concat.py extended for D-18 quote normalizer); Phase 3 (scene critic 5-axis extended to 13); Phase 2 (RAG 6th retriever via existing LanceDB additive nullable contract). Does NOT block on Phase 6 — Phase 7 can ship in parallel with Phase 6 testbed work.
+
+**Success Criteria** (what must be TRUE):
+  1. `book_pipeline.physics` kernel package landed with strict Pydantic SceneMetadata schema (D-03/D-13/D-04 fields), 5 pre-flight gates (pov_lock, motivation, ownership, treatment, quantity), 2 deterministic pre-LLM detectors (stub_leak, repetition_loop), SceneEmbeddingCache + cosine helpers; import-linter contract extended to enforce kernel boundary.
+  2. CB-01 6th RAG axis lands as a new VALUE for the existing rule_type column ('canonical_quantity') — no new LanceDB column, no new table — with the 5 manuscript canaries (Andres age, La Nina height, Santiago del Paso scale, Cholula date, Cempoala arrival) hand-seeded per OQ-05 (c). Bundler emits 7 events per call (was 6).
+  3. Drafter pre-flight runs the 5 gates BEFORE any vLLM call (D-24); each emission produces one role='physics_gate' Event per OBS-01. Drafter prompt header injects D-23 verbatim canonical-quantity stamp + D-13 fenced ownership/beat block.
+  4. Critic 5-axis rubric extends to 13 axes (rubric.yaml v2). Pre-LLM short-circuits (stub_leak, repetition_loop) fire BEFORE the Anthropic call; on hit, return synthetic CriticResponse without LLM spend. motivation_fidelity FAIL is hard-stop (overall_pass=False unconditionally — D-02 load-bearing).
+  5. Scene-buffer dedup: BGE-M3 cosine ≥0.80 vs prior committed scenes' embeddings forces scene_buffer_similarity=False + scene-kick (D-28). Embedding cache lives at `.planning/intel/scene_embeddings.sqlite` with PRIMARY KEY (scene_id, bge_m3_revision_sha) so model upgrades naturally invalidate.
+  6. ch15+ first-flight smoke: ch15 sc02 resume passes all 13 axes (or scene-kicks recover deterministically). ch01-04 read-only smoke: engine flags zero false positives on the 4 frozen-baseline chapters across 13 axes. PovLock activates at ch15+ for Itzcoatl (1st_person); ch09 retry NOT gated per OQ-01 (a).
+
+**Plans**: 5 plans in 4 waves (Wave 1: 07-01 schema + locks + import-linter + REQUIREMENTS.md → Wave 2: 07-02 CB-01 retriever + canonical_quantity ingest + 7-event bundler invariant → Wave 3 parallel: 07-03 pre-flight gates + canon_bible + drafter prompt extension && 07-04 critic 13-axis + stub_leak + repetition_loop + motivation hard-stop → Wave 4: 07-05 scene-buffer cosine + quote normalizer + CLI composition + ch15 / ch01-04 integration smokes)
+
+Plans:
+- [ ] 07-01-PLAN.md — physics package skeleton + SceneMetadata Pydantic schema + PovLock storage + config/pov_locks.yaml + import-linter contract + REQUIREMENTS.md PHYSICS-01..13 [PHYSICS-01, PHYSICS-02, PHYSICS-03]
+- [ ] 07-02-PLAN.md — ContinuityBibleRetriever (6th axis) + canonical_quantities corpus_ingest + config/canonical_quantities_seed.yaml hand-seeded canaries + bundler 7-event invariant [PHYSICS-04]
+- [ ] 07-03-PLAN.md — physics/canon_bible.py + 5 pre-flight gate files + run_pre_flight composer + drafter ModeA pre-flight wiring + Jinja2 canonical-stamp + fenced beat directive [PHYSICS-05, PHYSICS-06]
+- [ ] 07-04-PLAN.md — physics/stub_leak.py + physics/repetition_loop.py + critic 5→13 axis extension + rubric.yaml v2 + motivation hard-stop in _post_process [PHYSICS-07, PHYSICS-08, PHYSICS-09, PHYSICS-13]
+- [ ] 07-05-PLAN.md — physics/scene_buffer.py SceneEmbeddingCache + cosine helpers + chapter_assembler/concat.py quote normalizer + critic pre-LLM short-circuit hooks + CLI composition + ch15 sc02 smoke + ch01-04 zero-FP smoke [PHYSICS-10, PHYSICS-11, PHYSICS-12]
+**UI hint**: no
+
+**Parallelization**: Wave 1 (07-01 schema) is foundational — every later plan imports from physics.schema/locks/gates.base. Wave 2 (07-02 CB-01) is independent of Wave 3 plans. Wave 3 splits into two parallel plans: 07-03 (drafter-side: gates + prompt extension; depends on 07-01 schema + 07-02 CB-01 for the canon_bible reader) and 07-04 (critic-side: 13-axis schema + stub_leak/repetition_loop pre-LLM detectors + motivation hard-stop; depends only on 07-01 schema). Wave 4 (07-05) is the integration point — depends on everything; lands the scene-buffer cosine + CLI composition root + the phase-acceptance integration smokes.
+
+---
+
 ## Progress
 
 | Phase | Plans Complete | Status | Completed |
@@ -203,13 +234,14 @@ Plans:
 | 4. Chapter Assembly + Post-Commit DAG | 0/6 | Planned    | - |
 | 5. Mode-B Escape + Regen Budget + Alerting + Nightly Orchestration | 0/TBD | Not started | - |
 | 6. Testbed Plane + Production Hardening + First Draft | 0/TBD | Not started | - |
+| 7. Narrative Physics Engine | 0/5 | Planned (2026-04-25) | - |
 
 ---
 
 ## Coverage
 
-- **v1 requirements total:** 41
-- **Mapped to phases:** 41
+- **v1 requirements total:** 41 (+ 13 PHYSICS-NN scoped to Phase 7 = 54 total)
+- **Mapped to phases:** 41 + 13 = 54
 - **Unmapped:** 0
 - **Coverage:** 100% (every REQ-ID assigned to exactly one phase)
 
@@ -223,7 +255,8 @@ Plans:
 | 4 | CORPUS-02, CRIT-02, LOOP-02, LOOP-03, LOOP-04, TEST-01 | 6 |
 | 5 | DRAFT-03, DRAFT-04, REGEN-02, REGEN-03, REGEN-04, LOOP-01, ORCH-01, ALERT-01, ALERT-02 | 9 |
 | 6 | OBS-02, OBS-04, CRIT-03, TEST-02, TEST-03, TEST-04, ORCH-02, FIRST-01, FIRST-02 | 9 |
-| **Total** | | **41** |
+| 7 | PHYSICS-01, PHYSICS-02, PHYSICS-03, PHYSICS-04, PHYSICS-05, PHYSICS-06, PHYSICS-07, PHYSICS-08, PHYSICS-09, PHYSICS-10, PHYSICS-11, PHYSICS-12, PHYSICS-13 | 13 |
+| **Total** | | **54** |
 
 ---
 
@@ -242,8 +275,14 @@ Phase 1 (Foundation + Observability) ─┐
                                                 ▼
                                           Phase 5 (Mode-B + Budget + Alerting + Cron)
                                                 │
-                                                ▼
-                                          Phase 6 (Testbed + Hardening + FIRST-01)
+                                                ├──► Phase 6 (Testbed + Hardening + FIRST-01)
+                                                │
+                                                └──► Phase 7 (Narrative Physics Engine)
+                                                        — runs in parallel with Phase 6;
+                                                          extends Phase 2 (CB-01 6th axis),
+                                                          Phase 3 (5→13 axis critic),
+                                                          Phase 4 (concat.py quote normalizer),
+                                                          Phase 5 (alerts kernel-package precedent).
 ```
 
 **Notes on the dependency graph:**
@@ -254,6 +293,7 @@ Phase 1 (Foundation + Observability) ─┐
 - Phase 4 depends on Phase 3 (scenes in the buffer) and re-uses Phase 2's bundler for the chapter-critic's independent re-query.
 - Phase 5 depends on Phase 4 (chapter-level DAG). Mode-B escape is meaningful only when Mode-A has been characterized (Phase 3) and chapter commits atomically (Phase 4).
 - Phase 6 reads from every prior phase's event log. Its content is gated by having >=3 committed chapters (Phase 5's nightly loop must have run productively) before thesis closures and ablations produce meaningful evidence.
+- Phase 7 (Narrative Physics Engine) is a kernel-package addition + RAG-axis extension + critic-prompt extension; it does NOT block on Phase 6. Phase 7 reuses the alerts kernel-package precedent from Plan 05-03, the scene-kick recovery loop from Plan 05-02, the additive-nullable LanceDB column policy from Plan 05-03, and the Anthropic structured-output discipline from Plans 03-04/04-02. Forward-only scope (D-21): Phase 7 enforces narrative physics for ch15-27 + ch09 retry; ch01-14 are historical artifacts and are NOT retrofit. ch01-04 read-only baseline (zero-FP smoke) is the canary.
 
 ---
 
@@ -271,4 +311,4 @@ A browser dashboard is explicitly deferred to v2 (REVIEW-01) per PROJECT.md out-
 
 ---
 
-*Last updated: 2026-04-21 at roadmap creation*
+*Last updated: 2026-04-25 — Phase 7 planned (5 plans / 4 waves, 13 PHYSICS-NN REQ-IDs).*
