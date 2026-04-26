@@ -11,7 +11,7 @@ entity keyword list — Warning #2 mitigation.
 Severity model:
 - 'pass': all canonical-quantity entities mentioned in the stub resolve via CB-01.
 - 'mid': stub references an on-screen entity that has NO canonical row (soft
-  signal — Cempoala double-arrival corner case per 07-NARRATIVE_PHYSICS.md §6.3
+  signal — the double-arrival corner case per 07-NARRATIVE_PHYSICS.md S6.3
   says hard reject would over-fire at pre-flight; the critic catches the actual
   drift post-draft).
 - 'high': stub explicitly contradicts a canonical value substring (reserved for
