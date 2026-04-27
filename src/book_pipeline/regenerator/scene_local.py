@@ -185,6 +185,15 @@ class SceneLocalRegenerator:
         prior_wc = len(request.prior_draft.scene_text.split())
         word_count_target = prior_wc
 
+        # Diversification ramp on regen attempts ≥2 — V7C Qwen3.5-27B has a
+        # tendency to mirror prior-scene setup when context_pack carries
+        # neighbor scenes. Ramping temperature + injecting an explicit
+        # AVOID-PARAPHRASE directive on attempts 2-3 forces opening rhythm
+        # and sensory anchor diversification without losing voice.
+        attempt_temperature = self.temperature + 0.1 * max(0, attempt_number - 1)
+        attempt_temperature = min(attempt_temperature, 1.0)
+        diversify_directive = attempt_number >= 2
+
         # 4: render Jinja2.
         rendered_prompt = self._template.render(
             prior_scene_text=request.prior_draft.scene_text,
@@ -193,6 +202,8 @@ class SceneLocalRegenerator:
             scene_request=scene_request,
             voice_description=VOICE_DESCRIPTION,
             retrievals=request.context_pack.retrievals,
+            diversify_directive=diversify_directive,
+            attempt_number=attempt_number,
         )
 
         # 5: split on sentinels.
@@ -200,6 +211,8 @@ class SceneLocalRegenerator:
         messages = [{"role": "user", "content": user_text}]
 
         # 6-7: call Opus with tenacity 5x retry.
+        # Stash per-attempt temperature so _call_opus_inner picks it up.
+        self._pending_temperature = attempt_temperature
         t0_ns = time.monotonic_ns()
         try:
             response = self._call_opus(messages=messages, system_text=system_text)
@@ -309,7 +322,7 @@ class SceneLocalRegenerator:
         return self._anthropic_client.messages.create(
             model=self.model_id,
             max_tokens=self.max_tokens,
-            temperature=self.temperature,
+            temperature=getattr(self, "_pending_temperature", self.temperature),
             system=system_text,
             messages=messages,
         )

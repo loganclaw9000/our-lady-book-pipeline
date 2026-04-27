@@ -6,10 +6,17 @@
       scene_request: SceneRequest
       voice_description: str
       retrievals: dict[str, RetrievalResult]
+      diversify_directive: bool   # true on regen attempts ≥2 (V7C echo mitigation)
+      attempt_number: int
 -#}
 ===SYSTEM===
 You are rewriting specific passages of a scene to fix critic issues. Voice: {{ voice_description }}
 
+{% if diversify_directive -%}
+DIVERSIFICATION DIRECTIVE (regen attempt {{ attempt_number }}):
+The PRIOR DRAFT below was rejected partly because its opening, rhythm, or sensory anchor too closely paraphrased a different scene already in the canon. AVOID that paraphrase. Open with a different first sentence, a different sensory anchor (sound vs sight vs smell vs proprioception), and a different rhythm (long-short-short vs short-short-long). Do not echo prior committed scene's setup blocks. Continue forward, do not re-establish.
+
+{% endif -%}
 Rules:
 1. Target total word count: {{ word_count_target }} (±10%). Drifting outside this band fails the rewrite.
 2. Address every HIGH and MID severity issue listed. LOW-severity issues are context; do not chase them if it costs word budget.

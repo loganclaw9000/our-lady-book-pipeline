@@ -617,6 +617,32 @@ class SceneCritic:
                 invariant_fixed = True
             parsed.overall_pass = False
 
+        # If overall_pass is False but no axis with pass=False has a
+        # corresponding issue, the regen loop will hit `unreachable:
+        # overall_pass=False but no actionable issues` (Plan 05-02 invariant).
+        # Synthesize a placeholder mid-severity issue per orphaned FAIL axis so
+        # the regen path receives actionable input.
+        if not parsed.overall_pass:
+            axes_with_issues = {i.axis for i in parsed.issues}
+            for axis, passed in parsed.pass_per_axis.items():
+                if not passed and axis not in axes_with_issues:
+                    parsed.issues.append(
+                        CriticIssue(
+                            axis=axis,
+                            severity="mid",
+                            location="scene-wide",
+                            claim=(
+                                f"axis {axis!r} marked FAIL but critic emitted no "
+                                "actionable issue; synthesized placeholder so the "
+                                "regen loop has guidance to act on."
+                            ),
+                            evidence=(
+                                "post-process synthetic — review critic output "
+                                "against rubric template for missing issue field."
+                            ),
+                        )
+                    )
+
         # Always override rubric_version to the critic's source-of-truth.
         if parsed.rubric_version != self.rubric.rubric_version:
             logger.warning(

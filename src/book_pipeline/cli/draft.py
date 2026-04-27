@@ -784,14 +784,34 @@ def run_draft_loop(
         _persist(record, state_path)
         if event_logger is not None:
             try:
+                ts_iso = datetime.now(UTC).isoformat()
                 event_logger.emit(
-                    {
-                        "event_type": "empty_pack_preflight_block",
-                        "scene_id": scene_id,
-                        "empty_axes": empty_axes,
-                        "total_bytes": pack.total_bytes,
-                        "fingerprint": pack.fingerprint,
-                    }
+                    Event(
+                        event_id=event_id(
+                            ts_iso, "empty_pack_preflight", scene_id, "block"
+                        ),
+                        ts_iso=ts_iso,
+                        role="empty_pack_preflight",
+                        model="n/a",
+                        prompt_hash=hash_text(
+                            f"{scene_id}:{pack.fingerprint}"[:200]
+                        ),
+                        input_tokens=0,
+                        output_tokens=0,
+                        latency_ms=1,
+                        caller_context={
+                            "module": "cli.draft",
+                            "function": "run_draft_loop",
+                            "scene_id": scene_id,
+                        },
+                        output_hash=hash_text(str(empty_axes)),
+                        extra={
+                            "event_type": "empty_pack_preflight_block",
+                            "empty_axes": empty_axes,
+                            "total_bytes": pack.total_bytes,
+                            "fingerprint": pack.fingerprint,
+                        },
+                    )
                 )
             except Exception:
                 logger.exception("event_logger.emit failed on preflight block")
