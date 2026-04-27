@@ -1,0 +1,383 @@
+{
+  "entities": [
+    {
+      "entity_name": "Itzcoatl",
+      "last_seen_chapter": 15,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 15,
+        "current_state": "Mexica pilli-class pilot of the engine Obsidian Mirror. On his feast day during Toxcatl, present on the lower steps of the Templo Mayor in white cotton, unarmed, a quarter mile from his engine, when Spanish forces massacred the unarmed celebrants. Witnessed the four ixiptla killed in twelve seconds and felt the Great Engine's hum drop a full interval as the sacrificial pipeline was severed. Walked (did not run) along the southwest pyramid wall to Obsidian Mirror's stable; was turned back at the door by the two adorator-priests honoring the Toxcatl prohibition on waking the engine. A recall horn released him to the southern-gate corps muster, where he took his place in the pilli-class line under a Huitzilopochtli captain's order to hold ranks and not wake engines. Does not yet know his sister's husband Cuauhtli Ocelotl is dead.",
+        "relationships": [
+          {
+            "to": "Obsidian Mirror",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Tepin",
+            "kind": "uncle_of"
+          },
+          {
+            "to": "Cuauhtli Ocelotl",
+            "kind": "brother_in_law_of"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "Through the soles of his sandals Itzcoatl could feel the engine working, a low tremor passing up the pyramid stone into the bones of his feet",
+        "He was on his feast day. He was unarmed. He was a quarter mile from his engine.",
+        "Itzcoatl took his place in the pilli-class line and did not speak."
+      ],
+      "source_chapter_sha": "0e76edda22aecfbc4e0eeee70eaaeebd406796a5"
+    },
+    {
+      "entity_name": "Obsidian Mirror",
+      "last_seen_chapter": 15,
+      "state": {
+        "aliases": [
+          "Mirror"
+        ],
+        "entity_type": "object",
+        "first_mentioned_chapter": 15,
+        "current_state": "Mexica engine/Reliquary aligned with Tezcatlipoca, identified by a smoking-mirror motif on the chest and a high curved spine. Itzcoatl is its pilot. Sleeps in a shrine-stable in the engine compound roughly a quarter mile from the Templo Mayor courtyard, with a teōcalli-chest sealed under feast-day seals (three placed by Itzcoatl's own hands at dawn). Toxcatl protocol forbids the pilot's approach; the deity was not woken during the massacre. Tended at the door by two adorator-priests (one older, one younger) who held the prohibition. Cables remained cold; Itzcoatl projected he could have it walking 'by tomorrow midday' if rite were broken.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "piloted_by"
+          },
+          {
+            "to": "Tezcatlipoca",
+            "kind": "houses_deity"
+          }
+        ],
+        "confidence_score": 0.92
+      },
+      "evidence_spans": [
+        "Obsidian Mirror sat a quarter mile away, cradled in its shrine in the engine compound, attended only by its priests.",
+        "Behind the adorators, in the dim of the shrine-stable, the high curved spine of *Obsidian Mirror* held the late sun on the smoking-mirror motif at the chest and gave nothing back.",
+        "By tomorrow midday Obsidian Mirror would walk."
+      ],
+      "source_chapter_sha": "0e76edda22aecfbc4e0eeee70eaaeebd406796a5"
+    },
+    {
+      "entity_name": "Toxcatl",
+      "last_seen_chapter": 15,
+      "state": {
+        "aliases": [],
+        "entity_type": "event",
+        "first_mentioned_chapter": 15,
+        "current_state": "Mexica festival in progress in the Templo Mayor precinct on the day of the chapter. Centerpiece: four ixiptla (young men, ~19-20, each having lived a year as Huitzilopochtli) due to die at the climax. Protocol forbids the engine pilots' approach to their engines while the festival runs and bars rite-breaking actions like waking sleeping deities. Festival was cut short when Spanish soldiers at the perimeter (~38 counted by Itzcoatl, far above the dozen Moctezuma had approved as witness contingent) initiated a slaughter at a captain's hand-drop, killing all four ixiptla within twelve seconds and continuing past 100 seconds.",
+        "relationships": [
+          {
+            "to": "Templo Mayor",
+            "kind": "held_at"
+          },
+          {
+            "to": "Huitzilopochtli",
+            "kind": "honors"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "He was forbidden to approach it while Toxcatl ran.",
+        "Four ixiptla moved among the dancers. Young men, nineteen or twenty, each chosen a year ago to live as Huitzilopochtli for a single year",
+        "Toxcatl forbade the pilot's approach."
+      ],
+      "source_chapter_sha": "0e76edda22aecfbc4e0eeee70eaaeebd406796a5"
+    },
+    {
+      "entity_name": "Massacre at the Templo Mayor",
+      "last_seen_chapter": 15,
+      "state": {
+        "aliases": [
+          "Toxcatl massacre"
+        ],
+        "entity_type": "event",
+        "first_mentioned_chapter": 15,
+        "current_state": "Spanish soldiers (~38 at the perimeter, more than the ~12 Moctezuma had authorized as witnesses) initiated coordinated slaughter at a bearded captain's hand-drop during the climactic Toxcatl rite. Six men sealed the southern gate, twelve sealed the eastern arch, and Spanish from the western parapet descended. First Mexica blow was a thrown stone from a nobleman, who was cut down. All four ixiptla killed in twelve seconds. The killing exceeded 100 seconds by Itzcoatl's count and continued. ~500 nobles, ~300 priests, ~200 dancers, ~100 singers, four ixiptla and ~3,000 onlookers were caught unarmed in the open courtyard. Outcome at scene's end: Spanish garrison locked inside Axayacatl's palace; Tenochtitlan beginning to surround it; Tlatelolco barring its bridges; canals filling with people moving away.",
+        "relationships": [
+          {
+            "to": "Toxcatl",
+            "kind": "interrupted"
+          },
+          {
+            "to": "Templo Mayor",
+            "kind": "occurred_at"
+          },
+          {
+            "to": "Great Engine",
+            "kind": "severed_pipeline_of"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "The first ten seconds were a slaughter.",
+        "He counted to forty. The killing had begun forty seconds before. He had counted to forty and the killing had not stopped. He counted to eighty. The killing had not stopped. He counted to one hundred. The killing had not stopped.",
+        "the Spanish garrison had locked itself inside Axayacatl's palace; the city was beginning to surround it"
+      ],
+      "source_chapter_sha": "0e76edda22aecfbc4e0eeee70eaaeebd406796a5"
+    },
+    {
+      "entity_name": "Great Engine",
+      "last_seen_chapter": 15,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 1,
+        "current_state": "Mexica engine beneath the Templo Mayor precinct. During the massacre its hum first tightened (registering the first severed feed as the ixiptla died in the wrong rite), then bent upward, broke, went jagged, then thin, then dropped a full interval below baseline and stayed there. Felt simultaneously by every pilot, priest, adorator, and ear-trained citizen in Tenochtitlan. The sacrificial pipeline (ixiptla, Flower War captives held for the next sacrifice cycle, priests at the bone-dust furnace) is severed. Itzcoatl judges the hum will not return to baseline in his lifetime. Now sounding 'sour and held' from the southern-gate muster point.",
+        "relationships": [
+          {
+            "to": "Templo Mayor",
+            "kind": "powers"
+          },
+          {
+            "to": "Massacre at the Templo Mayor",
+            "kind": "wounded_by"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "the bass note that had been the city's foundation since before Itzcoatl was born went jagged, then thin, then dropped a full interval and stayed there",
+        "The pipeline had been severed.",
+        "the hum would not return to baseline in Itzcoatl's lifetime."
+      ],
+      "source_chapter_sha": "0e76edda22aecfbc4e0eeee70eaaeebd406796a5"
+    },
+    {
+      "entity_name": "Cuauhtli of Cuauhtitlán",
+      "last_seen_chapter": 15,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 15,
+        "current_state": "Youngest of the four Toxcatl ixiptla, with a flower-crown braided in. Had given gifts to Itzcoatl at court during his year as Huitzilopochtli. First ixiptla killed in the massacre: Spanish sword came up under his arm, into his belly and out his back; fell forward to his knees, stayed one breath, then went down. His flower-crown rolled three paces and came to rest near Itzcoatl's sandals.",
+        "relationships": [
+          {
+            "to": "Huitzilopochtli",
+            "kind": "ixiptla_of"
+          },
+          {
+            "to": "Massacre at the Templo Mayor",
+            "kind": "killed_in"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Cuauhtli of Cuauhtitlán was cut first. The sword came up under his arm and into his belly and out his back",
+        "the flower-crown rolled away from his head and came to rest three paces from Itzcoatl's sandals.",
+        "The youngest passed close, a boy with a flower-crown braided in, calm, hollow-eyed."
+      ],
+      "source_chapter_sha": "0e76edda22aecfbc4e0eeee70eaaeebd406796a5"
+    },
+    {
+      "entity_name": "Tochtli",
+      "last_seen_chapter": 15,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 15,
+        "current_state": "Second of the four Toxcatl ixiptla. The first sword aimed at him was stopped by a nobleman who stepped in front of him and died. Tochtli looked at the dead nobleman and did not move. Killed by the second sword; flower-crown rolled and struck Itzcoatl's ankle.",
+        "relationships": [
+          {
+            "to": "Huitzilopochtli",
+            "kind": "ixiptla_of"
+          },
+          {
+            "to": "Massacre at the Templo Mayor",
+            "kind": "killed_in"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "The second ixiptla, Tochtli, did not fall. The sword that would have killed him was stopped by the arm of a nobleman who stepped in front of him",
+        "and then the second sword came, and he fell, and his flower-crown rolled, and it struck Itzcoatl's ankle and went on."
+      ],
+      "source_chapter_sha": "0e76edda22aecfbc4e0eeee70eaaeebd406796a5"
+    },
+    {
+      "entity_name": "Mazatl",
+      "last_seen_chapter": 15,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 15,
+        "current_state": "Third of the four Toxcatl ixiptla. Killed standing during the massacre.",
+        "relationships": [
+          {
+            "to": "Huitzilopochtli",
+            "kind": "ixiptla_of"
+          },
+          {
+            "to": "Massacre at the Templo Mayor",
+            "kind": "killed_in"
+          }
+        ],
+        "confidence_score": 0.88
+      },
+      "evidence_spans": [
+        "Mazatl was killed standing."
+      ],
+      "source_chapter_sha": "0e76edda22aecfbc4e0eeee70eaaeebd406796a5"
+    },
+    {
+      "entity_name": "Tepetl",
+      "last_seen_chapter": 15,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 15,
+        "current_state": "Fourth of the four Toxcatl ixiptla. Killed kneeling, flower-crown still on his head, sword going into his throat from behind. Blood ran down his chest and stained the dahlia petals red.",
+        "relationships": [
+          {
+            "to": "Huitzilopochtli",
+            "kind": "ixiptla_of"
+          },
+          {
+            "to": "Massacre at the Templo Mayor",
+            "kind": "killed_in"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Tepetl was killed kneeling, his flower-crown still on his head, the sword going into his throat from behind, and the blood ran down his chest and stained the dahlia petals red."
+      ],
+      "source_chapter_sha": "0e76edda22aecfbc4e0eeee70eaaeebd406796a5"
+    },
+    {
+      "entity_name": "Tepin",
+      "last_seen_chapter": 15,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 15,
+        "current_state": "Itzcoatl's nephew, eight years old. Had been promised a view of the dancers from a Tlatelolco rooftop on the day of Toxcatl. Itzcoatl could not see the boy from anywhere along his route from the courtyard to the engine compound; status during the massacre unknown to Itzcoatl as of chapter end.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "nephew_of"
+          },
+          {
+            "to": "Tlatelolco",
+            "kind": "located_at"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "his nephew Tepin, eight years old, who had been promised a view of the dancers from a Tlatelolco rooftop, and he had not been able to see the boy from anywhere along the route"
+      ],
+      "source_chapter_sha": "0e76edda22aecfbc4e0eeee70eaaeebd406796a5"
+    },
+    {
+      "entity_name": "Cuauhtli Ocelotl",
+      "last_seen_chapter": 15,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 15,
+        "current_state": "Itzcoatl's sister's husband. A jaguar-warrior in full uniform, unarmored because of Toxcatl. Stepped between a Spanish sword and his younger cousin during the massacre and went down with both hands open. Died on the lower terrace within forty paces of Itzcoatl, who passed without recognizing him. News will reach Itzcoatl by the next morning via a Tlatelolco runner.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "brother_in_law_of"
+          },
+          {
+            "to": "Massacre at the Templo Mayor",
+            "kind": "killed_in"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "he was passing within forty paces of Cuauhtli Ocelotl, his sister's husband, who had stepped between a Spanish sword and his younger cousin and gone down with both hands open.",
+        "That knowledge would arrive by the next morning, by way of a Tlatelolco runner with a child's scar to describe and a household to account for."
+      ],
+      "source_chapter_sha": "0e76edda22aecfbc4e0eeee70eaaeebd406796a5"
+    },
+    {
+      "entity_name": "Axayacatl's palace",
+      "last_seen_chapter": 15,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 15,
+        "current_state": "Mexica palace adjacent to the Templo Mayor precinct, situated about a hundred paces across the lower terrace from the engine compound's eastern arch. After the massacre the entire Spanish garrison locked itself inside; from within, Fray Bernardo's Latin litany rose, naming the slain ixiptla by their year-names. The other Spanish voices inside the palace did not stop their work. Tenochtitlan beginning to surround the palace as scene closes.",
+        "relationships": [
+          {
+            "to": "Templo Mayor",
+            "kind": "adjacent_to"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "houses"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "From inside Axayacatl's palace, a hundred paces across the terrace, a single Spanish voice rose.",
+        "the Spanish garrison had locked itself inside Axayacatl's palace; the city was beginning to surround it"
+      ],
+      "source_chapter_sha": "0e76edda22aecfbc4e0eeee70eaaeebd406796a5"
+    },
+    {
+      "entity_name": "Tlatelolco",
+      "last_seen_chapter": 15,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 15,
+        "current_state": "Mexica district north of the Templo Mayor precinct, separated from it by canals and bridges. Has barred its bridges in response to the massacre, per a messenger's report at the southern-gate muster. Itzcoatl's sister's compound is in Tlatelolco; whether she is inside or outside the barred bridges is unknown to him at scene's end. Itzcoatl's nephew Tepin was promised a rooftop view of the dancers from there.",
+        "relationships": [
+          {
+            "to": "Tenochtitlan",
+            "kind": "district_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Tlatelolco was barring its bridges.",
+        "His sister's compound was in Tlatelolco. The bridges being barred could mean she was inside them or outside them."
+      ],
+      "source_chapter_sha": "0e76edda22aecfbc4e0eeee70eaaeebd406796a5"
+    },
+    {
+      "entity_name": "Bernardo",
+      "last_seen_chapter": 15,
+      "state": {
+        "aliases": [
+          "Fray Bernardo"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 3,
+        "current_state": "Franciscan friar present with the Spanish at Tenochtitlan during Toxcatl. Taught Nahuatl lessons during 'the gilded months' (a peaceful prior period) above which he recited Latin. After the massacre, his voice (a single Spanish voice rising from inside Axayacatl's palace) recited a slow, clear Latin litany, naming each of the four murdered ixiptla by the names he had learned during those lessons. Itzcoatl recognized the cadence but could not yet make out the words and did not yet know it was a litany of the dead.",
+        "relationships": [
+          {
+            "to": "Axayacatl's palace",
+            "kind": "located_in"
+          },
+          {
+            "to": "Massacre at the Templo Mayor",
+            "kind": "memorialized"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "he knew the cadence: a Latin litany, slow, clear, the way Fray Bernardo had recited above their Nahuatl lessons during the gilded months.",
+        "Itzcoatl could not yet know that he was naming the dead, and naming them by the names he had learned during those lessons, *ixiptla* by *ixiptla*."
+      ],
+      "source_chapter_sha": "0e76edda22aecfbc4e0eeee70eaaeebd406796a5"
+    }
+  ],
+  "chapter_num": 15,
+  "extraction_timestamp": "2026-04-27T20:30:54.490002Z"
+}
