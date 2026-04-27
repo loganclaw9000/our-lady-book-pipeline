@@ -16,7 +16,7 @@ voice_pin:
   pinned_reason: "V7C Qwen3.5-27B LoRA — Forge ship 2026-04-26T02:10:48Z (cron watcher). Final eval_loss ~2.30 at epoch 0.94. AgentWrite synthesis approach. Merged dir at /home/admin/finetuning/output/paul-v7c-qwen35-27b-merged digest 918c1092cfa518ac63f45544b296ed58e0f914e3aa01cb6d85e574de6f54564f. Forge bench (commit 26eae3d) confirmed voice on long-form via HF generate; vllm 0.17 status TBD on V7C — will boot LoRA-on-base mode (matching V6 working pattern) and fall back to merged if LoRA-on-bnb breaks."
   vllm_serve_config:
     port: 8003
-    max_model_len: 4096
+    max_model_len: 12288
     dtype: bfloat16
     tensor_parallel_size: 1
     quantization: bitsandbytes
