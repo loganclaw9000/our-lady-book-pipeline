@@ -1,0 +1,493 @@
+{
+  "entities": [
+    {
+      "entity_name": "Itzcoatl",
+      "last_seen_chapter": 9,
+      "state": {
+        "aliases": [
+          "narrator (teōmachtiani, ch09)"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 9,
+        "current_state": "Texcocan pilli pilot of Obsidian Mirror, son of the Triple Alliance. Trained beside Tlaxcalan pilots a decade ago before the last cycle of Flower Wars; cousin Ixtlilxochitl is in exile in the north; sister Xochitl mentioned a strange Nahua girl (Malintzin) she was teaching court protocol. Stood honor guard on the Iztapalapa causeway as Moctezuma walked the Spanish column into Tenochtitlan, then in the courtyard of Axayacatl's palace at the formal reception. Counted forty Mexica engines vs ~13 Spanish and ran the kill-geometry mentally; concluded Moctezuma could have ended the war in 10-12 minutes and chose not to. Climbed into Obsidian Mirror's cockpit alone for the first time in nine days, faced the smoking-mirror disc, and acknowledged to Tezcatlipoca that 'the mathematics were right; the mathematics had not been followed.' Now sees himself as the only pilot in the formation who looked at the gap, and accepts the decision will have to be his.",
+        "relationships": [
+          {
+            "to": "Obsidian Mirror",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Tezcatlipoca",
+            "kind": "deity_served"
+          },
+          {
+            "to": "Xochitl",
+            "kind": "brother_of"
+          },
+          {
+            "to": "Ixtlilxochitl",
+            "kind": "cousin_of"
+          },
+          {
+            "to": "Moctezuma",
+            "kind": "honor_guard_of"
+          },
+          {
+            "to": "Texcoco",
+            "kind": "from"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "A Texcocan face, the long jaw of my mother's line, the small scar at the temple from a childhood fall, the hair pulled back in the warrior's knot the calmecac had taught me when I was eleven. A son of the Triple Alliance.",
+        "my cousin Ixtlilxochitl, off in his exile in the north",
+        "I, so far as I could tell, was the only pilot in the formation who had let himself walk up his own ladder and look at the gap with the lights on."
+      ],
+      "source_chapter_sha": "8b22fce410da52dc5212bcb401a8f3af9cf4fdb9"
+    },
+    {
+      "entity_name": "Obsidian Mirror",
+      "last_seen_chapter": 9,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 15,
+        "current_state": "Mexica Tezcatlipoca-caste engine, fifty-five feet of obsidian-gilt and matte-black plating, smoking-mirror chest-disc polished to a dull sheen; ~eight tons of obsidian and lacquered cedar by interior reckoning. Stood drill-rank on the Iztapalapa causeway flanking Moctezuma's sedan during the Spanish column's entry; hum shifted into a 'new question' as Santiago del Paso passed within a stone's throw. Quartered afterward in the Mexica engine cradle, a stone shed open to the south, in the row of forty engines. Pilot Itzcoatl entered the cockpit alone for the first time in nine days; deity 'sharpened' its hum and asked 'What did you see, teōmachtiani?' Cables not woken to combat; engine in stall, hum followed Itzcoatl out of the shed and faded only at the gate.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "piloted_by"
+          },
+          {
+            "to": "Tezcatlipoca",
+            "kind": "houses_deity"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "*Obsidian Mirror* was behind me, fifty-five feet of obsidian-gilt and matte-black plating, the smoking-mirror chest-disc polished to a dull sheen.",
+        "Behind me *Obsidian Mirror* hummed at the pitch it always hummed, but the hum had become a question.",
+        "The engine was behind me, eight tons of obsidian and lacquered cedar, and the engine hummed."
+      ],
+      "source_chapter_sha": "8b22fce410da52dc5212bcb401a8f3af9cf4fdb9"
+    },
+    {
+      "entity_name": "Moctezuma",
+      "last_seen_chapter": 9,
+      "state": {
+        "aliases": [
+          "the tlatoani"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Tlatoani of the Mexica, visibly tired and unrested under the regalia. Had previously trained as an engine pilot before becoming tlatoani. On the day of the chapter rode lacquered four-poled litter to the midpoint of the Iztapalapa causeway, stepped down, met Cortés ten paces apart, and conducted a formal exchange via Malintzin/Aguilar — speaking about the journey, the gifts, the road, the city, but pointedly NOT Cholula. Decided (already, before the meeting) to let the Spanish into Tenochtitlan rather than attack despite a 50:1 body advantage and the Great Engine on the field. Then walked the Spanish into Axayacatl's palace as quartered guests; doors 'folded around' them.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "received_in_capital"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "translated_for_by"
+          },
+          {
+            "to": "Great Engine",
+            "kind": "withheld_order_to"
+          },
+          {
+            "to": "Itzcoatl",
+            "kind": "honor_guarded_by"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "His face was tired. I have known the tlatoani since I was a boy, and his fatigue was a new thing on him, a thing that did not sit well with the regalia. He had not slept.",
+        "Moctezuma had decided. He had decided to let them in.",
+        "Moctezuma, who had also been trained, who had piloted, before he had been tlatoani, who knew exactly what a Huitzilopochtli engine could do to a Reliquary the size of a market stall, had given the order to lower the standards and walk the strangers in."
+      ],
+      "source_chapter_sha": "8b22fce410da52dc5212bcb401a8f3af9cf4fdb9"
+    },
+    {
+      "entity_name": "Cortés",
+      "last_seen_chapter": 9,
+      "state": {
+        "aliases": [
+          "the captain"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Spanish captain. Reached the Iztapalapa causeway leading the column into Tenochtitlan, mounted on horse, in dented steel (dents from Centla, the road, and Cholula), carrying sword and an unread banner. Met Moctezuma on the causeway midpoint; conducted a formal, lawyerly, ceremonial greeting via Malintzin and Aguilar, having read the Requerimiento and chosen to set it aside for this exchange. Did not raise Cholula. After the exchange the column moved on into the sacred precinct and his party was quartered in Axayacatl's palace.",
+        "relationships": [
+          {
+            "to": "Moctezuma",
+            "kind": "received_by"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "translated_for_by"
+          },
+          {
+            "to": "Tlaxcalans",
+            "kind": "allied_with"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Cortés led them. He rode a horse, a thing I had seen before at Centla, a thing I still did not trust",
+        "His armor was steel, the steel was dented, the dents from Centla, from the road, from Cholula, I did not know which.",
+        "Cortés answered in Spanish, the words lawyerly, ceremonial, the words of a man who had read the *Requerimiento* and had chosen, for this moment, to set it aside."
+      ],
+      "source_chapter_sha": "8b22fce410da52dc5212bcb401a8f3af9cf4fdb9"
+    },
+    {
+      "entity_name": "Malintzin",
+      "last_seen_chapter": 9,
+      "state": {
+        "aliases": [
+          "Marina",
+          "the girl"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Walked beside Cortés's horse on the Iztapalapa causeway, on foot, in a Spanish dress altered for her (hem shortened, sleeves cut narrow). Carried herself as the hinge of the meeting. Translated Nahuatl<->Spanish chained through Aguilar between Moctezuma and Cortés in a formal exchange; her face changed with each language. Has been studying Mexica court protocol with Xochitl (Itzcoatl's sister) for weeks. Recognized Itzcoatl across the column at scene's end with a single nod of acknowledgment between two people who 'understood the hinge.' Continued with the column into Axayacatl's palace.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "translator_for"
+          },
+          {
+            "to": "Aguilar",
+            "kind": "translator_chain_with"
+          },
+          {
+            "to": "Xochitl",
+            "kind": "student_of"
+          },
+          {
+            "to": "Moctezuma",
+            "kind": "translated_to"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "She walked beside Cortés's horse, on foot, in a Spanish dress that had been altered for her, the hem shortened for the causeway, the sleeves cut narrow.",
+        "She was the girl Xochitl was teaching.",
+        "She nodded once, and the nod was not a greeting, it was an acknowledgment, the acknowledgment of one person who understood the hinge to another."
+      ],
+      "source_chapter_sha": "8b22fce410da52dc5212bcb401a8f3af9cf4fdb9"
+    },
+    {
+      "entity_name": "Great Engine",
+      "last_seen_chapter": 9,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 1,
+        "current_state": "A hundred and fifty feet of Huitzilopochtli-caste, first-class — the largest engine the Mexica have ever built, standing in the center of Tenochtitlan. On the day of the chapter has been awake for hours, perhaps days, hum a low cathedral-hum felt through water, causeway, and stone. Hum shifted register half a step as the Spanish column passed beneath the lake's mirror, registering Moctezuma's withheld order. Felt by Itzcoatl as the audible signature of the tlatoani's choice to host rather than strike.",
+        "relationships": [
+          {
+            "to": "Moctezuma",
+            "kind": "awaiting_order_from"
+          },
+          {
+            "to": "Templo Mayor",
+            "kind": "located_at"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "I felt the Great Engine of the Templo Mayor through the water, through the causeway, through the stone beneath my feet.",
+        "A hundred and fifty feet of Huitzilopochtli-caste, first-class, the largest engine the Mexica had ever built, standing in the center of Tenochtitlan waiting for an order that was not going to come.",
+        "the half-step shift of the Great Engine's hum"
+      ],
+      "source_chapter_sha": "8b22fce410da52dc5212bcb401a8f3af9cf4fdb9"
+    },
+    {
+      "entity_name": "Santiago del Paso",
+      "last_seen_chapter": 9,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 2,
+        "current_state": "Spanish first-class Reliquary, nearly as tall as Obsidian Mirror, walking with deliberate measured step. Chest-plate gilded; gilding caught morning light off Lake Texcoco hard enough to make Itzcoatl look down. Sword at hip. Pilot's voice carried back across the water in command to Tlaxcalans. Passed within a stone's throw of Obsidian Mirror on the Iztapalapa causeway; pilot turned head, looked at Itzcoatl, nodded once, then continued into the sacred precinct.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "in_column_of"
+          },
+          {
+            "to": "Tlaxcalans",
+            "kind": "leading_in_column"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "It was *Santiago del Paso*, nearly as tall as my own engine, and it walked with a deliberate, measured step that tightened my stomach in a way I could not name.",
+        "*Santiago del Paso* passed within a stone's throw of *Obsidian Mirror*. Its pilot turned his head, a small motion, polite, almost curious, and looked at me."
+      ],
+      "source_chapter_sha": "8b22fce410da52dc5212bcb401a8f3af9cf4fdb9"
+    },
+    {
+      "entity_name": "Xochitl",
+      "last_seen_chapter": 9,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 9,
+        "current_state": "Itzcoatl's sister. Had been teaching Malintzin court protocol for weeks before the Spanish entry; mentioned 'the strange Nahua girl, given to the strangers, who spoke three tongues, who learned court protocol the way a fish learns to swim' to Itzcoatl in passing in the garden. Not present on the causeway.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "sister_of"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "tutor_of"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "She was the girl Xochitl was teaching.",
+        "I had heard my sister mention her, once, in the garden, weeks ago. A strange Nahua girl, given to the strangers, who spoke three tongues, who learned court protocol the way a fish learns to swim."
+      ],
+      "source_chapter_sha": "8b22fce410da52dc5212bcb401a8f3af9cf4fdb9"
+    },
+    {
+      "entity_name": "Ixtlilxochitl",
+      "last_seen_chapter": 9,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 9,
+        "current_state": "Itzcoatl's cousin. Currently in exile in the north. Has his own answer to the question of why Moctezuma did not strike, in 'a different language' under 'a different name.' Not on the causeway.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "cousin_of"
+          }
+        ],
+        "confidence_score": 0.8
+      },
+      "evidence_spans": [
+        "my cousin Ixtlilxochitl, off in his exile in the north, would give in a different language and call by a different name"
+      ],
+      "source_chapter_sha": "8b22fce410da52dc5212bcb401a8f3af9cf4fdb9"
+    },
+    {
+      "entity_name": "Tezcatlipoca",
+      "last_seen_chapter": 9,
+      "state": {
+        "aliases": [
+          "the smoking mirror"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 9,
+        "current_state": "Mexica deity housed in Obsidian Mirror — 'the god whose business it was to show people what they would rather not see.' Sharpened the engine's hum to address Itzcoatl directly inside the cockpit at Axayacatl's cradle, asking 'What did you see, teōmachtiani?' Records but does not reward; eased the hum once Itzcoatl named the gap.",
+        "relationships": [
+          {
+            "to": "Obsidian Mirror",
+            "kind": "houses_in"
+          },
+          {
+            "to": "Itzcoatl",
+            "kind": "speaks_through_engine_to"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "Tezcatlipoca, the smoking mirror, the god whose business it was to show people what they would rather not see.",
+        "*What did you see, teōmachtiani?*",
+        "The deity does not reward; the deity records."
+      ],
+      "source_chapter_sha": "8b22fce410da52dc5212bcb401a8f3af9cf4fdb9"
+    },
+    {
+      "entity_name": "Iztapalapa causeway",
+      "last_seen_chapter": 9,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 9,
+        "current_state": "Stone causeway running north from Iztapalapa across Lake Texcoco toward Tenochtitlan and Tlatelolco. Built 'of stone and will and the backs of ten thousand men.' On the day of the chapter held forty Mexica engines in drill-rank flanking it; site of Moctezuma's formal reception of Cortés at its midpoint. Spanish + Tlaxcalan column walked its length into the sacred precinct unopposed.",
+        "relationships": [
+          {
+            "to": "Tenochtitlan",
+            "kind": "approach_to"
+          },
+          {
+            "to": "Lake Texcoco",
+            "kind": "crosses"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "The causeway was a causeway. Not a miracle, not a bridge from the gods. A road built of stone and will and the backs of ten thousand men, stretching north from Iztapalapa through the mirror of the lake toward the twin cities."
+      ],
+      "source_chapter_sha": "8b22fce410da52dc5212bcb401a8f3af9cf4fdb9"
+    },
+    {
+      "entity_name": "Lake Texcoco",
+      "last_seen_chapter": 9,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 9,
+        "current_state": "Lake surrounding Tenochtitlan. At mid-morning of the chapter flat and glassy under a pale-blue sky; restored to mirror after the column passed.",
+        "relationships": [
+          {
+            "to": "Tenochtitlan",
+            "kind": "surrounds"
+          },
+          {
+            "to": "Iztapalapa causeway",
+            "kind": "crossed_by"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Lake Texcoco at mid-morning was flat and glassy, the sky above it the pale blue of new cotton"
+      ],
+      "source_chapter_sha": "8b22fce410da52dc5212bcb401a8f3af9cf4fdb9"
+    },
+    {
+      "entity_name": "Tlaxcalans",
+      "last_seen_chapter": 9,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 9,
+        "current_state": "Nahua kin (teōmecahuītlī) marching behind the Spanish into Tenochtitlan. Their engines are 'our kind of engine, built the way our kind were built, fueled the way our kind were fueled' — now serving the strangers. Itzcoatl trained beside Tlaxcalan pilots a decade ago before the last cycle of Flower Wars; he reads their presence in the column as betrayal — the third such taste after Centla (Maya turning) and Cholula (the dormant Quetzalcoatl shrine).",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "allied_with"
+          },
+          {
+            "to": "Mexica",
+            "kind": "kin_turned_against"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "*Teōmecahuītlī*. Kin.",
+        "The Tlaxcalan engines were our kind of engine, built the way our kind were built, fueled the way our kind were fueled. And now they walked behind the strangers."
+      ],
+      "source_chapter_sha": "8b22fce410da52dc5212bcb401a8f3af9cf4fdb9"
+    },
+    {
+      "entity_name": "San Esteban de la Cruz",
+      "last_seen_chapter": 9,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 9,
+        "current_state": "Spanish second-class Reliquary in Cortés's column entering Tenochtitlan via the Iztapalapa causeway. Named by Mexica scouts. Internals/saint-fuel unknown to the Mexica.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "in_column_of"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "the four second-class Reliquaries our scouts had named: *La Niña de Córdoba*, *San Esteban de la Cruz*, *San Sebastián*"
+      ],
+      "source_chapter_sha": "8b22fce410da52dc5212bcb401a8f3af9cf4fdb9"
+    },
+    {
+      "entity_name": "San Sebastián",
+      "last_seen_chapter": 9,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 9,
+        "current_state": "Spanish second-class Reliquary in Cortés's column entering Tenochtitlan via the Iztapalapa causeway. Named by Mexica scouts. Internals/saint-fuel unknown to the Mexica.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "in_column_of"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "the four second-class Reliquaries our scouts had named: *La Niña de Córdoba*, *San Esteban de la Cruz*, *San Sebastián*"
+      ],
+      "source_chapter_sha": "8b22fce410da52dc5212bcb401a8f3af9cf4fdb9"
+    },
+    {
+      "entity_name": "Axayacatl's palace",
+      "last_seen_chapter": 9,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 9,
+        "current_state": "Mexica palace in the sacred precinct of Tenochtitlan; not Texcocan, never previously entered by Itzcoatl. Stone courtyard with a pool and an old avocado at its center; doors that 'fold around' those entering rather than close. Adjacent stone engine cradle, open to the south, with cedar beams blackened by twenty generations of incense, its own courtyard, pool, and smaller scarred avocado, holding forty engines in two facing rows. On the day of the chapter the Spanish (Cortés, Malintzin, captains) were quartered inside following Moctezuma's formal reception on the causeway.",
+        "relationships": [
+          {
+            "to": "Tenochtitlan",
+            "kind": "located_in"
+          },
+          {
+            "to": "Cortés",
+            "kind": "now_quartering"
+          },
+          {
+            "to": "Moctezuma",
+            "kind": "hosted_in"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "The palace of Axayacatl was not my palace. It was not any Texcocan's palace. It was the Mexica palace, the Mexica court, the Mexica center of power, and I had never been inside it before.",
+        "the palace took them as the city had taken the column. The doors did not close so much as fold around them."
+      ],
+      "source_chapter_sha": "8b22fce410da52dc5212bcb401a8f3af9cf4fdb9"
+    },
+    {
+      "entity_name": "Tenochtitlan",
+      "last_seen_chapter": 9,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 3,
+        "current_state": "Mexica capital, viewed across Lake Texcoco from the southern causeway: temples, causeways, canals, chinampas, the geometry of a city. On the day of the chapter the Spanish + Tlaxcalan column walked the Iztapalapa causeway and was admitted unopposed past forty Mexica engines in drill-rank; the strangers were quartered in Axayacatl's palace and 'the city swallowed them.' The city Itzcoatl grew up looking at from Texcoco was, by chapter end, 'already a different city' — change registered in the half-step shift of the Great Engine's hum.",
+        "relationships": [
+          {
+            "to": "Moctezuma",
+            "kind": "ruled_by"
+          },
+          {
+            "to": "Lake Texcoco",
+            "kind": "surrounded_by"
+          },
+          {
+            "to": "Iztapalapa causeway",
+            "kind": "approached_by"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "on the far shore Tenochtitlan rose the way it had always risen, temples, causeways, canals, chinampas, the geometry that taught a child what a city was.",
+        "The city swallowed them."
+      ],
+      "source_chapter_sha": "8b22fce410da52dc5212bcb401a8f3af9cf4fdb9"
+    }
+  ],
+  "chapter_num": 9,
+  "extraction_timestamp": "2026-04-27T21:08:18.097544Z"
+}
