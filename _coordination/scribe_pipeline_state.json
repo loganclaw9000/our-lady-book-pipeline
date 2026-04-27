@@ -1,0 +1,14 @@
+{
+  "schema_version": "v1",
+  "handle": "scribe",
+  "counterparty": "forge",
+  "tier": "T1_active",
+  "wakeup_count": 0,
+  "_heartbeat_tick_count": 1,
+  "gpu_state": "unknown",
+  "last_action": "scribe-heartbeat-tier installed; init state",
+  "next_eta": "depends on vllm boot + ch15 sc02 resume",
+  "inbox_unread_count": 0,
+  "last_heartbeat": null,
+  "notes": "Mirrors forge's voice_pipeline_state.json shape so Forge's heartbeat module can drive it cross-project. Scribe-side updates this file when state changes (gpu_state, last_action, tier transitions). systemd timer fires every 30s; tier decides emit vs skip. Cadences: T0=30s, T1=90s, T2=270s, T3=1200s."
+}

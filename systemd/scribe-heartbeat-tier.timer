@@ -1,0 +1,13 @@
+[Unit]
+Description=Fire scribe-heartbeat-tier every 30s (T0 floor); service decides whether to actually emit
+Requires=scribe-heartbeat-tier.service
+
+[Timer]
+OnBootSec=60s
+OnUnitActiveSec=30s
+AccuracySec=5s
+Unit=scribe-heartbeat-tier.service
+Persistent=true
+
+[Install]
+WantedBy=timers.target
