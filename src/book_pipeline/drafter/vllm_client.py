@@ -49,7 +49,7 @@ from book_pipeline.interfaces.types import Event
 from book_pipeline.observability.hashing import event_id, hash_text
 from book_pipeline.voice_fidelity.sha import VoicePinMismatch, compute_adapter_sha
 
-_DEFAULT_TIMEOUT_S = 900.0  # 15min - bumped 300->900 for 2048-token output at ~5.5 tok/s on 27B bnb (sc01 timeout 2026-04-25)
+_DEFAULT_TIMEOUT_S = 1800.0  # 30min - bumped 900->1800 for V7C qwen3.5-27B @ ~3 tok/s w/ enforce-eager + bnb-4bit (2026-04-27)
 _DEFAULT_LORA_MODULE_NAME = "paul-voice"
 
 
