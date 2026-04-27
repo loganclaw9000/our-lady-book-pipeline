@@ -20,5 +20,5 @@ voice_pin:
     dtype: bfloat16
     tensor_parallel_size: 1
     quantization: bitsandbytes
-    gpu_memory_utilization: 0.55
+    gpu_memory_utilization: 0.40
     safety_ceiling_max_gpu_util: 0.60
