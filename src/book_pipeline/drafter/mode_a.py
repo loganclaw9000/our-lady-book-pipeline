@@ -83,7 +83,7 @@ _PAIRED_QUOTE_RE = re.compile(r'"[^"]+"')
 # clean_output strips <think> + mojibake + em-dashes per Paul-style discipline.
 # Soft-import: if path moves, fall back to raw text + warn (don't block draft).
 
-_FORGE_POSTPROCESS_PATH = Path("/home/admin/paul-thinkpiece-pipeline/eval")
+_FORGE_POSTPROCESS_PATH = Path("/home/admin/paul-thinkpiece-pipeline/src")
 
 
 def _apply_forge_postprocess(
@@ -95,7 +95,7 @@ def _apply_forge_postprocess(
 
         if str(_FORGE_POSTPROCESS_PATH) not in sys.path:
             sys.path.insert(0, str(_FORGE_POSTPROCESS_PATH))
-        from postprocess import clean_output  # type: ignore[import-not-found]
+        from forge.postprocess import clean_output  # type: ignore[import-not-found]
 
         return clean_output(text)  # type: ignore[no-any-return]
     except Exception as exc:  # pragma: no cover - defensive fallback

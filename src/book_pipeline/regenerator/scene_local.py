@@ -56,7 +56,7 @@ except ImportError as _exc:  # pragma: no cover
 
 _DEFAULT_TEMPLATE_PATH = Path(__file__).parent / "templates" / "regen.j2"
 _WORD_COUNT_DRIFT_LIMIT = 0.10
-_FORGE_POSTPROCESS_PATH = Path("/home/admin/paul-thinkpiece-pipeline/eval")
+_FORGE_POSTPROCESS_PATH = Path("/home/admin/paul-thinkpiece-pipeline/src")
 
 
 def _apply_forge_postprocess_regen(text: str) -> str:
@@ -72,7 +72,7 @@ def _apply_forge_postprocess_regen(text: str) -> str:
 
         if str(_FORGE_POSTPROCESS_PATH) not in _sys.path:
             _sys.path.insert(0, str(_FORGE_POSTPROCESS_PATH))
-        from postprocess import clean_output  # type: ignore[import-not-found]
+        from forge.postprocess import clean_output  # type: ignore[import-not-found]
 
         return clean_output(text)  # type: ignore[no-any-return]
     except Exception:

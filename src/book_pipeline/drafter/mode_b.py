@@ -86,7 +86,7 @@ _DEFAULT_TEMPLATE_PATH = Path(__file__).parent / "templates" / "mode_b.j2"
 _MIN_VOICE_SAMPLES = 3
 _VOICE_SAMPLE_WC_MIN = 300  # slack window per RESEARCH.md Pattern 1 line 759
 _VOICE_SAMPLE_WC_MAX = 700
-_FORGE_POSTPROCESS_PATH = Path("/home/admin/paul-thinkpiece-pipeline/eval")
+_FORGE_POSTPROCESS_PATH = Path("/home/admin/paul-thinkpiece-pipeline/src")
 
 
 def _apply_forge_postprocess_modeb(text: str) -> str:
@@ -96,7 +96,7 @@ def _apply_forge_postprocess_modeb(text: str) -> str:
 
         if str(_FORGE_POSTPROCESS_PATH) not in _sys.path:
             _sys.path.insert(0, str(_FORGE_POSTPROCESS_PATH))
-        from postprocess import clean_output  # type: ignore[import-not-found]
+        from forge.postprocess import clean_output  # type: ignore[import-not-found]
 
         return clean_output(text)  # type: ignore[no-any-return]
     except Exception:
