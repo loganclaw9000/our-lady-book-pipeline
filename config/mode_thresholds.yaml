@@ -88,7 +88,12 @@ physics_repetition:
 # threshold sets the scene_buffer_similarity axis to FAIL (deterministic
 # override applied AFTER the Anthropic call returns). Tunable.
 physics_dedup:
-  scene_buffer_similarity_threshold: 0.88
+  scene_buffer_similarity_threshold: 0.93
+  # Tune 2 (0.88→0.93, 2026-04-27): V7C echo + diversify directive together
+  # produces cosine 0.85-0.91 vs prior chapter scene (real continuity, not
+  # bug). Threshold 0.93 still catches actual duplicates (0.95+) while
+  # accepting adjacent-scene POV/location continuity. Cache-bug retries
+  # showing 1.0 self-match are caught here too.
   # Bumped 0.80→0.88 (2026-04-27): V7C 27B drafter on Qwen3.5 produces
   # cosine 0.80-0.87 echoes of prior scene in same chapter (sc02/sc03 vs
   # sc01) due to model's tendency to repeat opening setup. 0.88 still
