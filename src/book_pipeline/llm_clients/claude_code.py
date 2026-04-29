@@ -244,10 +244,8 @@ class _Messages:
 
         # Long prompts (e.g. full chapter text for entity_extractor) overflow
         # OS ARG_MAX when passed as positional argv → subprocess hangs and hits
-        # 180s timeout (HANDOFF Known Issue #3). Pipe via stdin instead. The
-        # ``-`` positional tells ``claude -p`` to read prompt from stdin.
-        argv += ["-"]
-
+        # 180s timeout (HANDOFF Known Issue #3). claude -p reads prompt from
+        # stdin when no positional is supplied (verified manually 2026-04-29).
         payload = _invoke_claude_cli(
             argv=argv,
             timeout_s=self._timeout_s,
@@ -312,8 +310,7 @@ class _Messages:
         argv += list(self._extra_args)
 
         # Long prompts via stdin (HANDOFF Known Issue #3 — ARG_MAX overflow).
-        argv += ["-"]
-
+        # claude -p reads prompt from stdin when no positional is supplied.
         payload = _invoke_claude_cli(
             argv=argv,
             timeout_s=self._timeout_s,
