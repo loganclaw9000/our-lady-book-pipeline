@@ -62,7 +62,7 @@ sampling_profiles:
 critic_backend:
   kind: claude_code_cli
   model: claude-opus-4-7
-  timeout_s: 180
+  timeout_s: 600
   max_budget_usd_per_scene: 1.0
 # Plan 05-02 D-05 + D-06: regen budget + per-scene USD spend cap.
 # r_cap_mode_a = number of Mode-A regen attempts allowed before escalating to
