@@ -1,0 +1,530 @@
+{
+  "entities": [
+    {
+      "entity_name": "Malintzin",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [
+          "Malinalli",
+          "Doña Marina",
+          "Marina",
+          "La Malinche"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "In her seventh month of pregnancy by Cortés, quartered in a six-by-four-pace walled annex of the command tent at the Spanish camp on Lake Texcoco during the siege of Tenochtitlan. Translates daily for Cortés and the Tlaxcalan and Texcocan captains. Companions/guards are two Nahua women: Tozi (with her since Cempoala) and a young Tlaxcalan named Citlal. Across May-June teaches Bernardo Nahuatl in evening sessions; on June 28 hands him a hand-written list of eleven Nahuatl last-rites words, deciding deliberately not to dissuade his forming martyrdom.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "translator_for_and_pregnant_by"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "language_partner_and_witness"
+          },
+          {
+            "to": "Tozi",
+            "kind": "attended_by"
+          },
+          {
+            "to": "Citlal (Tlaxcalan)",
+            "kind": "attended_by"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "She moved through the rows in her seventh month.",
+        "Two Nahua women she had chosen herself walked at her elbows: Tozi, who had been with her since Cempoala, and a younger Tlaxcalan named Citlal who had come to her in Tlaxcala without being asked.",
+        "She had been the only witness to the construction of the martyrdom, and she would be the only witness to the martyrdom itself"
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "Bernardo",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [
+          "Fray Bernardo"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 3,
+        "current_state": "Franciscan who joined the expedition at the last moment in Cuba, at his own insistence. Refuses to pilot. Was a scholar before a friar. Through May-June at the Spanish lake-shore camp meets Malinalli evenings outside her annex, trading Nahuatl for ecclesiastical Latin. From June 12 articulates aloud in Latin a forming theology — whether a willing, freshly-informed death could charge a Reliquary monstrance as sacrament rather than ancient relic. By June 28 has memorized her eleven-word Nahuatl last-rites list and walked her through the commendatio animae. Touched her wrist once.",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "language_partner_and_confidant"
+          },
+          {
+            "to": "Andrés",
+            "kind": "spiritual_anchor_to"
+          },
+          {
+            "to": "Order of Friars Minor",
+            "kind": "member_of"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "He was the Franciscan who had joined the expedition at the last moment, in Cuba, at his own insistence, a moral anchor for the Spanish pilot, for the commanders, for anyone who needed one and admitted it.",
+        "He refused to pilot.",
+        "He talked about a Reliquary's monstrance charged not by a centuries-old relic but by a freshly informed willing death, and he said the words voluntas, consensus, sacramentum, in a voice that was very steady"
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "Tozi",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 24,
+        "current_state": "Nahua woman who has been with Malintzin since Cempoala. One of two companions/guards Malinalli chose herself for her annex at the Spanish lake-shore camp during the siege of Tenochtitlan.",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "attendant_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Tozi, who had been with her since Cempoala"
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "Citlal (Tlaxcalan)",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [
+          "Citlal"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 24,
+        "current_state": "Younger Tlaxcalan woman who came to Malintzin in Tlaxcala without being asked. One of two companions/guards in Malintzin's annex during the siege. Distinct from the Mayan-faced Citlal of chapters 1 and 3.",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "attendant_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "a younger Tlaxcalan named Citlal who had come to her in Tlaxcala without being asked",
+        "Citlal, from inside the annex, cleared her throat to remind Malinalli that she had not eaten since noon."
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "Spanish lakeshore camp",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [
+          "the Spanish camp"
+        ],
+        "entity_type": "place",
+        "first_mentioned_chapter": 24,
+        "current_state": "Spanish-Tlaxcalan-Texcocan siege camp on the western edge of Lake Texcoco — canvas and ash anchored in mud. Tents in rows of twelve, cooking fires at ~30-pace intervals, engine cradles inspected at first light. Holds the command tent (with Malintzin's walled annex), brigantine moorings, the cradle of San Esteban del Río being refitted, picket lines, a Franciscan tent, duty-roster post, and laundry lines. From here the half-awake hum of the Templo Mayor's Great Engine carries across the water.",
+        "relationships": [
+          {
+            "to": "Lake Texcoco",
+            "kind": "located_on_shore_of"
+          },
+          {
+            "to": "Cortés",
+            "kind": "headquartered_by"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "The Spanish camp at the edge of Lake Texcoco was a city inverted.",
+        "Tents in rows of twelve. Cooking fires at fixed intervals of roughly thirty paces.",
+        "Engine cradles inspected at dawn the way priests had once inspected the temple before sunrise"
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "Siege of Tenochtitlan",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [],
+        "entity_type": "event",
+        "first_mentioned_chapter": 22,
+        "current_state": "In settled rhythm by May-June. Aqueducts at Chapultepec cut in the first week (Sandoval's work). Causeways blockaded at all three ends. Thirteen brigantines, assembled at Texcoco from sections dragged over the Paso de Cortés, patrol the lake in pairs and have ended Mexica canoe night-runs. Tenochtitlan burns house by house in a method Cortés ordered and Ixtlilxochitl refined; starvation has begun inside the city. Outside, daily routine: meals at fixed hours, duty rosters posted, laundry on lines, cradles inspected at first light.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "commanded_by"
+          },
+          {
+            "to": "Ixtlilxochitl",
+            "kind": "refined_by"
+          },
+          {
+            "to": "Sandoval",
+            "kind": "aqueduct_cut_by"
+          },
+          {
+            "to": "Tenochtitlan",
+            "kind": "targets"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "The aqueducts at Chapultepec had been cut in the first week, Sandoval's work, swift and unsentimental.",
+        "The causeways were blockaded at all three ends.",
+        "Tenochtitlan was burning block by block as the ring tightened, not all at once, not theatrically, but house by house in a method Cortés had ordered and Ixtlilxochitl had refined."
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "San Esteban del Río",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 17,
+        "current_state": "Sitting in cradle at the Spanish lakeshore camp during the siege, being refitted with a new monstrance bracket; the old bracket cracked at Otumba and was never properly fixed — only welded and prayed over and welded again. Holds a Castilian arm-bone in its new bracket. Andrés remains the assigned pilot.",
+        "relationships": [
+          {
+            "to": "Andrés",
+            "kind": "piloted_by"
+          },
+          {
+            "to": "Otumba",
+            "kind": "damaged_at"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "San Esteban del Río sat in cradle being refitted with a new monstrance bracket; the old one had cracked at Otumba and never been properly fixed, only welded and prayed over and welded again.",
+        "He was thinking about the Castilian arm-bone in San Esteban del Río, the one in the new monstrance bracket that had been welded and prayed over and welded again."
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "Brigantines",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 19,
+        "current_state": "Thirteen hulls assembled at Texcoco from sections dragged over the Paso de Cortés. Patrol Lake Texcoco in pairs and are the reason Mexica canoes no longer run at night. Three named in chapter: Magdalena, Espíritu, and a smaller third Malinalli always forgets the name of. Three came in from patrol with smoke in their rigging during the May evenings.",
+        "relationships": [
+          {
+            "to": "Lake Texcoco",
+            "kind": "patrol"
+          },
+          {
+            "to": "Siege of Tenochtitlan",
+            "kind": "instrument_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Three brigantines came in from patrol with smoke in their rigging, Magdalena, Espíritu, and the smaller one whose name she always forgot.",
+        "thirteen hulls assembled at Texcoco from sections dragged over the Paso de Cortés, and they were the reason the Mexica canoes no longer ran at night."
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "Magdalena",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 24,
+        "current_state": "One of the thirteen Spanish brigantines patrolling Lake Texcoco during the siege. Came in from patrol on a May evening with smoke in her rigging.",
+        "relationships": [
+          {
+            "to": "Brigantines",
+            "kind": "member_of"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "Three brigantines came in from patrol with smoke in their rigging, Magdalena, Espíritu, and the smaller one whose name she always forgot."
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "Espíritu",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 24,
+        "current_state": "One of the thirteen Spanish brigantines patrolling Lake Texcoco during the siege. Came in from patrol on a May evening with smoke in her rigging.",
+        "relationships": [
+          {
+            "to": "Brigantines",
+            "kind": "member_of"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "Three brigantines came in from patrol with smoke in their rigging, Magdalena, Espíritu, and the smaller one whose name she always forgot."
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "Chapultepec aqueducts",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 24,
+        "current_state": "Aqueducts at Chapultepec supplying fresh water to Tenochtitlan. Cut by Sandoval in the first week of the siege, swiftly and unsentimentally — the foundational act that began the city's starvation phase.",
+        "relationships": [
+          {
+            "to": "Sandoval",
+            "kind": "cut_by"
+          },
+          {
+            "to": "Tenochtitlan",
+            "kind": "supplied_water_to"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "The aqueducts at Chapultepec had been cut in the first week, Sandoval's work, swift and unsentimental."
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "Sandoval",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 17,
+        "current_state": "Spanish captain, pilot of the first-class Reliquary Santiago del Paso. Cut the Chapultepec aqueducts in the first week of the siege of Tenochtitlan — characterized as 'swift and unsentimental.'",
+        "relationships": [
+          {
+            "to": "Santiago del Paso",
+            "kind": "pilots"
+          },
+          {
+            "to": "Chapultepec aqueducts",
+            "kind": "cut"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "The aqueducts at Chapultepec had been cut in the first week, Sandoval's work, swift and unsentimental."
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "Don Fernando Ixtlilxochitl",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [
+          "Ixtlilxochitl",
+          "Don Fernando"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 19,
+        "current_state": "Texcocan defector to the Spanish, Itzcoatl's cousin. By the siege phase has refined the house-by-house burning method that Cortés ordered for the destruction of Tenochtitlan — converting the abstract directive into block-level execution drawing on his knowledge of the city's geography.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "ally_of"
+          },
+          {
+            "to": "Tenochtitlan",
+            "kind": "destroyer_of"
+          },
+          {
+            "to": "Itzcoatl",
+            "kind": "cousin_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Tenochtitlan was burning block by block as the ring tightened, not all at once, not theatrically, but house by house in a method Cortés had ordered and Ixtlilxochitl had refined."
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "commendatio animae",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [
+          "Proficiscere, anima Christiana, de hoc mundo"
+        ],
+        "entity_type": "object",
+        "first_mentioned_chapter": 24,
+        "current_state": "Latin Catholic prayer for a soul leaving the body. Has two variants: a shorter, harder one for a martyr (no plea for mercy on sins, the blood being its own absolution) and a longer, gentler one for a layperson (saints called by name). Bernardo walked Malinalli through both forms in full on the evening of June 28; foreshadowed as the prayer Andrés will say over Bernardo in the templo plaza six weeks hence.",
+        "relationships": [
+          {
+            "to": "Bernardo",
+            "kind": "to_be_recited_over"
+          },
+          {
+            "to": "Andrés",
+            "kind": "to_be_recited_by"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Then she asked him, in Latin, to walk her through the commendatio animae, the prayer for a soul leaving the body, including the variant forms a confessor used for a martyr versus a layperson.",
+        "The commendatio animae was the prayer Andrés would say over Bernardo in the templo plaza six weeks hence."
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "Last-rites Nahuatl word list",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 24,
+        "current_state": "Eleven Nahuatl words written in Malintzin's own hand on a parchment on the evening of June 28: miquiztli (death), teyolia (soul), tlaocoliliztli (mercy), tlapohpolhuiliztli (forgiveness), tlamatcayeliztli (peace), nacayotl (body), eztli (blood), cocoliztli (pain), mauhcayotl (fear), tlachixcayeliztli (hope), teotl (god). Composed deliberately to give Bernardo the vocabulary needed to administer last rites to an indigenous Christian during and after the city's fall. Read aloud once by Bernardo; not retained on parchment in any tent in the camp.",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "authored_by"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "given_to"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "The list had taken the entire afternoon to write and there were only eleven words on it.",
+        "The words a priest would need to administer last rites to an indigenous Christian during and after the fall of the city.",
+        "He read them all. He read them aloud."
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "Great Engine",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 1,
+        "current_state": "Half-awake beneath the Templo Mayor through the siege. Sounds 'a hum that was not a hum, a pressure under the breastbone, rising and falling like a slow lung.' Carries across Lake Texcoco to the Spanish camp. By June 28 the hum has thinned — 'not gone, only stretched the way a held note stretches before it breaks' — registering the city's starvation. Malinalli has been carrying the sound in her chest for three months alongside her own pregnancy's heartbeat.",
+        "relationships": [
+          {
+            "to": "Templo Mayor",
+            "kind": "housed_under"
+          },
+          {
+            "to": "Tenochtitlan",
+            "kind": "registers_state_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Across the water, the half-awake Great Engine of the Templo Mayor sounded, a hum that was not a hum, a pressure under the breastbone, rising and falling like a slow lung.",
+        "From the canvas wall of her annex she could hear, distantly, the hum from across the water, thinned tonight, by the twenty-eighth of June, not gone, only stretched the way a held note stretches before it breaks."
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "Tenochtitlan",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 1,
+        "current_state": "Under siege through May-June. Aqueducts cut in the first week, all three causeways blockaded, brigantines patrolling so canoes no longer run at night. Burning block by block, house by house, in a method Cortés ordered and Ixtlilxochitl refined. Starvation has begun inside the walls. The half-awake Great Engine beneath the Templo Mayor still hums but, by June 28, thinned — a held note before it breaks.",
+        "relationships": [
+          {
+            "to": "Siege of Tenochtitlan",
+            "kind": "subject_of"
+          },
+          {
+            "to": "Lake Texcoco",
+            "kind": "in_the_middle_of"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "Tenochtitlan was burning block by block as the ring tightened, not all at once, not theatrically, but house by house in a method Cortés had ordered and Ixtlilxochitl had refined.",
+        "Inside the city, starvation had begun.",
+        "the city refusing to be quiet even in its starvation"
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "Andrés",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [
+          "Andrés de Mora"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Continues as pilot of San Esteban del Río, whose monstrance bracket is being refitted in cradle at the Spanish lake-shore camp during the siege. Foreshadowed as the priest who will recite the commendatio animae over Bernardo in the templo plaza six weeks after June 28. Not on-stage in chapter 24; appears only as referent.",
+        "relationships": [
+          {
+            "to": "San Esteban del Río",
+            "kind": "pilots"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "future_celebrant_for"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "The commendatio animae was the prayer Andrés would say over Bernardo in the templo plaza six weeks hence."
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    },
+    {
+      "entity_name": "Cortés",
+      "last_seen_chapter": 24,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Commands the siege of Tenochtitlan from the lake-shore camp through May-June. Father of Malintzin's child (she is in her seventh month). Ordered the house-by-house destruction method that Ixtlilxochitl has refined. Receives daily translations from Malintzin for the Tlaxcalan and Texcocan captains. Headquartered in the command tent whose walled annex is Malintzin's quarters.",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "father_of_her_unborn_child"
+          },
+          {
+            "to": "Siege of Tenochtitlan",
+            "kind": "commands"
+          },
+          {
+            "to": "Ixtlilxochitl",
+            "kind": "directs"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "She translated each day for Cortés and the Tlaxcalan and Texcocan captains",
+        "house by house in a method Cortés had ordered and Ixtlilxochitl had refined",
+        "The command tent had a small walled annex that was her quarters"
+      ],
+      "source_chapter_sha": "01a27e116f71f5304b4f07c5cbb82ed646b5728a"
+    }
+  ],
+  "chapter_num": 24,
+  "extraction_timestamp": "2026-04-29T23:48:41.362783Z"
+}
