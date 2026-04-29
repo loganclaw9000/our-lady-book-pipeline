@@ -1,0 +1,606 @@
+{
+  "entities": [
+    {
+      "entity_name": "Andrés",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [
+          "Andrés de Mora"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "On July 1, 1520, piloted La Niña de Córdoba as eighth engine in the Spanish retreat column down the Tlacopan causeway during La Noche Triste. A Huitzilopochtli boulder cracked the monstrance at the third hour of retreat; felt Flora 'let go,' the engine fell, he hatched out and swam to the causeway stone. Lost his left boot, walked west bootless and soaked into Tlacopan. En route saw Bernardo walking the wrong way carrying a Tlaxcalan teōmachtiani; watched three seconds and did not help, a memory he commits to keep. Reached Tlacopan; sat against an adobe wall in the third street, did not weep, accepted maguey sandals from lay brother Tomás, then went inside with Bernardo. Has been told he will be assigned the rebound saint San Esteban del Río before winter; has not agreed and has not decided what his face will do. By dawn stands and walks toward the re-forming column.",
+        "relationships": [
+          {
+            "to": "La Niña de Córdoba",
+            "kind": "former_pilot_of"
+          },
+          {
+            "to": "Flora",
+            "kind": "lost_saint"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "friend_passed_on_causeway"
+          },
+          {
+            "to": "San Esteban del Río",
+            "kind": "designated_future_pilot_of"
+          },
+          {
+            "to": "Tomás",
+            "kind": "tended_by"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "The boulder is the size of a horse. It hits *La Niña* in the chest. It hits the monstrance.",
+        "I watched for three seconds and I kept walking. The engine was not what kept me walking. I was.",
+        "San Esteban del Río. The name is already in my mouth and I have not agreed to it."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "La Niña de Córdoba",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 1,
+        "current_state": "Destroyed on the Tlacopan causeway during La Noche Triste, July 1, 1520. Walking eighth in line through cold midnight rain when a Huitzilopochtli engine on the lake side hurled a horse-sized boulder over the parapet that struck her chest and cracked the monstrance. Hum stopped, engine fell. Andrés hatched out as she tilted; her gilding caught a torch for one moment and was gone. Now lies on her side in the silt at the bottom of Lake Texcoco, gilding starting to lift. Paint expected to fade to grey within three days (and within a year per a separate reckoning); no agreed explanation. Bones inside not recoverable.",
+        "relationships": [
+          {
+            "to": "Flora",
+            "kind": "enshrined"
+          },
+          {
+            "to": "Andrés",
+            "kind": "piloted_by"
+          },
+          {
+            "to": "Lake Texcoco",
+            "kind": "submerged_in"
+          }
+        ],
+        "confidence_score": 0.97
+      },
+      "evidence_spans": [
+        "The boulder is the size of a horse. It hits *La Niña* in the chest. It hits the monstrance.",
+        "Her chassis is on its side in the silt with the gilding starting to lift.",
+        "The paint on her chassis will fade to grey over the next three days."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "Flora",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [
+          "Flora of Córdoba",
+          "child of Córdoba"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Bones (a fingerbone among them) bound in a silver-and-beaten-gold casing the size of a man's chest were lost when a Huitzilopochtli boulder cracked La Niña de Córdoba's monstrance during the Tlacopan retreat. Andrés felt her 'let go the way a hand lets go of another hand. Not violence. Permission.' Now at the bottom of Lake Texcoco in ~40 feet of water; not recoverable. Bones expected to outlast the metal. Andrés had her vita memorized in eight years of daily Latin recitation; the shape of the words remains in his mouth, the girl does not.",
+        "relationships": [
+          {
+            "to": "La Niña de Córdoba",
+            "kind": "enshrined_in_lost"
+          },
+          {
+            "to": "Lake Texcoco",
+            "kind": "buried_in"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "The bones of Flora of Córdoba are in the monstrance. The monstrance is cracked. The lake is forty feet deep here. The bones are not recoverable.",
+        "I felt her let go the way a hand lets go of another hand. Not violence. Permission.",
+        "The bones will outlast the metal. They will outlast me. They will not be recovered."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "Bernardo",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [
+          "Father Bernardo",
+          "Fray Bernardo"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 3,
+        "current_state": "Survived La Noche Triste. During the retreat he walked the Tlacopan causeway against the flow in his Franciscan habit, soaked black, carrying a Tlaxcalan teōmachtiani twice his weight on his shoulders. Andrés saw him for three seconds near the third gap and did not help. By near-dawn at Tlacopan Tomás reports 'Father Bernardo is bringing them in,' four wounded at first count. Later seen kneeling in the third street working on a Spanish crossbowman's broken-knee leg, habit black with blood, hair matted. Crossed to Andrés, asked nothing, looked at his empty hands and feet, said 'come inside.' Andrés went inside with him.",
+        "relationships": [
+          {
+            "to": "Andrés",
+            "kind": "friend_to"
+          },
+          {
+            "to": "Tomás",
+            "kind": "fellow_friar"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "He is in his Franciscan habit, soaked black with rain and lake water, and he is carrying a Tlaxcalan teōmachtiani across his shoulders.",
+        "*Father Bernardo is on the causeway still. They have seen him. He is bringing them in.*",
+        "His habit is no longer black with water. It is black with blood."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "Cortés",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Commanded the Spanish retreat from Tenochtitlan down the Tlacopan causeway on the night of June 30 / morning of July 1, 1520. Spread the column thin by order because gold-laden men were slow. Rode Nuestra Señora del Campeón at the head; she stepped the unbridged fourth-gap in one long stride. At the Tlacopan shore sat under a tree, helmet off, weeping quietly while men arranged themselves to not hear. By dawn stood and walked to the head of the re-forming column to address the survivors. Passed Andrés at six feet, looked once, kept walking — 'a man counting a horse and noting it is still a horse.' Will lead the column north toward Tlaxcala by noon, will not mention the lost Reliquaries by name.",
+        "relationships": [
+          {
+            "to": "Nuestra Señora del Campeón",
+            "kind": "rides"
+          },
+          {
+            "to": "Andrés",
+            "kind": "commands"
+          }
+        ],
+        "confidence_score": 0.92
+      },
+      "evidence_spans": [
+        "At the Tlacopan shore there is a tree. Under the tree there is Cortés. He is sitting. His helmet is off. He is weeping",
+        "He will not mention the Reliquaries by name. He never does.",
+        "Cortés has spread them by order, because the gold each man carries makes him slow"
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "Nuestra Señora del Campeón",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 2,
+        "current_state": "Survived La Noche Triste. The expedition's Marian engine and largest survivor — sixty feet at the shoulder; Cortés rides her himself. Walked first in the retreat column on the Tlacopan causeway and crossed the unbridged fourth gap (twenty feet wide) in one long stride. At the Tlacopan shore she stood behind the weeping Cortés in the grey rain, weeping also — actual fluid running down her face plates. By morning still standing among the eight surviving Spanish/allied engines.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "ridden_by"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "*Nuestra Señora del Campeón* stands behind him in the grey rain, weeping also, the actual fluid running down her face plates.",
+        "*Nuestra Señora* steps across with one long stride because she is sixty feet and the gap is twenty.",
+        "Nuestra Señora del Campeón, the Marian Cortés rides."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "Santiago del Paso",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 2,
+        "current_state": "Survived La Noche Triste, identified by Andrés as Sandoval's eleven-story first-class engine — 'the only first-class we have ever fielded.' Took an arrow in the shoulder plate an hour before the third gap and limped through the column. Crossed the third gap third in line. Later took an arrow in the throat-grille and went down on one knee; pilot opened the chest hatch from inside and rolled into the rain on foot, carrying his monstrance under his arm. By morning at Tlacopan still counted among the eight surviving engines.",
+        "relationships": [
+          {
+            "to": "Sandoval",
+            "kind": "piloted_by"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "The first arrow hit *Santiago del Paso* an hour ago. The pilot is alive. The engine is limping.",
+        "*Santiago* takes one in the throat-grille and goes down on one knee and stays there. The pilot opens the chest hatch from inside and rolls into the rain.",
+        "Santiago del Paso, eleven stories, Sandoval's, the only first-class we have ever fielded."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "San Cristóbal del Viento",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 2,
+        "current_state": "Lost on the Tlacopan causeway during La Noche Triste. Walked fifth in the column, crossed the third gap successfully. At the unbridged fourth gap he tried the far edge; the stone gave (Mexica engineers had cut the gaps to widen under weight) and he tilted sideways into Lake Texcoco. The saint was awake when he sank.",
+        "relationships": [
+          {
+            "to": "Lake Texcoco",
+            "kind": "submerged_in"
+          }
+        ],
+        "confidence_score": 0.92
+      },
+      "evidence_spans": [
+        "*San Cristóbal* tries. He puts a foot on the far edge and the stone gives, Mexica engineers cut these gaps to widen under weight, and he tilts sideways into the lake. The saint is awake when he sinks.",
+        "San Cristóbal del Viento."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "Tlacopan causeway",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 17,
+        "current_state": "Stone causeway running west across Lake Texcoco from Tenochtitlan to Tlacopan, four kilometers long. Crossed by the retreating Spanish/Tlaxcalan column on the night of June 30 / morning of July 1, 1520 in cold midnight rain. Cut by Mexica engineers into deliberate gaps spaced about eighty yards apart, each crossed by a portable plank carried by a foot-soldier detail; the gaps had been engineered to widen under weight. Torches spaced ~30 yards apart. Mexica canoes, hollowed cedar, two or three men each, moved alongside in the dark, shooting arrows at engine joints. Site of the loss of La Niña de Córdoba, San Cristóbal del Viento, two unnamed third-class knight engines and one Tlaxcalan engine — total four Reliquaries lost from the column.",
+        "relationships": [
+          {
+            "to": "Lake Texcoco",
+            "kind": "crosses"
+          },
+          {
+            "to": "Tlacopan",
+            "kind": "leads_to"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "The Tlacopan causeway is four kilometers long. We have walked perhaps one.",
+        "The gaps in the causeway are about eighty yards apart, each one a deliberate cut by Mexica engineers, each one crossed by a plank that a detail of men must lay and lift again and carry behind.",
+        "Mexica engineers cut these gaps to widen under weight"
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "La Noche Triste",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [
+          "the retreat",
+          "the night of the causeway"
+        ],
+        "entity_type": "event",
+        "first_mentioned_chapter": 17,
+        "current_state": "Spanish retreat from Tenochtitlan across the Tlacopan causeway on the cold-rainy night of June 30 / dawn of July 1, 1520. Mexica canoe forces shot arrows at engine joints from both sides; a Huitzilopochtli engine on the lake side hurled boulders over the parapet. Outcome at Tlacopan shore: two-thirds of the expedition dead (counted by Andrés via torches going out); four Reliquaries lost (La Niña de Córdoba, San Cristóbal del Viento, two third-class unnamed knight engines), one Tlaxcalan engine sunk at the third gap when the plank split; eight engines still standing (Nuestra Señora del Campeón, Santiago del Paso, San Sebastián de Cuba, Santiago del Alba, two unnamed third-class, two Tlaxcalan teōmecahuītlī). Three knights from the third-class line crawled out of the lake without their engines and survived. By dawn the column re-forms at Tlacopan to march north toward Tlaxcala by noon. Mexica did not pursue past the shore.",
+        "relationships": [
+          {
+            "to": "Tlacopan causeway",
+            "kind": "took_place_on"
+          },
+          {
+            "to": "Cortés",
+            "kind": "led_by"
+          },
+          {
+            "to": "Tlacopan",
+            "kind": "ended_at"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "Two-thirds of the expedition is dead. The count will come later. I know the number because I counted the torches going out.",
+        "We lost four Reliquaries on the causeway.",
+        "It is July 1, 1520, by an hour."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "Tlacopan",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 17,
+        "current_state": "Western shore town at the far end of the Tlacopan causeway from Tenochtitlan. On the night of June 30 / morning of July 1, 1520 became a holding pen for the Spanish retreat survivors: Tlaxcalans gave over three streets, posted men at every junction with torches and orders to shoot any Mexica stepping off the water. Mexica did not pursue past the shore. Adobe walls the color of wet hide. A captain at a doorpost tallied the dead in charcoal — eleven Spanish, four Tlaxcalans, plus a separate cluster for engines. Site of Cortés weeping under a tree at the shore, of Bernardo bringing wounded in across the night, and of Andrés receiving maguey sandals from the lay brother Tomás before going inside with Bernardo at near-dawn.",
+        "relationships": [
+          {
+            "to": "Tlacopan causeway",
+            "kind": "western_terminus_of"
+          },
+          {
+            "to": "Tlaxcalans",
+            "kind": "garrisoned_by"
+          }
+        ],
+        "confidence_score": 0.92
+      },
+      "evidence_spans": [
+        "Tlacopan is not a town tonight. It is a holding pen.",
+        "The Tlaxcalans have given over three streets to the survivors and posted men at every junction with torches and instructions to shoot any Mexica who steps off the water.",
+        "I walk west into Tlacopan."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "Tomás",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 17,
+        "current_state": "Lay brother, age 20, novice in Sevilla two years ago. At Tlacopan in the third street tended Andrés through the night after La Noche Triste: brought a clay cup of maize gruel with salt or fish, came back later with cloth and Tlaxcalan maguey-fiber sandals which he tied on Andrés's bare bleeding left foot without asking, and reported Bernardo's progress retrieving wounded from the causeway. Has not yet learned to be careful with words ('bringing them in'). Implicitly serves under Bernardo.",
+        "relationships": [
+          {
+            "to": "Andrés",
+            "kind": "tended"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "subordinate_to"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "A lay brother named Tomás comes by with a clay cup and tells me to drink it.",
+        "Tomás is twenty and was a novice in Sevilla two years ago and he has not learned to be careful with words.",
+        "He kneels and ties them on me without asking."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "San Esteban del Río",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 17,
+        "current_state": "Planned new Reliquary, scheduled to be bound before winter (post-July 1520) using the relic of San Ildefonso del Mar — a fragment of arrow shaft, a child's tooth, or a knuckle (Andrés has not been told which) recovered from the wreck off Cozumel and carried in oilcloth across the water and over the mountains to Tlaxcala for reconsecration. Will replace the lost Reliquaries as the column's fifth standing saint. The cockpit has been designated for Andrés. He has not agreed.",
+        "relationships": [
+          {
+            "to": "San Ildefonso del Mar",
+            "kind": "rebound_from"
+          },
+          {
+            "to": "Andrés",
+            "kind": "designated_pilot"
+          },
+          {
+            "to": "Tlaxcala",
+            "kind": "consecrated_at"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "They will rebind it before winter. They will call it San Esteban del Río. That will be the fifth. I have been told it will be mine. I have not answered.",
+        "The relic is the same relic, a fragment of arrow shaft, a child's tooth, a knuckle, I have not been told which, pulled from the wreck off Cozumel and carried in oilcloth across the water and over the mountains to Tlaxcala."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "San Ildefonso del Mar",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 17,
+        "current_state": "Spanish Reliquary lost in a storm off Cozumel in February of the prior year (Feb 1519). Its relic was being reconsecrated in Tlaxcala while the expedition marched. Will be rebound before winter under the new name San Esteban del Río.",
+        "relationships": [
+          {
+            "to": "San Esteban del Río",
+            "kind": "predecessor_of"
+          },
+          {
+            "to": "Cozumel",
+            "kind": "lost_off"
+          }
+        ],
+        "confidence_score": 0.92
+      },
+      "evidence_spans": [
+        "San Ildefonso del Mar was already gone before any of this, lost in the storm off Cozumel in February of last year, and its relic was being reconsecrated in Tlaxcala when we marched."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "San Sebastián de Cuba",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 17,
+        "current_state": "Spanish Reliquary, Ordaz's engine, characterized by Andrés as 'dependable as a hammer.' Survived La Noche Triste; one of eight engines still standing at Tlacopan dawn.",
+        "relationships": [
+          {
+            "to": "Ordaz",
+            "kind": "piloted_by"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "San Sebastián de Cuba, Ordaz's, dependable as a hammer."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "Santiago del Alba",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 17,
+        "current_state": "Spanish Reliquary, Alvarado's engine, polished by Alvarado himself even at the gallop. Survived La Noche Triste; one of eight engines still standing at Tlacopan dawn.",
+        "relationships": [
+          {
+            "to": "Alvarado",
+            "kind": "piloted_by"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Santiago del Alba, Alvarado's, which Alvarado polished himself even at the gallop."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "Sandoval",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 17,
+        "current_state": "Spanish captain, pilot of Santiago del Paso, the only first-class Reliquary the expedition has ever fielded (eleven stories tall). Survived La Noche Triste with his engine despite arrows in shoulder plate and throat-grille on the causeway.",
+        "relationships": [
+          {
+            "to": "Santiago del Paso",
+            "kind": "pilot_of"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "Santiago del Paso, eleven stories, Sandoval's, the only first-class we have ever fielded."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "Ordaz",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 17,
+        "current_state": "Spanish captain, pilot of San Sebastián de Cuba. Survived La Noche Triste.",
+        "relationships": [
+          {
+            "to": "San Sebastián de Cuba",
+            "kind": "pilot_of"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "San Sebastián de Cuba, Ordaz's, dependable as a hammer."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "Alvarado",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 17,
+        "current_state": "Spanish captain, pilot of Santiago del Alba, which he polished himself even at the gallop. Survived La Noche Triste.",
+        "relationships": [
+          {
+            "to": "Santiago del Alba",
+            "kind": "pilot_of"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "Santiago del Alba, Alvarado's, which Alvarado polished himself even at the gallop."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "Olid",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 17,
+        "current_state": "Spanish captain. A sergeant from Olid's company (missing two fingers on the right hand) is among the survivors at Tlacopan. By dawn Olid is heard shouting at the porters about the gold the column still carries, taking the porters' survival as evidence of providence; the porters take it as evidence of nothing.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "subordinate_to"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "A sergeant from Olid's company, missing two fingers on the right hand.",
+        "Somebody, Olid, by the voice, is shouting at the porters about the gold"
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "Olmedo",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [
+          "chaplain Olmedo"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 17,
+        "current_state": "Spanish chaplain. At dawn near Tlacopan heard praying in Latin over a man past Latin, somewhere down the re-forming column.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "chaplain_to"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "I can hear the chaplain Olmedo praying in Latin over a man who is past Latin."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "Malintzin",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [
+          "Marina"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Survived La Noche Triste. Somewhere in the re-forming column at Tlacopan dawn, wet and tired. Heard 'very faint, in Nahuatl, and a Tlaxcalan voice answering her, and then both of them in Spanish, agreeing on the road north.' Speaking to three men at once in three languages, none of whom will weep in front of her because she is not weeping.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "translator_for"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Malintzin is alive. She is somewhere in the column too.",
+        "I can hear Malintzin, very faint, in Nahuatl, and a Tlaxcalan voice answering her"
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    },
+    {
+      "entity_name": "Lake Texcoco",
+      "last_seen_chapter": 17,
+      "state": {
+        "aliases": [
+          "the lake"
+        ],
+        "entity_type": "place",
+        "first_mentioned_chapter": 9,
+        "current_state": "Lake surrounding Tenochtitlan, ~40 feet deep at the third gap of the Tlacopan causeway. On the night of June 30 / morning of July 1, 1520 black under cold midnight rain, with Mexica canoes (hollowed cedar, two or three men each) moving in torch-circles ~20 ft wide at the causeway edges. Now holds the wreckage of La Niña de Córdoba (with Flora's bones), San Cristóbal del Viento, two unnamed third-class Spanish knight engines and one Tlaxcalan engine, plus six gold-laden Spaniards who jumped the unbridged fourth gap and went under, plus the body of a horse seen by Andrés on the causeway. By dawn 'grey and very still and is keeping its dead.'",
+        "relationships": [
+          {
+            "to": "Tlacopan causeway",
+            "kind": "crossed_by"
+          },
+          {
+            "to": "Flora",
+            "kind": "buries"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "The lake is forty feet deep here. The bones are not recoverable.",
+        "The lake at my back is grey and very still and is keeping its dead.",
+        "On either side of the causeway the lake is black."
+      ],
+      "source_chapter_sha": "b55f48d92c63a9b7813f943aa72beadc5a44414f"
+    }
+  ],
+  "chapter_num": 17,
+  "extraction_timestamp": "2026-04-29T16:14:42.519617Z"
+}
