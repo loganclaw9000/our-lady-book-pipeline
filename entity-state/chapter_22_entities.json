@@ -1,0 +1,424 @@
+{
+  "entities": [
+    {
+      "entity_name": "Malintzin",
+      "last_seen_chapter": 22,
+      "state": {
+        "aliases": [
+          "Marina",
+          "Doña Marina"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state_summary": "Age 20, pregnant by Cortés (~4 months in sc01, ~7 months in sc02 across the Tlaxcala months; child to be born in August). Works in a shuttered Tlaxcala room building bilingual briefs (Castilian on left, Nahuatl on right), drawing a Nahuatl primer for Bernardo, and translating in council. Has decided since February to remain in the Spanish camp not as resistance or collaboration but as the translator in the room when sentences are written — choosing weighted verbs to soften, preserve names, and keep the record from half-erasing the conquered language. Knows the city is going to burn and that hope is a luxury for those without the arithmetic. On the march over the Paso de Cortés rides a mule near the front of the column; rendered an unnamed Tlaxcalan captain's politely-phrased water request into Spanish using 'solicitar' and 'es necesario' rather than weaker constructions, and Cortés ordered the porters' water ration doubled for the next league. Names herself 'the hinge' that will hold. Andrés has stopped greeting her since February; she stopped weeping at night the same week. Cortés has not spoken of the child since once laying a hand on her belly in the dark.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "carries_child_of"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "drawing_nahuatl_primer_for"
+          },
+          {
+            "to": "Andrés",
+            "kind": "interlocutor_unspoken"
+          },
+          {
+            "to": "Tlaxcalan captain (water-ration)",
+            "kind": "translated_for"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "She was twenty years old. She would be twenty-one before the city fell. The child would be born after.",
+        "She had decided in February.",
+        "She was the hinge. She would hold."
+      ],
+      "source_chapter_sha": "671bbdf6b7afb09b926a04d36975510a5cdd84f4"
+    },
+    {
+      "entity_name": "Andrés",
+      "last_seen_chapter": 22,
+      "state": {
+        "aliases": [
+          "Andrés de Mora"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state_summary": "Spanish pilot of San Esteban del Río during the Tlaxcala months and the march toward the lake. Walks now with a slight drag of his right boot ever since Otumba, where a Tlaxcalan lance grazed the leather without breaking skin. For roughly a month came uninvited to Malintzin's room each day; in that room and again in the brigantine workshop yard he asked her — in carefully rehearsed Castilian — 'Do you believe you are doing the right thing?', a question he is rehearsing for himself. Received her answer 'I believe I am doing a thing' twice and sat with it, his twelve priestly years showing in his ability not to fill the silence. Has not been assigned to the brigantine carry party over the Paso de Cortés in eight days; will stay with the engine until the lakeshore camp is set. During the actual crossing the engine walks ahead of him in the column with the cockpit empty.",
+        "relationships": [
+          {
+            "to": "San Esteban del Río",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "questioner_unbidden"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "spiritual_peer"
+          }
+        ],
+        "confidence_score": 0.92
+      },
+      "evidence_spans": [
+        "Andrés walked with a slight drag of his right boot now, ever since Otumba, a cut in the leather where a Tlaxcalan lance had grazed him without breaking skin",
+        "Do you believe you are doing the right thing",
+        "I am not going with the carry party. They have asked me to stay with the engine until the lakeshore camp is set."
+      ],
+      "source_chapter_sha": "671bbdf6b7afb09b926a04d36975510a5cdd84f4"
+    },
+    {
+      "entity_name": "Cortés",
+      "last_seen_chapter": 22,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state_summary": "Father of the child Malintzin carries; touched her belly once in the dark and withdrew his hand 'as though he had touched a thing that was not his to claim,' and has not spoken of it since. Commissioned the morning brief of place names on the road to the lake (Iztapalapa, Mexicaltzingo, Coyoacan, etc.). Commands the column moving from Tlaxcala over the Paso de Cortés toward Lake Texcoco; rides a horse a quarter-mile ahead of Malintzin's mule, will wait for her to ride up to him rather than summon her. On her translation of an unnamed Tlaxcalan captain's request, immediately ordered the quartermaster to double the water ration for the porters at the rear of the brigantine train for the next league. Did not ask for clarification.",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "father_of_her_child"
+          },
+          {
+            "to": "Brigantines",
+            "kind": "commissioned"
+          },
+          {
+            "to": "March over the Paso de Cortés",
+            "kind": "commands"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Cortés had not spoken of the child since the night he had laid a hand on her belly, briefly, in the dark, and then withdrawn it as though he had touched a thing that was not his to claim.",
+        "Cortés heard her. He did not ask for clarification. He turned to the quartermaster at his right and gave the order. The quartermaster turned to the porters at the rear of the brigantine train and the water ration was doubled for the next league."
+      ],
+      "source_chapter_sha": "671bbdf6b7afb09b926a04d36975510a5cdd84f4"
+    },
+    {
+      "entity_name": "San Esteban del Río",
+      "last_seen_chapter": 22,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 17,
+        "current_state_summary": "Newest of the Spanish engines; designated for Andrés. On the march from Tlaxcala over the Paso de Cortés walks a quarter-mile ahead of Malintzin's mule near the front of the column, gilded monstrance at the top of the head catching the sun and flaring. Cockpit empty during the crossing — Andrés is on foot in the column and will not enter until the lakeshore camp is set.",
+        "relationships": [
+          {
+            "to": "Andrés",
+            "kind": "assigned_pilot"
+          },
+          {
+            "to": "Fray Diego",
+            "kind": "adorator"
+          }
+        ],
+        "confidence_score": 0.88
+      },
+      "evidence_spans": [
+        "San Esteban del Río a quarter-mile ahead, the newest of the Spanish engines, its cockpit designated for Andrés and empty, the gilded monstrance at the top of the head catching the sun and flaring"
+      ],
+      "source_chapter_sha": "671bbdf6b7afb09b926a04d36975510a5cdd84f4"
+    },
+    {
+      "entity_name": "Santiago del Paso",
+      "last_seen_chapter": 22,
+      "state": {
+        "aliases": [
+          "Saint James of the Pass"
+        ],
+        "entity_type": "object",
+        "first_mentioned_chapter": 2,
+        "current_state_summary": "Spanish first-class Reliquary, eleven stories tall, with Sandoval at its heart. Walking two miles back in the column on the march over the Paso de Cortés at a pace it does not need to break. Relic confirmed: the apostle James's finger sits in the chest-monstrance, bending the air around the column even at two miles' distance.",
+        "relationships": [
+          {
+            "to": "Sandoval",
+            "kind": "piloted_by"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "Saint James of the Pass two miles back with Sandoval at its heart, eleven stories of stately iron walking at a pace it did not need to break, the apostle's finger in the chest-monstrance bending the air around the column even at that distance"
+      ],
+      "source_chapter_sha": "671bbdf6b7afb09b926a04d36975510a5cdd84f4"
+    },
+    {
+      "entity_name": "Bernardo",
+      "last_seen_chapter": 22,
+      "state": {
+        "aliases": [
+          "Fray Bernardo"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 3,
+        "current_state_summary": "Franciscan in Tlaxcala, recipient of the Nahuatl primer Malintzin draws by reed during the Tlaxcala months — entries written first in glyph script, then Latin alphabet, then Castilian gloss, then a sentence in Castilian explaining what the verb does not mean. Earlier in the chapter cycle had a confessional Latin night with Malintzin where she set his Latin confession beside a Mexica priest's Nahuatl account and understood the two sacrificial machines were the same machine.",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "student_of_nahuatl_primer"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "In her room she opened the Nahuatl primer she was drawing for Bernardo, dipped the reed, and wrote the next entry.",
+        "the night she had set his Latin confession beside the Mexica priest's Nahuatl account and understood, finally, that the two machines were the same machine"
+      ],
+      "source_chapter_sha": "671bbdf6b7afb09b926a04d36975510a5cdd84f4"
+    },
+    {
+      "entity_name": "Brigantines",
+      "last_seen_chapter": 22,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 19,
+        "current_state_summary": "Thirteen brigantines completed in the long Tlaxcala workshop spanning three knocked-through houses (sixty paces end-to-end). Pieces (beams, planks, coils of rope) are pine, pitched, charcoaled with Spanish numbers on the hull-pieces and beneath each Spanish number a Tlaxcalan glyph naming the joint; the Spanish gauge passes over both marks and certifies the cut true. On the march over the Paso de Cortés the train rides on the right shoulders of perhaps eight hundred Tlaxcalan porters, lashed at two points with rawhide shaved from cattle that survived the crossing, walking in pairs twenty paces apart, a Spanish overseer with a whip-as-baton between each pair. To be reassembled at the lakeshore for the siege.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "commissioned_by"
+          },
+          {
+            "to": "Paso de Cortés",
+            "kind": "carried_over"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Three houses had been knocked through to make it, the lime walls broken at shoulder height and the rubble cleared, so that the building ran sixty paces from end to end and held the ribs of thirteen brigantines in numbered piles.",
+        "The brigantine pieces came first, on the backs of perhaps eight hundred Tlaxcalan porters, each man carrying a beam or a plank or a coil of rope on his right shoulder, lashed at two points, the lashings rawhide, the beams pine."
+      ],
+      "source_chapter_sha": "671bbdf6b7afb09b926a04d36975510a5cdd84f4"
+    },
+    {
+      "entity_name": "Paso de Cortés",
+      "last_seen_chapter": 22,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 19,
+        "current_state_summary": "Mountain pass between Tlaxcala and the lake basin. The road over the crest is not built but worn — top of a ridge worn by porters for a thousand years, widened by mule-backs, crushed to dust by six months of iron-shod Spanish cavalry. Fine dust hangs a foot above the ground, makes every figure look afloat. Cresting the ridge gives the first view of the valley of the lakes in six months: the gray rectangle of Lake Texcoco the size of a province, and beyond it in the haze the smudge of Tenochtitlan with smoke rising in straight windless lines. Currently being crossed by Cortés's column with the brigantines on porters' shoulders.",
+        "relationships": [
+          {
+            "to": "Lake Texcoco",
+            "kind": "overlooks"
+          },
+          {
+            "to": "Tenochtitlan",
+            "kind": "overlooks"
+          }
+        ],
+        "confidence_score": 0.88
+      },
+      "evidence_spans": [
+        "It was not a road the way Spanish roads back in Spain were roads, not a thing built but a thing worn, the top of a ridge worn by the feet of porters for a thousand years",
+        "For the first time in six months, the horizon fell away. The valley of the lakes was there."
+      ],
+      "source_chapter_sha": "671bbdf6b7afb09b926a04d36975510a5cdd84f4"
+    },
+    {
+      "entity_name": "Tenochtitlan",
+      "last_seen_chapter": 22,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 1,
+        "current_state_summary": "Visible from the crest of the Paso de Cortés as a smudge of stone and thatch beyond Lake Texcoco. Smoke rises in straight lines because the wind is not yet moving — and the smoke is the wrong kind: not the smoke of a city cooking morning meal but of one already burned. The siege is fixed: it will begin in May; the city is going to burn. The march now in progress is the period at the end of the sentence.",
+        "relationships": [
+          {
+            "to": "Lake Texcoco",
+            "kind": "stands_in"
+          },
+          {
+            "to": "Cortés",
+            "kind": "target_of_siege"
+          }
+        ],
+        "confidence_score": 0.88
+      },
+      "evidence_spans": [
+        "the shape of the city, a smudge of stone and thatch and the smoke from the cooking fires, the smoke rising in straight lines because the wind was not yet moving",
+        "The smoke was the wrong kind. It was not the smoke of a city that was cooking its morning meal. It was the smoke of a city that had already been burned."
+      ],
+      "source_chapter_sha": "671bbdf6b7afb09b926a04d36975510a5cdd84f4"
+    },
+    {
+      "entity_name": "Lake Texcoco",
+      "last_seen_chapter": 22,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 9,
+        "current_state_summary": "Visible from the crest of the Paso de Cortés as gray water through the haze, a rectangle of color the size of a province. Dozen-plus plumes of smoke rise from the valley villages along the lake — some from cooking fires, some from burned thatch, some from things the Spanish burned on the way in.",
+        "relationships": [
+          {
+            "to": "Tenochtitlan",
+            "kind": "surrounds"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "the gray water of Lake Texcoco visible through the haze, a rectangle of color the size of a province"
+      ],
+      "source_chapter_sha": "671bbdf6b7afb09b926a04d36975510a5cdd84f4"
+    },
+    {
+      "entity_name": "Otumba",
+      "last_seen_chapter": 22,
+      "state": {
+        "aliases": [],
+        "entity_type": "event",
+        "first_mentioned_chapter": 22,
+        "current_state_summary": "Battle/engagement (presumably the post-Noche-Triste rearguard fight in the months before the Tlaxcala regroup) at which Andrés took a Tlaxcalan lance graze on his right boot — the leather cut without skin broken; the boot remembers, leaving him with a slight drag in his right foot ever since. Mentioned in ch19 prior context as a fight where Obsidian Mirror harassed the Spanish right flank.",
+        "relationships": [
+          {
+            "to": "Andrés",
+            "kind": "wounded_at"
+          }
+        ],
+        "confidence_score": 0.7
+      },
+      "evidence_spans": [
+        "Andrés walked with a slight drag of his right boot now, ever since Otumba, a cut in the leather where a Tlaxcalan lance had grazed him without breaking skin, but the boot remembered."
+      ],
+      "source_chapter_sha": "671bbdf6b7afb09b926a04d36975510a5cdd84f4"
+    },
+    {
+      "entity_name": "La Malinche (mountain)",
+      "last_seen_chapter": 22,
+      "state": {
+        "aliases": [
+          "Matlalcueitl"
+        ],
+        "entity_type": "place",
+        "first_mentioned_chapter": 22,
+        "current_state_summary": "Mountain whose lower slopes furnish the pine for the brigantine timbers in the Tlaxcala workshop; pitch on the cut beam ends sticks to Malintzin's hand and smells of those slopes. Shares Malintzin's baptismal name and 'would not let her forget it.' (Likely the same volcano known elsewhere as Matlalcueitl/La Malinche on the Tlaxcala side; the chapter explicitly names it 'La Malinche' through the baptismal-name link.)",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "shares_baptismal_name_with"
+          },
+          {
+            "to": "Brigantines",
+            "kind": "source_of_pine_timbers"
+          }
+        ],
+        "confidence_score": 0.7
+      },
+      "evidence_spans": [
+        "smelling of the lower slopes of La Malinche, the mountain that shared her baptismal name and would not let her forget it"
+      ],
+      "source_chapter_sha": "671bbdf6b7afb09b926a04d36975510a5cdd84f4"
+    },
+    {
+      "entity_name": "Mexicaltzingo",
+      "last_seen_chapter": 22,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 22,
+        "current_state_summary": "Town listed in Malintzin's morning brief for Cortés as one of the places the army will pass on the way to the lake; written by her in both Castilian and Nahuatl so later Spanish scribes copying only the Castilian cannot half-erase the name.",
+        "relationships": [
+          {
+            "to": "March over the Paso de Cortés",
+            "kind": "on_route_of"
+          }
+        ],
+        "confidence_score": 0.8
+      },
+      "evidence_spans": [
+        "Iztapalapa. Mexicaltzingo. Coyoacan."
+      ],
+      "source_chapter_sha": "671bbdf6b7afb09b926a04d36975510a5cdd84f4"
+    },
+    {
+      "entity_name": "Coyoacan",
+      "last_seen_chapter": 22,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 22,
+        "current_state_summary": "Town listed in Malintzin's morning brief for Cortés as one of the places the army will pass on the way to the lake; written by her in both Castilian and Nahuatl.",
+        "relationships": [
+          {
+            "to": "March over the Paso de Cortés",
+            "kind": "on_route_of"
+          }
+        ],
+        "confidence_score": 0.8
+      },
+      "evidence_spans": [
+        "Iztapalapa. Mexicaltzingo. Coyoacan."
+      ],
+      "source_chapter_sha": "671bbdf6b7afb09b926a04d36975510a5cdd84f4"
+    },
+    {
+      "entity_name": "Tlaxcalan water-ration captain",
+      "last_seen_chapter": 22,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 22,
+        "current_state_summary": "Unnamed Tlaxcalan captain on the march over the Paso de Cortés. Came out of the brush on Malintzin's left in tunic and loincloth, no armor, greenstone beads inherited from his father, bow in right hand, quiver on left shoulder. Spoke to her in Nahuatl in a flat voice, framing a request for the water ration to be increased — used 'ask politely' and 'hope you will consider' verbs but never the verb that meant 'they are dying,' because as captain he could not speak of death in the present tense. After Malintzin's weighted Spanish translation produced a doubled water ration from Cortés, thanked her once in flat-voiced Nahuatl, did not smile, walked back into the brush.",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "petitioned_through"
+          },
+          {
+            "to": "Cortés",
+            "kind": "supplicant_of"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "A Tlaxcalan captain came out of the brush on her left. He was not in armor. He wore a tunic and a loincloth and a necklace of greenstone beads that had been his father's.",
+        "He had used a verb that meant ask politely. He had used a second verb that meant hope you will consider. He had not used the verb that meant they are dying."
+      ],
+      "source_chapter_sha": "671bbdf6b7afb09b926a04d36975510a5cdd84f4"
+    },
+    {
+      "entity_name": "March over the Paso de Cortés",
+      "last_seen_chapter": 22,
+      "state": {
+        "aliases": [],
+        "entity_type": "event",
+        "first_mentioned_chapter": 22,
+        "current_state_summary": "Spanish-Tlaxcalan column moving from Tlaxcala over the Paso de Cortés toward the lake basin, eight days after Andrés's workshop-yard exchange with Malintzin. Order of march: brigantine train of ~800 Tlaxcalan porters with Spanish overseers between pairs, then Spanish cavalry, pikemen, arquebusiers, cannon on wooden carriages with mule-teams, then Tlaxcalan warriors flanking on both sides in brush and scrub. Three Reliquaries visible spaced along the line — San Esteban del Río a quarter-mile ahead with cockpit empty, Santiago del Paso (Saint James of the Pass) two miles back with Sandoval, and an unnamed third-class engine moving with the cavalry — engines positioned so no section of the column is more than a mile from a standing iron giant, because the road is a kill-zone. Crested the ridge and began descent into the valley; Malintzin rides a mule near the front, secured a doubled water ration for the porters at the rear via a single weighted-verb translation. Siege begins in May.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "commanded_by"
+          },
+          {
+            "to": "Brigantines",
+            "kind": "transports"
+          },
+          {
+            "to": "Tenochtitlan",
+            "kind": "objective"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "The brigantines go over the pass in eight days",
+        "The engines were spaced so that no section of the column was more than a mile from a standing iron giant, because the road was a kill-zone."
+      ],
+      "source_chapter_sha": "671bbdf6b7afb09b926a04d36975510a5cdd84f4"
+    }
+  ],
+  "chapter_num": 22,
+  "extraction_timestamp": "2026-04-29T21:28:58.127104Z"
+}
