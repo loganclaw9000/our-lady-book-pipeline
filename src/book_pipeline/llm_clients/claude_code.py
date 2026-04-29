@@ -241,11 +241,17 @@ class _Messages:
         if system_text:
             argv += ["--append-system-prompt", system_text]
         argv += list(self._extra_args)
-        argv += [user_prompt]
+
+        # Long prompts (e.g. full chapter text for entity_extractor) overflow
+        # OS ARG_MAX when passed as positional argv → subprocess hangs and hits
+        # 180s timeout (HANDOFF Known Issue #3). Pipe via stdin instead. The
+        # ``-`` positional tells ``claude -p`` to read prompt from stdin.
+        argv += ["-"]
 
         payload = _invoke_claude_cli(
             argv=argv,
             timeout_s=self._timeout_s,
+            stdin_input=user_prompt,
         )
 
         structured = payload.get("structured_output")
@@ -304,11 +310,14 @@ class _Messages:
         if system_text:
             argv += ["--append-system-prompt", system_text]
         argv += list(self._extra_args)
-        argv += [user_prompt]
+
+        # Long prompts via stdin (HANDOFF Known Issue #3 — ARG_MAX overflow).
+        argv += ["-"]
 
         payload = _invoke_claude_cli(
             argv=argv,
             timeout_s=self._timeout_s,
+            stdin_input=user_prompt,
         )
 
         result_text = payload.get("result")
@@ -387,8 +396,15 @@ def _invoke_claude_cli(
     *,
     argv: list[str],
     timeout_s: int,
+    stdin_input: str | None = None,
 ) -> dict[str, Any]:
     """Run ``claude -p ...`` and return the parsed JSON payload.
+
+    When ``stdin_input`` is provided, the prompt content is piped via stdin
+    instead of an argv positional. Required for long prompts (e.g. chapter
+    text >~100KB) that would otherwise hit the OS ARG_MAX limit and timeout
+    silently. Per HANDOFF Known Issue #3 (entity_extractor argv overflow on
+    long chapters).
 
     Raises:
         APIConnectionError (anthropic): transient subprocess failure
@@ -406,6 +422,7 @@ def _invoke_claude_cli(
             timeout=timeout_s,
             env=env,
             check=False,
+            input=stdin_input,
         )
     except FileNotFoundError as exc:
         raise ClaudeCodeCliError(
