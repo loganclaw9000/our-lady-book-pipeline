@@ -1,0 +1,438 @@
+{
+  "entities": [
+    {
+      "entity_name": "Andrés",
+      "last_seen_chapter": 19,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Spanish pilot at the Tlaxcala regroup ~early 1521. Has piloted San Esteban del Río for four months; the engine still feels borrowed, hum a third lower than La Niña's. Stood in attendance as junior pilot at Cortés's council with the defector Don Fernando Ixtlilxochitl, whose presence frightens him without articulable reason. Tested a heresy on Bernardo (the Spanish are winning by cheating, not God) in three languages; could not refute, could not affirm, registered both. Vowed silence. Saw a Tlaxcalan woman pilot watching him in the workshop yard; no introduction. Walked in on Malintzin already at Bernardo's lodging late at night and withdrew.",
+        "relationships": [
+          {
+            "to": "San Esteban del Río",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "confidant_of"
+          },
+          {
+            "to": "Don Fernando Ixtlilxochitl",
+            "kind": "wary_of"
+          },
+          {
+            "to": "Fray Diego",
+            "kind": "introduced_to_saint_by"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "Four months Andrés had piloted it. Four months and the engine still felt borrowed.",
+        "He frightens me, and I do not know why.",
+        "He registered the sentence. He registered that he could not refute it. He registered that he could not affirm it."
+      ],
+      "source_chapter_sha": "700164a7ba23ad0982ef3b1bfff167fe045745f0"
+    },
+    {
+      "entity_name": "San Esteban del Río",
+      "last_seen_chapter": 19,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 17,
+        "current_state": "Refitted second-class Spanish Reliquary, brought up from Veracruz on Cortés's orders. Taller and broader-shouldered than La Niña de Córdoba; armor plates etched with the Calatrava cross, the etching reading as deliberate, almost aggressive. Powered by the arm bone of a Castilian knight killed at Granada in 1491 (Reconquista martyr) — note: ch17 had projected the relic source as San Ildefonso del Mar; ch19 establishes a different martyr. Hum sits a third lower than La Niña's, a cracked-bell tone in the sternum. Cockpit smaller, seating canted forward. Andrés has piloted it four months; gait stable by second calibration pattern but presence in cockpit abrasive. Cradled in Tlaxcala two streets from Andrés's quarters. Adorator: Fray Diego.",
+        "relationships": [
+          {
+            "to": "Andrés",
+            "kind": "piloted_by"
+          },
+          {
+            "to": "Fray Diego",
+            "kind": "tended_by"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "The arm bone that powered it belonged to a Castilian martyr of the Reconquista, a knight killed at Granada in 1491.",
+        "San Esteban's pitch was a third lower than La Niña's, the cadence more military, the presence in the cockpit abrasive in a way that was not malice but was also not welcome.",
+        "Refitted second-class, arm bone of a Castilian knight from the Reconquista, liturgy in Mozarabic Latin he had to relearn line by line."
+      ],
+      "source_chapter_sha": "700164a7ba23ad0982ef3b1bfff167fe045745f0"
+    },
+    {
+      "entity_name": "Fray Diego",
+      "last_seen_chapter": 19,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 19,
+        "current_state": "Franciscan adorator who brought San Esteban del Río up the road from Veracruz to Tlaxcala. Stands before the cockpit with a silver crucifix in his left hand and a small vial of oil in his right. Performed the introduction-rite naming Andrés to the saint and the saint to Andrés in older, harder Mozarabic Latin (the Latin of the Reconquista). Heard the wrong hum during calibration and said nothing of it, as Andrés said nothing. Andrés has not yet learned his face.",
+        "relationships": [
+          {
+            "to": "San Esteban del Río",
+            "kind": "adorator_of"
+          },
+          {
+            "to": "Andrés",
+            "kind": "performed_introduction_rite_for"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "The adorator was a Franciscan named Fray Diego, a man whose face Andrés had not yet learned.",
+        "Fray Diego knelt beside the cockpit and began the introduction-rite, naming Andrés to the saint and the saint to Andrés.",
+        "He had heard it. He had said nothing either."
+      ],
+      "source_chapter_sha": "700164a7ba23ad0982ef3b1bfff167fe045745f0"
+    },
+    {
+      "entity_name": "Bernardo",
+      "last_seen_chapter": 19,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 3,
+        "current_state": "Franciscan in a borrowed Tlaxcalan house at the end of a side lane in Tlaxcala. Has been at a Nahuatl primer Malintzin drew for him since the regroup ~four months earlier — writing slowly, crossing out, rewriting. Articulated to Andrés a heresy in Nahuatl, then Spanish, then Mozarabic Latin: the Spanish are winning not because God is with them but because they cheat — powder, steel, oversized Reliquaries, Tlaxcalan allies bought by century-old enmities, and a sickness rumored from a coast muleteer (unnamed) emptying villages inland. Hosted Malintzin alone late the same night Itzcoatl appeared at council; Andrés walked in, withdrew unspoken. Named to Andrés that Don Fernando frightens him because he is doing the same arithmetic from the other side of the table.",
+        "relationships": [
+          {
+            "to": "Andrés",
+            "kind": "confidant_of"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "Nahuatl_student_of"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "private_meeting_with"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Bernardo sat at the table with a Nahuatl primer Malintzin had drawn out for him and a sheet of bark paper covered in his attempts.",
+        "The Spanish were not winning because God was with them. They were winning because they cheated.",
+        "Because he is doing the same arithmetic you are. From the other side of the table."
+      ],
+      "source_chapter_sha": "700164a7ba23ad0982ef3b1bfff167fe045745f0"
+    },
+    {
+      "entity_name": "Malintzin",
+      "last_seen_chapter": 19,
+      "state": {
+        "aliases": [
+          "Marina"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "At Cortés's left at the council in Tlaxcala, six or seven months pregnant by him; the Spanish camp has absorbed the pregnancy into ambient knowledge without comment. Translated Itzcoatl's lineage statement into Castilian; her cadence stuttered for a half-second before rendering the name of his sister Xochitl Tlapala (widowed at the massacre), and her hand went briefly still on the table edge. Did not return to debrief Cortés afterward; walked down a corridor toward the household staff rooms. Late that night was already at Bernardo's lodging when Andrés arrived; Andrés withdrew unspoken. Has been drawing a Nahuatl primer for Bernardo through the regroup.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "translator_for"
+          },
+          {
+            "to": "Cortés",
+            "kind": "carrying_child_of"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "Nahuatl_tutor_of"
+          },
+          {
+            "to": "Itzcoatl",
+            "kind": "translated_for"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Malintzin at his left, as she had been since autumn, six or seven months along now, the pregnancy visible and not hidden",
+        "Something in her cadence stuttered, not in the rate, not in the volume, but in the small held breath she took before rendering one of Itzcoatl's sentences into Spanish",
+        "Malintzin was already there, sitting at Bernardo's table."
+      ],
+      "source_chapter_sha": "700164a7ba23ad0982ef3b1bfff167fe045745f0"
+    },
+    {
+      "entity_name": "Itzcoatl",
+      "last_seen_chapter": 19,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 9,
+        "current_state": "Came alone, in civilian clothes, to Cortés's headquarters at Tlaxcala as a Mexica envoy. Pickets sent word up the chain; the room closed around him. Sat across from Cortés, gave his name as Itzcoatl of Texcoco, pilot of Obsidian Mirror, the Tezcatlipoca-class engine the Spanish know by reputation from the Templo Mayor and from Otumba (where it harassed them on the right flank). Calmer than Andrés would have been. Delivered a lineage statement naming his sister Xochitl Tlapala, widowed at the massacre, of a Mexica house in Tenochtitlan. Negotiation was preliminaries only — nothing decided. Will return in some weeks with Mirror or will not. The same night, Malintzin was at Bernardo's lodging.",
+        "relationships": [
+          {
+            "to": "Obsidian Mirror",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Xochitl Tlapala",
+            "kind": "brother_of"
+          },
+          {
+            "to": "Cortés",
+            "kind": "envoy_to"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "He gave his name: Itzcoatl, of Texcoco, pilot of Obsidian Mirror, the Tezcatlipoca-class engine the Spanish knew by reputation from the Templo Mayor and from Otumba",
+        "he named a sister, Xochitl Tlapala, widowed at the massacre, of a Mexica house in Tenochtitlan.",
+        "Itzcoatl would return in some weeks with Mirror or he would not."
+      ],
+      "source_chapter_sha": "700164a7ba23ad0982ef3b1bfff167fe045745f0"
+    },
+    {
+      "entity_name": "Don Fernando Ixtlilxochitl",
+      "last_seen_chapter": 19,
+      "state": {
+        "aliases": [
+          "Ixtlilxochitl",
+          "Don Fernando"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 9,
+        "current_state": "Itzcoatl's cousin, formerly in exile in the north. Defected to the Spanish during the regroup in October; brought three engines of his own (Texcocan-pattern Tezcatlipoca-class variants, second-class, all named, all with their teōmachtiani still aboard), a retinue of nobles, and a standing offer of fifty thousand warriors over the coming campaign. Has been baptized; goes by Don Fernando. Spanish better than Andrés's Latin. Sat at Cortés's council with table-bred ease, calibrated each Spaniard within half a degree (Cortés first, Sandoval, Olid, Alvarado last and most carefully), and held the room without raising his voice. Knows which causeway takes weight, which altepetl owes which other ones what, where every Mexica engine cradle sits. Has been preparing this campaign in his head for years. Andrés reads him as enemy without articulable proof; Bernardo: 'doing the same arithmetic from the other side of the table.'",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "cousin_of"
+          },
+          {
+            "to": "Cortés",
+            "kind": "ally_of"
+          },
+          {
+            "to": "Andrés",
+            "kind": "rival_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "He had defected during the regroup in October, brought three engines of his own, Texcocan-pattern Tezcatlipoca-class variants, second-class, all named, all with their teōmachtiani still aboard, and a retinue of nobles, and a standing offer of fifty thousand warriors over the course of the coming campaign.",
+        "He had been baptized. He went by Don Fernando now.",
+        "He calibrated each Spaniard to within half a degree, Cortés first, Sandoval second, Olid third, Alvarado last and most carefully, and he held the room without raising his voice."
+      ],
+      "source_chapter_sha": "700164a7ba23ad0982ef3b1bfff167fe045745f0"
+    },
+    {
+      "entity_name": "Xochitl Tlapala",
+      "last_seen_chapter": 19,
+      "state": {
+        "aliases": [
+          "Xochitl"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 9,
+        "current_state": "Itzcoatl's sister. Now confirmed widowed at the Templo Mayor massacre — establishing that her husband Cuauhtli Ocelotl (ch15) is dead and the news has reached her. Of a Mexica house in Tenochtitlan. Named by Itzcoatl across the table at Cortés's council in Tlaxcala as part of his lineage statement; the name caused Malintzin's translation cadence to stutter and her hand to still briefly. Not present in the chapter; cited only.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "sister_of"
+          },
+          {
+            "to": "Cuauhtli Ocelotl",
+            "kind": "widow_of"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "former_court_protocol_tutor_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "he named a sister, Xochitl Tlapala, widowed at the massacre, of a Mexica house in Tenochtitlan."
+      ],
+      "source_chapter_sha": "700164a7ba23ad0982ef3b1bfff167fe045745f0"
+    },
+    {
+      "entity_name": "Cortés",
+      "last_seen_chapter": 19,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Commanding the Spanish-Tlaxcalan regroup at Tlaxcala in the months after La Noche Triste, planning the siege of Tenochtitlan. Convened a council in a repurposed Tlaxcalan house with Aguilar at his right, Malintzin at his left, captains, priests, nobles, and the defector Don Fernando Ixtlilxochitl ranged down the sides. Ordered the refitted second-class San Esteban del Río brought up from Veracruz to replace La Niña and assigned it to Andrés. Has commissioned thirteen brigantines being shaped in pieces in long Tlaxcalan workshops, to be dragged over the Paso de Cortés in spring. Received the Mexica envoy Itzcoatl across the council table; preliminaries only.",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "father_of_her_unborn_child"
+          },
+          {
+            "to": "Don Fernando Ixtlilxochitl",
+            "kind": "ally_of"
+          },
+          {
+            "to": "Itzcoatl",
+            "kind": "received_envoy"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Cortés at one end, Malintzin at his right hand, captains and priests and nobles ranged down the sides, and the man who was not supposed to be there.",
+        "a refitted second-class brought up from Veracruz on Cortés's orders.",
+        "He sat across from Cortés."
+      ],
+      "source_chapter_sha": "700164a7ba23ad0982ef3b1bfff167fe045745f0"
+    },
+    {
+      "entity_name": "Tlaxcala",
+      "last_seen_chapter": 19,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 17,
+        "current_state": "Spanish-Tlaxcalan regroup base in the months after La Noche Triste. Holds Cortés's headquarters compound (a repurposed Tlaxcalan house with cedar smoke gone cold in the rafters), a long brigantine workshop spanning three Tlaxcalan houses with their walls knocked out, a side-lane lodging for Bernardo, an engine cradle for San Esteban del Río two streets from Andrés's quarters, and the Tlaxcalan engine yard (including Matlalcueitl). Tlaxcalan carpenters and Spanish woodsmen work side by side in two languages; the brigantines are being shaped in pieces here for transport over the Paso de Cortés in spring. Site of Don Fernando's defection in October and Itzcoatl's preliminary envoy meeting.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "headquarters_of"
+          },
+          {
+            "to": "Brigantines",
+            "kind": "construction_site_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "The brigantines were being shaped in pieces, in a long workshop that ran the length of three Tlaxcalan houses with their walls knocked out.",
+        "Tlaxcalan carpenters and Spanish woodsmen worked side by side, each language a separate current in the same river, neither yielding.",
+        "It was a borrowed Tlaxcalan house at the end of a side lane, a single room, a small writing table"
+      ],
+      "source_chapter_sha": "700164a7ba23ad0982ef3b1bfff167fe045745f0"
+    },
+    {
+      "entity_name": "Brigantines",
+      "last_seen_chapter": 19,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 19,
+        "current_state": "Thirteen Spanish brigantines being shaped in pieces in a long Tlaxcalan workshop spanning three houses with their walls knocked out. Tlaxcalan carpenters and Spanish woodsmen argue across two languages over joinery — mortise vs tenon vs Nahuatl word for 'the way rain enters a roof badly' — and the piece comes out true under a Spaniard's gauge and a Tlaxcalan's knife. Pieces will be dragged over the Paso de Cortés in spring and reassembled at the lakeshore for the siege of Tenochtitlan. The siege is being machined into existence in the background of Tlaxcala's calm.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "commissioned_by"
+          },
+          {
+            "to": "Tlaxcala",
+            "kind": "built_at"
+          },
+          {
+            "to": "Tenochtitlan",
+            "kind": "siege_weapon_against"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "They were building thirteen. The pieces would be dragged over the Paso de Cortés in spring.",
+        "carpenters were building brigantines that would be carried in pieces to the lakeshore for the siege of Tenochtitlan.",
+        "The brigantines were being shaped in pieces, in a long workshop that ran the length of three Tlaxcalan houses with their walls knocked out."
+      ],
+      "source_chapter_sha": "700164a7ba23ad0982ef3b1bfff167fe045745f0"
+    },
+    {
+      "entity_name": "Paso de Cortés",
+      "last_seen_chapter": 19,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 19,
+        "current_state": "Mountain pass between Tlaxcala and the lake basin. Brigantine pieces will be dragged over it in spring for reassembly at the Tenochtitlan lakeshore.",
+        "relationships": [
+          {
+            "to": "Brigantines",
+            "kind": "transit_route_for"
+          },
+          {
+            "to": "Tlaxcala",
+            "kind": "egress_from"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "The pieces would be dragged over the Paso de Cortés in spring."
+      ],
+      "source_chapter_sha": "700164a7ba23ad0982ef3b1bfff167fe045745f0"
+    },
+    {
+      "entity_name": "Matlalcueitl",
+      "last_seen_chapter": 19,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 19,
+        "current_state": "Tlaxcalan engine outside the brigantine workshop in Tlaxcala — one of the teōmecahuītlī Andrés calls to mind: 'fueled the way they had always been fueled, serving the strangers who had baptized them last week.' Specific role unstated.",
+        "relationships": [
+          {
+            "to": "Tlaxcala",
+            "kind": "stationed_at"
+          }
+        ],
+        "confidence_score": 0.75
+      },
+      "evidence_spans": [
+        "He thought of the Tlaxcalan engines outside the workshop right now, Matlalcueitl among them, fueled the way they had always been fueled, serving the strangers who had baptized them last week."
+      ],
+      "source_chapter_sha": "700164a7ba23ad0982ef3b1bfff167fe045745f0"
+    },
+    {
+      "entity_name": "Tlaxcalan woman pilot",
+      "last_seen_chapter": 19,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 19,
+        "current_state": "Unnamed Tlaxcalan woman with her arm in a sling, standing in the brigantine-workshop yard with the stillness only pilots learn. Watched Andrés through Fray Diego's introduction-rite, the calibration patterns, and his dismount of San Esteban del Río — not the carpenters, not the brigantine timbers, not the priests blessing the work, but the engine. No introduction offered in either direction. At the moment Andrés turned at the yard's edge their eyes met across forty feet of pine shavings; she touched the sling at her elbow and turned back toward the workshop without speaking.",
+        "relationships": [
+          {
+            "to": "Andrés",
+            "kind": "observed"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "a woman with her arm in a sling, standing with the kind of stillness only pilots learned.",
+        "She was watching the Reliquary. Not the carpenters, nor the brigantine timbers, nor the priests blessing the work. The engine.",
+        "Then she touched the sling at her elbow, a small adjustment, nothing said, and turned back toward the workshop, and the moment closed."
+      ],
+      "source_chapter_sha": "700164a7ba23ad0982ef3b1bfff167fe045745f0"
+    },
+    {
+      "entity_name": "Coast sickness",
+      "last_seen_chapter": 19,
+      "state": {
+        "aliases": [],
+        "entity_type": "event",
+        "first_mentioned_chapter": 19,
+        "current_state": "Rumored sickness reported by an unnamed muleteer down from the coast: faces and bodies covered in something the muleteer had no word for, whole villages emptied. Bernardo named it to Andrés as one element of why the Spanish are winning ('they cheated'). Not yet named in-story.",
+        "relationships": [
+          {
+            "to": "Bernardo",
+            "kind": "reported_to"
+          }
+        ],
+        "confidence_score": 0.8
+      },
+      "evidence_spans": [
+        "rumors he had heard from a muleteer down from the coast about a sickness moving inland, faces and bodies covered in something the muleteer had no word for, whole villages emptied."
+      ],
+      "source_chapter_sha": "700164a7ba23ad0982ef3b1bfff167fe045745f0"
+    }
+  ],
+  "chapter_num": 19,
+  "extraction_timestamp": "2026-04-29T20:06:36.381394Z"
+}
