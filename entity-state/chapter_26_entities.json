@@ -1,0 +1,548 @@
+{
+  "entities": [
+    {
+      "entity_name": "Andrés",
+      "last_seen_chapter": 26,
+      "state": {
+        "aliases": [
+          "Andrés de Mora"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Pilot of San Esteban del Río. At dawn on the day of Tenochtitlan's fall executed Bernardo in the templo plaza: untied the Franciscan cord at Bernardo's waist and bound his wrists himself, drew his Toledo short-sword (blessed in Havana, carried through Cempoala, Cholula and the Noche Triste causeway, never used for execution before), made a single transverse stroke at the base of the skull. Pinned 37 minutes in the cockpit after the duel; pulled out with two cracked ribs, a burn the length of his left forearm, and a sprained ankle he chose not to limp on. Climbed back into the cooling cockpit alone and prayed the vitas of San Esteban, Flora, and an assembled vita of Bernardo. Met Malintzin at dusk on the lower terrace and said in Spanish 'I do not know what I am.' Walked down to the lake at sunset to read Latin over the wounded — the one task he was still permitted to do.",
+        "relationships": [
+          {
+            "to": "Bernardo",
+            "kind": "executioner_of"
+          },
+          {
+            "to": "San Esteban del Río",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "witness_to"
+          },
+          {
+            "to": "Flora",
+            "kind": "former_pilot_for_relic_of"
+          }
+        ],
+        "confidence_score": 0.97
+      },
+      "evidence_spans": [
+        "He had killed a stranger in his first chapter. He was about to kill a friend in this one.",
+        "Andrés was pulled from the wreckage with two cracked ribs and a burn across his left forearm.",
+        "He had used up whatever inside him could weep."
+      ],
+      "source_chapter_sha": "297eaef136bf8bba057253a71a77949e3b2aad5c"
+    },
+    {
+      "entity_name": "Bernardo",
+      "last_seen_chapter": 26,
+      "state": {
+        "aliases": [
+          "Father Bernardo",
+          "Fray Bernardo"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 3,
+        "current_state": "Executed at dawn on the day of Tenochtitlan's fall. Came alone to the templo plaza in his ordinary brown habit, having already given last confession to the senior Franciscan. Knelt at the stone block, named Flora aloud as a girl killed at Córdoba in 851 and chose what she had been. Wrists bound by Andrés in the novice knot. Killed by a single transverse stroke at the base of the skull. Right humerus, lower jaw, and two cervical vertebrae extracted within three minutes by the senior adorator and fused warm into San Esteban del Río's monstrance bracket alongside San Esteban de Granada's arm. Body moved during the first hour to a litter in the calmecac. Senior friar read the office for confessors (not the office for martyrs), declining to rule on his status and passing the case up to Rome. Hands folded right over left around the still-attached Franciscan cord.",
+        "relationships": [
+          {
+            "to": "Andrés",
+            "kind": "executed_by"
+          },
+          {
+            "to": "San Esteban del Río",
+            "kind": "fuel_of"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "tutee_in_nahuatl_of"
+          },
+          {
+            "to": "Flora",
+            "kind": "publicly_named_at_death"
+          }
+        ],
+        "confidence_score": 0.98
+      },
+      "evidence_spans": [
+        "Her name was Flora. She was nine. She refused to recant in Córdoba in the year of our Lord 851, and they took her head for it.",
+        "Andrés made the cut. A single transverse stroke at the base of the skull.",
+        "It was the office for confessors. Not the office for martyrs."
+      ],
+      "source_chapter_sha": "297eaef136bf8bba057253a71a77949e3b2aad5c"
+    },
+    {
+      "entity_name": "San Esteban del Río",
+      "last_seen_chapter": 26,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 17,
+        "current_state": "Refitted second-class Spanish Reliquary, Andrés's engine. At dawn on the fall-day reconfigured to dual-saint output: Bernardo's right humerus, lower jaw and two cervical vertebrae bound warm into the bracket alongside San Esteban de Granada's arm-bone, sealing rite said in Mozarabic Latin, monstrance whining up three octaves in under a breath. Drove to apex-equivalent output; crossed the plaza, struck the Great Engine of the sun-god twice (split paving stones from calmecac wall to ball court at the first), opened her chest seam at the foot of the pyramid and went down beside her on the lower terrace. Will not move again today, perhaps not ever. Bracket now holds Bernardo's lower jaw behind the crystal. Cockpit smells of Andrés's blood and broken coolant. Cradle frame wrenched, ladder rungs crimped.",
+        "relationships": [
+          {
+            "to": "Andrés",
+            "kind": "piloted_by"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "fueled_by"
+          },
+          {
+            "to": "San Esteban de Granada",
+            "kind": "fueled_by"
+          },
+          {
+            "to": "Great Engine",
+            "kind": "killer_of"
+          }
+        ],
+        "confidence_score": 0.97
+      },
+      "evidence_spans": [
+        "the bracket open, the linen cloth laid out on the stone, the bone-chisels arranged in their nine-piece order on a strip of unbleached linen.",
+        "The dual-saint configuration drove the engine to apex-equivalent output.",
+        "The hum was gone. The bracket at the chest, behind the crystal, held a small dark shape that had been Bernardo's lower jaw an hour ago"
+      ],
+      "source_chapter_sha": "297eaef136bf8bba057253a71a77949e3b2aad5c"
+    },
+    {
+      "entity_name": "Flora",
+      "last_seen_chapter": 26,
+      "state": {
+        "aliases": [
+          "Flora of Córdoba"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Named aloud one last time in the templo plaza by Bernardo as a public dedication before his execution: described as a girl of nine who refused to recant at Córdoba in the year 851 and was beheaded for it. NOTE: discrepancy with prior cards — ch1 records her killed in 850 at unspecified age, ch2 records her as 'thirteen,' and ch26 records her as 'nine' killed in 851; the inconsistency is in the prose itself and may be an authorial drift or an in-world variant of her hagiography. Andrés has been unable to pray her vita since June; in the cooling cockpit after the duel he tried again — the Latin came, the girl did not.",
+        "relationships": [
+          {
+            "to": "Bernardo",
+            "kind": "named_aloud_by_at_death"
+          },
+          {
+            "to": "Andrés",
+            "kind": "former_relic_of"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "Her name was Flora. She was nine. She refused to recant in Córdoba in the year of our Lord 851, and they took her head for it.",
+        "Then the *vita* of Flora of Córdoba, which had been the morning before that one for eight years, and which he had not been able to pray since June. The Latin came. The girl did not."
+      ],
+      "source_chapter_sha": "297eaef136bf8bba057253a71a77949e3b2aad5c"
+    },
+    {
+      "entity_name": "Great Engine",
+      "last_seen_chapter": 26,
+      "state": {
+        "aliases": [
+          "Great Engine of the sun-god",
+          "the sun-god"
+        ],
+        "entity_type": "object",
+        "first_mentioned_chapter": 1,
+        "current_state": "Destroyed in the templo-plaza duel. At dawn sat in her cradle at the base of the Templo Mayor, hum at half-state, dark-eyed, immense — sixty meters of stepped basalt, taller than most cathedrals in Castile. Lifted to meet San Esteban del Río when the dual-saint engine crossed the plaza. Struck once at the foot of the pyramid and once on the lower terrace; chest seam opened by the cut Bernardo's bones bought, went down across her own steps. Now lies across her own cradle in two hundred tons of basalt and iron. The upper shrine of Huitzilopochtli folded forward and the shrine of Tlaloc folded backward — 'the two leaves of a book that had been closed too hard.' A Franciscan brother walked the rim with a censer and a phrasebook, doing what could be done.",
+        "relationships": [
+          {
+            "to": "San Esteban del Río",
+            "kind": "killed_by"
+          },
+          {
+            "to": "Templo Mayor",
+            "kind": "housed_in"
+          },
+          {
+            "to": "Huitzilopochtli",
+            "kind": "deity_of"
+          }
+        ],
+        "confidence_score": 0.96
+      },
+      "evidence_spans": [
+        "The Great Engine of the sun-god sat in her cradle at the base, hum at half-state, dark-eyed, immense.",
+        "*San Esteban* opened the Great Engine's chest seam with the cut Bernardo's bones had bought, and the sun-god went down across her own steps",
+        "the upper shrines of Huitzilopochtli and Tlaloc folded inward in a slow column of dust that took the shape, briefly, of a man."
+      ],
+      "source_chapter_sha": "297eaef136bf8bba057253a71a77949e3b2aad5c"
+    },
+    {
+      "entity_name": "Templo Mayor",
+      "last_seen_chapter": 26,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 1,
+        "current_state": "After 75 days of siege fire the lower platforms are rubble — stepped geometry shelled into ramps of broken stone — but the pyramid still rises. At its foot a stone block forty paces wide where the dawn-rite linen was laid. Site of Bernardo's execution and the duel between San Esteban del Río and the Great Engine. Upper shrines of Huitzilopochtli and Tlaloc folded inward in a slow column of dust briefly shaped like a man. Plaza now being inventoried by Tlaxcalans separating Mexica dead by caste (eagles, jaguars, calmecac priests) for engine-corps officers to identify; Cortés has ordered the dead counted before they are burned.",
+        "relationships": [
+          {
+            "to": "Great Engine",
+            "kind": "houses"
+          },
+          {
+            "to": "Tenochtitlan",
+            "kind": "located_in"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "The Templo Mayor's lower platforms were rubble, their stepped geometry shelled into ramps of broken stone, but the pyramid still rose.",
+        "Sixty meters of stepped basalt, taller than most cathedrals in Castile, and at her foot a stone block forty paces wide where the linen cloth had been laid."
+      ],
+      "source_chapter_sha": "297eaef136bf8bba057253a71a77949e3b2aad5c"
+    },
+    {
+      "entity_name": "Tenochtitlan",
+      "last_seen_chapter": 26,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 1,
+        "current_state": "Fell on the day of the chapter after a 75-day siege. Dawn opened with the templo-plaza execution and duel; by the second hour of afternoon the city was taken. Plaza inventoried, Mexica dead separated by caste, Cortés wants a number to write to the Emperor. Cuauhtémoc taken to Coyoacán under guard. Three chronicles of the duel disagree on every detail except the central one.",
+        "relationships": [
+          {
+            "to": "Cuauhtémoc",
+            "kind": "ruled_by_at_fall"
+          },
+          {
+            "to": "Cortés",
+            "kind": "captured_by"
+          },
+          {
+            "to": "Templo Mayor",
+            "kind": "contains"
+          }
+        ],
+        "confidence_score": 0.97
+      },
+      "evidence_spans": [
+        "the light of a city that had burned for seventy-five days.",
+        "By the second hour of afternoon the city was taken.",
+        "What happened in the next hour was witnessed by thousands and recorded in three chronicles that disagree on every detail except the central one."
+      ],
+      "source_chapter_sha": "297eaef136bf8bba057253a71a77949e3b2aad5c"
+    },
+    {
+      "entity_name": "Cortés",
+      "last_seen_chapter": 26,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Witnessed Bernardo's execution and the duel from the witness-circle at the templo plaza alongside his captains. After the city fell stood at the base of the broken steps with Malintzin half a pace back at his shoulder when Sandoval delivered Cuauhtémoc. Embraced Cuauhtémoc on the flagstones (a runner reported the embrace as the strangest part of the morning). Ordered the dead counted before burning so he would have a number to write to the Emperor. Sent Cuauhtémoc to Coyoacán under guard.",
+        "relationships": [
+          {
+            "to": "Cuauhtémoc",
+            "kind": "captor_of"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "consort_of"
+          },
+          {
+            "to": "Sandoval",
+            "kind": "commander_of"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "Cortés stood waiting at the base of the broken steps. Malintzin stood at his shoulder, half a pace back",
+        "Cortés had ordered the dead counted before they were burned. He wanted a number to write to the Emperor.",
+        "Cortés had embraced him."
+      ],
+      "source_chapter_sha": "297eaef136bf8bba057253a71a77949e3b2aad5c"
+    },
+    {
+      "entity_name": "Malintzin",
+      "last_seen_chapter": 26,
+      "state": {
+        "aliases": [
+          "Marina",
+          "Malinalli"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Stood in the witness-circle at the dawn execution where Bernardo could see her. Took a corner of the linen — not the bloodied part, the part with only plaza-dust and morning incense — folded it to the size of a child's hand and put it inside her sash. Stood at Cortés's shoulder for the prisoner exchange and translated Cuauhtémoc's surrender words on the spot. Met Andrés at the foot of his fallen engine after he climbed down; he said in Spanish 'I do not know what I am' and she answered in Nahuatl 'No one does, on this day. Tomorrow some of us will choose. Some of us will not.' Walked down the terrace toward the lake at dusk where the brigantines were taking on the wounded.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "translator_for"
+          },
+          {
+            "to": "Cuauhtémoc",
+            "kind": "translator_for"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "tutor_to"
+          },
+          {
+            "to": "Andrés",
+            "kind": "witness_with"
+          }
+        ],
+        "confidence_score": 0.96
+      },
+      "evidence_spans": [
+        "She had taken a corner of the linen, not the part that had Bernardo's blood on it but the part that had only the dust of the plaza and the morning's incense, and folded it into a square the size of a child's hand and put it inside her sash.",
+        "*No one does, on this day. Tomorrow some of us will choose. Some of us will not.*"
+      ],
+      "source_chapter_sha": "297eaef136bf8bba057253a71a77949e3b2aad5c"
+    },
+    {
+      "entity_name": "Itzcoatl",
+      "last_seen_chapter": 26,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 9,
+        "current_state": "Witnessed the dawn execution from the open hatch of Obsidian Mirror in the witness-circle off to one side. After the duel walked Mirror to a low cradle against the calmecac wall and dismounted unobserved. An hour after the friar's office crossed the plaza on foot and came to the threshold of the calmecac, looked once at Bernardo's litter, did not enter, walked back to the cradle, climbed in and closed the hatch. The cradle did not move again that day.",
+        "relationships": [
+          {
+            "to": "Obsidian Mirror",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "non_mourner_for"
+          },
+          {
+            "to": "Andrés",
+            "kind": "co_witness_with"
+          }
+        ],
+        "confidence_score": 0.93
+      },
+      "evidence_spans": [
+        "Itzcoatl in *Obsidian Mirror's* cradle to one side, hatch open, watching.",
+        "Itzcoatl came as far as the threshold of the calmecac, looked once at the litter, did not enter, and walked back to his cradle. He climbed in. He closed the hatch."
+      ],
+      "source_chapter_sha": "297eaef136bf8bba057253a71a77949e3b2aad5c"
+    },
+    {
+      "entity_name": "Obsidian Mirror",
+      "last_seen_chapter": 26,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 9,
+        "current_state": "Stood in the witness-circle at the dawn execution, hatch open, in a cradle to one side of the templo plaza. After the duel her cradle sat low against the calmecac wall. Through the afternoon her hatch was left up with hands at rest on the knees and head bowed three degrees — a posture Andrés had never before seen a Texcocan engine left in. Hatch closed when Itzcoatl returned from the calmecac threshold; cradle did not move again that day, nor for most of the next.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "piloted_by"
+          },
+          {
+            "to": "Tezcatlipoca",
+            "kind": "houses"
+          }
+        ],
+        "confidence_score": 0.92
+      },
+      "evidence_spans": [
+        "the engine left open behind him in its cradle in a posture Andrés had never seen a Texcocan engine left in, hatch up, hands at rest on the knees, head bowed three degrees.",
+        "He climbed in. He closed the hatch. The cradle did not move again that day."
+      ],
+      "source_chapter_sha": "297eaef136bf8bba057253a71a77949e3b2aad5c"
+    },
+    {
+      "entity_name": "Cuauhtémoc",
+      "last_seen_chapter": 26,
+      "state": {
+        "aliases": [
+          "the tlatoani"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 26,
+        "current_state": "Last tlatoani of the Mexica. During the templo-plaza duel escaped by canoe across the southeast canal toward Iztapalapa; was overtaken by Sandoval's brigantine and brought back without injury. Walked between two Spanish soldiers up the south ramp, wrists tied in front, water still beading down the ankles of his cotton kilt — Andrés read the gait of someone who had not yet been struck. Stepped from the canoe onto the flagstones with both hands open and said, in Nahuatl translated by Malintzin on the spot: 'I have done what I was given to do. Take what is left of the city. Do not torture me for the gold; there is none.' Cortés embraced him. Taken to Coyoacán under guard.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "captive_of"
+          },
+          {
+            "to": "Sandoval",
+            "kind": "captured_by"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "translated_by"
+          },
+          {
+            "to": "Tenochtitlan",
+            "kind": "tlatoani_of"
+          }
+        ],
+        "confidence_score": 0.97
+      },
+      "evidence_spans": [
+        "Cuauhtémoc, escaping by canoe across the southeast canal toward Iztapalapa, was overtaken by Sandoval's brigantine and brought back.",
+        "*I have done what I was given to do. Take what is left of the city. Do not torture me for the gold; there is none.*",
+        "They had taken Cuauhtémoc to Coyoacán under guard."
+      ],
+      "source_chapter_sha": "297eaef136bf8bba057253a71a77949e3b2aad5c"
+    },
+    {
+      "entity_name": "Sandoval",
+      "last_seen_chapter": 26,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 17,
+        "current_state": "Captain of the first-class Reliquary Santiago del Paso. On the day of the fall his brigantine overtook Cuauhtémoc's canoe on the southeast canal toward Iztapalapa and brought him back. Led the column up the south ramp to deliver the prisoner to Cortés intact — characteristically clear, as he was always clear, that the prisoner was to arrive uninjured.",
+        "relationships": [
+          {
+            "to": "Cuauhtémoc",
+            "kind": "captor_of"
+          },
+          {
+            "to": "Cortés",
+            "kind": "subordinate_to"
+          }
+        ],
+        "confidence_score": 0.93
+      },
+      "evidence_spans": [
+        "Sandoval came up the south ramp at the head of a small column.",
+        "Sandoval had been clear, as he was always clear, that the prisoner was to be delivered intact."
+      ],
+      "source_chapter_sha": "297eaef136bf8bba057253a71a77949e3b2aad5c"
+    },
+    {
+      "entity_name": "San Esteban de Granada",
+      "last_seen_chapter": 26,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 26,
+        "current_state": "Castilian-knight saint whose right arm bone has been the working relic of San Esteban del Río since the engine was reconsecrated at Tlaxcala (per ch19, the knight was killed at Granada in 1491 in the Reconquista). Named explicitly here for the first time as 'San Esteban de Granada' when the senior adorator laid Bernardo's bones alongside his arm in the monstrance bracket at dawn. Andrés has prayed his vita every morning since investiture; the Latin is so worn into his mouth the words come without his consent.",
+        "relationships": [
+          {
+            "to": "San Esteban del Río",
+            "kind": "primary_relic_of"
+          },
+          {
+            "to": "Andrés",
+            "kind": "daily_prayed_by"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "carried the four paces to the monstrance bracket and laid alongside the arm of San Esteban de Granada.",
+        "He prayed the *vita* of San Esteban del Río. He had prayed it every morning since his investiture"
+      ],
+      "source_chapter_sha": "297eaef136bf8bba057253a71a77949e3b2aad5c"
+    },
+    {
+      "entity_name": "Senior Franciscan",
+      "last_seen_chapter": 26,
+      "state": {
+        "aliases": [
+          "the senior Franciscan",
+          "the senior friar"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 26,
+        "current_state": "Senior friar of the expedition. Took Bernardo's last confession before the dawn execution. Spoke the prayer for the martyr in Latin, in the form the friars had carried out of Córdoba seven centuries before. Said the sealing rite over the bracket in older, harder Mozarabic Latin — the words the Reconquista friars used to fuse the bones of their own dead into the engines that took Granada in 1491. After the city fell read the office for confessors (not the office for martyrs) over Bernardo's body in the calmecac — declining to rule and passing the case up to Rome. Folded Bernardo's hands around the still-attached Franciscan cord, right over left, thumbs crossed. Set his palm briefly on the crown of Bernardo's head, walked out into the smoke of the plaza and was gone.",
+        "relationships": [
+          {
+            "to": "Bernardo",
+            "kind": "confessor_of"
+          },
+          {
+            "to": "San Esteban del Río",
+            "kind": "sealed_bracket_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "He had already given his last confession to the senior Franciscan, who waited now beside the monstrance bracket",
+        "The senior Franciscan said the sealing rite over the bracket in older, harder Mozarabic Latin",
+        "He had folded the hands around the cord, which Andrés understood to be a small private theology of the friar's own"
+      ],
+      "source_chapter_sha": "297eaef136bf8bba057253a71a77949e3b2aad5c"
+    },
+    {
+      "entity_name": "Senior adorator",
+      "last_seen_chapter": 26,
+      "state": {
+        "aliases": [
+          "the senior adorator"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 26,
+        "current_state": "Senior adorator of San Esteban del Río's bracket-rite. Worked the stone block with the speed and economy of a man who had performed the bracket-rite nineteen times in his life and had been told twice the rite must not exceed three minutes if the bones were to enter warm. Stepped back from the bone-chisels and opened a hand toward the stone block to cede the kill to Andrés — the rite required the kill and the bracket-rite stay separate by a margin of seconds the senior adorator was paid to keep narrow. Extracted right humerus, lower jaw and two cervical vertebrae from Bernardo and laid each piece warm into the bracket alongside San Esteban de Granada's arm.",
+        "relationships": [
+          {
+            "to": "San Esteban del Río",
+            "kind": "adorator_of"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "extractor_of_relics_of"
+          }
+        ],
+        "confidence_score": 0.88
+      },
+      "evidence_spans": [
+        "The senior adorator was already at the stone block. He worked with the speed and economy of a man who had done this nineteen times in his life",
+        "the bracket-rite must not exceed three minutes if the bones were to enter warm",
+        "the senior adorator stepped back from the chisels and opened a hand toward the stone block, ceding the ground."
+      ],
+      "source_chapter_sha": "297eaef136bf8bba057253a71a77949e3b2aad5c"
+    },
+    {
+      "entity_name": "Fall of Tenochtitlan",
+      "last_seen_chapter": 26,
+      "state": {
+        "aliases": [
+          "the city was taken"
+        ],
+        "entity_type": "event",
+        "first_mentioned_chapter": 26,
+        "current_state": "Climactic engagement at the close of a 75-day siege. At dawn in the templo plaza Bernardo was executed and his bones bound warm to San Esteban del Río's monstrance alongside San Esteban de Granada's arm in a dual-saint configuration; the engine drove to apex-equivalent output and crossed the plaza. The Great Engine of the sun-god lifted to meet it. Two strikes — at the foot of the pyramid and on the lower terrace — split paving stones from the calmecac wall to the ball court, opened the sun-god's chest seam, dropped both engines, and folded the Huitzilopochtli and Tlaloc shrines inward in a column of dust briefly shaped like a man. Cuauhtémoc was overtaken by Sandoval's brigantine on the southeast canal toward Iztapalapa and brought back; Cortés embraced him; he was taken to Coyoacán under guard. By the second hour of afternoon the city was taken. Witnessed by thousands and recorded in three chronicles that disagree on every detail except the central one.",
+        "relationships": [
+          {
+            "to": "San Esteban del Río",
+            "kind": "spanish_engine_lost_at"
+          },
+          {
+            "to": "Great Engine",
+            "kind": "mexica_engine_lost_at"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "willing_sacrifice_at"
+          },
+          {
+            "to": "Cuauhtémoc",
+            "kind": "captured_at"
+          },
+          {
+            "to": "Tenochtitlan",
+            "kind": "fall_of"
+          }
+        ],
+        "confidence_score": 0.97
+      },
+      "evidence_spans": [
+        "What happened in the next hour was witnessed by thousands and recorded in three chronicles that disagree on every detail except the central one.",
+        "They struck a second time on the lower terrace. *San Esteban* opened the Great Engine's chest seam with the cut Bernardo's bones had bought",
+        "By the second hour of afternoon the city was taken."
+      ],
+      "source_chapter_sha": "297eaef136bf8bba057253a71a77949e3b2aad5c"
+    }
+  ],
+  "chapter_num": 26,
+  "extraction_timestamp": "2026-04-30T01:34:56.568100Z"
+}
