@@ -137,3 +137,8 @@ She sat with the lamp until it burned out. Outside the canvas the hum from acros
 
 The convergence was complete. The *commendatio animae* was the prayer Andrés would say over Bernardo in the templo plaza six weeks hence. Her refusal to dissuade was the *power within* of Tlaxcala enacted in its hardest specific case, not the council-floor abstraction but a list of eleven words in her own hand for a man she had decided not to save. The touch on the wrist was the only intimacy their thread would ever hold, earned because they had stopped pretending to each other and could not now go back to pretending. The lamp burned out. The hum from across the water rose and fell. The grammar waited.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 23](chapter_23.md) · [Index](../index.md) · [Chapter 26 →](chapter_26.md)

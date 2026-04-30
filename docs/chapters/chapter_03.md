@@ -132,3 +132,8 @@ Malintzin walked. She counted the women again. Twenty. She counted the Spanish w
 
 She walked north with the column, and she kept the count in her mouth, under the tongue, beside the stone of her first language.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 2](chapter_02.md) · [Index](../index.md) · [Chapter 4 →](chapter_04.md)

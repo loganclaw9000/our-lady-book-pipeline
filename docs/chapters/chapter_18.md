@@ -197,3 +197,8 @@ By morning the dedication-through-trial is a defection that has not yet been wal
 
 The war continues.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 17](chapter_17.md) · [Index](../index.md) · [Chapter 19 →](chapter_19.md)

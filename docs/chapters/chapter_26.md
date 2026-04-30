@@ -137,3 +137,8 @@ She did not say which she would be. She did not say which she expected him to be
 
 Andrés stood on the terrace until the sun cleared the western shore. Then he walked down to the lake himself, because there was nothing left at the top of the pyramid that wanted him there, and because the wounded would need a man who could read Latin over them, and that, at least, was a thing he was still permitted to do.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 24](chapter_24.md) · [Index](../index.md)

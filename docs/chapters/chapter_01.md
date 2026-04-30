@@ -201,3 +201,8 @@ I did not say it. I had been ordered to hold a dream. I held the thought with it
 
 I went.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[Index](../index.md) · [Chapter 2 →](chapter_02.md)

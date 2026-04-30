@@ -292,3 +292,8 @@ The lords assent in the formal manner. The priest who spoke of the seals lowers 
 
 Itzcoatl looks at his stained hands. The decision has been made by men in rooms he was not meant to enter, on a calculation he was not meant to weigh. The Spanish will come across the pass. They will come down through Cholula, where the dormant engines sleep. They
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 5](chapter_05.md) · [Index](../index.md) · [Chapter 7 →](chapter_07.md)

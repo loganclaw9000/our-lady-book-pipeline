@@ -161,3 +161,8 @@ He would. That was the thing that wanted saying, and it was the only thing. He w
 
 The hum kept its step behind him, a beat off, and he let it.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 18](chapter_18.md) · [Index](../index.md) · [Chapter 20 →](chapter_20.md)

@@ -166,3 +166,8 @@ Andrés sat. He took the offered tortilla. He ate., You are quiet, Bernardo said
 
 Bernardo did not ask further. That was his particular cruelty as a friend: he would not collect the confession until the penitent offered it. Andrés had been on the road with him for nine months and had learned that silence from Bernardo was the silence of a man with a hand out, palm up.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 12](chapter_12.md) · [Index](../index.md) · [Chapter 14 →](chapter_14.md)

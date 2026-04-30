@@ -170,3 +170,8 @@ He thought of the serpent. The serpent had decided not to wake, and the deciding
 
 He turned on his side. The cot creaked. Somewhere along the colonnade a man was crying, quietly, trying not to. Andrés did not know whose voice it was. He thought, perhaps, the captain's. He thought, perhaps, his own. He could not tell, in the dark, and after a while he stopped trying to tell, and lay with his eyes open until the first grey at the window, and made no decision, and was not absolved of the decisions he had already made.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 7](chapter_07.md) · [Index](../index.md) · [Chapter 9 →](chapter_09.md)

@@ -106,3 +106,8 @@ He stood in the cockpit-shrine of *La Niña de Córdoba* in the salt-flat at Cen
 
 He turned her toward the camp. The mud held, and then released, and then held.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 1](chapter_01.md) · [Index](../index.md) · [Chapter 3 →](chapter_03.md)

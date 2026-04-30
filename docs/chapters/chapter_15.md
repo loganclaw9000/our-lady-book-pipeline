@@ -172,3 +172,8 @@ The friar's litany went on.
 
 Itzcoatl stood at the muster point and waited for an order he could obey.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 14](chapter_14.md) · [Index](../index.md) · [Chapter 17 →](chapter_17.md)

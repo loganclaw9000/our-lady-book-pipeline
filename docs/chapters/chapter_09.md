@@ -215,3 +215,8 @@ I climbed back down the forty rungs. The teōmachtiani on duty did not look up. 
 
 The hum followed me out of the shed and faded only at the gate.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 8](chapter_08.md) · [Index](../index.md) · [Chapter 10 →](chapter_10.md)

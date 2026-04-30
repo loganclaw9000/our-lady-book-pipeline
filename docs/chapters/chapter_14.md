@@ -106,3 +106,8 @@ She had translated, until tonight, in order to live. From this morning forward s
 
 She put the mirror in the pouch and kept her hand on the pouch. The wagon kept its pace. Somewhere four wagons back, Francisco de Eguía was lying down in clean straw because his head hurt and he could not say why, and the column carried him south the way a river carries a seed.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 13](chapter_13.md) · [Index](../index.md) · [Chapter 15 →](chapter_15.md)

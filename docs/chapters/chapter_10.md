@@ -241,3 +241,8 @@ He stayed on his knees until the brazier went out. Then he lay down on the cot i
 
 He got up at dawn. He went to find Cortés.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 9](chapter_09.md) · [Index](../index.md) · [Chapter 11 →](chapter_11.md)

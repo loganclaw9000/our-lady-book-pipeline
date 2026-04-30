@@ -312,3 +312,8 @@ He left the slip without saying goodbye. She stayed. The sun had not cleared the
 
 She would keep translating. She had said it twice now. The second saying had made it true.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 19](chapter_19.md) · [Index](../index.md) · [Chapter 21 →](chapter_21.md)

@@ -208,3 +208,8 @@ Behind her, the Reliquaries were spaced along the line. Ahead of her, the lake. 
 
 She was the hinge. She would hold.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 21](chapter_21.md) · [Index](../index.md) · [Chapter 23 →](chapter_23.md)

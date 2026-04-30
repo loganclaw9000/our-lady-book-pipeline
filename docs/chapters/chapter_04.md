@@ -130,3 +130,8 @@ Cortés accepted.
 
 Andrés, inside *La Niña de Córdoba*, with Flora's bones humming against his sternum at the working register and the four Totonac engines watching him from twelve paces with jade in their eyes, understood for the second time in eight weeks that he had signed onto something he could not unsign.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 3](chapter_03.md) · [Index](../index.md) · [Chapter 5 →](chapter_05.md)

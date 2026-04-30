@@ -304,3 +304,8 @@ In Tenochtitlan he went straight to Xochitl's compound before reporting to the e
 
 His loyalties were officially intact. Privately, they were not.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 11](chapter_11.md) · [Index](../index.md) · [Chapter 13 →](chapter_13.md)

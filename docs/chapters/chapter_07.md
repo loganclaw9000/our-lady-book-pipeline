@@ -176,3 +176,8 @@ After the second watch she rose and walked toward the latrine ditch and did not 
 
 She knelt slowly, with the small hydraulic sigh Malintzin had learned to listen for in the engines at rest, and her right knee touched the dust of the watercourse at the same instant Andrés's voice paused on a syllable. Then she rose again, just as slowly, and folded her hands and stood as she had stood before. The whole motion took the space of four breaths. Andrés did not look up. He had not asked her to kneel, and she had kneeled,
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 6](chapter_06.md) · [Index](../index.md) · [Chapter 8 →](chapter_08.md)

@@ -150,3 +150,8 @@ A bell rang from the staging ground, the small bronze the priests used to call t
 
 He turned the horse toward the staging ground. He did not look at the lake.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 20](chapter_20.md) · [Index](../index.md) · [Chapter 22 →](chapter_22.md)

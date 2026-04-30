@@ -94,3 +94,8 @@ Then he thought: to whom.
 
 He had no answer for that, and the night was long, and the two engines hummed on, and near dawn he slept.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 4](chapter_04.md) · [Index](../index.md) · [Chapter 6 →](chapter_06.md)

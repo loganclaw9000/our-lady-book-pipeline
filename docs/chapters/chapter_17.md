@@ -224,3 +224,8 @@ I walk toward the column. The grass under my bare foot is cold and full of roots
 
 I do not look back.
 
+<!-- chapter-nav-injected -->
+
+---
+
+[← Chapter 15](chapter_15.md) · [Index](../index.md) · [Chapter 18 →](chapter_18.md)
