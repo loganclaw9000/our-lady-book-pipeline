@@ -64,11 +64,12 @@ COMPUTED_SHA="$(
     cd "$ADAPTER_DIR" && sha256sum adapter_model.safetensors adapter_config.json | sort | sha256sum | awk '{print $1}'
 )"
 echo "Adapter dir verified: $ADAPTER_DIR"
-echo "  V-3 manifest sha (recomputed): $COMPUTED_SHA"
-if [[ -n "$ADAPTER_DIGEST" ]] && [[ "$COMPUTED_SHA" != "$ADAPTER_DIGEST" ]]; then
-    echo "  WARN: MANIFEST.adapter_digest=$ADAPTER_DIGEST does NOT match recomputed sha"
-    echo "        Will fail redeploy_voice_pin.sh pre-flight."
-fi
+echo "  V-3 manifest sha (recomputed via voice_fidelity.sha algo): $COMPUTED_SHA"
+echo "  MANIFEST.adapter_digest (forge sha256 of safetensors only): $ADAPTER_DIGEST"
+echo "  (these are DIFFERENT algorithms by design — V-3 = sha256(sorted"
+echo "  sha256sum manifest); MANIFEST.adapter_digest = sha256(safetensors-only).)"
+echo "  redeploy_voice_pin.sh will pin V-3 sha; MANIFEST.adapter_digest stays"
+echo "  informational in commented header."
 echo
 
 # 3. Comparison report (if present) -----------------------------------------
