@@ -1,0 +1,474 @@
+{
+  "entities": [
+    {
+      "entity_name": "Itzcoatl",
+      "last_seen_chapter": 21,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Texcocan pilli pilot of Obsidian Mirror. Rode from Tenochtitlan to the family compound at Texcoco in two days; arrived as priests sang his mother into the dark; held her until she died on the mat under the colonnade, unable to parse her last sentence in archaic Tezcatlipoca cadence — 'a Tezcatlipoca pilot for eleven years and he could not finish his mother's sentence.' Within a fortnight has lost his mother, his brother in the calmecac (eight days prior), a household cousin, the household elders, his sister Xochitl Tlapala, and her two children Tepin and Citlalli — all dead of huey cocoliztli; gates of Tenochtitlan sealed and bodies unclaimable. Performed his Texcocan philosopher's exercise (taught by his mother) on the lake shore and named the unnamable: 'I have no house.' Re-read his cousin Ixtlilxochitl's October defection in a new light — 'Ixtlilxochitl had not chosen the winning side because it was winning. He had chosen which kind of surviving Texcoco would exist on the other side of the ruin.' Walked the forward engine cradles and counted the corps dead: five pits, three useless. Resolves to ride for Tenochtitlan in the morning to stand at Cuauhtémoc's installation, pilot Mirror in the war he now knows the Mexica will lose ('the fuel was dead'), and hold the question of an after for a later road — 'It was to defend a shell because the shell was the last thing his hand could be laid on.'",
+        "relationships": [
+          {
+            "to": "Itzcoatl's mother",
+            "kind": "son_of"
+          },
+          {
+            "to": "Xochitl Tlapala",
+            "kind": "brother_of"
+          },
+          {
+            "to": "Tepin",
+            "kind": "uncle_of"
+          },
+          {
+            "to": "Citlalli",
+            "kind": "uncle_of"
+          },
+          {
+            "to": "Itzcoatl's brother (calmecac)",
+            "kind": "brother_of"
+          },
+          {
+            "to": "Don Fernando Ixtlilxochitl",
+            "kind": "cousin_of"
+          },
+          {
+            "to": "Obsidian Mirror",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Cuauhtémoc",
+            "kind": "future_subject_of"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "He had been a Tezcatlipoca pilot for eleven years and he could not finish his mother's sentence.",
+        "*I have no house.*",
+        "It was to defend a shell because the shell was the last thing his hand could be laid on."
+      ],
+      "source_chapter_sha": "9b5d3cba6eaf3fe9a332f4242df34db4a439df62"
+    },
+    {
+      "entity_name": "Obsidian Mirror",
+      "last_seen_chapter": 21,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 9,
+        "current_state": "In cradle by the lake shore at the edge of Itzcoatl's family compound at Texcoco for the duration of the chapter — Itzcoatl rode home on a borrowed horse, not in her. Hum low; attended by an unknown apprentice (~16) polishing the smoking-mirror chest disc with a rag that had once been a shirt, his right hand already pustuled with the early rash. Per old custom moved out into the open courtyard for the mother's funeral so 'the engine of the dead pilot's house attended the rites by being present.' Re-specced this chapter as forty-eight feet of obsidian skin and matte ceramic plate (vs. fifty/fifty-five in prior cards), polished smoking-mirror motif at chest, hum at rest 'half a step below the note that meant alert.' Hum did not change at the mother's death and would not change when Itzcoatl dies — 'the hum was the hum of an engine, not a mourner.' Tezcatlipoca engines pass through houses, not individuals; she has been working thirty years and would work thirty more 'if the bones in her chest were kept fresh.' Will be ridden into Tenochtitlan when the gates open for the new tlatoani's call.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "piloted_by"
+          },
+          {
+            "to": "Tezcatlipoca",
+            "kind": "houses_deity"
+          }
+        ],
+        "confidence_score": 0.92
+      },
+      "evidence_spans": [
+        "Forty-eight feet of obsidian skin and matte ceramic plate, and the polished disc of the smoking-mirror motif at her chest, and she was humming, as she always hummed at rest, half a step below the note that meant alert.",
+        "The hum did not change. It had not changed when his mother died and would not change when he died and would not change when the city across the water finished dying.",
+        "She had been working for thirty years. She would work for thirty more if the bones in her chest were kept fresh."
+      ],
+      "source_chapter_sha": "9b5d3cba6eaf3fe9a332f4242df34db4a439df62"
+    },
+    {
+      "entity_name": "Itzcoatl's mother",
+      "last_seen_chapter": 21,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 18,
+        "current_state": "Dead of huey cocoliztli at the family compound at Texcoco. Two physicians the calpulli had sent (the calmecac no longer had men to send) sang counterpoint Tezcatlipoca formula over her body. By the time Itzcoatl arrived the disease had reached black collapse: pustules on her throat wept dark fluid into the cotton at her neck. She opened her eyes once, called him by his household register name, then shifted into 'the high priestly idiom she had not spoken to him since he was small, the archaic Tezcatlipoca cadence dense with formulae from codices he had never been taught.' Her last sentence Itzcoatl could not parse — 'A verb he could not place. A case ending that hung in the air.' Bones to be ready by the ninth day; she will be sung into a Tezcatlipoca engine (which one Itzcoatl might or might not be told). Confirms her as a Texcocan philosopher in the Nezahualcoyotl tradition who taught Itzcoatl 'name the thing you do not want to name' (cf. ch18).",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "mother_of"
+          },
+          {
+            "to": "Xochitl Tlapala",
+            "kind": "mother_of"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "She breathed once more and then the breath stopped.",
+        "The colder of the two said the bones would be ready in nine days.",
+        "the high priestly idiom she had not spoken to him since he was small, the archaic Tezcatlipoca cadence dense with formulae from codices he had never been taught"
+      ],
+      "source_chapter_sha": "9b5d3cba6eaf3fe9a332f4242df34db4a439df62"
+    },
+    {
+      "entity_name": "Xochitl Tlapala",
+      "last_seen_chapter": 21,
+      "state": {
+        "aliases": [
+          "Xochitl"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 9,
+        "current_state": "Dead. Died of huey cocoliztli inside sealed Tenochtitlan three days after Itzcoatl left for Texcoco; her two children died within the same week. Reported to Itzcoatl by a runner from a Tenochtitlan cousin on the third day after his mother's death. Body unclaimable: city gates shut against the contagion, no rites possible to stand. Cousin who sent the message did not give the children's names and did not know whether they were buried or 'piled with the others by the Tlatelolco wall.' The cousin had lost six in the past week and was 'not yet sick but was waiting.'",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "sister_of"
+          },
+          {
+            "to": "Tepin",
+            "kind": "mother_of"
+          },
+          {
+            "to": "Citlalli",
+            "kind": "mother_of"
+          },
+          {
+            "to": "Cuauhtli Ocelotl",
+            "kind": "widow_of"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "Xochitl Tlapala died three days after you left.",
+        "Her children died within the same week.",
+        "The gates of Tenochtitlan were shut. The city had sealed itself against the contagion."
+      ],
+      "source_chapter_sha": "9b5d3cba6eaf3fe9a332f4242df34db4a439df62"
+    },
+    {
+      "entity_name": "Tepin",
+      "last_seen_chapter": 21,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 15,
+        "current_state": "Dead. Itzcoatl's nephew, son of Xochitl Tlapala and the late Cuauhtli Ocelotl, scarred from temple to jaw at the Templo Mayor massacre. Died of huey cocoliztli inside sealed Tenochtitlan within the same week as his mother (i.e. within ~10 days of Itzcoatl's departure for Texcoco). Body unclaimable; whether buried or piled by the Tlatelolco wall is unknown.",
+        "relationships": [
+          {
+            "to": "Xochitl Tlapala",
+            "kind": "son_of"
+          },
+          {
+            "to": "Cuauhtli Ocelotl",
+            "kind": "son_of"
+          },
+          {
+            "to": "Itzcoatl",
+            "kind": "nephew_of"
+          },
+          {
+            "to": "Citlalli",
+            "kind": "brother_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Tepin who had carried the scar across his temple, Citlalli who was not yet four, were dead",
+        "Her children died within the same week."
+      ],
+      "source_chapter_sha": "9b5d3cba6eaf3fe9a332f4242df34db4a439df62"
+    },
+    {
+      "entity_name": "Citlalli",
+      "last_seen_chapter": 21,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 21,
+        "current_state": "Dead. Itzcoatl's niece, daughter of Xochitl Tlapala, not yet four years old. Died of huey cocoliztli inside sealed Tenochtitlan within the same week as her mother and brother. Body unclaimable. Distinct from the Mayan-faced Citlal of chs 1/3 and the Tlaxcalan Citlal of ch24.",
+        "relationships": [
+          {
+            "to": "Xochitl Tlapala",
+            "kind": "daughter_of"
+          },
+          {
+            "to": "Tepin",
+            "kind": "sister_of"
+          },
+          {
+            "to": "Itzcoatl",
+            "kind": "niece_of"
+          }
+        ],
+        "confidence_score": 0.92
+      },
+      "evidence_spans": [
+        "Citlalli who was not yet four, were dead",
+        "He did not know if Tepin and Citlalli were alive."
+      ],
+      "source_chapter_sha": "9b5d3cba6eaf3fe9a332f4242df34db4a439df62"
+    },
+    {
+      "entity_name": "Itzcoatl's brother (calmecac)",
+      "last_seen_chapter": 21,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 21,
+        "current_state": "Dead of huey cocoliztli, eight days before the chapter's events. Was in the calmecac at Texcoco. First named in this chapter; one of the family deaths Itzcoatl learns about on returning to the compound.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "brother_of"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "His brother in the calmecac had died eight days ago."
+      ],
+      "source_chapter_sha": "9b5d3cba6eaf3fe9a332f4242df34db4a439df62"
+    },
+    {
+      "entity_name": "Cuitláhuac",
+      "last_seen_chapter": 21,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 21,
+        "current_state": "Dead. Took the Mexica throne after Moctezuma's death and held it for eighty days; died of huey cocoliztli on the same afternoon as Itzcoatl's mother. Reported to Itzcoatl at dusk on the day of his mother's death by a runner whose hands shook 'not from cold.' His death triggers the raising of Cuauhtémoc.",
+        "relationships": [
+          {
+            "to": "Moctezuma",
+            "kind": "successor_of"
+          },
+          {
+            "to": "Cuauhtémoc",
+            "kind": "predecessor_of"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "Cuitláhuac was dead. The man who had taken the throne after Moctezuma had taken it for eighty days and was gone. Same disease. Same afternoon."
+      ],
+      "source_chapter_sha": "9b5d3cba6eaf3fe9a332f4242df34db4a439df62"
+    },
+    {
+      "entity_name": "Cuauhtémoc",
+      "last_seen_chapter": 21,
+      "state": {
+        "aliases": [
+          "Cuauhtemoctzin"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 18,
+        "current_state": "Being raised as next tlatoani on the day of the chapter's third scene — characterized as 'young and defiant.' The bronze installation bell rings from the Texcocan staging ground while Itzcoatl walks the empty cradles. He is being raised over a corps that is no longer a corps but 'a series of holes in the mud with crows in them' — the Mexica engine pipeline is dead for lack of fuel and most cradles are empty, dormant, or abandoned. Itzcoatl resolves to attend the installation and ride out beside Sun-That-Answers when the priests wake it for the next causeway sortie.",
+        "relationships": [
+          {
+            "to": "Cuitláhuac",
+            "kind": "successor_of"
+          },
+          {
+            "to": "Moctezuma",
+            "kind": "successor_of"
+          }
+        ],
+        "confidence_score": 0.93
+      },
+      "evidence_spans": [
+        "Cuauhtémoc, young and defiant, would be raised.",
+        "Cuauhtémoc would be raised today, and the body of a young man with no fuel to draw on would carry the weight of an empire that had already been hollowed from the inside.",
+        "The corps Cuauhtémoc was about to be raised over was not a corps. It was a series of holes in the mud with crows in them."
+      ],
+      "source_chapter_sha": "9b5d3cba6eaf3fe9a332f4242df34db4a439df62"
+    },
+    {
+      "entity_name": "Huey cocoliztli",
+      "last_seen_chapter": 21,
+      "state": {
+        "aliases": [
+          "smallpox",
+          "the contagion"
+        ],
+        "entity_type": "event",
+        "first_mentioned_chapter": 19,
+        "current_state": "On-stage and devastating in chapter 21. Pattern: three days of fever, then the rash, then the black collapse with pustules opening on skin clean a week before. In the Texcocan family compound has killed Itzcoatl's mother, his brother in the calmecac, a household cousin, the household elders, the prior pilot of the second-cradle Tezcatlipoca; on the same afternoon as the mother killed Cuitláhuac. Inside sealed Tenochtitlan has killed Xochitl Tlapala and her two children Tepin and Citlalli, and ~a quarter of the city's people in six weeks (read by Itzcoatl from the flat haze of funeral-fire smoke that 'did not rise'). The Spanish are immune and 'did not know why' — Itzcoatl knows: 'something had arrived in their blood, generations ago, in a country he would never see, and they carried it the way a man carries a name.' Has crippled the ixiptla pipeline by killing the priests who tended the bones on the same mats as the ixiptla they were preparing; Mexica engines across the valley are going dormant for lack of fuel. Read by Itzcoatl as having no enemy at the right scale for grief and no possible answer in war: 'It was a thing they had brought and not aimed, and the moral gradient of that was worse than anything he had seen in war.'",
+        "relationships": [
+          {
+            "to": "Tenochtitlan",
+            "kind": "depopulating"
+          },
+          {
+            "to": "Mexica engine corps",
+            "kind": "starving_pipeline_of"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "three days of fever, then the rash, then the black collapse",
+        "The smoke marked a city that had lost a quarter of its people in six weeks.",
+        "It was a thing they had brought and not aimed, and the moral gradient of that was worse than anything he had seen in war."
+      ],
+      "source_chapter_sha": "9b5d3cba6eaf3fe9a332f4242df34db4a439df62"
+    },
+    {
+      "entity_name": "Tenochtitlan",
+      "last_seen_chapter": 21,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 1,
+        "current_state": "Sealed against the contagion. Gates shut, runners not crossing — Itzcoatl cannot enter to claim Xochitl, Tepin, or Citlalli. Seen across the lake from the Texcocan shore at midday: 'a pale geometry of temples and rooftops with smoke rising from it in a dozen places, funeral fires, slow and continuous, the smoke not in columns but in a flat haze that did not rise, that hung over the city like a second water.' Has lost a quarter of its people in six weeks to huey cocoliztli; ixiptla pipeline broken; engine corps starved of fuel. Cuitláhuac dead after eighty days on the throne; Cuauhtémoc being raised on the day of the chapter. Itzcoatl: by the time the siege comes 'be a shell.'",
+        "relationships": [],
+        "confidence_score": 0.93
+      },
+      "evidence_spans": [
+        "The gates of Tenochtitlan were shut. The city had sealed itself against the contagion.",
+        "the smoke not in columns but in a flat haze that did not rise, that hung over the city like a second water",
+        "The smoke marked a city that had lost a quarter of its people in six weeks."
+      ],
+      "source_chapter_sha": "9b5d3cba6eaf3fe9a332f4242df34db4a439df62"
+    },
+    {
+      "entity_name": "Don Fernando Ixtlilxochitl",
+      "last_seen_chapter": 21,
+      "state": {
+        "aliases": [
+          "Ixtlilxochitl"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 9,
+        "current_state": "Not on-stage. Re-evaluated by Itzcoatl from the lake shore and the empty cradles: his October 1520 defection (three engines, retinue, fifty thousand warriors, baptism, a church to be funded out of unquarried stone) is now read by Itzcoatl not as betrayal but as foresight — 'Ixtlilxochitl had not chosen the winning side because it was winning. He had chosen which kind of surviving Texcoco would exist on the other side of the ruin, and he had made the choice early enough that the choosing was still his to make.' Itzcoatl recalls Ixtlilxochitl's December 1519 sentence 'you will come when you come' and now reads its certainty as arithmetic, not arrogance. Itzcoatl's own choosing, however, is no longer the same choosing — too late for the family his refusal was meant to defend.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "cousin_of"
+          },
+          {
+            "to": "Cortés",
+            "kind": "ally_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Ixtlilxochitl had not chosen the winning side because it was winning. He had chosen which kind of surviving Texcoco would exist on the other side of the ruin, and he had made the choice early enough that the choosing was still his to make.",
+        "Ixtlilxochitl had said *you will come when you come*. Itzcoatl had hated the certainty in that sentence. He understood now that the certainty was not arrogance. It was arithmetic."
+      ],
+      "source_chapter_sha": "9b5d3cba6eaf3fe9a332f4242df34db4a439df62"
+    },
+    {
+      "entity_name": "Sun-That-Answers",
+      "last_seen_chapter": 21,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 21,
+        "current_state": "Mexica Huitzilopochtli-caste field engine. Was stationed in the first of the Texcocan-margin forward cradles set up the previous summer after Alvarado's massacre, a pit-and-ramp lined with obsidian chips stained black with years of consecration residue. Has been moved back to Tenochtitlan because 'the Great Engine needs bones' — the cradle was no longer defensible and the city's central engine corps is consolidating fuel. Will be the engine Itzcoatl rides out beside on the next causeway sortie when the priests wake it.",
+        "relationships": [
+          {
+            "to": "Mexica engine corps",
+            "kind": "field_engine_of"
+          },
+          {
+            "to": "Great Engine",
+            "kind": "fuel_donor_to"
+          }
+        ],
+        "confidence_score": 0.88
+      },
+      "evidence_spans": [
+        "The engine that had sat here, a Huitzilopochtli-caste field engine named *Sun-That-Answers*, was gone. It had been moved, he knew, not abandoned.",
+        "\"Where did you move the Huitzilopochtli?\"",
+        "\"Back to the city. The Great Engine needs bones.\""
+      ],
+      "source_chapter_sha": "9b5d3cba6eaf3fe9a332f4242df34db4a439df62"
+    },
+    {
+      "entity_name": "Mexica engine corps",
+      "last_seen_chapter": 21,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 9,
+        "current_state": "Dying. The forward cradle staging set up the previous summer after Alvarado's massacre — when the Templo Mayor's hum first began to stutter — has gone hollow. Itzcoatl's inspection of five forward cradles on the day of Cuauhtémoc's installation: (1) Sun-That-Answers absent, pulled back to feed the Great Engine; (2) a Tezcatlipoca, thirty feet, in pit but not humming, smoking-mirror chest disc clouded, mirror-mask slack — pilot dead four days ago, apprentice taken sick yesterday; (3) cradle empty by design; (4) another Tezcatlipoca asleep with no pilot ready to wake it; (5) half-built, ramp interrupted mid-course, obsidian chips piled and unset, two crows nesting in the unset stones. Throughout autumn the fuel came slowly; through winter it stopped. The corps Cuauhtémoc is about to be raised over is 'a series of holes in the mud with crows in them.'",
+        "relationships": [
+          {
+            "to": "Huey cocoliztli",
+            "kind": "starved_by"
+          },
+          {
+            "to": "Massacre at the Templo Mayor",
+            "kind": "wounded_by"
+          },
+          {
+            "to": "Cuauhtémoc",
+            "kind": "raised_under"
+          }
+        ],
+        "confidence_score": 0.92
+      },
+      "evidence_spans": [
+        "Five cradles. One engine functional and absent. One engine present and dormant. One pit empty by design. One Tezcatlipoca asleep with no pilot ready to wake it. One construction abandoned in place.",
+        "The corps Cuauhtémoc was about to be raised over was not a corps. It was a series of holes in the mud with crows in them.",
+        "Through the autumn the fuel had come slowly. Through the winter it had stopped."
+      ],
+      "source_chapter_sha": "9b5d3cba6eaf3fe9a332f4242df34db4a439df62"
+    },
+    {
+      "entity_name": "Templo Mayor",
+      "last_seen_chapter": 21,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 1,
+        "current_state": "Off-stage in chapter 21; named in causal context. Its hum 'first began to stutter after Alvarado's massacre' (i.e., the ch15 Toxcatl killings) — anchoring that event as the moment the ixiptla pipeline was wounded. The priests who tended the bones for the Templo Mayor's central pipeline are now dying on the same mats as the ixiptla they were preparing; the ground is months behind on quotas; engines across the valley are going dormant for lack of fuel. The Great Engine still 'needs bones' — Sun-That-Answers has been pulled back from the forward cradle to feed it.",
+        "relationships": [
+          {
+            "to": "Great Engine",
+            "kind": "houses"
+          },
+          {
+            "to": "Mexica engine corps",
+            "kind": "fuel_source_of"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "The staging had been set up the previous summer, when the Templo Mayor's hum first began to stutter after Alvarado's massacre.",
+        "The Templo Mayor ground was already months behind on its quotas after Alvarado; now the priests who tended the bones were dying on the same mats as the *ixiptla* they had been preparing."
+      ],
+      "source_chapter_sha": "9b5d3cba6eaf3fe9a332f4242df34db4a439df62"
+    },
+    {
+      "entity_name": "Itzcoatl's apprentice",
+      "last_seen_chapter": 21,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 21,
+        "current_state": "Apprentice Itzcoatl does not know, sixteen at most, attending Obsidian Mirror in cradle at the Texcocan compound. Polishing the smoking-mirror chest disc with a rag that had once been a shirt. First pustules of huey cocoliztli rising on the back of his right hand. Made the small pilot's-return bow when Itzcoatl arrived. Itzcoatl saw the rash and did not say what he saw — 'The boy would be dead inside the week. Telling him would change nothing except the boy's last days.'",
+        "relationships": [
+          {
+            "to": "Obsidian Mirror",
+            "kind": "tends"
+          },
+          {
+            "to": "Huey cocoliztli",
+            "kind": "infected_by"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "an apprentice he did not know polishing the disc on its chest plate",
+        "His knuckles were red. The first pustules had risen on the back of his right hand.",
+        "The boy would be dead inside the week."
+      ],
+      "source_chapter_sha": "9b5d3cba6eaf3fe9a332f4242df34db4a439df62"
+    }
+  ],
+  "chapter_num": 21,
+  "extraction_timestamp": "2026-04-30T20:14:17.328975Z"
+}
