@@ -46,3 +46,9 @@ ch01_sc03 drifted on the **historical** axis specifically around the Venus-omen 
 - ch01_sc02 (Malintzin/Citlal) passed critic in one regenerator cycle while sc01 and sc03 needed multiple — is voice-fidelity easier when the scene contains zero metaphysics/engine content, and should we sequence early-chapter scenes to alternate lore-heavy and lore-light to give the drafter recovery beats?
 - ch01_sc03 stacks Venus-omen (historical/metaphysics) plus dormant-Quetzalcoatl-engine plus narrator's withheld dream — three signal events in one scene drove the regenerator output to 9177 tokens. Is there a per-scene "foreshadow budget" beyond which drafter coherence collapses?
 - Event log shows no donts-axis violations flagged this chapter, but corpus contains modern-anachronism and on-the-nose-prophecy traps the critic should be probing — is the donts retriever firing at all, or silently empty?
+
+<!-- chapter-nav-injected -->
+
+---
+
+[Index](../index.md) · [Chapter 1 canon](../chapters/chapter_01.md) · [💬 Feedback on Chapter 1 retrospective](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+1+retrospective)

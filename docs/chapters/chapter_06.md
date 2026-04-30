@@ -297,3 +297,5 @@ Itzcoatl looks at his stained hands. The decision has been made by men in rooms 
 ---
 
 [← Chapter 5](chapter_05.md) · [Index](../index.md) · [Chapter 7 →](chapter_07.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+6)

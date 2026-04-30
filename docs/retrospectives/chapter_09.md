@@ -36,3 +36,9 @@ Secondary pattern: position in chapter does not predict regen here. sc01 (openin
 - Scenes pairing new metaphysics introduction (deity-speaking, engine-as-question) with dense historical-canon load (causeway entry, palace of Axayacatl) require regen; scenes that are historical-procedural alone (Malintzin translation ritual at midpoint) pass first attempt
 - Cockpit/mirror confessional scenes where the deity addresses the pilot directly (sc03) may stress the donts axis differently than rank-formation metaphysics (sc01); both regen but the failure modes likely differ — needs disambiguation in next chapter with a comparable confessional beat
 - voice_fidelity_aggregate is null in chapter frontmatter despite chapter_critic_pass=true — either the aggregator failed silently for ch09 or the contract changed; check pipeline_state.json and the chapter-assembly path
+
+<!-- chapter-nav-injected -->
+
+---
+
+[Index](../index.md) · [Chapter 9 canon](../chapters/chapter_09.md) · [💬 Feedback on Chapter 9 retrospective](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+9+retrospective)

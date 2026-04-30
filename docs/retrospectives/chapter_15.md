@@ -49,3 +49,9 @@ Secondary pattern: the chapter_critic full-rebuild loop is now an observable fai
 - When chapter_critic fires a second pass after scene-level convergence, it triggers a full per-scene regenerator+critic cycle across all scenes. This is a new failure mode not seen in ch01-ch04 and is the dominant cost driver for chapters where scenes individually pass but aggregate coherence fails.
 - Named ixiptla (Cuauhtli of Cuauhtitlán, Tochtli, Mazatl, Tepetl) and offscreen-relations (Cuauhtli Ocelotl, Tepin) appear without dedicated entity-card scaffolding, forcing the entity axis to validate names against general RAG. A first-appearance ephemeral-entity slot may reduce sc02's retriever churn on future massacre/battle scenes.
 - Arc beats built on inaction (Itzcoatl not approaching the stable door; standing in muster) require more regen passes than action beats, because the critic appears to flag low-event scenes for arc-stall before recognizing the restraint as the beat itself.
+
+<!-- chapter-nav-injected -->
+
+---
+
+[Index](../index.md) · [Chapter 15 canon](../chapters/chapter_15.md) · [💬 Feedback on Chapter 15 retrospective](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+15+retrospective)

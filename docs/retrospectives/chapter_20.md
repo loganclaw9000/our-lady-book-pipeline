@@ -32,3 +32,9 @@ Secondary observation: sc01's `[retriever]` and `[context_pack_bundler]` log sho
 - When a scene's job is to collide two previously-introduced metaphysics revelations rather than introduce new ones, regen cost can exceed both setup scenes combined — synthesis load-bearing is more expensive than introduction.
 - The scene carrying a chapter's thematic punchline (the line readers will quote) reliably overruns regen budget regardless of metaphysics-introduction density, because critic enforces precision on the load-bearing utterance itself.
 - A drafter re-invocation mid-cycle (after multiple regenerator passes already failed) is a distinct failure mode from regen-cycling and likely indicates the regenerator cannot reach the target from the current draft's frame.
+
+<!-- chapter-nav-injected -->
+
+---
+
+[Index](../index.md) · [Chapter 20 canon](../chapters/chapter_20.md) · [💬 Feedback on Chapter 20 retrospective](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+20+retrospective)

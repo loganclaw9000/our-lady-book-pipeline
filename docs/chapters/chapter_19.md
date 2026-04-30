@@ -166,3 +166,5 @@ The hum kept its step behind him, a beat off, and he let it.
 ---
 
 [← Chapter 18](chapter_18.md) · [Index](../index.md) · [Chapter 20 →](chapter_20.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+19)

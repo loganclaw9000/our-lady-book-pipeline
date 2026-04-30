@@ -99,3 +99,5 @@ He had no answer for that, and the night was long, and the two engines hummed on
 ---
 
 [← Chapter 4](chapter_04.md) · [Index](../index.md) · [Chapter 6 →](chapter_06.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+5)

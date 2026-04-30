@@ -155,3 +155,5 @@ He turned the horse toward the staging ground. He did not look at the lake.
 ---
 
 [← Chapter 20](chapter_20.md) · [Index](../index.md) · [Chapter 22 →](chapter_22.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+21)

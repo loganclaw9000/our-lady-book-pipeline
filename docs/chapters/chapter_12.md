@@ -309,3 +309,5 @@ His loyalties were officially intact. Privately, they were not.
 ---
 
 [← Chapter 11](chapter_11.md) · [Index](../index.md) · [Chapter 13 →](chapter_13.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+12)

@@ -202,3 +202,5 @@ The war continues.
 ---
 
 [← Chapter 17](chapter_17.md) · [Index](../index.md) · [Chapter 19 →](chapter_19.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+18)

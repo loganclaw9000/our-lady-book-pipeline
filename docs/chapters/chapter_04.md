@@ -135,3 +135,5 @@ Andrés, inside *La Niña de Córdoba*, with Flora's bones humming against his s
 ---
 
 [← Chapter 3](chapter_03.md) · [Index](../index.md) · [Chapter 5 →](chapter_05.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+4)

@@ -33,3 +33,9 @@ This refines the lineage: ch01→ch02 (introduction density) → ch15 (canon-int
 - In payoff chapters, regen count tracks thread-convergence density (multiple long-arc threads resolving simultaneously) more strongly than canon/metaphysics-introduction density. Motif-threading amortizes voice load but does not amortize convergence load.
 - Scenes containing in-world ritual formula lists (Nahuatl word glossaries, Latin liturgy variants like commendatio animae for martyr vs layperson) carry disproportionate critic load on the entity axis even when voice is steady.
 - A midpoint scene that explicitly recapitulates prior-chapter beats ("They had done this in Ch 11... They had done this in Ch 20") and reuses pre-established sensory motifs can land first-try even at high thematic density.
+
+<!-- chapter-nav-injected -->
+
+---
+
+[Index](../index.md) · [Chapter 24 canon](../chapters/chapter_24.md) · [💬 Feedback on Chapter 24 retrospective](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+24+retrospective)

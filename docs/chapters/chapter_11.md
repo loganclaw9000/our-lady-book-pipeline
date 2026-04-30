@@ -185,3 +185,5 @@ Malintzin watched Xochitl go, counted the paces back to the bench, and sat down 
 ---
 
 [← Chapter 10](chapter_10.md) · [Index](../index.md) · [Chapter 12 →](chapter_12.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+11)

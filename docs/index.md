@@ -35,6 +35,14 @@ Autonomous-pipeline first-draft novel. Historical-fiction, 16th-century Atlantic
 
 23 chapters canonized · 84,234 words · gaps remain at ch16, ch23, ch25, ch27.
 
+---
+
+## Send feedback
+
+[💬 Open a feedback issue on GitHub](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=general)
+
+Per-chapter feedback links live at the bottom of each chapter page. All feedback lands in the project's GitHub Issues feedback queue and is read by the pipeline operator + autonomous agent.
+
 ## Pipeline provenance
 
 - **Voice model:** paul-voice V7D Qwen3.5-27B LoRA (rewrite_para qpass 88%, continuation 93%, adversarial 100%; trained 2026-04-30, manifest digest `0c55cb1f...`)

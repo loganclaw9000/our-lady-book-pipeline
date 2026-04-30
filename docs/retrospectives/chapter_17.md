@@ -35,3 +35,9 @@ The ch15 thesis ("regen count tracks historical-canon density when the scene is 
 - Arc-aftermath scenes that recapitulate the named-entity roster trigger full drafter restarts rather than regenerator passes. ch17_sc03 took 3 drafter calls (vs 1 for sc01) on the casualty/Reliquary-list section.
 - Metaphysics-loss scenes converge in one pass when the lost element was established in earlier chapters. ch17_sc01 destroyed Flora's relic in 1 regen cycle because her vita was pre-loaded across prior chapters.
 - Voice fidelity may strain hardest on stillness/aftermath beats rather than action beats — sc02 (sitting against a wall) regenerated more than sc01 (causeway battle).
+
+<!-- chapter-nav-injected -->
+
+---
+
+[Index](../index.md) · [Chapter 17 canon](../chapters/chapter_17.md) · [💬 Feedback on Chapter 17 retrospective](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+17+retrospective)

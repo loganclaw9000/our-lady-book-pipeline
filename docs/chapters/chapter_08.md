@@ -175,3 +175,5 @@ He turned on his side. The cot creaked. Somewhere along the colonnade a man was 
 ---
 
 [← Chapter 7](chapter_07.md) · [Index](../index.md) · [Chapter 9 →](chapter_09.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+8)

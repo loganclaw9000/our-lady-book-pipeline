@@ -16,3 +16,9 @@ candidate_theses: []
 
 ## Open Questions for Next Chapter
 (none)
+
+<!-- chapter-nav-injected -->
+
+---
+
+[Index](../index.md) · [Chapter 3 canon](../chapters/chapter_03.md) · [💬 Feedback on Chapter 3 retrospective](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+3+retrospective)

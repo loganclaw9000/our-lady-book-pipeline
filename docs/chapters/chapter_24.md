@@ -142,3 +142,5 @@ The convergence was complete. The *commendatio animae* was the prayer Andrés wo
 ---
 
 [← Chapter 23](chapter_23.md) · [Index](../index.md) · [Chapter 26 →](chapter_26.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+24)

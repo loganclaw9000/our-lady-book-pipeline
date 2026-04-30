@@ -246,3 +246,5 @@ He got up at dawn. He went to find Cortés.
 ---
 
 [← Chapter 9](chapter_09.md) · [Index](../index.md) · [Chapter 11 →](chapter_11.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+10)

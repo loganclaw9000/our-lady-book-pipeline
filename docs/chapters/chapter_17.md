@@ -229,3 +229,5 @@ I do not look back.
 ---
 
 [← Chapter 15](chapter_15.md) · [Index](../index.md) · [Chapter 18 →](chapter_18.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+17)

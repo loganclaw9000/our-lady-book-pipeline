@@ -111,3 +111,5 @@ He turned her toward the camp. The mud held, and then released, and then held.
 ---
 
 [← Chapter 1](chapter_01.md) · [Index](../index.md) · [Chapter 3 →](chapter_03.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+2)

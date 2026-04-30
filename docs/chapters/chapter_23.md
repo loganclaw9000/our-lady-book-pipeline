@@ -215,3 +215,5 @@ He kept his head bowed until the third hour bell sounded from the Franciscan ten
 ---
 
 [← Chapter 22](chapter_22.md) · [Index](../index.md) · [Chapter 24 →](chapter_24.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+23)

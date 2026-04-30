@@ -39,3 +39,9 @@ ch19_sc01 took 2 regen cycles + 2 critic passes (regenerator latency 90013ms the
 - When metaphysics-introduction (new engine + new saint + wrong-pitch trance) and historical-canon-introduction collide in the same chapter, regen load lands on the metaphysics scene (sc01, 2 regens) not the canon-dense scene (sc02 with Ixtlilxochitl + heresy, 1 regen). Refines ch15/ch17.
 - The "He would. That was the thing that wanted saying, and it was the only thing." refrain repeats verbatim in sc01 and sc03. Open question whether the chapter critic flagged it or let it pass as deliberate echo.
 - Bernardo's Nahuatl→Spanish→Latin heresy test (sc02) is a structural device — same sentence, three registers, used to instrument Andrés's inability to refute. Test whether this scaffold transfers to other doctrinal-strain scenes in coming chapters.
+
+<!-- chapter-nav-injected -->
+
+---
+
+[Index](../index.md) · [Chapter 19 canon](../chapters/chapter_19.md) · [💬 Feedback on Chapter 19 retrospective](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+19+retrospective)

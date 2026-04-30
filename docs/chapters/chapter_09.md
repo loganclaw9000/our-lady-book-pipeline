@@ -220,3 +220,5 @@ The hum followed me out of the shed and faded only at the gate.
 ---
 
 [← Chapter 8](chapter_08.md) · [Index](../index.md) · [Chapter 10 →](chapter_10.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+9)

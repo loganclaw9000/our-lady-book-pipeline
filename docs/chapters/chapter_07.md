@@ -181,3 +181,5 @@ She knelt slowly, with the small hydraulic sigh Malintzin had learned to listen 
 ---
 
 [← Chapter 6](chapter_06.md) · [Index](../index.md) · [Chapter 8 →](chapter_08.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+7)

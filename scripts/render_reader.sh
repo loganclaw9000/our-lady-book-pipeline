@@ -50,7 +50,14 @@ nums = [num_of(p) for p in ordered]
 
 NAV_DELIM = "<!-- chapter-nav-injected -->"
 
+FEEDBACK_BASE = (
+    "https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new"
+    "?template=reader_feedback.yml"
+)
+
 def build_nav(idx: int) -> str:
+    n = nums[idx]
+    feedback_url = f"{FEEDBACK_BASE}&chapter=Chapter+{n}"
     parts = []
     if idx > 0:
         prev_n = nums[idx - 1]
@@ -59,7 +66,9 @@ def build_nav(idx: int) -> str:
     if idx < len(nums) - 1:
         next_n = nums[idx + 1]
         parts.append(f"[Chapter {next_n} →](chapter_{next_n:02d}.md)")
-    return NAV_DELIM + "\n\n---\n\n" + " · ".join(parts) + "\n"
+    nav_line = " · ".join(parts)
+    feedback_line = f"[💬 Send feedback on this chapter]({feedback_url})"
+    return NAV_DELIM + "\n\n---\n\n" + nav_line + "\n\n" + feedback_line + "\n"
 
 for i, path in enumerate(ordered):
     text = path.read_text(encoding="utf-8")
@@ -69,6 +78,39 @@ for i, path in enumerate(ordered):
     nav = build_nav(i)
     path.write_text(text.rstrip() + "\n\n" + nav, encoding="utf-8")
 print(f"chapter nav injected on {len(ordered)} files")
+PYEOF
+
+# Inject feedback link at end of each retrospective.
+python3 - "$DOCS/retrospectives" <<'PYEOF'
+import re, sys
+from pathlib import Path
+
+retros_dir = Path(sys.argv[1])
+files = sorted(retros_dir.glob("chapter_*.md"))
+NAV_DELIM = "<!-- chapter-nav-injected -->"
+FEEDBACK_BASE = (
+    "https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new"
+    "?template=reader_feedback.yml"
+)
+for path in files:
+    m = re.match(r"chapter_(\d+)\.md", path.name)
+    if not m:
+        continue
+    n = int(m.group(1))
+    text = path.read_text(encoding="utf-8")
+    if NAV_DELIM in text:
+        text = text.split(NAV_DELIM, 1)[0].rstrip() + "\n"
+    feedback_url = (
+        f"{FEEDBACK_BASE}&chapter=Chapter+{n}+retrospective"
+    )
+    block = (
+        f"{NAV_DELIM}\n\n---\n\n"
+        f"[Index](../index.md) · "
+        f"[Chapter {n} canon](../chapters/chapter_{n:02d}.md) · "
+        f"[💬 Feedback on Chapter {n} retrospective]({feedback_url})\n"
+    )
+    path.write_text(text.rstrip() + "\n\n" + block, encoding="utf-8")
+print(f"feedback link injected on {len(files)} retrospectives")
 PYEOF
 
 echo "staged:"

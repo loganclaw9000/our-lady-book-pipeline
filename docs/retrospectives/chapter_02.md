@@ -36,3 +36,9 @@ The ch01 retro thesis — *attempt count tracks metaphysics density* — holds a
 - Chapter-critic gating dropped ch02_sc03 from final assembly despite drafter+regen cycles converging at scene level — is assembly-level rejection a feature or a defect, and what attempt-count policy should govern drop-vs-retry?
 - Retriever issued 200+ duplicate calls on ch02_sc01 before drafter ran (latencies 9-73s, output_tokens=8 each) — is this a retry-storm bug in the context_pack_bundler upstream loop or expected re-ranking behavior?
 - ch02_sc02 cleared on a single critic pass while ch02_sc01 needed 3 cycles + 3 full drafter re-runs — does the per-scene critic cost gradient correlate with first-kill emotional load specifically, or with theological-premise introduction generally?
+
+<!-- chapter-nav-injected -->
+
+---
+
+[Index](../index.md) · [Chapter 2 canon](../chapters/chapter_02.md) · [💬 Feedback on Chapter 2 retrospective](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+2+retrospective)

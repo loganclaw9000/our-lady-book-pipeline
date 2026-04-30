@@ -36,3 +36,9 @@ A second pattern: **chapter_critic output collapsed 3x between first pass (4804 
 - - Does arc-closure (the resolution of a multi-chapter arc) impose its own regen floor of 2 independent of metaphysics/canon density? ch26 is the first chapter where this can be isolated; the next low-density continuation chapter is the cleanest test.
 - - Is the chapter_critic first-pass-to-second-pass output ratio (here ~3x) a reliable convergence indicator worth promoting to a tracked metric?
 - ```
+
+<!-- chapter-nav-injected -->
+
+---
+
+[Index](../index.md) · [Chapter 26 canon](../chapters/chapter_26.md) · [💬 Feedback on Chapter 26 retrospective](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+26+retrospective)

@@ -39,3 +39,9 @@ ch22 inverts the ch15 thesis ("regen count tracks historical-canon density when 
 - chapter_critic_pass=true does not catch cross-scene verbatim dialogue duplication within a chapter — the chapter critic appears to evaluate scene-coherence and arc-shape but not phrase-level repetition between sibling scenes.
 - When the drafter receives prior-scene context for a scene serving the same arc function as its predecessor, it biases toward beat reuse rather than extension; the Andrés "do you believe" exchange in ch22_sc01 and ch22_sc02 is the cleanest example yet of this failure mode.
 - Motif-threading (ch19 thesis) and motif-duplication are different phenomena that the current critic conflates — a deliberate hum reused as anchor (ch19_sc02/sc03) reads as voice-faithful, but a dialogue exchange reused near-verbatim across two consecutive scenes reads as drift; the discriminator may be exact-string overlap above some threshold.
+
+<!-- chapter-nav-injected -->
+
+---
+
+[Index](../index.md) · [Chapter 22 canon](../chapters/chapter_22.md) · [💬 Feedback on Chapter 22 retrospective](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+22+retrospective)

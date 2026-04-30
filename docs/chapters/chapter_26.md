@@ -142,3 +142,5 @@ Andrés stood on the terrace until the sun cleared the western shore. Then he wa
 ---
 
 [← Chapter 24](chapter_24.md) · [Index](../index.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+26)

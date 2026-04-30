@@ -213,3 +213,5 @@ She was the hinge. She would hold.
 ---
 
 [← Chapter 21](chapter_21.md) · [Index](../index.md) · [Chapter 23 →](chapter_23.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+22)

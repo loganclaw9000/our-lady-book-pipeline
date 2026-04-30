@@ -1,0 +1,47 @@
+name: Reader feedback
+description: Share feedback on a chapter or the project. The pipeline (and Paul) read these.
+title: "[feedback] "
+labels: ["feedback", "reader"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reading. Anything you write here lands in the project's feedback log
+        and is reviewed by the pipeline operator and the autonomous-pipeline agent.
+  - type: input
+    id: chapter
+    attributes:
+      label: Chapter
+      description: Which chapter is this about? (Or "general" / "site".)
+      placeholder: "Chapter 8 — Cholula"
+    validations:
+      required: false
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind of feedback
+      options:
+        - praise / what worked
+        - critique / what did not work
+        - factual or continuity error
+        - voice / prose suggestion
+        - bug or site issue
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: body
+    attributes:
+      label: What you want to say
+      description: Quote the line, paragraph, or beat if helpful. The more specific, the more useful.
+      placeholder: "On Chapter 8 around the third volley scene, the cadence shifts to..."
+    validations:
+      required: true
+  - type: input
+    id: contact
+    attributes:
+      label: Optional — how to reach you
+      description: Leave blank to stay anonymous.
+      placeholder: "@your-handle or email"
+    validations:
+      required: false

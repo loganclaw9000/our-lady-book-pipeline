@@ -171,3 +171,5 @@ Bernardo did not ask further. That was his particular cruelty as a friend: he wo
 ---
 
 [← Chapter 12](chapter_12.md) · [Index](../index.md) · [Chapter 14 →](chapter_14.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+13)

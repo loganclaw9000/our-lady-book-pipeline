@@ -38,3 +38,9 @@ The chapter_critic → scene_kick recovery is informative: when the chapter as a
 - When a scene synthesizes named formulas/exercises from prior chapters (not new metaphysics), its regen cost exceeds canon-introducing scenes — callback-density compounds where it lands.
 - When chapter_critic fails the first pass and triggers scene_kick, the scene requiring full re-draft (not just regen) is the one carrying thematic pivot, not the one with densest historical fact.
 - Synthesis scenes that pin themselves to a literal countable inventory (five cradles, ordered) hold voice cheaper than synthesis scenes that pin to interior-formula callback.
+
+<!-- chapter-nav-injected -->
+
+---
+
+[Index](../index.md) · [Chapter 21 canon](../chapters/chapter_21.md) · [💬 Feedback on Chapter 21 retrospective](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+21+retrospective)

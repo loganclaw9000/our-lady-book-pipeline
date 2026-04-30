@@ -33,3 +33,9 @@ The ch01→ch02 thesis ("attempt count tracks metaphysics-introduction density")
 - Foreign-metaphysics introduction passes first-pass critic when staged as comparative juxtaposition against established rules (Totonac engines vs La Niña), inverting the ch01–ch02 thesis that metaphysics-introduction density predicts regen count.
 - Chapter-level assembly can cut a scene-critic-passed scene (sc03 drafted with 1 regen, then excluded from assembled_from_scenes), implying chapter_critic operates as an independent filter axis rather than a rubber-stamp over scene-critic verdicts.
 - Reused metaphysics surfaces (Reliquary binding, Flora's bones) still trigger regen when fused with new historical-axis density (cabildo founding, nine-ship burning roster), suggesting axis interaction — not single-axis density — drives regen.
+
+<!-- chapter-nav-injected -->
+
+---
+
+[Index](../index.md) · [Chapter 4 canon](../chapters/chapter_04.md) · [💬 Feedback on Chapter 4 retrospective](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+4+retrospective)

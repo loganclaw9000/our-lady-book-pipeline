@@ -137,3 +137,5 @@ She walked north with the column, and she kept the count in her mouth, under the
 ---
 
 [← Chapter 2](chapter_02.md) · [Index](../index.md) · [Chapter 4 →](chapter_04.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+3)

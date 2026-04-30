@@ -38,3 +38,9 @@ Second pattern: chapter_critic forced a uniform second pass on all three scenes 
 - Interior-monologue scenes that catalog losses without an anchoring image incur runaway regen — sc02's eight regens vs sc03's one, on comparable POV-density, suggests the ch26 image-amortization thesis extends to historical-roll-call interiority, not just sensory motif chains.
 - When chapter_critic forces a second pass, does per-scene re-regen (the current behavior — three more critic+regen cycles) actually fix chapter-level coherence drift, or is it papering over a missing chapter-integration step? sc01 and sc02 each took one extra regen post-chapter_critic; sc03 also took one despite already being clean, suggesting the second pass may be over-firing.
 - sc01's retriever/bundler thrash (15+ bundler invocations before the drafter ran) on a scene that ultimately drafted in one pass — is the context-pack assembly cost decoupled from drafting difficulty, and if so, what triggered the retriever loop without producing a corresponding drafter retry?
+
+<!-- chapter-nav-injected -->
+
+---
+
+[Index](../index.md) · [Chapter 18 canon](../chapters/chapter_18.md) · [💬 Feedback on Chapter 18 retrospective](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+18+retrospective)

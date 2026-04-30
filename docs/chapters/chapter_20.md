@@ -317,3 +317,5 @@ She would keep translating. She had said it twice now. The second saying had mad
 ---
 
 [← Chapter 19](chapter_19.md) · [Index](../index.md) · [Chapter 21 →](chapter_21.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+20)

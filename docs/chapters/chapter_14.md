@@ -111,3 +111,5 @@ She put the mirror in the pouch and kept her hand on the pouch. The wagon kept i
 ---
 
 [← Chapter 13](chapter_13.md) · [Index](../index.md) · [Chapter 15 →](chapter_15.md)
+
+[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+14)
