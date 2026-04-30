@@ -25,6 +25,10 @@ from book_pipeline.physics.gates import (
     run_pre_flight,
 )
 from book_pipeline.physics.locks import PovLock, load_pov_locks
+from book_pipeline.physics.pov_narrative_voice import (
+    PovNarrativeVoiceHit,
+    scan_pov_narrative_voice,
+)
 from book_pipeline.physics.repetition_loop import RepetitionHit, scan_repetition_loop
 from book_pipeline.physics.scene_buffer import (
     SceneEmbeddingCache,
@@ -65,6 +69,7 @@ __all__ = [
     "GateResult",
     "Perspective",
     "PovLock",
+    "PovNarrativeVoiceHit",
     "RepetitionHit",
     "SceneEmbeddingCache",
     "SceneMetadata",
@@ -78,6 +83,7 @@ __all__ = [
     "load_pov_locks",
     "max_cosine",
     "run_pre_flight",
+    "scan_pov_narrative_voice",
     "scan_repetition_loop",
     "scan_stub_leak",
 ]

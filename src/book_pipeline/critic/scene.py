@@ -39,6 +39,7 @@ from book_pipeline.observability.hashing import hash_text
 from book_pipeline.physics import (
     Treatment,
     max_cosine,
+    scan_pov_narrative_voice,
     scan_repetition_loop,
     scan_stub_leak,
 )
@@ -295,6 +296,36 @@ class SceneCritic:
                             "evidence": h.detail,
                         }
                         for h in repetition_hits
+                    ],
+                )
+
+            # PHYSICS-11 (2026-04-30): pov_lock pre-flight gate validates
+            # SceneMetadata.perspective vs the per-character lock; pov_fidelity
+            # LLM axis catches OTHER-character interior leakage. Neither
+            # detects "1st-person declared but 3rd-person prose" (real
+            # ch15_sc02 incident). Deterministic narrative-voice scanner
+            # short-circuits when pronoun rate violates declared perspective.
+            perspective_for_voice_check = (
+                request.scene_metadata.perspective
+                if request.scene_metadata is not None
+                else None
+            )
+            voice_hits = scan_pov_narrative_voice(
+                request.scene_text,
+                perspective_for_voice_check,
+            )
+            if voice_hits:
+                return self._build_pre_llm_short_circuit_response(
+                    scene_id=scene_id,
+                    failed_axis="pov_fidelity",
+                    severity="high",
+                    issues=[
+                        {
+                            "location": "scene-wide",
+                            "claim": h.hit_type,
+                            "evidence": h.detail,
+                        }
+                        for h in voice_hits
                     ],
                 )
 
