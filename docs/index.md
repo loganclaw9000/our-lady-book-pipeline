@@ -81,6 +81,7 @@ All feedback lands in the project's queue and is read by the pipeline operator +
 
 ## Project docs
 
+- [Self-portrait — pipeline architecture diagram](self-portrait.md)
 - [Architecture](ARCHITECTURE.md)
 - [ADRs](ADRs/)
 
