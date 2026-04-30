@@ -133,12 +133,30 @@ if [[ "$REINDEX" == "1" ]]; then
     fi
 fi
 
-# 5. Restart vllm + smoke-test -----------------------------------------------
-echo "[redeploy] restarting vllm-paul-voice..."
-systemctl --user start vllm-paul-voice.service
+# 5. Re-render systemd unit + restart vllm -----------------------------------
+# IMPORTANT (2026-04-30 incident): bare `systemctl --user start` reuses the
+# existing unit which has the OLD --lora-modules path hardcoded. Must call
+# `book-pipeline vllm-bootstrap --start` so the unit is re-rendered from the
+# Jinja2 template using the freshly-rewritten voice_pin.yaml.
+echo "[redeploy] re-rendering systemd unit + starting vllm via vllm-bootstrap..."
+cd "$REPO_ROOT"
+if [[ ! -x ".venv/bin/python3" ]]; then
+    echo "[redeploy] FATAL: .venv missing — cannot run book-pipeline vllm-bootstrap" >&2
+    exit 5
+fi
+# Stop is already done in step 2. vllm-bootstrap --start does daemon-reload +
+# unit write + start + V-3 SHA boot handshake.
+.venv/bin/python3 -m book_pipeline vllm-bootstrap --enable --start 2>&1 | tail -10
+BOOTSTRAP_RC="${PIPESTATUS[0]}"
+if [[ "$BOOTSTRAP_RC" -ne 0 ]]; then
+    echo "[redeploy] FATAL: vllm-bootstrap exited $BOOTSTRAP_RC" >&2
+    systemctl --user status vllm-paul-voice.service | tail -10 >&2
+    exit 5
+fi
 
-# Wait up to 180s for /v1/models to respond
-echo "[redeploy] waiting for vllm health..."
+# Final health check (vllm-bootstrap already polls /v1/models internally, but
+# double-check from outside its process).
+echo "[redeploy] verifying /v1/models health..."
 for i in $(seq 1 36); do
     if curl -sf http://127.0.0.1:8003/v1/models > /dev/null; then
         echo "[redeploy] vllm healthy after ${i}*5s"
@@ -147,10 +165,18 @@ for i in $(seq 1 36); do
     sleep 5
     if [[ $i -eq 36 ]]; then
         echo "[redeploy] FATAL: vllm not healthy after 180s" >&2
-        systemctl --user status vllm-paul-voice.service | tail -10 >&2
         exit 5
     fi
 done
+
+# Verify the running vllm now points at the NEW adapter path.
+RUNNING_LORA="$(ps aux | grep -E 'vllm.entrypoints' | grep -v grep | grep -oE 'paul-voice=[^ ]+' | head -1 | cut -d= -f2)"
+if [[ -n "$RUNNING_LORA" ]] && [[ "$RUNNING_LORA" != "$CHECKPOINT_PATH" ]]; then
+    echo "[redeploy] FATAL: vllm running lora path ($RUNNING_LORA) != pinned ($CHECKPOINT_PATH)" >&2
+    echo "[redeploy] systemd unit may not have been re-rendered correctly" >&2
+    exit 6
+fi
+echo "[redeploy] verified vllm serving $RUNNING_LORA"
 
 # 6. Summary -----------------------------------------------------------------
 echo "[redeploy] ========================================"
