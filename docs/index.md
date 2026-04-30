@@ -5,23 +5,43 @@ title: Our Lady of Champion — Reader
 
 # Our Lady of Champion
 
-Autonomous-pipeline first-draft novel. Historical-fiction, 16th-century Atlantic triangle.
+Autonomous-pipeline first-draft novel. Historical-fiction, 16th-century Atlantic triangle. Three POVs (Andrés / Malintzin / Itzcoatl). Reliquaries and Teōmecahuītlī.
 
 ## Chapters
 
-| # | Title | Words | POV triptych | Critic pass |
-|---|-------|------:|:-------------|:-----------:|
-| 1 | (TBD) | 2,852 | Andrés (Havana) / Malintzin (Potonchán) / Itzcoatl (Tenochtitlan) | all axes ≥60 |
+- [Chapter 1 — canon](chapters/chapter_01.md) (2518w) · [retro](retrospectives/chapter_01.md)
+- [Chapter 2 — canon](chapters/chapter_02.md) (2473w) · [retro](retrospectives/chapter_02.md)
+- [Chapter 3 — canon](chapters/chapter_03.md) (2922w) · [retro](retrospectives/chapter_03.md)
+- [Chapter 4 — canon](chapters/chapter_04.md) (3026w) · [retro](retrospectives/chapter_04.md)
+- [Chapter 5 — canon](chapters/chapter_05.md) (2230w) · [retro](retrospectives/chapter_05.md)
+- [Chapter 6 — canon](chapters/chapter_06.md) (4472w) · [retro](retrospectives/chapter_06.md)
+- [Chapter 7 — canon](chapters/chapter_07.md) (4211w) · [retro](retrospectives/chapter_07.md)
+- [Chapter 8 — canon](chapters/chapter_08.md) (4077w) · [retro](retrospectives/chapter_08.md)
+- [Chapter 9 — canon](chapters/chapter_09.md) (3934w) · [retro](retrospectives/chapter_09.md)
+- [Chapter 10 — canon](chapters/chapter_10.md) (3562w) · [retro](retrospectives/chapter_10.md)
+- [Chapter 11 — canon](chapters/chapter_11.md) (3811w) · [retro](retrospectives/chapter_11.md)
+- [Chapter 12 — canon](chapters/chapter_12.md) (3401w) · [retro](retrospectives/chapter_12.md)
+- [Chapter 13 — canon](chapters/chapter_13.md) (4178w) · [retro](retrospectives/chapter_13.md)
+- [Chapter 14 — canon](chapters/chapter_14.md) (4037w) · [retro](retrospectives/chapter_14.md)
+- [Chapter 15 — canon](chapters/chapter_15.md) (3773w) · [retro](retrospectives/chapter_15.md)
+- [Chapter 17 — canon](chapters/chapter_17.md) (4583w) · [retro](retrospectives/chapter_17.md)
+- [Chapter 18 — canon](chapters/chapter_18.md) (3853w) · [retro](retrospectives/chapter_18.md)
+- [Chapter 19 — canon](chapters/chapter_19.md) (3654w) · [retro](retrospectives/chapter_19.md)
+- [Chapter 20 — canon](chapters/chapter_20.md) (4286w) · [retro](retrospectives/chapter_20.md)
+- [Chapter 21 — canon](chapters/chapter_21.md) (3793w) · [retro](retrospectives/chapter_21.md)
+- [Chapter 22 — canon](chapters/chapter_22.md) (4504w) · [retro](retrospectives/chapter_22.md)
+- [Chapter 24 — canon](chapters/chapter_24.md) (3874w) · [retro](retrospectives/chapter_24.md)
+- [Chapter 26 — canon](chapters/chapter_26.md) (3492w) · [retro](retrospectives/chapter_26.md)
 
-- [Chapter 1 — canon](chapters/chapter_01.md)
-- [Chapter 1 — retrospective](retrospectives/chapter_01.md)
+23 chapters canonized · 84,234 words · gaps remain at ch16, ch23, ch25, ch27.
 
 ## Pipeline provenance
 
-- **Voice model:** paul-voice V6 Qwen3.5-27B LoRA (bnb 4-bit, vLLM 0.17)
+- **Voice model:** paul-voice V7D Qwen3.5-27B LoRA (rewrite_para qpass 88%, continuation 93%, adversarial 100%; trained 2026-04-30, manifest digest `0c55cb1f...`)
 - **Critic:** Claude Opus 4.7 via claude-code CLI (no SDK)
-- **RAG:** 5-axis BGE-M3 + LanceDB (9-field CHUNK_SCHEMA)
-- **Postprocess:** Forge contract v1.0.0 — em-dash strip + mojibake fix
+- **RAG:** 5+1 axis BGE-M3 + LanceDB (continuity_bible adds CB-01 canonical-quantity axis; 9-field CHUNK_SCHEMA)
+- **Postprocess:** Forge contract v1.0.0 — em-dash strip + mojibake fix + think-tag strip
+- **Phase 7 critic:** 13-axis rubric_v2 (5 original + 6 LLM-judged + 2 deterministic pre-LLM short-circuits)
 
 ## Project docs
 
