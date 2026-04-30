@@ -112,4 +112,29 @@ She put the mirror in the pouch and kept her hand on the pouch. The wagon kept i
 
 [← Chapter 13](chapter_13.md) · [Index](../index.md) · [Chapter 15 →](chapter_15.md)
 
-[💬 Send feedback on this chapter](https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new?template=reader_feedback.yml&chapter=Chapter+14)
+<form class="reader-feedback" data-page-id="Chapter 14" onsubmit="return submitReaderFeedback(event)">
+  <details>
+    <summary>💬 Send anonymous feedback on this page</summary>
+    <input type="hidden" name="chapter" value="Chapter 14">
+    <label>Kind:
+      <select name="kind">
+        <option>praise / what worked</option>
+        <option>critique / what did not work</option>
+        <option>factual or continuity error</option>
+        <option>voice / prose suggestion</option>
+        <option>bug or site issue</option>
+        <option>other</option>
+      </select>
+    </label><br>
+    <label>What you want to say:<br>
+      <textarea name="body" rows="6" cols="60" required></textarea>
+    </label><br>
+    <label>Optional contact (leave blank to stay anonymous):
+      <input type="text" name="contact" maxlength="200">
+    </label><br>
+    <button type="submit">Submit</button>
+    <span class="reader-feedback-status" aria-live="polite"></span>
+  </details>
+</form>
+
+{% include feedback-script.html %}

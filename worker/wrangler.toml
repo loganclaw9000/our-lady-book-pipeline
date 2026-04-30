@@ -1,0 +1,23 @@
+name = "our-lady-feedback"
+main = "feedback-worker.js"
+compatibility_date = "2026-04-01"
+
+# Public-readable config (set on deploy with `wrangler deploy`).
+# Override per-environment in [env.production.vars] etc. if needed.
+[vars]
+OWNER = "loganclaw9000"
+REPO = "our-lady-book-pipeline"
+ALLOWED_ORIGIN = "https://loganclaw9000.github.io"
+MAX_BODY_BYTES = "8000"
+
+# Optional: bind a KV namespace for per-IP rate limiting. Create via
+#   wrangler kv namespace create FEEDBACK_KV
+# then paste the returned id into the binding below and uncomment.
+# [[kv_namespaces]]
+# binding = "FEEDBACK_KV"
+# id = "REPLACE_WITH_NAMESPACE_ID"
+
+# Secret (NOT committed): the GitHub PAT for issue creation.
+#   wrangler secret put GITHUB_PAT
+# A fine-grained PAT scoped to the single target repo with
+# `Issues: Read and write` is sufficient.

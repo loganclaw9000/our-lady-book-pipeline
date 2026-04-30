@@ -50,14 +50,42 @@ nums = [num_of(p) for p in ordered]
 
 NAV_DELIM = "<!-- chapter-nav-injected -->"
 
-FEEDBACK_BASE = (
-    "https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new"
-    "?template=reader_feedback.yml"
-)
+def feedback_form(page_id: str) -> str:
+    """Inline HTML feedback form. POSTs to /feedback.json (a Worker URL
+    configured in docs/_config.yml). On unconfigured deploys, the form
+    falls back to a mailto:reader-feedback@laul.dev draft so visitors are
+    never silently dropped. No GitHub account required."""
+    safe = page_id.replace('"', "&quot;")
+    return (
+        '<form class="reader-feedback" data-page-id="' + safe + '" '
+        'onsubmit="return submitReaderFeedback(event)">\n'
+        '  <details>\n'
+        '    <summary>💬 Send anonymous feedback on this page</summary>\n'
+        '    <input type="hidden" name="chapter" value="' + safe + '">\n'
+        '    <label>Kind:\n'
+        '      <select name="kind">\n'
+        '        <option>praise / what worked</option>\n'
+        '        <option>critique / what did not work</option>\n'
+        '        <option>factual or continuity error</option>\n'
+        '        <option>voice / prose suggestion</option>\n'
+        '        <option>bug or site issue</option>\n'
+        '        <option>other</option>\n'
+        '      </select>\n'
+        '    </label><br>\n'
+        '    <label>What you want to say:<br>\n'
+        '      <textarea name="body" rows="6" cols="60" required></textarea>\n'
+        '    </label><br>\n'
+        '    <label>Optional contact (leave blank to stay anonymous):\n'
+        '      <input type="text" name="contact" maxlength="200">\n'
+        '    </label><br>\n'
+        '    <button type="submit">Submit</button>\n'
+        '    <span class="reader-feedback-status" aria-live="polite"></span>\n'
+        '  </details>\n'
+        '</form>'
+    )
 
 def build_nav(idx: int) -> str:
     n = nums[idx]
-    feedback_url = f"{FEEDBACK_BASE}&chapter=Chapter+{n}"
     parts = []
     if idx > 0:
         prev_n = nums[idx - 1]
@@ -67,8 +95,12 @@ def build_nav(idx: int) -> str:
         next_n = nums[idx + 1]
         parts.append(f"[Chapter {next_n} →](chapter_{next_n:02d}.md)")
     nav_line = " · ".join(parts)
-    feedback_line = f"[💬 Send feedback on this chapter]({feedback_url})"
-    return NAV_DELIM + "\n\n---\n\n" + nav_line + "\n\n" + feedback_line + "\n"
+    form = feedback_form(f"Chapter {n}")
+    return (
+        NAV_DELIM + "\n\n---\n\n" + nav_line + "\n\n"
+        + form + "\n\n"
+        "{% include feedback-script.html %}\n"
+    )
 
 for i, path in enumerate(ordered):
     text = path.read_text(encoding="utf-8")
@@ -80,7 +112,7 @@ for i, path in enumerate(ordered):
 print(f"chapter nav injected on {len(ordered)} files")
 PYEOF
 
-# Inject feedback link at end of each retrospective.
+# Inject feedback form at end of each retrospective.
 python3 - "$DOCS/retrospectives" <<'PYEOF'
 import re, sys
 from pathlib import Path
@@ -88,10 +120,37 @@ from pathlib import Path
 retros_dir = Path(sys.argv[1])
 files = sorted(retros_dir.glob("chapter_*.md"))
 NAV_DELIM = "<!-- chapter-nav-injected -->"
-FEEDBACK_BASE = (
-    "https://github.com/loganclaw9000/our-lady-book-pipeline/issues/new"
-    "?template=reader_feedback.yml"
-)
+
+def form_for(page_id: str) -> str:
+    safe = page_id.replace('"', "&quot;")
+    return (
+        '<form class="reader-feedback" data-page-id="' + safe + '" '
+        'onsubmit="return submitReaderFeedback(event)">\n'
+        '  <details>\n'
+        '    <summary>💬 Send anonymous feedback on this page</summary>\n'
+        '    <input type="hidden" name="chapter" value="' + safe + '">\n'
+        '    <label>Kind:\n'
+        '      <select name="kind">\n'
+        '        <option>praise / what worked</option>\n'
+        '        <option>critique / what did not work</option>\n'
+        '        <option>factual or continuity error</option>\n'
+        '        <option>voice / prose suggestion</option>\n'
+        '        <option>bug or site issue</option>\n'
+        '        <option>other</option>\n'
+        '      </select>\n'
+        '    </label><br>\n'
+        '    <label>What you want to say:<br>\n'
+        '      <textarea name="body" rows="6" cols="60" required></textarea>\n'
+        '    </label><br>\n'
+        '    <label>Optional contact (leave blank to stay anonymous):\n'
+        '      <input type="text" name="contact" maxlength="200">\n'
+        '    </label><br>\n'
+        '    <button type="submit">Submit</button>\n'
+        '    <span class="reader-feedback-status" aria-live="polite"></span>\n'
+        '  </details>\n'
+        '</form>'
+    )
+
 for path in files:
     m = re.match(r"chapter_(\d+)\.md", path.name)
     if not m:
@@ -100,17 +159,16 @@ for path in files:
     text = path.read_text(encoding="utf-8")
     if NAV_DELIM in text:
         text = text.split(NAV_DELIM, 1)[0].rstrip() + "\n"
-    feedback_url = (
-        f"{FEEDBACK_BASE}&chapter=Chapter+{n}+retrospective"
-    )
+    page_id = f"Chapter {n} retrospective"
     block = (
         f"{NAV_DELIM}\n\n---\n\n"
         f"[Index](../index.md) · "
-        f"[Chapter {n} canon](../chapters/chapter_{n:02d}.md) · "
-        f"[💬 Feedback on Chapter {n} retrospective]({feedback_url})\n"
+        f"[Chapter {n} canon](../chapters/chapter_{n:02d}.md)\n\n"
+        + form_for(page_id) + "\n\n"
+        "{% include feedback-script.html %}\n"
     )
     path.write_text(text.rstrip() + "\n\n" + block, encoding="utf-8")
-print(f"feedback link injected on {len(files)} retrospectives")
+print(f"feedback form injected on {len(files)} retrospectives")
 PYEOF
 
 echo "staged:"

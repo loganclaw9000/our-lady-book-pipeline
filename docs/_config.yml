@@ -6,6 +6,12 @@ kramdown:
   input: GFM
   hard_wrap: false
 
+# Reader feedback Worker endpoint (Cloudflare). When unset / placeholder,
+# the JS form falls back to a mailto: draft so visitors are never silently
+# dropped. Set after running `wrangler deploy` in /worker.
+feedback_worker_url: "REPLACE_AFTER_WRANGLER_DEPLOY"
+feedback_mailto: "pauljflogan+ourlady@gmail.com"
+
 exclude:
   - ADRs/
   - ARCHITECTURE.md
