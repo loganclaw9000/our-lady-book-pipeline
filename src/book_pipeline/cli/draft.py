@@ -536,6 +536,7 @@ def _run_mode_b_attempt(
     # Phase 7 Plan 05 — physics wiring (BLOCKER #5).
     scene_metadata_for_request: Any | None = None,
     prior_ids_for_request: list[str] | None = None,
+    scene_buffer_cache: Any | None = None,
 ) -> int:
     """Run one Mode-B draft attempt; on success critic-gate; else HARD_BLOCK.
 
@@ -612,6 +613,7 @@ def _run_mode_b_attempt(
         commit_dir=commit_dir,
         ingestion_run_id=ingestion_run_id,
         attempt_count=1,
+        scene_buffer_cache=scene_buffer_cache,
     )
     record = transition(record, SceneState.COMMITTED, "mode_b committed")
     _persist(record, state_path)
@@ -633,6 +635,7 @@ def _commit_scene(
     commit_dir: Path,
     ingestion_run_id: str | None,
     attempt_count: int,
+    scene_buffer_cache: Any | None = None,
 ) -> Path:
     """Write drafts/ch{NN}/{scene_id}.md with full YAML frontmatter.
 
@@ -643,6 +646,12 @@ def _commit_scene(
     Both keys hold the SAME value — Phase 4 ChapterAssembler trusts this
     invariant. Do NOT diverge. If draft.voice_pin_sha is None, raise
     RuntimeError — a COMMITTED scene requires a pinned checkpoint.
+
+    PHYSICS-10 fix (2026-04-30): on successful commit, persist the scene's
+    embedding to ``scene_buffer_cache`` so future scenes can compare against
+    it. The critic path now uses ``compute_transient`` (no insert) to avoid
+    the cosine-1.0 self-match bug from storing uncommitted attempts. Commit
+    is the only authorized cache writer.
     """
     if draft.voice_pin_sha is None:
         raise RuntimeError(
@@ -684,6 +693,20 @@ def _commit_scene(
     md_path.write_text(
         f"---\n{yaml_text}---\n{draft.scene_text}\n", encoding="utf-8"
     )
+
+    # PHYSICS-10 commit-time embedding persistence: only committed scenes go
+    # into the cache so future scenes' scene_buffer_similarity axis compares
+    # against ground truth. Critic path uses compute_transient (no insert).
+    if scene_buffer_cache is not None:
+        try:
+            scene_buffer_cache.get_or_compute(scene_id, draft.scene_text)
+        except Exception:
+            logger.exception(
+                "scene_buffer_cache persist failed for committed %s; "
+                "non-fatal (next scene's critic will recompute on demand)",
+                scene_id,
+            )
+
     return md_path
 
 
@@ -839,6 +862,7 @@ def run_draft_loop(
             event_logger=event_logger,
             scene_metadata_for_request=physics_scene_metadata,
             prior_ids_for_request=physics_prior_ids,
+            scene_buffer_cache=getattr(composition_root, "scene_buffer_cache", None),
         )
 
     prior_draft: Any = None
@@ -1065,6 +1089,7 @@ def run_draft_loop(
                 commit_dir=commit_dir,
                 ingestion_run_id=ingestion_run_id,
                 attempt_count=attempt,
+                scene_buffer_cache=getattr(composition_root, "scene_buffer_cache", None),
             )
             record = transition(
                 record, SceneState.COMMITTED, f"committed after attempt {attempt}"
@@ -1159,6 +1184,7 @@ def run_draft_loop(
                     event_logger=event_logger,
                     scene_metadata_for_request=physics_scene_metadata,
                     prior_ids_for_request=physics_prior_ids,
+            scene_buffer_cache=getattr(composition_root, "scene_buffer_cache", None),
                 )
 
         # --- Plan 05-02 D-09 step (d): R-cap exhausted. ---
@@ -1190,6 +1216,7 @@ def run_draft_loop(
                     event_logger=event_logger,
                     scene_metadata_for_request=physics_scene_metadata,
                     prior_ids_for_request=physics_prior_ids,
+            scene_buffer_cache=getattr(composition_root, "scene_buffer_cache", None),
                 )
             # Legacy Phase 3 path (no Mode-B wired) — preserve HARD_BLOCKED.
             record = transition(

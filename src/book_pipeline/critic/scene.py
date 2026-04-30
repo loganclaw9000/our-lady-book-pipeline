@@ -309,8 +309,13 @@ class SceneCritic:
             and request.prior_scene_ids
         ):
             try:
-                candidate_emb = self.scene_buffer_cache.get_or_compute(
-                    scene_id, request.scene_text
+                # PHYSICS-10 incident 2026-04-27: previously called
+                # get_or_compute(scene_id, request.scene_text) which persisted
+                # uncommitted attempts and caused cosine-1.0 self-match on
+                # retry. compute_transient embeds without inserting; cache is
+                # populated only at commit-time elsewhere.
+                candidate_emb = self.scene_buffer_cache.compute_transient(
+                    request.scene_text
                 )
                 prior_embs = self.scene_buffer_cache.all_prior(
                     list(request.prior_scene_ids)

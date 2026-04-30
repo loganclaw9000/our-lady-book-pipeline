@@ -293,6 +293,10 @@ class _StubSceneBufferCache:
         self.calls.append((scene_id, scene_text[:50]))
         return self._candidate.copy()
 
+    def compute_transient(self, scene_text: str) -> np.ndarray:
+        self.calls.append(("<transient>", scene_text[:50]))
+        return self._candidate.copy()
+
     def all_prior(self, prior_scene_ids: list[str]) -> dict[str, np.ndarray]:
         return {sid: self._prior[sid].copy() for sid in prior_scene_ids if sid in self._prior}
 

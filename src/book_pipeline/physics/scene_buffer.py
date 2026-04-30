@@ -72,8 +72,32 @@ class SceneEmbeddingCache:
         )
         self._conn.commit()
 
+    def compute_transient(self, scene_text: str) -> np.ndarray:
+        """Compute embedding WITHOUT persisting. Use for uncommitted candidates.
+
+        Critic-path callers want the candidate's embedding compared against
+        prior committed scenes' cached embeddings, but MUST NOT pollute the
+        cache with attempts that may be regenerated or hard-blocked. Storing
+        attempts caused cosine-1.0 self-match bugs on retry (Phase 7 incident
+        2026-04-27): a regen attempt would land in the cache, then the next
+        attempt's critic call would receive the stored prior-attempt blob
+        from ``get_or_compute`` and compare against itself.
+        """
+        arr = self.embedder.embed_texts([scene_text])[0].astype(np.float32)
+        assert abs(float(np.linalg.norm(arr)) - 1.0) < 1e-3, (
+            "BGE-M3 returned non-unit-normalized vector — "
+            "Pitfall 3 invariant violated"
+        )
+        return arr
+
     def get_or_compute(self, scene_id: str, scene_text: str) -> np.ndarray:
         """Return embedding for ``scene_id``; compute + persist on cache miss.
+
+        ⚠ COMMITTED-SCENE PATH ONLY. Do NOT call from the critic loop or any
+        path that handles uncommitted attempts — use ``compute_transient``
+        instead. Calling this from the critic stores the attempt's embedding
+        permanently and breaks future comparisons (cosine-1.0 self-match on
+        retry, observed 2026-04-27).
 
         Returns a ``(EMBEDDING_DIM,)`` float32 unit-normalized numpy array.
         Cache hit copies the row out so callers can mutate freely without
@@ -93,14 +117,7 @@ class SceneEmbeddingCache:
             return arr.copy()
 
         # Cache miss — compute + persist.
-        arr = self.embedder.embed_texts([scene_text])[0].astype(np.float32)
-        # Pitfall 3 sanity: BGE-M3 normalize_embeddings=True yields unit-norm.
-        # The assertion below is cheap and catches a future embedder change
-        # that drops normalization.
-        assert abs(float(np.linalg.norm(arr)) - 1.0) < 1e-3, (
-            "BGE-M3 returned non-unit-normalized vector — "
-            "Pitfall 3 invariant violated"
-        )
+        arr = self.compute_transient(scene_text)
         ts = datetime.now(UTC).isoformat()
         self._conn.execute(
             "INSERT OR REPLACE INTO scene_embeddings "

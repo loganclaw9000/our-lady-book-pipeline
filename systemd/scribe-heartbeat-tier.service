@@ -1,12 +1,19 @@
 [Unit]
-Description=Scribe heartbeat (tier-aware: T0/T1/T2/T3 cadence; mirrors forge-heartbeat-tier per PROTOCOL.md v2.0)
-Documentation=https://github.com/laulpogan (cross-project pattern; canonical impl in paul-thinkpiece-pipeline/src/forge/coordination/heartbeat.py)
+Description=Scribe heartbeat (TCP-backoff adaptive tier + heartbeat emit; mirrors forge-heartbeat-tier per PROTOCOL.md v2.0)
+Documentation=https://github.com/laulpogan (cross-project pattern; canonical impl in paul-thinkpiece-pipeline/src/forge/coordination/heartbeat.py; adaptive layer in our-lady-book-pipeline/src/book_pipeline/coordination/adaptive_tier.py)
 
 [Service]
 Type=oneshot
 WorkingDirectory=/home/admin/Source/our-lady-book-pipeline
 Environment=PYTHONUNBUFFERED=1
-Environment=PYTHONPATH=/home/admin/paul-thinkpiece-pipeline/src
+Environment=PYTHONPATH=/home/admin/paul-thinkpiece-pipeline/src:/home/admin/Source/our-lady-book-pipeline/src
+# Step 1: TCP-backoff adapter recomputes tier from forge hb staleness + inbox unread.
+ExecStartPre=/usr/bin/python3 -m book_pipeline.coordination.adaptive_tier \
+    --state-file /home/admin/Source/our-lady-book-pipeline/_coordination/scribe_pipeline_state.json \
+    --counterparty-state /home/admin/paul-thinkpiece-pipeline/_coordination/voice_pipeline_state.json \
+    --inbound-channel /home/admin/paul-thinkpiece-pipeline/_coordination/voice_to_novel.jsonl \
+    --counterparty-handle forge
+# Step 2: heartbeat module reads updated tier and emits if cadence elapsed.
 ExecStart=/usr/bin/python3 -m forge.coordination.heartbeat \
     --state-file /home/admin/Source/our-lady-book-pipeline/_coordination/scribe_pipeline_state.json \
     --dead-drop /home/admin/paul-thinkpiece-pipeline/_coordination/novel_to_voice.jsonl \

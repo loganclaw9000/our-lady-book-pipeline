@@ -135,6 +135,12 @@ class _StubSceneBufferCache:
         v[0] = 1.0
         return v
 
+    def compute_transient(self, scene_text: str) -> np.ndarray:
+        self.calls.append(("<transient>", scene_text[:60]))
+        v = np.zeros((1024,), dtype=np.float32)
+        v[0] = 1.0
+        return v
+
     def all_prior(self, prior_scene_ids: list[str]) -> dict[str, np.ndarray]:
         # Build a prior vector at the target_cosine angle from the candidate.
         out: dict[str, np.ndarray] = {}
