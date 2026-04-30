@@ -1,0 +1,267 @@
+{
+  "entities": [
+    {
+      "entity_name": "Itzcoatl",
+      "last_seen_chapter": 23,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 9,
+        "current_state": "Texcocan pilli pilot of Obsidian Mirror, defection completed. A month before chapter formally pledged his engines, men, and Texcocan retinue to the Spanish in the great courtyard at Tlaxcala in front of Cortés, Olid, Alvarado and the Tlaxcalan lords, with Malintzin two paces back translating; permitted Cortés to lay a silver crucifix briefly against Mirror's flank without being baptized himself and will not be. Walked Mirror down the volcano switchback under her own power into a Spanish-built cradle of flat laid stone (wrong geometry for a Tezcatlipoca engine, which rests on shadow not flat). Wears a Spanish breastplate hammered to his frame in Tlaxcala that meets his collarbone three fingers high and cuts a thin line of pressure above the bone, and a Spanish leather belt with a small iron buckle over his Texcocan undertunic. Rode a Spanish horse on the northern causeway across shallow Lake Texcoco beside Ixtlilxochitl as the cousin spoke of Texcocan reconstruction; managed only four words of Nahuatl in reply ('the grandfather's lines were good'). At dawn of the chapter's third scene took the dawn watch in Mirror's open cockpit at the Spanish lakeshore camp, listening to the Great Engine's half-awake hum two miles across the water sit a sixth above Mirror's pitch. Has begun a private dawn ritual not Spanish and not properly Texcocan: palms on knees, head bowed three degrees, telling Mirror he is still here half a quarter-step off the note and will not lie to her about what they are doing. Has decided he will never harmonize with the work, will walk Mirror into the breach when ordered, and will not pretend otherwise. Will walk Mirror across the camp at the third hour to stage by the brigantine yard for Sandoval's western-causeway order.",
+        "relationships": [
+          {
+            "to": "Obsidian Mirror",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Cortés",
+            "kind": "pledged_to"
+          },
+          {
+            "to": "Don Fernando Ixtlilxochitl",
+            "kind": "cousin_of"
+          },
+          {
+            "to": "Sandoval",
+            "kind": "subordinate_of"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "He had pledged his engines. Last month, in the great courtyard at Tlaxcala, in front of Cortés and Olid and Alvarado and the Tlaxcalan lords",
+        "He set his palms on his knees in the formal posture and bowed his head three degrees.",
+        "He had walked down the road. That was enough."
+      ],
+      "source_chapter_sha": "73d6434c0fef2c2663a5b8f1b706ceb5b9e702af"
+    },
+    {
+      "entity_name": "Obsidian Mirror",
+      "last_seen_chapter": 23,
+      "state": {
+        "aliases": [
+          "Mirror"
+        ],
+        "entity_type": "object",
+        "first_mentioned_chapter": 9,
+        "current_state": "Tezcatlipoca-caste Texcocan engine, fifty feet of basalt walking under its own power. Walked the volcano switchback down from the pass into a Spanish-prepared cradle of rough-hewn stone at the lake — geometry wrong because a Tezcatlipoca engine rests on shadow, not flat stone. Permitted Cortés's silver crucifix laid briefly against her flank; hum dropped a quarter-tone for a beat then returned. Walked the northern causeway behind Itzcoatl's horse half a quarter-step off Sun-That-Answers's pitch (the two engines cannot harmonize); obsidian pads scrape at every joint between blocks because the deity prefers edges to flats. Now sits in cradle on a platform of laid logs at the western edge of the Spanish lakeshore camp, hatch up, hands at rest on her knees. Hum sits at the pitch Itzcoatl learned at fifteen in the engine-yard at Texcoco; the catch the older pilots describe as the deity coughing in sleep is still there, very faint, deity has not departed. Cockpit fitted with a divination port (four-hand-wide polished obsidian disc), three-mirror obsidian stack around the pilot seat, and a corner-mirror behind the seat installed at Itzcoatl's request the year his mother first fell ill — uncommon among Tezcatlipoca pilots and against older pilots' counsel. Will walk to the brigantine yard at the third hour for the western-causeway sortie.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "piloted_by"
+          },
+          {
+            "to": "Tezcatlipoca",
+            "kind": "houses"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "Mirror sat in her cradle on a platform of laid logs at the camp's western edge, hatch up, hands at rest on her knees.",
+        "the catch in her hum that the older pilots described as the deity coughing in sleep was still there, very faint, and she had not departed.",
+        "A Tezcatlipoca engine does not rest on flat stone. It rests on shadow."
+      ],
+      "source_chapter_sha": "73d6434c0fef2c2663a5b8f1b706ceb5b9e702af"
+    },
+    {
+      "entity_name": "Don Fernando Ixtlilxochitl",
+      "last_seen_chapter": 23,
+      "state": {
+        "aliases": [
+          "Ixtlilxochitl",
+          "Don Fernando"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 9,
+        "current_state": "Texcocan defector to the Spanish, baptized last autumn (1520) in a Tlaxcalan chapel Itzcoatl was not invited to. Pilots Sun-That-Answers, a Huitzilopochtli-caste giant cast for the patron god of the Mexica by a Texcocan smith a generation ago, now painted with Spanish heraldry over the Mexica glyphs. Wears a Spanish cloak pinned at the shoulder over a Texcocan undertunic with a small enameled cross at the throat that he never takes off; in camp now uses Castilian even in private — 'the discipline of the choice.' Stood to the left of Itzcoatl's pledge stage at the staging ground at the foot of the pass; rode at Itzcoatl's right on the northern causeway speaking of Texcoco rebuilt around a Spanish stone church on the foundation of the old precinct, a Latin school where Texcocan boys would read Cicero, the preservation of Nezahualpilli's library (signed written promise), and the canal grid being re-cut in the southern wards by Sandoval's engineers (Ixtlilxochitl marked which older lines to keep — 'the ones our grandfather had widened'). Said 'our grandfather' lightly. Acts as Sandoval's liaison to Itzcoatl: confirmed at the dawn cradle that Mirror walks across camp at the third hour to stage by the brigantine yard. Calm is not cruelty — 'a sealed thing complete in itself.' Has not claimed grief ended, only that he is past it.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "cousin_of"
+          },
+          {
+            "to": "Sun-That-Answers",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Cortés",
+            "kind": "pledged_to"
+          },
+          {
+            "to": "Sandoval",
+            "kind": "liaison_for"
+          }
+        ],
+        "confidence_score": 0.93
+      },
+      "evidence_spans": [
+        "He had been baptized last autumn, in some chapel in Tlaxcala that Itzcoatl had not seen, on a schedule Itzcoatl had not been invited to keep.",
+        "He spoke of a Texcoco rebuilt around a Spanish stone church on the foundation of the old precinct",
+        "Sandoval wants the Texcocan engines on the western causeway by midday"
+      ],
+      "source_chapter_sha": "73d6434c0fef2c2663a5b8f1b706ceb5b9e702af"
+    },
+    {
+      "entity_name": "Sun-That-Answers",
+      "last_seen_chapter": 23,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 21,
+        "current_state": "Huitzilopochtli-caste giant in Spanish service, piloted by Ixtlilxochitl/Don Fernando. A Texcocan engine cast for the patron god of the Mexica by a Texcocan smith a generation ago, now painted with Spanish heraldry over the Mexica glyphs. Stood behind Ixtlilxochitl during Itzcoatl's pledge ceremony at the foot of the pass; walked half a quarter-step off Obsidian Mirror's pitch on the northern causeway — the two engines cannot harmonize and will not, and the air between them carries an audible pressure. Designated by Itzcoatl as 'Ixtlilxochitl's deliberate provocation': the Mexica patron god walking toward the Mexica capital on the Spanish side of the line. NOTE: ch21 had Sun-That-Answers as a Mexica forward-cradle engine pulled back to feed the Great Engine — ch23 establishes either a different engine of the same name or a transfer/capture; ch23 unambiguously has it under Ixtlilxochitl in the Spanish column.",
+        "relationships": [
+          {
+            "to": "Don Fernando Ixtlilxochitl",
+            "kind": "piloted_by"
+          },
+          {
+            "to": "Huitzilopochtli",
+            "kind": "houses"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "his engine *Sun-That-Answers* stood behind him, a Huitzilopochtli-caste giant in the employ of the man who would conquer his own people.",
+        "The engine was painted with Spanish heraldry over the Mexica glyphs.",
+        "The patron god of the Mexica, piloted in a Texcocan engine cast for him a generation ago by a smith long since dead, walking now toward the Mexica capital on the Spanish side of the line."
+      ],
+      "source_chapter_sha": "73d6434c0fef2c2663a5b8f1b706ceb5b9e702af"
+    },
+    {
+      "entity_name": "Great Engine",
+      "last_seen_chapter": 23,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 1,
+        "current_state": "Half-awake all night beneath the Templo Mayor across two miles of open lake from the Spanish camp; idle pitch arrives at the camp so attenuated it can be mistaken for wind in the canvas, audible only to those who know to listen for it. Sits a sixth above Obsidian Mirror's pitch — not dissonant, not consonant, the old interval between Tezcatlipoca and Huitzilopochtli (brothers in the order of the world). Pilot is dead, smallpox per the courier; the new pilot will not climb in while there is any other choice. Per Ixtlilxochitl: will stay half-awake, the new pilot will climb in only when the western wall comes down, and then 'we will know.'",
+        "relationships": [
+          {
+            "to": "Templo Mayor",
+            "kind": "located_under"
+          },
+          {
+            "to": "Huitzilopochtli",
+            "kind": "houses"
+          }
+        ],
+        "confidence_score": 0.92
+      },
+      "evidence_spans": [
+        "the Great Engine's idle pitch arrived at his hatch so attenuated it could be mistaken for wind in the canvas",
+        "\"The pilot is dead. Smallpox, the courier said.",
+        "It will stay half-awake,"
+      ],
+      "source_chapter_sha": "73d6434c0fef2c2663a5b8f1b706ceb5b9e702af"
+    },
+    {
+      "entity_name": "Brigantines",
+      "last_seen_chapter": 23,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 19,
+        "current_state": "Thirteen brigantine hulls hauled in sections over the Paso de Cortés on the backs of indigenous porters whose names no one will write down, reassembled at Texcoco's shore in a yard that smelled of pitch and resined wood. Now floating at their moorings beyond the picket of the Spanish lakeshore camp, masts black against the paling sky. The reassembly yard at Texcoco still active; Itzcoatl will stage Mirror by the brigantine yard at the third hour for the western-causeway sortie. The ring is closing.",
+        "relationships": [
+          {
+            "to": "Spanish lakeshore camp",
+            "kind": "moored_at"
+          },
+          {
+            "to": "Lake Texcoco",
+            "kind": "patrolling"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "the brigantines floated at their moorings, thirteen of them, masts black against the paling sky",
+        "the brigantines: thirteen of them, hauled in sections over the Paso de Cortés on the backs of porters whose names no one would write down",
+        "reassembled at Texcoco's shore in a yard that smelled of pitch and resined wood."
+      ],
+      "source_chapter_sha": "73d6434c0fef2c2663a5b8f1b706ceb5b9e702af"
+    },
+    {
+      "entity_name": "Sandoval",
+      "last_seen_chapter": 23,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 17,
+        "current_state": "Spanish captain at the lakeshore camp on the day before/at the start of the siege. Wants the Texcocan engines on the western causeway by midday on the chapter day; received Ixtlilxochitl's confirmation that Itzcoatl will walk Mirror across camp at the third hour to stage by the brigantine yard. His engineers have already drawn the canal-grid re-cuts for the southern wards of Tenochtitlan and asked Ixtlilxochitl to mark which older lines to keep.",
+        "relationships": [
+          {
+            "to": "Don Fernando Ixtlilxochitl",
+            "kind": "commands_through"
+          },
+          {
+            "to": "Itzcoatl",
+            "kind": "issues_orders_to"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Sandoval wants the Texcocan engines on the western causeway by midday",
+        "Sandoval's engineers have already drawn it. They asked me to mark which of the older lines to keep."
+      ],
+      "source_chapter_sha": "73d6434c0fef2c2663a5b8f1b706ceb5b9e702af"
+    },
+    {
+      "entity_name": "Cortés",
+      "last_seen_chapter": 23,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Commands the Spanish-Tlaxcalan-Texcocan force at the lake basin. At the staging ground at the foot of the pass came out from the tents with Malintzin half a step behind to receive Itzcoatl's defection — short formal exchange, accepted Itzcoatl's pledge of engines, men, and Texcocan retinue, and laid a silver crucifix briefly against Obsidian Mirror's flank without comment. A month before chapter at the great courtyard at Tlaxcala had received the formal pledge in front of Olid, Alvarado, and the Tlaxcalan lords with Malintzin two paces back translating. By dawn of scene three already up at the command tent at the lakeshore camp.",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "consort_translator_of"
+          },
+          {
+            "to": "Itzcoatl",
+            "kind": "received_pledge_from"
+          },
+          {
+            "to": "Don Fernando Ixtlilxochitl",
+            "kind": "received_pledge_from"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Cortés came out from the tents. Malintzin was half a step behind him, as always.",
+        "in front of Cortés and Olid and Alvarado and the Tlaxcalan lords",
+        "The gesture of the crucifix was small, a silver cross laid briefly against the flank of *Obsidian Mirror*"
+      ],
+      "source_chapter_sha": "73d6434c0fef2c2663a5b8f1b706ceb5b9e702af"
+    },
+    {
+      "entity_name": "Nezahualpilli",
+      "last_seen_chapter": 23,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 23,
+        "current_state": "Texcocan ancestor (named here for the first time in the corpus) who kept a library in old Texcoco. Per Ixtlilxochitl's causeway speech, the library will not be burned in the post-conquest reconstruction — Ixtlilxochitl has a written, signed Spanish promise to that effect. Implied to be a Texcocan tlatoani / royal predecessor in Itzcoatl and Ixtlilxochitl's lineage; the cousins also speak of 'our grandfather' separately, suggesting Nezahualpilli is an earlier ancestor (likely the Nezahualcoyotl-line royal house Itzcoatl's mother taught from).",
+        "relationships": [
+          {
+            "to": "Texcoco",
+            "kind": "ancestor_of"
+          }
+        ],
+        "confidence_score": 0.7
+      },
+      "evidence_spans": [
+        "the library Nezahualpilli had kept would not be burned, he had a written promise on that, signed."
+      ],
+      "source_chapter_sha": "73d6434c0fef2c2663a5b8f1b706ceb5b9e702af"
+    }
+  ],
+  "chapter_num": 23,
+  "extraction_timestamp": "2026-04-30T20:52:21.544866Z"
+}
