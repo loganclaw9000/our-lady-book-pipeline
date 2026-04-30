@@ -1,0 +1,508 @@
+{
+  "entities": [
+    {
+      "entity_name": "Itzcoatl",
+      "last_seen_chapter": 18,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 9,
+        "current_state": "Texcocan pilli pilot of Obsidian Mirror at the Battle of Otumba (~July 7-8, 1520, seven nights after La Noche Triste). Held the right flank under standing orders to harass any Spanish second-class breaking for open country; never engaged. Watched a Tlaxcalan storm-pilot kill Sun-at-Noon by driving a captured Huitzilopochtli solar standard into its chest seal while it knelt to strike. Allowed the thought 'We could lose this' to form complete in his cockpit, and registered the not-unthinking of it as betrayal. After the field broke ordered Mirror put into rest-rite in the field rather than Texcoco, performed the Tezcatlipoca closing rite with two telpochcalli boys aged 16 and 17, and slept in Mirror's cradle 50 miles from any temple of her god. Used the calmecac verb (not the poet's verb) to name the act of betraying a sworn lord. Named to himself: 'I am beginning to choose.' Recalls his cousin Ixtlilxochitl's December 1519 recruitment offer at Texcoco (which he refused cleanly), his sister Xochitl's wordless letter in May, and his mother's dinner-table warning that the seals at Cholula and Tula had cracked further. By morning the dedication-through-trial is a defection that has not yet been walked; the week between is logistics.",
+        "relationships": [
+          {
+            "to": "Obsidian Mirror",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Ixtlilxochitl",
+            "kind": "cousin_of"
+          },
+          {
+            "to": "Xochitl Tlapala",
+            "kind": "brother_of"
+          },
+          {
+            "to": "Itzcoatl's mother",
+            "kind": "son_of"
+          },
+          {
+            "to": "Tezcatlipoca",
+            "kind": "served_by"
+          },
+          {
+            "to": "Cuauhtemoctzin's cousin",
+            "kind": "comrade_of"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "We could lose this.",
+        "I am beginning to choose.",
+        "By morning the dedication-through-trial is a defection that has not yet been walked."
+      ],
+      "source_chapter_sha": "ad412fa2e1871ba0496681644961f6a18a6581a6"
+    },
+    {
+      "entity_name": "Obsidian Mirror",
+      "last_seen_chapter": 18,
+      "state": {
+        "aliases": [
+          "Mirror"
+        ],
+        "entity_type": "object",
+        "first_mentioned_chapter": 9,
+        "current_state": "Tezcatlipoca-caste, fifty feet, Texcocan-made; smoking-mirror chest-disc is a real piece of polished obsidian four hands across, the working face of the engine's divinatory mirror. Walked the right flank at Otumba at half-pace; cockpit lit only by reflected light through the divination port; mirror-stack showed the field at four removes including a corner-mirror behind the seat that gave Itzcoatl the line of his own back. Did not engage. After the rout Itzcoatl ordered her into rest-rite in the field, helmet set on wet ground, blood smeared on the chest-disc which drank it and showed Itzcoatl a gray distorted face he did not recognize. By night she rests in cradle 50 miles from any temple of her god — the first time that distance has been opened since the campaign began — with a catch in her hum 'like a person coughing in sleep' that older pilots describe as the deity noticing a pilot's drift. Hum stayed steady against Itzcoatl's back during the betrayal-thought; Tezcatlipoca did not depart.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "piloted_by"
+          },
+          {
+            "to": "Tezcatlipoca",
+            "kind": "houses"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "Tezcatlipoca-caste, fifty feet, Texcocan-made.",
+        "The disc drinks his blood.",
+        "The engine hums, softer now, fifty miles from any temple of her god, but with a catch in the sound that was not there at dawn."
+      ],
+      "source_chapter_sha": "ad412fa2e1871ba0496681644961f6a18a6581a6"
+    },
+    {
+      "entity_name": "Otumba",
+      "last_seen_chapter": 18,
+      "state": {
+        "aliases": [
+          "the plain at Otumba"
+        ],
+        "entity_type": "place",
+        "first_mentioned_chapter": 18,
+        "current_state": "Plain forty kilometers from Tenochtitlan, dust to the horizon, late morning sun flattening shadows. Bad ground for Tezcatlipoca-caste engines; dry, flat, no shelter — the worst possible terrain for a Matlalcueitl storm-pilot, where her deity is at its weakest. Site of the engagement seven nights after La Noche Triste in which a small Tlaxcalan storm-pilot on foot killed the first-class Huitzilopochtli engine Sun-at-Noon by driving a captured Mexica solar standard into its chest-seal while it knelt to strike. After the kill the Mexica line of two thousand warriors and forty engines stopped advancing; the Spanish square of six hundred sunburned unhorsed men and two thousand Tlaxcalans on foot reformed and advanced. By evening Cortés's column is making for Tlaxcala three miles out, ragged at the rear, surviving Reliquaries walking last on foot.",
+        "relationships": [],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "The plain at Otumba was forty kilometers from the city, dust to the horizon.",
+        "Bad ground for a Tezcatlipoca",
+        "the Spanish square, six hundred sunburned men with no engines and no horses, began, raggedly, to advance."
+      ],
+      "source_chapter_sha": "ad412fa2e1871ba0496681644961f6a18a6581a6"
+    },
+    {
+      "entity_name": "Sun-at-Noon",
+      "last_seen_chapter": 18,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 18,
+        "current_state": "Mexica first-class Huitzilopochtli engine, hundred feet tall, actual gold on the chest disc, talons rather than bootplates, hummingbird-helm crested with quetzal-feather banks ten meters tall. The largest field engine the Triple Alliance kept outside Tenochtitlan itself. Drank only the bones of warriors taken in the Flower Wars who had ascended the pyramid willingly; three generations of those bones rode in its teōcalli-chest. Stood at the center of the Mexica line at Otumba. When a single Tlaxcalan storm-pilot on foot crossed the dust toward it, it accepted the challenge as theologically required and strode forward; took two backward steps to set a third macuahuitl strike, dropped to its right knee, and the gilded chest-disc came down to the height of an upraised banner. The pilot drove the captured Mexica solar standard into the chest seal — same god, same metal — and the seal recognized one of its own and opened. Now stands kneeling motionless at the center of its formation with a Tlaxcalan stick through its heart-chamber; right arm with bronze blade still raised, never finishing the swing; hummingbird helm canted forward six degrees; feather banks gone still in a wind that was still blowing. By the chronicles will stand for a season before any motif consents to fade. Solar heraldry undimmed in the noon light at chapter end.",
+        "relationships": [
+          {
+            "to": "Cuauhtemoctzin's cousin",
+            "kind": "piloted_by"
+          },
+          {
+            "to": "Huitzilopochtli",
+            "kind": "houses"
+          },
+          {
+            "to": "Matlalcueitl",
+            "kind": "killed_by"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "A hundred feet. Actual gold on the chest disc, talons rather than bootplates",
+        "She drove the captured solar standard into the seal.",
+        "the right arm with its bronze blade had not finished the stroke it had begun fifty seconds ago."
+      ],
+      "source_chapter_sha": "ad412fa2e1871ba0496681644961f6a18a6581a6"
+    },
+    {
+      "entity_name": "Cuauhtemoctzin's cousin",
+      "last_seen_chapter": 18,
+      "state": {
+        "aliases": [
+          "pilot of Sun-at-Noon"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 18,
+        "current_state": "Mexica pilot of Sun-at-Noon, cousin of Cuauhtemoctzin (Cuauhtémoc). Itzcoatl had eaten with him three months earlier in the precinct refectory; both complained about the rations. Inside Sun-at-Noon when Matlalcueitl drove the captured standard into the chest seal at Otumba; Itzcoatl thought he was either dead now or about to be, and did not know which.",
+        "relationships": [
+          {
+            "to": "Sun-at-Noon",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Cuauhtémoc",
+            "kind": "cousin_of"
+          },
+          {
+            "to": "Itzcoatl",
+            "kind": "comrade_of"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "The pilot was Cuauhtemoctzin's cousin, Itzcoatl had eaten with him three months earlier in the precinct refectory",
+        "Cuauhtemoctzin's cousin was somewhere behind that gold, and he was either dead now or about to be."
+      ],
+      "source_chapter_sha": "ad412fa2e1871ba0496681644961f6a18a6581a6"
+    },
+    {
+      "entity_name": "Matlalcueitl",
+      "last_seen_chapter": 18,
+      "state": {
+        "aliases": [
+          "the storm-pilot",
+          "the Tlaxcalan storm-pilot"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 18,
+        "current_state": "Tlaxcalan storm-pilot, ~30 years old, of a pilli house with five generations of teōmachtiani. Engine Hummingbird at Dawn left behind in Tenochtitlan with a broken left shoulder-joint; she crossed the Tlacopan causeway on foot, the plain to Otumba on foot, and killed the largest engine on the field on foot. Brother killed at Tlaxcala by the Reliquary La Niña de Córdoba. Identified by Itzcoatl across the field by the rain-glyphs tattooed up her forearms and a stained head-wrap from a wound taken on the causeway seven nights earlier. At Otumba she ran across the dust alone carrying a captured Mexica Huitzilopochtli solar standard (cotinga-blue cloth, ~30kg hammered-gold disc) angled forward like a lance; ducked under the first macuahuitl sweep, stepped through the second, climbed the kneeling Sun-at-Noon's leg and drove the standard into its chest seal — same god, same metal, the seal opened. The deity inside Obsidian Mirror laughed in recognition, not at her. After the kill walked back across the dust empty-handed, head down, eyes on the dust in front of her own feet. The Mexica line did not close on her — what she had done at the heart-chamber purchased her something the calmecac did not have a verb for. NOTE: prior ch19 card listed 'Matlalcueitl' as a Tlaxcalan engine in the brigantine workshop yard — that reference may be to her deity-caste, her engine, or this storm-pilot herself; the chapter uses 'Matlalcueitl' as the narrative shorthand for the woman.",
+        "relationships": [
+          {
+            "to": "Hummingbird at Dawn",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Sun-at-Noon",
+            "kind": "killed"
+          },
+          {
+            "to": "La Niña de Córdoba",
+            "kind": "killed_brother_of"
+          },
+          {
+            "to": "Tlaxcalans",
+            "kind": "fights_for"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "She was small.",
+        "*Matlalcueitl.* A storm-pilot, on foot, at noon, on a dry plain, where her deity was at its weakest.",
+        "Brother killed at Tlaxcala by the Reliquary called *La Niña de Córdoba*"
+      ],
+      "source_chapter_sha": "ad412fa2e1871ba0496681644961f6a18a6581a6"
+    },
+    {
+      "entity_name": "Hummingbird at Dawn",
+      "last_seen_chapter": 18,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 18,
+        "current_state": "Tlaxcalan engine, Matlalcueitl's mount. Left behind in Tenochtitlan with a broken left shoulder-joint when Matlalcueitl crossed the Tlacopan causeway on foot during La Noche Triste. Not present at Otumba.",
+        "relationships": [
+          {
+            "to": "Matlalcueitl",
+            "kind": "piloted_by"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "*Hummingbird at Dawn* left behind in Tenochtitlan with a broken left shoulder-joint, which meant she had crossed the causeway on foot"
+      ],
+      "source_chapter_sha": "ad412fa2e1871ba0496681644961f6a18a6581a6"
+    },
+    {
+      "entity_name": "Battle of Otumba",
+      "last_seen_chapter": 18,
+      "state": {
+        "aliases": [],
+        "entity_type": "event",
+        "first_mentioned_chapter": 18,
+        "current_state": "Engagement on a dry plain forty kilometers from Tenochtitlan, late morning, ~July 7-8 1520 (seven nights after La Noche Triste). Mexica field: ~forty engines and two thousand warriors arrayed around Sun-at-Noon at the center; standing orders held the Tezcatlipoca-caste right flank (Obsidian Mirror) to harass Spanish second-class breakouts. Spanish field: two upright second-class Reliquaries (neither moving fast), a square of ~600 unhorsed unarmored sunburned men, two thousand Tlaxcalans on foot. Kill-geometry at dawn said Spanish defeat by midday. Decisive moment: the Tlaxcalan storm-pilot Matlalcueitl crossed the dust on foot carrying a captured Mexica Huitzilopochtli solar standard, ducked two macuahuitl strikes from Sun-at-Noon, climbed its kneeling chest seam and drove the matched solar standard into the seal, killing the engine in place. Mexica line of forty engines and two thousand warriors stopped advancing. Spanish square reformed around Cortés's banner; Sandoval's cavalry formed; Tlaxcalan square advanced; a Mexica drum that had been beating since dawn stopped, and the field heard it stop. Outcome: Spanish-Tlaxcalan victory; Cortés's column makes for Tlaxcala three miles out by evening, ragged at the rear, surviving Reliquaries walking last on foot with two of them showing dull patches of fading saint-heraldry.",
+        "relationships": [
+          {
+            "to": "Sun-at-Noon",
+            "kind": "decisive_loss"
+          },
+          {
+            "to": "Matlalcueitl",
+            "kind": "decisive_actor"
+          },
+          {
+            "to": "Cortés",
+            "kind": "victor"
+          },
+          {
+            "to": "Tlaxcalans",
+            "kind": "victor"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "The plain at Otumba was forty kilometers from the city, dust to the horizon.",
+        "Two thousand warriors and forty engines, looking at the hundred-foot solar giant kneeling motionless at the center of their formation with a Tlaxcalan stick through its heart",
+        "a Mexica drum that had been beating since dawn stopped, and the field heard it stop."
+      ],
+      "source_chapter_sha": "ad412fa2e1871ba0496681644961f6a18a6581a6"
+    },
+    {
+      "entity_name": "Ixtlilxochitl",
+      "last_seen_chapter": 18,
+      "state": {
+        "aliases": [
+          "Don Fernando Ixtlilxochitl"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 9,
+        "current_state": "Itzcoatl's cousin. In December (1519) met Itzcoatl in a borrowed room at Texcoco — paper walls, brazier between them, no servants — and made a simple proposition: join the Spanish, take Texcoco back from the Mexica with Spanish engines as leverage. Itzcoatl refused cleanly. Ixtlilxochitl did not press; they drank octli together afterward and did not speak of it again. (Later, per ch19, defects publicly to Cortés in October 1520 with three engines, retinue of nobles, and offer of 50,000 warriors; baptized as Don Fernando.)",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "cousin_of"
+          },
+          {
+            "to": "Cortés",
+            "kind": "later_defects_to"
+          },
+          {
+            "to": "Texcoco",
+            "kind": "exile_from"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "His cousin Ixtlilxochitl, in December, in a borrowed room at Texcoco, paper walls, brazier between them, no servants.",
+        "join the Spanish, take Texcoco back from the Mexica, with the Spanish engines as leverage. He had refused.",
+        "They had drunk *octli* together afterward and not spoken of it again."
+      ],
+      "source_chapter_sha": "ad412fa2e1871ba0496681644961f6a18a6581a6"
+    },
+    {
+      "entity_name": "Xochitl Tlapala",
+      "last_seen_chapter": 18,
+      "state": {
+        "aliases": [
+          "Xochitl"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 9,
+        "current_state": "Itzcoatl's sister. Widowed in May (Templo Mayor massacre, where her husband Cuauhtli Ocelotl died). Her son scarred from temple to jaw. After the massacre sent Itzcoatl a folded paper letter with no words on the outside (his name not written) and no words inside — only three small stained objects: a feather, a piece of cloth, a child's sandal. Itzcoatl read it as her sending him 'the difference between' her having lost everything and his having lost nothing.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "sister_of"
+          },
+          {
+            "to": "Cuauhtli Ocelotl",
+            "kind": "widow_of"
+          },
+          {
+            "to": "Tepin",
+            "kind": "mother_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "His sister Xochitl, widowed in May, her son scarred from temple to jaw.",
+        "Inside the folded paper: a feather, a piece of cloth, a child's sandal. All three stained.",
+        "She had sent them without writing his name on the outside."
+      ],
+      "source_chapter_sha": "ad412fa2e1871ba0496681644961f6a18a6581a6"
+    },
+    {
+      "entity_name": "Itzcoatl's mother",
+      "last_seen_chapter": 18,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 18,
+        "current_state": "Texcocan philosopher in the Nezahualcoyotl tradition. At dinner months before Otumba, told Itzcoatl — without saying the word Quetzalcoatl, without saying wake — that the seals at Cholula and Tula had cracked further. Itzcoatl understood this as a coded warning that the dormant engines would wake against the Mexica, since Tezcatlipoca and Quetzalcoatl are brothers in the cosmogony and her phrasing announced whose turn was ending. Taught Itzcoatl as a boy the Texcocan philosopher's exercise: name the thing you do not want to name. Used by Itzcoatl on the plain at Otumba to name 'I am beginning to choose.' Appears in Itzcoatl's dream the night after Otumba at her dinner table — copal smoke, two cups, lacquered edge worn pale by Itzcoatl's grandfather's elbows — saying nothing to him, the silence between them the named thing.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "mother_of"
+          },
+          {
+            "to": "Xochitl Tlapala",
+            "kind": "mother_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "His mother in Texcoco, philosopher in the Nezahualcoyotl tradition",
+        "the seals at Cholula and at Tula had cracked further. She had said *cracked further*, and it had been enough.",
+        "He does the exercise his mother taught him as a boy. The Texcocan philosopher's exercise. Name the thing you do not want to name."
+      ],
+      "source_chapter_sha": "ad412fa2e1871ba0496681644961f6a18a6581a6"
+    },
+    {
+      "entity_name": "Tepin",
+      "last_seen_chapter": 18,
+      "state": {
+        "aliases": [
+          "Xochitl's son"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 15,
+        "current_state": "Itzcoatl's nephew, son of Xochitl Tlapala (and the late Cuauhtli Ocelotl). Survived the Templo Mayor massacre but was scarred from temple to jaw — confirming the rooftop-view inquiry that opened in ch15 has resolved. (Ch18 does not name him as Tepin explicitly; identification by sole-nephew inference.)",
+        "relationships": [
+          {
+            "to": "Xochitl Tlapala",
+            "kind": "son_of"
+          },
+          {
+            "to": "Cuauhtli Ocelotl",
+            "kind": "son_of"
+          },
+          {
+            "to": "Itzcoatl",
+            "kind": "nephew_of"
+          }
+        ],
+        "confidence_score": 0.7
+      },
+      "evidence_spans": [
+        "His sister Xochitl, widowed in May, her son scarred from temple to jaw."
+      ],
+      "source_chapter_sha": "ad412fa2e1871ba0496681644961f6a18a6581a6"
+    },
+    {
+      "entity_name": "Cholula",
+      "last_seen_chapter": 18,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 1,
+        "current_state": "Site of a dormant Quetzalcoatl engine. By Itzcoatl's mother's dinner-table report (months before Otumba), the seals at Cholula have 'cracked further' — coded warning that the dormant engine will wake, and when it wakes will wake against the Mexica. Itzcoatl reads Cholula as the place where the dormant Quetzalcoatl shrine 'turned its head and had not, despite everything, turned it back.'",
+        "relationships": [
+          {
+            "to": "Quetzalcoatl",
+            "kind": "houses_dormant_engine_of"
+          },
+          {
+            "to": "Tula",
+            "kind": "paired_seal_site"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Cholula, where the dormant Quetzalcoatl shrine had turned its head and had not, despite everything, turned it back.",
+        "the seals at Cholula and at Tula had cracked further"
+      ],
+      "source_chapter_sha": "ad412fa2e1871ba0496681644961f6a18a6581a6"
+    },
+    {
+      "entity_name": "Tula",
+      "last_seen_chapter": 18,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 1,
+        "current_state": "Site of a dormant Quetzalcoatl engine. Per Itzcoatl's mother's coded warning, the seals at Tula have 'cracked further' alongside Cholula's — read as a sign the dormant engines will wake against the Mexica.",
+        "relationships": [
+          {
+            "to": "Quetzalcoatl",
+            "kind": "houses_dormant_engine_of"
+          },
+          {
+            "to": "Cholula",
+            "kind": "paired_seal_site"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "the seals at Cholula and at Tula had cracked further"
+      ],
+      "source_chapter_sha": "ad412fa2e1871ba0496681644961f6a18a6581a6"
+    },
+    {
+      "entity_name": "Moctezuma",
+      "last_seen_chapter": 18,
+      "state": {
+        "aliases": [
+          "Huey Tlatoani"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Dead. Killed in the noise on a rooftop in the last days before the Spanish flight from Tenochtitlan (i.e. before La Noche Triste, ~late June 1520). Cause disputed in chronicles already disagreeing — 'the stones or the swords' — but Itzcoatl's own eyes registered only that the Huey Tlatoani had died in the noise. NOTE: this is the first ch-level confirmation of Moctezuma's death; prior cards last had him receiving the Spanish in ch9.",
+        "relationships": [
+          {
+            "to": "Tenochtitlan",
+            "kind": "tlatoani_of"
+          },
+          {
+            "to": "Cuauhtémoc",
+            "kind": "succeeded_by"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "He examined Moctezuma on the rooftop in the last days before the lake, the stones or the swords, the chronicles already disagreeing",
+        "his own eyes registering only that the Huey Tlatoani had died in the noise."
+      ],
+      "source_chapter_sha": "ad412fa2e1871ba0496681644961f6a18a6581a6"
+    },
+    {
+      "entity_name": "Cortés",
+      "last_seen_chapter": 18,
+      "state": {
+        "aliases": [
+          "the Spanish caudillo"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Commands the surviving Spanish-Tlaxcalan column at Otumba ~July 7-8 1520. His banner was ill-positioned to recover at the third hour but became positioned exactly correctly to receive a collapsing enemy after Sun-at-Noon's death. By evening leads the column on toward Tlaxcala, three miles out, ragged at the rear. Itzcoatl reads him as the Spanish caudillo who walked his column out of the lake seven nights ago and onto this plain this morning and would, by the end of the afternoon, have walked his column into a victory the kill-geometry of dawn had said he could not have.",
+        "relationships": [
+          {
+            "to": "Tlaxcala",
+            "kind": "marching_to"
+          },
+          {
+            "to": "Sandoval",
+            "kind": "commands"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Cortés's banner, ill-positioned to recover at the third hour, was now positioned exactly correctly to receive a collapsing enemy.",
+        "Cortés's column is making for Tlaxcala, three miles out, ragged at the rear."
+      ],
+      "source_chapter_sha": "ad412fa2e1871ba0496681644961f6a18a6581a6"
+    },
+    {
+      "entity_name": "Sandoval",
+      "last_seen_chapter": 18,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 17,
+        "current_state": "Spanish captain. At Otumba, after Sun-at-Noon's death his flag was moving and his cavalry were forming as the Spanish square reformed around Cortés's banner.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "captain_under"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "Sandoval's flag was moving.",
+        "Sandoval's cavalry were forming."
+      ],
+      "source_chapter_sha": "ad412fa2e1871ba0496681644961f6a18a6581a6"
+    }
+  ],
+  "chapter_num": 18,
+  "extraction_timestamp": "2026-04-30T18:54:52.821159Z"
+}
