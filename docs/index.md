@@ -30,10 +30,11 @@ Autonomous-pipeline first-draft novel. Historical-fiction, 16th-century Atlantic
 - [Chapter 20 — canon](chapters/chapter_20.md) (4286w) · [retro](retrospectives/chapter_20.md)
 - [Chapter 21 — canon](chapters/chapter_21.md) (3793w) · [retro](retrospectives/chapter_21.md)
 - [Chapter 22 — canon](chapters/chapter_22.md) (4504w) · [retro](retrospectives/chapter_22.md)
+- [Chapter 23 — canon](chapters/chapter_23.md) (4042w) · [retro](retrospectives/chapter_23.md)
 - [Chapter 24 — canon](chapters/chapter_24.md) (3874w) · [retro](retrospectives/chapter_24.md)
 - [Chapter 26 — canon](chapters/chapter_26.md) (3492w) · [retro](retrospectives/chapter_26.md)
 
-23 chapters canonized · 84,234 words · gaps remain at ch16, ch23, ch25, ch27.
+24 chapters canonized · gaps remain at ch16, ch25, ch27 (chapter-critic FAIL or RAG corpus-gap; operator-tier work).
 
 ---
 
