@@ -1,0 +1,405 @@
+{
+  "entities": [
+    {
+      "entity_name": "Malintzin",
+      "last_seen_chapter": 20,
+      "state": {
+        "aliases": [
+          "Marina",
+          "Malinalli"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "At Tlaxcala during the regroup. Currently nursing a child (milk came down twice on the walk to the granary), and carrying a new undisclosed pregnancy ('the small obstinate weight under her ribs, she had not announced it to anyone'). Father called her Malinalli ('Grass'). Eight nights before the chapter heard Bernardo's auto-da-fé confession (os sanctum, reddere, consent feeds the saint); six weeks before that translated for a dying old teōpixqui in the Tlaxcalan granary who told her the great engines at Cholula and Tula feed on the consent of an ixiptla knower, not bone. Synthesized both accounts as one machine in two dialects. Climbed thirty rungs to Andrés in San Esteban del Río's cockpit and laid the synthesis on him verbatim, naming him as the only Spanish pilot who would hear both halves. After three days of his silence met him at the brigantine slip at dawn; declared 'I intend to keep translating' twice — the second saying made it true. Considered telling Cortés, Itzcoatl-via-Xochitl, or walking into the sierra; rejected all three. Spanish vocabulary now ~100 words, up from four in February 1519. Walks past the Spanish gate without challenge.",
+        "relationships": [
+          {
+            "to": "Cortés",
+            "kind": "translator_for_and_consort_of"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "confidant_of_and_nahuatl_tutor_to"
+          },
+          {
+            "to": "Andrés",
+            "kind": "ally_to_after_synthesis"
+          },
+          {
+            "to": "Old teōpixqui (granary priest)",
+            "kind": "translator_for"
+          },
+          {
+            "to": "Itzcoatl",
+            "kind": "back_channel_via_Xochitl"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "Her milk had come down twice on the walk.",
+        "The small obstinate weight under her ribs, she had not announced it to anyone, made each rung a calculation she made and discarded.",
+        "I intend to keep translating."
+      ],
+      "source_chapter_sha": "6ec5bd107d22b78d9bb796f7af0a8b34cbf7f0a9"
+    },
+    {
+      "entity_name": "Bernardo",
+      "last_seen_chapter": 20,
+      "state": {
+        "aliases": [
+          "Fray Bernardo"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 3,
+        "current_state": "At Tlaxcala in his cell, teaching Malintzin Latin and learning Nahuatl from her primer. Has a small tremor in his hand that has been there for weeks, hidden from everyone but her. After three hours at the desk he confessed, in the voice of a man who had stopped guarding what he said, that he has been at three auto-da-fés and that the bones of the executed are kept (not buried, not burned), the saint takes them, the saint feeds — using the words reddere, os, sanctum. Stipulated theologically that the saint receives only what is given (the willing martyr's consent), never what is taken. Did not realize what he had told her until the next morning. Has been silently watching smallpox take children in the camp and watching the Tlaxcalan priests without asking the questions he wanted to ask. On the second morning of Andrés's three-day seclusion crossed the workshop yard with a wooden bowl of food, knocked once on the cradle ladder, climbed up, came back with the bowl empty, said nothing.",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "language_partner_and_unintended_confessor"
+          },
+          {
+            "to": "Andrés",
+            "kind": "fellow_spaniard_brought_food"
+          },
+          {
+            "to": "Auto-da-fé",
+            "kind": "witness_to_three"
+          }
+        ],
+        "confidence_score": 0.92
+      },
+      "evidence_spans": [
+        "I have been at three auto-da-fés,",
+        "The bones are kept. They are not buried. They are not burned. They are kept. The saint takes them. The saint *feeds*.",
+        "the small tremor in it that had been there for weeks"
+      ],
+      "source_chapter_sha": "6ec5bd107d22b78d9bb796f7af0a8b34cbf7f0a9"
+    },
+    {
+      "entity_name": "Andrés",
+      "last_seen_chapter": 20,
+      "state": {
+        "aliases": [
+          "Andrés de Mora"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Pilot of San Esteban del Río at Tlaxcala. Has taken to sleeping in the engine's cradle 'since the engine began to dream of him,' breviary on knee at a page he no longer turns. Goes through the manual flat, on duty, without the cadence pilots use once a saint has become theirs. Heard Malintzin's two-part synthesis of the auto-da-fé and ixiptla theologies in the cockpit; asked her to repeat the Mexica word (ixiptla) and the exact phrasings; broke down silently and asked to be alone. Three days in the cradle alone — lamp burning two nights, Bernardo brought a wooden bowl on day two, lamp out and cradle door open by morning of day three. Met Malintzin at the brigantine slip at dawn, shaved, sleepless. Sealed an agreement: she keeps translating, will tell him when she decides what to do with what she knows; he will tell her when he decides 'what to do about Flora. Whatever a man can decide about a saint at the bottom of a lake.' Has not stopped praying to a child whose ossuary is mud.",
+        "relationships": [
+          {
+            "to": "San Esteban del Río",
+            "kind": "pilot_of"
+          },
+          {
+            "to": "Flora",
+            "kind": "still_praying_to_after_loss"
+          },
+          {
+            "to": "Malintzin",
+            "kind": "agreement_with"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "received_food_from"
+          }
+        ],
+        "confidence_score": 0.92
+      },
+      "evidence_spans": [
+        "Andrés had taken to sleeping in the cradle since the engine began to dream of him.",
+        "What do you intend to do,",
+        "I cannot stop you,"
+      ],
+      "source_chapter_sha": "6ec5bd107d22b78d9bb796f7af0a8b34cbf7f0a9"
+    },
+    {
+      "entity_name": "San Esteban del Río",
+      "last_seen_chapter": 20,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 17,
+        "current_state": "Stands at the back of the engine sheds at the Tlaxcala workshops with one shoulder-plate dropped open. The new monstrance bracket has been bolted and unbolted three times in two days. Confirms ch19's relic identification: 'The Castilian arm-bone in its housing did not glow. Cradled engines never did.' Cockpit lamp lit; cradle has a thirty-rung iron ladder. Andrés sleeps in the cradle now 'since the engine began to dream of him.' Cradle is two sheds away from the brigantine slips; engine sheds smell of oil, cold metal, and a faint copper that always sits under a Reliquary in cradle.",
+        "relationships": [
+          {
+            "to": "Andrés",
+            "kind": "piloted_by"
+          },
+          {
+            "to": "Castilian arm-bone (San Esteban de Granada)",
+            "kind": "powered_by"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "*San Esteban del Río* stood at the back with one shoulder-plate dropped open, the new monstrance bracket bolted and unbolted three times in two days.",
+        "The Castilian arm-bone in its housing did not glow. Cradled engines never did.",
+        "Andrés had taken to sleeping in the cradle since the engine began to dream of him."
+      ],
+      "source_chapter_sha": "6ec5bd107d22b78d9bb796f7af0a8b34cbf7f0a9"
+    },
+    {
+      "entity_name": "Brigantines",
+      "last_seen_chapter": 20,
+      "state": {
+        "aliases": [],
+        "entity_type": "object",
+        "first_mentioned_chapter": 19,
+        "current_state": "At the Tlaxcala workshops Tlaxcalan women crews are ribbing the seventh hull by lamp-light through the night. Iron rings in pairs (strike, strike, pause) because two crews work opposing keels on a shared rhythm. A long shed nearby holds planks soaking in pine pitch and wet rope. Forges at the south end emit an iron-and-blood smell of new caulk drifting up over the market. New ribs stand up from the still-black dawn channel water 'like the bones of something the lake had not finished giving back.' At least one channel slip is now active and ready for hull assembly.",
+        "relationships": [
+          {
+            "to": "Tlaxcala",
+            "kind": "manufactured_at"
+          },
+          {
+            "to": "Lake Texcoco",
+            "kind": "destined_for"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "Three slips over, the Tlaxcalan women were ribbing the seventh hull by lamp-light",
+        "two crews worked opposing keels on a shared rhythm",
+        "the new ribs of the hull stood up from it like the bones of something the lake had not finished giving back."
+      ],
+      "source_chapter_sha": "6ec5bd107d22b78d9bb796f7af0a8b34cbf7f0a9"
+    },
+    {
+      "entity_name": "Flora",
+      "last_seen_chapter": 20,
+      "state": {
+        "aliases": [],
+        "entity_type": "person",
+        "first_mentioned_chapter": 1,
+        "current_state": "Still at the bottom of Lake Texcoco in La Niña de Córdoba's wreckage. Andrés 'has not stopped praying to a child whose ossuary is mud' — establishes that the daily Latin recitations of her vita have continued through the four months at Tlaxcala despite his loss. By chapter end Andrés has explicitly committed, in his agreement with Malintzin, that he will eventually have to decide 'what to do about Flora. Whatever a man can decide about a saint at the bottom of a lake.' Her name remains the unfinished Spanish business of his interior.",
+        "relationships": [
+          {
+            "to": "Andrés",
+            "kind": "pilot_who_still_prays_to_her"
+          },
+          {
+            "to": "La Niña de Córdoba",
+            "kind": "saint_in_destroyed_engine"
+          },
+          {
+            "to": "Lake Texcoco",
+            "kind": "ossuary_at_bottom_of"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "Because *La Niña de Córdoba* was your engine before this cradle, and her bones are at the bottom of Lake Texcoco, and you have not stopped praying to a child whose ossuary is mud.",
+        "And I will tell you when I have decided what to do about Flora. Whatever a man can decide about a saint at the bottom of a lake."
+      ],
+      "source_chapter_sha": "6ec5bd107d22b78d9bb796f7af0a8b34cbf7f0a9"
+    },
+    {
+      "entity_name": "Old teōpixqui (granary priest)",
+      "last_seen_chapter": 20,
+      "state": {
+        "aliases": [
+          "Mexica priest in granary",
+          "old teopixqui"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 20,
+        "current_state": "Old Mexica priest dying of his own years in a corn-emptied granary at the lane's end in Tlaxcala, under guard. Speaks a dialect close to Malintzin's; calls her by her father's name Malinalli. Forty years ago, as a young teōpixqui, was sent to Cholula to inspect the seal — stood on the seal-stone an afternoon and felt nothing, took the absence as proof the seal was good. Six weeks before chapter (relative to Malintzin's count) was brought to the Tlaxcalan workshops to be translated. Tells her: lesser engines feed on warrior bone, given; the great engines (Cholula, Tula, the mountain ones) feed on the consent of an ixiptla 'knower' who has learned the god into himself and walked up the pyramid in his own skin. The bone is the housing/bowl; the seal eats what was given and 'a man can be coerced to walk up the steps. He cannot be coerced to mean it. The seal knows.' For four generations there have been no knowers willing in the right way and the apparatus has gone hollow generationally, with the priestly caste agreeing among themselves not to notice. Tells her the tlamatinime at Texcoco (with Itzcoatl's people) agreed a year ago to stop guarding the seal. Reasons given for telling her: he is dying, the children of Tenochtitlan are dying of the huey cocoliztli with no one left to tell, she came in her mother's dress and asked in her father's tongue. Whites of eyes yellow, blood pink at corner of mouth. Drifts into the slow breathing pattern Malintzin has heard twice in dying women of her family; she leaves before the breath halts.",
+        "relationships": [
+          {
+            "to": "Malintzin",
+            "kind": "told_metaphysics_to"
+          },
+          {
+            "to": "Cholula",
+            "kind": "inspected_seal_at_40_years_ago"
+          },
+          {
+            "to": "Tlamatinime at Texcoco",
+            "kind": "fellow_priest_aligned_with"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "The lesser engines feed on bone. Warrior bone, given.",
+        "Those feed on consent. On the knower.",
+        "We agreed a year ago to stop guarding the seal. There is nothing left to guard."
+      ],
+      "source_chapter_sha": "6ec5bd107d22b78d9bb796f7af0a8b34cbf7f0a9"
+    },
+    {
+      "entity_name": "Auto-da-fé",
+      "last_seen_chapter": 20,
+      "state": {
+        "aliases": [
+          "auto-da-fé"
+        ],
+        "entity_type": "event",
+        "first_mentioned_chapter": 20,
+        "current_state": "Spanish Inquisition execution rite, the metaphysical machine that powers the Reliquaries. Bernardo has been at three. The bones of the executed are kept — not buried, not burned — and given to the saint, which 'feeds.' Required input is the penitent's consent to die ('a yes'); without that yes the rite is 'a flawed engine' that does not charge the relic beneath the cathedral and does not keep the stone walking. Theologically framed by the Church as 'the saint receives what is given. Not what is taken. Never what is taken.' Bernardo's confession (spoken in Latin technical vocabulary: reddere, os, sanctum) revealed it as theologically isomorphic to the Mexica ixiptla acceptance — the same machine in a different dialect, which Malintzin synthesized as the central revelation of the chapter.",
+        "relationships": [
+          {
+            "to": "Reliquary mecha",
+            "kind": "fuel_pipeline_for"
+          },
+          {
+            "to": "Ixiptla acceptance",
+            "kind": "theological_isomorph_of"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "witnessed_three_times_by"
+          }
+        ],
+        "confidence_score": 0.92
+      },
+      "evidence_spans": [
+        "I have been at three auto-da-fés,",
+        "The saint takes them. The saint *feeds*.",
+        "He said the consent of the martyr is what makes the bone work."
+      ],
+      "source_chapter_sha": "6ec5bd107d22b78d9bb796f7af0a8b34cbf7f0a9"
+    },
+    {
+      "entity_name": "Cholula",
+      "last_seen_chapter": 20,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 1,
+        "current_state": "Site of one of the dormant great Quetzalcoatl engines (the 'mountain' engines). Per the dying old teōpixqui in the Tlaxcalan granary: forty years ago he stood on Cholula's seal-stone an afternoon and felt nothing — taken at the time as proof the seal was good. The seal itself remains good; what has gone hollow is 'the apparatus around the seal,' quietly and generationally, because for four generations there have been no ixiptla knowers willing in the right way, and the priestly caste has agreed among themselves not to notice. The tlamatinime at Texcoco agreed a year ago to stop guarding the seal because 'there is nothing left to guard.' Itzcoatl's mother's coded warning (ch18) that the seals had cracked further is now corroborated by an independent priest from inside the cult of guardians.",
+        "relationships": [
+          {
+            "to": "Tula",
+            "kind": "paired_dormant_engine_site"
+          },
+          {
+            "to": "Old teōpixqui (granary priest)",
+            "kind": "inspected_by_40_years_ago"
+          },
+          {
+            "to": "Tlamatinime at Texcoco",
+            "kind": "no_longer_guarded_by"
+          },
+          {
+            "to": "Quetzalcoatl",
+            "kind": "houses_dormant_engine_of"
+          }
+        ],
+        "confidence_score": 0.9
+      },
+      "evidence_spans": [
+        "I was at Cholula once,",
+        "I stood on the seal-stone an afternoon and felt nothing. That was the proof.",
+        "It is the apparatus around the seal that has gone hollow, quietly, generationally, because for four generations there have been no knowers willing in the right way"
+      ],
+      "source_chapter_sha": "6ec5bd107d22b78d9bb796f7af0a8b34cbf7f0a9"
+    },
+    {
+      "entity_name": "Tula",
+      "last_seen_chapter": 20,
+      "state": {
+        "aliases": [],
+        "entity_type": "place",
+        "first_mentioned_chapter": 1,
+        "current_state": "Site of one of the dormant great Quetzalcoatl engines. Named alongside Cholula by the old teōpixqui as one of the 'great engines, the ones in the mountains' that 'do not feed on bone' — they feed on the consent of an ixiptla knower. Same theological status as Cholula: seal still good, apparatus around it hollow for four generations, tlamatinime stopped guarding it a year ago.",
+        "relationships": [
+          {
+            "to": "Cholula",
+            "kind": "paired_dormant_engine_site"
+          },
+          {
+            "to": "Quetzalcoatl",
+            "kind": "houses_dormant_engine_of"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "the ones in the mountains, the ones at Cholula and Tula, those do not feed on bone.",
+        "Those feed on consent. On the knower."
+      ],
+      "source_chapter_sha": "6ec5bd107d22b78d9bb796f7af0a8b34cbf7f0a9"
+    },
+    {
+      "entity_name": "Huey cocoliztli",
+      "last_seen_chapter": 20,
+      "state": {
+        "aliases": [
+          "smallpox",
+          "the great sickness",
+          "coast sickness"
+        ],
+        "entity_type": "event",
+        "first_mentioned_chapter": 19,
+        "current_state": "Now named in Nahuatl: the smallpox epidemic Bernardo had earlier rumored from a coast muleteer (ch19) is identified by the dying old teōpixqui as huey cocoliztli, killing the children of Tenochtitlan. Visible in the Spanish-Tlaxcalan camp at Tlaxcala — Bernardo has been silently watching it 'take the children in the camp' for an unstated stretch without saying a word. The priest cites it as one of his reasons for breaking decades of silence with Malintzin: 'because the children of Tenochtitlan are dying with the huey cocoliztli and there will be no one left to tell.' Operates in Bernardo's later (ch19) diagnosis of why the Spanish are winning ('they cheated… a sickness rumored from a coast muleteer emptying villages inland').",
+        "relationships": [
+          {
+            "to": "Tenochtitlan",
+            "kind": "killing_children_of"
+          },
+          {
+            "to": "Bernardo",
+            "kind": "silently_witnessed_by"
+          },
+          {
+            "to": "Spanish conquest",
+            "kind": "advantage_in"
+          }
+        ],
+        "confidence_score": 0.95
+      },
+      "evidence_spans": [
+        "the children of Tenochtitlan are dying with the *huey cocoliztli*",
+        "She had watched him watching the smallpox take the children in the camp and not say a word."
+      ],
+      "source_chapter_sha": "6ec5bd107d22b78d9bb796f7af0a8b34cbf7f0a9"
+    },
+    {
+      "entity_name": "Tlamatinime at Texcoco",
+      "last_seen_chapter": 20,
+      "state": {
+        "aliases": [
+          "wise ones",
+          "tlamatinime"
+        ],
+        "entity_type": "person",
+        "first_mentioned_chapter": 20,
+        "current_state": "Texcocan philosopher-priests aligned with Itzcoatl's people (his mother's intellectual lineage in the Nezahualcoyotl tradition). Per the old teōpixqui in the Tlaxcalan granary, they 'agreed a year ago to stop guarding the seal' at Cholula and Tula because there is nothing left to guard — i.e. the dormant great engines no longer have the consent-pipeline to wake them, and the wise ones have collectively resolved to abandon the pretense. They are now openly saying what the priestly caste had agreed not to notice for four generations.",
+        "relationships": [
+          {
+            "to": "Itzcoatl",
+            "kind": "of_his_house_lineage"
+          },
+          {
+            "to": "Itzcoatl's mother",
+            "kind": "philosophical_kin_of"
+          },
+          {
+            "to": "Cholula",
+            "kind": "stopped_guarding_seal_at"
+          },
+          {
+            "to": "Tula",
+            "kind": "stopped_guarding_seal_at"
+          },
+          {
+            "to": "Old teōpixqui (granary priest)",
+            "kind": "aligned_with"
+          }
+        ],
+        "confidence_score": 0.85
+      },
+      "evidence_spans": [
+        "The *tlamatinime* at Texcoco,",
+        "They are saying it now. We agreed a year ago to stop guarding the seal."
+      ],
+      "source_chapter_sha": "6ec5bd107d22b78d9bb796f7af0a8b34cbf7f0a9"
+    }
+  ],
+  "chapter_num": 20,
+  "extraction_timestamp": "2026-04-30T19:38:23.576551Z"
+}
