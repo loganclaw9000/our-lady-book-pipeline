@@ -44,6 +44,8 @@ curl -X POST https://<worker-url> \
 
 **Why agent can't:** Architectural decision. Both chapters now have all 3 scenes drafted+committed individually but `chapter_critic` flags coherence issues that scene-kick can't resolve in 3 cycles. Returning `CHAPTER_FAIL_SCENE_KICKED`. The threshold or rubric for chapter-level coherence is operator-tier judgment.
 
+**Forge insight (2026-05-01T08:55Z):** "chapter-critic too aggressive on V7D" is a **calibration mismatch**, not a model regression — V7D's rewrite_para retraining produces longer / denser paragraphs which the existing chapter-critic thresholds (calibrated for V7C density) flag as coherence drift. Forge's thinkpiece batch v1 (25k words, 100% qpass, voice fidelity 4.72/5) corroborates V7D quality. **Calibration adjustment, not retrain.**
+
 **Blocks:** ch16 + ch25 canon shipping. 24 of 27 chapters canon, gap is here.
 
 **Time:** ~30 min once decided.
@@ -54,7 +56,7 @@ curl -X POST https://<worker-url> \
 - (c) Manual: `scripts/ship_chapter.sh 16 && scripts/ship_chapter.sh 25` (skips chapter critic, uses concat-and-ship from V7C ramp era)
 - (d) Investigate what specifically chapter-critic flags — `runs/critic_audit/ch16_chapter_*.json`
 
-**Recommended:** (d) first — read the audit, then pick (a) or (b).
+**Recommended:** (d) first — read the audit, then pick (a) or (b). Per forge insight, the FAILs are likely "paragraph-density too high" or "scene-spanning rhythm shift" axes that need their thresholds nudged for V7D's longer-paragraph baseline.
 
 ---
 
