@@ -5,11 +5,9 @@ title: Our Lady of Champion — Reader
 
 # Our Lady of Champion
 
-<p style="text-align:center; margin: 1em 0">
-  <img src="assets/images/cover-la-nina.webp" alt="La Niña de Córdoba on the Veracruz quay at dusk" style="max-width: 480px; width: 100%; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.25)">
-</p>
+{% include hero-carousel.html %}
 
-Autonomous-pipeline first-draft novel. Historical-fiction, 16th-century Atlantic triangle. Three POVs (Andrés / Malintzin / Itzcoatl). Reliquaries and Teōmecahuītlī.
+Autonomous-pipeline first-draft novel. Historical-fiction, 16th-century Atlantic triangle. Three POVs (Andrés / Malintzin / Itzcoatl). Reliquaries and Teōmecahuītlī. [→ full gallery](gallery.md)
 
 ## Chapters
 

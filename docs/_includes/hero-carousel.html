@@ -1,0 +1,90 @@
+<style>
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  margin: 1em auto 1.6em;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+  background: #1a1a1a;
+}
+.hero-carousel figure {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  animation: hero-fade 64s infinite;
+}
+.hero-carousel figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hero-carousel figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.6em 1em;
+  background: linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0));
+  color: #f5f5f5;
+  font-size: 0.92em;
+  font-style: italic;
+}
+.hero-carousel figure:nth-child(1) { animation-delay:  0s; }
+.hero-carousel figure:nth-child(2) { animation-delay:  8s; }
+.hero-carousel figure:nth-child(3) { animation-delay: 16s; }
+.hero-carousel figure:nth-child(4) { animation-delay: 24s; }
+.hero-carousel figure:nth-child(5) { animation-delay: 32s; }
+.hero-carousel figure:nth-child(6) { animation-delay: 40s; }
+.hero-carousel figure:nth-child(7) { animation-delay: 48s; }
+.hero-carousel figure:nth-child(8) { animation-delay: 56s; }
+@keyframes hero-fade {
+  0%   { opacity: 0; }
+  3%   { opacity: 1; }
+  12%  { opacity: 1; }
+  15%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-carousel figure { animation: none; opacity: 1; }
+  .hero-carousel figure ~ figure { display: none; }
+}
+</style>
+<div class="hero-carousel" aria-label="Hero image carousel of moments from the novel">
+  <figure>
+    <img src="{{ '/assets/images/cover-la-nina.webp' | relative_url }}" alt="La Niña de Córdoba on the Veracruz quay">
+    <figcaption>La Niña de Córdoba — the gilded reliquary engine, Veracruz, 1518</figcaption>
+  </figure>
+  <figure>
+    <img src="{{ '/assets/images/huitzilopochtli-engine.webp' | relative_url }}" alt="A Mexica solar war engine at the Templo Mayor">
+    <figcaption>A Huitzilopochtli engine at the Templo Mayor — Tenochtitlan, 1519</figcaption>
+  </figure>
+  <figure>
+    <img src="{{ '/assets/images/great-engine-sleeping.webp' | relative_url }}" alt="The dormant Quetzalcoatl Great Engine">
+    <figcaption>The dormant Quetzalcoatl Great Engine — Templo Mayor</figcaption>
+  </figure>
+  <figure>
+    <img src="{{ '/assets/images/cholula-courtyard.webp' | relative_url }}" alt="Cholula courtyard at dawn">
+    <figcaption>Cholula courtyard, dawn — the massacre, October 1519</figcaption>
+  </figure>
+  <figure>
+    <img src="{{ '/assets/images/noche-triste.webp' | relative_url }}" alt="La Noche Triste on the Tlacopan causeway">
+    <figcaption>La Noche Triste — the Tlacopan causeway, midnight rain, June 1520</figcaption>
+  </figure>
+  <figure>
+    <img src="{{ '/assets/images/brigantine-workshop.webp' | relative_url }}" alt="Brigantine workshop in Tlaxcala">
+    <figcaption>Brigantine workshop — Tlaxcala, the siege machined into existence</figcaption>
+  </figure>
+  <figure>
+    <img src="{{ '/assets/images/malintzin-translating.webp' | relative_url }}" alt="Malintzin at the Tlaxcala council">
+    <figcaption>Malintzin at the Tlaxcala council, late campaign</figcaption>
+  </figure>
+  <figure>
+    <img src="{{ '/assets/images/bernardo-martyrdom.webp' | relative_url }}" alt="Bernardo's martyrdom in the Tlaxcalan chapel">
+    <figcaption>Bernardo's martyrdom — Tlaxcalan chapel courtyard</figcaption>
+  </figure>
+</div>
