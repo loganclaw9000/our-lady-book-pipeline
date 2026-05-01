@@ -9,6 +9,12 @@ title: Our Lady of Champion — Reader
 
 Autonomous-pipeline first-draft novel. Historical-fiction, 16th-century Atlantic triangle. Three POVs (Andrés / Malintzin / Itzcoatl). Reliquaries and Teōmecahuītlī. [→ full gallery](gallery.md)
 
+<p style="text-align:center;margin:1em 0">
+  <a href="our_lady_of_champion.pdf" download style="display:inline-block;padding:0.5em 1.2em;background:#4a3520;color:#f5e6c7;text-decoration:none;border-radius:4px;font-weight:600">
+    📖 Download PDF (24 chapters · ~12 MB)
+  </a>
+</p>
+
 ## Chapters
 
 - [Chapter 1 — canon](chapters/chapter_01.md) (2518w) · [retro](retrospectives/chapter_01.md)
