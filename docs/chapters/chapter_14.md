@@ -13,6 +13,11 @@ voice_pin_shas:
 manual_concat: true
 ---
 
+<!-- chapter-hero-injected -->
+<p style="text-align:center;margin:0.5em 0 1.2em"><img src="../assets/images/great-engine-sleeping.webp" alt="The dormant Quetzalcoatl Great Engine, Templo Mayor" style="max-width:760px;width:100%;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.25)"><br><em style="font-size:0.9em;color:#666">The dormant Quetzalcoatl Great Engine, Templo Mayor</em></p>
+
+<!-- chapter-hero-injected -->
+
 <!-- scene: ch14_sc01 -->
 The rain stopped before the fighting did. From the doorway of the Totonac chieftain's compound, Malintzin counted four engine hums in the dark, La Niña's first, low and even at the bottom of her throat, then three others bracing around her in the sharper Spanish key. A fifth voice, foreign to her ear, climbed and broke. A Narváez engine taking a pike to the knee joint. The hum dropped a full tone, then thinned to the wet metal sound of a Reliquary going down on one knee in the rain. After that the fight was bookkeeping.
 

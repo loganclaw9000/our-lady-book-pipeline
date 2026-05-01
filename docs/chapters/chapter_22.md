@@ -12,6 +12,11 @@ voice_pin_shas:
 - dd8ce35a673573534683c566a9d8503bfae01c1364611a0fb777f5d4da296810
 ---
 
+<!-- chapter-hero-injected -->
+<p style="text-align:center;margin:0.5em 0 1.2em"><img src="../assets/images/malintzin-translating.webp" alt="Malintzin at the Tlaxcala council, late in the campaign" style="max-width:760px;width:100%;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.25)"><br><em style="font-size:0.9em;color:#666">Malintzin at the Tlaxcala council, late in the campaign</em></p>
+
+<!-- chapter-hero-injected -->
+
 <!-- scene: ch22_sc01 -->
 The room had two dimensions and a window. The window was shuttered but light came through the slats anyway, the way it does with all windows in this country. She sat at the table with her notebook open. The pages were cheap paper, the kind the Spanish brought in reams, and they drank the ink like they drank everything else.
 

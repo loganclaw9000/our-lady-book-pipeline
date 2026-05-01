@@ -12,6 +12,11 @@ voice_pin_shas:
 - 83095d9371f26f7979c85b1ba47f05dd21cd1f677023c98c891b0fab11c72ca1
 ---
 
+<!-- chapter-hero-injected -->
+<p style="text-align:center;margin:0.5em 0 1.2em"><img src="../assets/images/cover-la-nina.webp" alt="La Niña de Córdoba on the Veracruz quay at dusk" style="max-width:760px;width:100%;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.25)"><br><em style="font-size:0.9em;color:#666">La Niña de Córdoba on the Veracruz quay at dusk</em></p>
+
+<!-- chapter-hero-injected -->
+
 <!-- scene: ch01_sc01 -->
 The hum.
 

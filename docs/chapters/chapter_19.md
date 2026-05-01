@@ -12,6 +12,11 @@ voice_pin_shas:
 - dd8ce35a673573534683c566a9d8503bfae01c1364611a0fb777f5d4da296810
 ---
 
+<!-- chapter-hero-injected -->
+<p style="text-align:center;margin:0.5em 0 1.2em"><img src="../assets/images/brigantine-workshop.webp" alt="Brigantine workshop in Tlaxcala — the siege machined into existence" style="max-width:760px;width:100%;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.25)"><br><em style="font-size:0.9em;color:#666">Brigantine workshop in Tlaxcala — the siege machined into existence</em></p>
+
+<!-- chapter-hero-injected -->
+
 <!-- scene: ch19_sc01 -->
 The workshop smelled of pine sap and sweat and iron. Adzed timbers lay in neat piles, grain still glistening with oil from the axe blades. Tlaxcalan carpenters and Spanish woodsmen worked side by side, each language a separate current in the same river, neither yielding. Andrés watched them a moment, then turned away. He disliked the smell of cut pine. It reminded him of the forests around Granada, and Granada was a place he tried not to visit in his thoughts.
 

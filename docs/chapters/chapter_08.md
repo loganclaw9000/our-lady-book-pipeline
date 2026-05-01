@@ -13,6 +13,11 @@ voice_pin_shas:
 manual_concat: true
 ---
 
+<!-- chapter-hero-injected -->
+<p style="text-align:center;margin:0.5em 0 1.2em"><img src="../assets/images/cholula-courtyard.webp" alt="Cholula courtyard, dawn — Reliquaries in their cradles" style="max-width:760px;width:100%;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.25)"><br><em style="font-size:0.9em;color:#666">Cholula courtyard, dawn — Reliquaries in their cradles</em></p>
+
+<!-- chapter-hero-injected -->
+
 <!-- scene: ch08_sc01 -->
 October 18, 1519. Dawn at Cholula. The courtyard ran east to west between the great pyramid and the lesser shrines, two hundred paces long, paved in pale flagstone that took the light like wet bone. Andrés stood in La Niña's cradle with the faceplate open and the helmet hooked at his belt. The cradle braced him at sternum and hip, eight points of contact, all of them familiar, and held him forty-two feet above the stones. From up here the men coming through the gate looked like a procession of birds.
 

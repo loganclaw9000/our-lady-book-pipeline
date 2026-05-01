@@ -12,6 +12,11 @@ voice_pin_shas:
 - 83095d9371f26f7979c85b1ba47f05dd21cd1f677023c98c891b0fab11c72ca1
 ---
 
+<!-- chapter-hero-injected -->
+<p style="text-align:center;margin:0.5em 0 1.2em"><img src="../assets/images/bernardo-martyrdom.webp" alt="Bernardo's martyrdom, Tlaxcalan chapel courtyard" style="max-width:760px;width:100%;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.25)"><br><em style="font-size:0.9em;color:#666">Bernardo's martyrdom, Tlaxcalan chapel courtyard</em></p>
+
+<!-- chapter-hero-injected -->
+
 <!-- scene: ch26_sc01 -->
 Dawn broke over Tenochtitlan in thin gold, the light of a high-altitude morning, the light of a city that had burned for seventy-five days. The Templo Mayor's lower platforms were rubble, their stepped geometry shelled into ramps of broken stone, but the pyramid still rose. The Great Engine of the sun-god sat in her cradle at the base, hum at half-state, dark-eyed, immense. Sixty meters of stepped basalt, taller than most cathedrals in Castile, and at her foot a stone block forty paces wide where the linen cloth had been laid.
 

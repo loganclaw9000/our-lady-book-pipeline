@@ -13,6 +13,11 @@ voice_pin_shas:
 manual_concat: true
 ---
 
+<!-- chapter-hero-injected -->
+<p style="text-align:center;margin:0.5em 0 1.2em"><img src="../assets/images/huitzilopochtli-engine.webp" alt="A Huitzilopochtli engine at the Templo Mayor" style="max-width:760px;width:100%;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.25)"><br><em style="font-size:0.9em;color:#666">A Huitzilopochtli engine at the Templo Mayor</em></p>
+
+<!-- chapter-hero-injected -->
+
 <!-- scene: ch10_sc01 -->
 The Spanish were quartered in the palace of Axayacatl, Moctezuma's father. A great sprawling complex, courtyards linked by arched corridors, stuccoed walls painted with murals of gods and warriors and kings, fountains drawing clean lake-water at the center of each space. The smell of copal followed Andrés everywhere he walked. It did not bother him.
 

@@ -50,6 +50,33 @@ nums = [num_of(p) for p in ordered]
 
 NAV_DELIM = "<!-- chapter-nav-injected -->"
 
+CHAPTER_HERO_IMAGE = {
+    1:  ("cover-la-nina.webp",          "La Niña de Córdoba on the Veracruz quay at dusk"),
+    8:  ("cholula-courtyard.webp",      "Cholula courtyard, dawn — Reliquaries in their cradles"),
+    10: ("huitzilopochtli-engine.webp", "A Huitzilopochtli engine at the Templo Mayor"),
+    14: ("great-engine-sleeping.webp",  "The dormant Quetzalcoatl Great Engine, Templo Mayor"),
+    17: ("noche-triste.webp",           "La Noche Triste — the Tlacopan causeway, midnight rain"),
+    19: ("brigantine-workshop.webp",    "Brigantine workshop in Tlaxcala — the siege machined into existence"),
+    22: ("malintzin-translating.webp",  "Malintzin at the Tlaxcala council, late in the campaign"),
+    26: ("bernardo-martyrdom.webp",     "Bernardo's martyrdom, Tlaxcalan chapel courtyard"),
+}
+
+def hero_image_block(chapter_n: int) -> str:
+    pair = CHAPTER_HERO_IMAGE.get(chapter_n)
+    if not pair:
+        return ""
+    fname, alt = pair
+    safe_alt = alt.replace('"', "&quot;")
+    return (
+        '<p style="text-align:center;margin:0.5em 0 1.2em">'
+        f'<img src="../assets/images/{fname}" alt="{safe_alt}" '
+        'style="max-width:760px;width:100%;border-radius:4px;'
+        'box-shadow:0 2px 8px rgba(0,0,0,0.25)">'
+        f'<br><em style="font-size:0.9em;color:#666">{alt}</em>'
+        '</p>\n\n'
+    )
+
+
 def feedback_form(page_id: str) -> str:
     """Inline HTML feedback form. POSTs to /feedback.json (a Worker URL
     configured in docs/_config.yml). On unconfigured deploys, the form
@@ -102,11 +129,45 @@ def build_nav(idx: int) -> str:
         "{% include feedback-script.html %}\n"
     )
 
+HERO_DELIM = "<!-- chapter-hero-injected -->"
+
 for i, path in enumerate(ordered):
     text = path.read_text(encoding="utf-8")
     # Strip prior injected nav (idempotent re-runs).
     if NAV_DELIM in text:
         text = text.split(NAV_DELIM, 1)[0].rstrip() + "\n"
+    # Strip prior injected hero image.
+    if HERO_DELIM in text:
+        before_marker, after_marker = text.split(HERO_DELIM + "\n", 1)
+        # Drop the next block up to the next blank line + blank.
+        after_lines = after_marker.split("\n", 1)[1] if "\n" in after_marker else ""
+        # Simpler: split around the marker pair we emit.
+        if HERO_DELIM in after_marker:
+            tail = after_marker.split(HERO_DELIM + "\n", 1)[1]
+            text = before_marker + tail
+        else:
+            text = before_marker
+    # Inject hero image after the YAML frontmatter (between the second `---` and prose).
+    n = nums[i]
+    hero = hero_image_block(n)
+    if hero:
+        if text.startswith("---"):
+            parts = text.split("---", 2)
+            if len(parts) >= 3:
+                fm = "---" + parts[1] + "---\n"
+                body = parts[2].lstrip("\n")
+                text = (
+                    fm
+                    + "\n"
+                    + HERO_DELIM
+                    + "\n"
+                    + hero
+                    + HERO_DELIM
+                    + "\n\n"
+                    + body
+                )
+        else:
+            text = HERO_DELIM + "\n" + hero + HERO_DELIM + "\n\n" + text
     nav = build_nav(i)
     path.write_text(text.rstrip() + "\n\n" + nav, encoding="utf-8")
 print(f"chapter nav injected on {len(ordered)} files")

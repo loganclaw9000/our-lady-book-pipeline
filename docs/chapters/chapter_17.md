@@ -13,6 +13,11 @@ voice_pin_shas:
 - dd8ce35a673573534683c566a9d8503bfae01c1364611a0fb777f5d4da296810
 ---
 
+<!-- chapter-hero-injected -->
+<p style="text-align:center;margin:0.5em 0 1.2em"><img src="../assets/images/noche-triste.webp" alt="La Noche Triste — the Tlacopan causeway, midnight rain" style="max-width:760px;width:100%;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,0.25)"><br><em style="font-size:0.9em;color:#666">La Noche Triste — the Tlacopan causeway, midnight rain</em></p>
+
+<!-- chapter-hero-injected -->
+
 <!-- scene: ch17_sc01 -->
 It rains at midnight. Not a storm, no thunder, nothing that would drive the canoes to the reeds. A cold rain that keeps on. The kind that soaks through and stays.
 
