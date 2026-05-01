@@ -90,6 +90,16 @@ npx gitnexus analyze
 
 ---
 
+## 5b. (Optional) Port forge LLM-ism filter v4 → novel-side pre-LLM critic axis
+
+**Why agent can't:** Architectural decision on scope. Forge shipped (commit c76bbb2 in paul-thinkpiece-pipeline) a regex-based LLM-tell detector with ~9 new categories from 2026 corpus (meta-significance closers, outline-formula closers, meta-commentary hedges, copula avoidance, trailing -ing participles). Density-monitored vs banned bucket distinction.
+
+**Could be:** New `llm_ism_drift` pre-LLM short-circuit axis alongside `stub_leak`, `repetition_loop`, `pov_narrative_voice`. Would catch the same tics in novel prose. Operator decides if scope justifies.
+
+**Time:** ~1.5 hr — port BANNED_TIC_PATTERNS, write detector pure-fn, add critic-axis wiring, add 13 → 14-axis rubric_v2 → v3 bump.
+
+**Deferred:** Until V7D output is observed in production producing the same patterns. May not — V7C/V7D are fic-domain checkpoints; tics that show up in forge's nonfiction may not show up in fic.
+
 ## 5. (Optional) Review V7D rewrite_para output quality
 
 **Why agent can't:** Subjective judgment on prose quality. forge's eval shipped V7D on rewrite_para 49% → 88% qpass + retained continuation/adversarial. New chapters ch18/20/21/23 are V7D output; eyes-on read confirms voice match.
