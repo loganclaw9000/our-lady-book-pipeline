@@ -7,7 +7,7 @@ title: Our Lady of Champion — Reader
 
 {% include hero-carousel.html %}
 
-Autonomous-pipeline first-draft novel. Historical-fiction, 16th-century Atlantic triangle. Three POVs (Andrés / Malintzin / Itzcoatl). Reliquaries and Teōmecahuītlī. [→ full gallery](gallery.md)
+Autonomous-pipeline first-draft novel. Historical-fiction, 16th-century Atlantic triangle. Three POVs (Andrés / Malintzin / Itzcoatl). Reliquaries and Teōmecahuītlī. [→ full gallery](gallery.md) · [→ screenplay (ch01 pilot)](screenplay/)
 
 <p style="text-align:center;margin:1em 0">
   <a href="our_lady_of_champion.pdf" download style="display:inline-block;padding:0.5em 1.2em;background:#4a3520;color:#f5e6c7;text-decoration:none;border-radius:4px;font-weight:600">
